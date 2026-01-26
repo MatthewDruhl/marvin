@@ -16,11 +16,17 @@
 
 ## User Profile
 
-<!-- SETUP: Replace this section with actual user info -->
+**Name:** Matt
+**Role:** Software Engineer (currently between jobs)
 
-**Status: NOT CONFIGURED**
+**Goals:**
+- Master Data Structures and Algorithms
+- Develop Data Engineering skills (Python, SQL, NoSQL, Linux, Shell Scripting, ETL/Data Pipelines, Data Warehouse Fundamentals)
+- Improve skills to land a new job
+- Exercise regularly
+- Work on DND coding project at `/Users/matthewdruhl/Code/AI/DnDProject`
 
-To complete setup, tell me a bit about yourself and I'll fill this in.
+**Communication Style:** Mix of casual and professional - friendly but focused, clear and direct while staying conversational
 
 ---
 
