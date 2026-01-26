@@ -1,33 +1,21 @@
 # Goals
 
-<!-- SETUP NOT COMPLETE: This file has placeholder content -->
-<!-- MARVIN will update this during setup -->
-
-Last updated: Not yet configured
+Last updated: 2026-01-26
 
 ---
 
 ## Work Goals
 
-Goals related to your job - KPIs, projects, professional development, team goals.
-
-*Examples:*
-- Hit Q1 revenue target
-- Ship the new feature by March
-- Get promoted to senior
-- Improve team velocity by 20%
+- Master Data Structures and Algorithms
+- Develop Data Engineering skills (Python, SQL, NoSQL, Linux, Shell Scripting, ETL/Data Pipelines, Data Warehouse Fundamentals)
+- Improve skills to land a new job
 
 ---
 
 ## Personal Goals
 
-Goals for life outside work - health, hobbies, relationships, personal growth.
-
-*Examples:*
-- Walk 10k steps daily
-- Write a blog post every week
-- Read 24 books this year
-- Learn to play guitar
+- Exercise regularly
+- Work on DND coding project (located at `/Users/matthewdruhl/Code/AI/DnDProject`)
 
 ---
 
@@ -35,8 +23,12 @@ Goals for life outside work - health, hobbies, relationships, personal growth.
 
 | Goal | Type | Status | Notes |
 |------|------|--------|-------|
-| Complete MARVIN setup | - | In progress | |
+| Master Data Structures and Algorithms | Work | Not started | |
+| Develop Data Engineering skills | Work | Not started | Python, SQL, NoSQL, Linux, Shell, ETL, Data Warehouses |
+| Land a new job | Work | Not started | |
+| Exercise regularly | Personal | Not started | |
+| Work on DND coding project | Personal | Not started | Located at /Users/matthewdruhl/Code/AI/DnDProject |
 
 ---
 
-*Tell MARVIN about your goals during setup, and they'll appear here. You can update these anytime - just say "let's update my goals."*
+*You can update these anytime - just say "let's update my goals."*
