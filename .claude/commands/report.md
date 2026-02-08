@@ -48,11 +48,17 @@ Create a report with these sections:
 - Note any goals that got attention this week
 ```
 
-### 3. Save the Report
+### 3. Prune current.md
+After generating the report, clean up `state/current.md`:
+- Remove completed items from Open Threads
+- Archive any resolved topics
+- Keep it under 50 lines
+
+### 4. Save the Report
 
 Save to `reports/YYYY-MM-DD.md` using today's date.
 
-### 4. Offer Next Steps
+### 5. Offer Next Steps
 
 Ask: "Want me to copy this somewhere, share it, or adjust the format?"
 

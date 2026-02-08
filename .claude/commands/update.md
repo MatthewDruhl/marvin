@@ -35,9 +35,22 @@ Only update `state/current.md` if something actually changed:
 - Changed priority
 - New task discovered
 
+Keep `current.md` under 50 lines. Move project details to `content/` files, not current.md.
+
 Skip if nothing material changed.
 
-### 4. Confirm (minimal)
+### 4. Generate TWC PDFs (if TWC files changed)
+If any TWC CSV files were modified, see `skills/twc-pdf/SKILL.md` and run:
+```bash
+cd content/jobs/TWC
+for file in work-search-week-*.csv; do
+    python3 fill_twc_pdf.py "$file" 2>/dev/null
+done
+```
+
+Only mention if PDFs were updated.
+
+### 5. Confirm (minimal)
 One line: "Checkpointed: {brief description}"
 
 No summary. No "next actions" list. Just confirm the save.
