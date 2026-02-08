@@ -1,6 +1,6 @@
 # Goals
 
-Last updated: 2026-01-26
+Last updated: 2026-02-07
 
 ---
 
@@ -23,11 +23,11 @@ Last updated: 2026-01-26
 
 | Goal | Type | Status | Notes |
 |------|------|--------|-------|
-| Master Data Structures and Algorithms | Work | Not started | |
-| Develop Data Engineering skills | Work | Not started | Python, SQL, NoSQL, Linux, Shell, ETL, Data Warehouses |
-| Land a new job | Work | Not started | |
-| Exercise regularly | Personal | Not started | |
-| Work on DND coding project | Personal | Not started | Located at /Users/matthewdruhl/Code/AI/DnDProject |
+| Master DSA | Work | In Progress | Completed: Recursion, Linear/Binary Search, Bubble/Selection/Insertion/Quick/Merge Sort. Learning: Tree Traversals (Coursera). Next: Stack/Queue |
+| Data Engineering skills | Work | In Progress | Learning PostgreSQL, FastAPI, SQLAlchemy, Docker through projects. TODO: FreeCodeCamp Relational DB Design (6hr), Docker Handbook |
+| Land a new job | Work | In Progress | 7 active applications, 5 rejections, 2 opportunities to pursue. TWC weekly requirements met consistently |
+| Exercise regularly | Personal | In Progress | Needs more consistent schedule |
+| DND coding project | Personal | In Progress | MCP complete, Web app Phase 3 complete (backend API), Combat engine 65 tests passing. See `content/dnd-project.md` |
 
 ---
 

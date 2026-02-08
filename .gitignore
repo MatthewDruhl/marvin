@@ -1,0 +1,5 @@
+.env
+.DS_Store
+tmp/
+*.pdf
+.claude/settings.local.json
