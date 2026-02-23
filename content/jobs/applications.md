@@ -1,10 +1,36 @@
 # Job Applications
 
-Last updated: 2026-02-06
+Last updated: 2026-02-23
 
 ---
 
 ## Active Applications
+
+### PatientPoint - Advanced Software Engineer (Python)
+- **Applied:** 2026-02-23
+- **Status:** Application submitted
+- **Salary:** $130,000/yr
+- **Type:** Software Engineering (Python)
+- **URL:** https://job-boards.greenhouse.io/patientpoint/jobs/4654686005
+- **Next Action:** Wait for response
+
+### G2i - AI Software Engineer - Python
+- **Applied:** 2026-02-23
+- **Status:** Application submitted
+- **Salary:** $30.00 - $70.00/hr (Freelance)
+- **Type:** AI Software Engineering (Python)
+- **Applied via:** flexjobs.com
+- **URL:** https://www.flexjobs.com/hostedjob.aspx?id=19a4b6db-f514-4e5b-96fc-ca409dae814a
+- **Next Action:** Wait for response
+
+### Cambium Learning Group - Software Engineer Python
+- **Applied:** 2026-02-23
+- **Status:** Application submitted
+- **Salary:** $130,000/yr
+- **Type:** Software Engineering (Python)
+- **Applied via:** flexjobs.com
+- **URL:** https://www.flexjobs.com/hostedjob.aspx?id=1079c9f8-6db8-43ed-bb3e-16fa78b03ff1
+- **Next Action:** Wait for response
 
 ### VetsEZ - Full Stack Developer
 - **Applied:** 2026-02-02
@@ -36,37 +62,49 @@ Last updated: 2026-02-06
 - **Notes:** Had initial discussion Jan 16, sent follow-up Jan 28. Awaiting response.
 - **Next Action:** Wait for Derek's response
 
-### Tenable - Staff Software Engineer
-- **Applied:** 2026-01-15
-- **Status:** Application filed
-- **Type:** Software Engineering
-- **URL:** https://my.recruitmilitary.com
-- **Notes:** Applied via My Recruit Military
-- **Next Action:** Wait for response
-
-### Cisco Systems Inc - Digital Product and Engineering Roles
-- **Applied:** 2026-01-16
-- **Status:** Application filed
-- **Type:** Software Engineering
-- **Next Action:** Wait for response
-
-### Quilt LLC - Software Position
-- **Applied:** 2026-01-20
-- **Status:** Under Review
-- **Type:** Software Engineering
-- **Notes:** Confirmed Jan 20 - under review
-- **Next Action:** Wait for update
-
-### Best Egg - Software Position
-- **Applied:** 2026-01-07
-- **Status:** Under Review
-- **Type:** Software Engineering
-- **Notes:** Confirmed Jan 7
-- **Next Action:** Wait for update
-
 ---
 
 ## Recent Rejections
+
+### Tenable - Staff Software Engineer
+- **Applied:** 2026-01-15
+- **Closed:** 2026-02-23
+- **Reason:** No response after 5+ weeks
+- **Type:** Software Engineering
+- **URL:** https://my.recruitmilitary.com
+
+### Cisco Systems Inc - Digital Product and Engineering Roles
+- **Applied:** 2026-01-16
+- **Closed:** 2026-02-23
+- **Reason:** No response after 5+ weeks
+- **Type:** Software Engineering
+
+### Quilt LLC - Senior Data Engineer
+- **Applied:** 2026-01-20
+- **Rejected:** 2026-02-19
+- **Reason:** Decided to move ahead with another candidate
+- **Type:** Data Engineering
+
+### Best Egg - Lead Software Engineer II (Java & Python)
+- **Applied:** 2026-01-07
+- **Rejected:** 2026-01-22
+- **Reason:** Position filled
+- **Type:** Software Engineering
+
+### Canonical - Microservices Engineer
+- **Applied:** 2026-02-09
+- **Rejected:** 2026-02-11
+- **Reason:** Not progressing application
+- **Applied via:** flexjobs.com
+- **URL:** https://www.flexjobs.com/hostedjob.aspx?id=a4df9f44-03bb-4c06-a727-8b30186b4987
+
+### ngrok - Software Engineer III - Senior, Customer Data
+- **Applied:** 2026-02-09
+- **Rejected:** 2026-02-09
+- **Reason:** Decided to move ahead with other candidates
+- **Location:** Remote
+- **Type:** Software Engineering / Customer Data
+- **URL:** https://www.flexjobs.com/hostedjob.aspx?id=fe2b92a0-38bf-4b80-8b37-b3952a947e10
 
 ### Yahoo - Senior Backend Engineer
 - **Applied:** 2026-01-31
