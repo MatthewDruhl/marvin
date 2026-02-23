@@ -106,6 +106,10 @@ If the resume exceeds 2 pages, **stop and ask** before removing or compressing c
 
 - Always backup before editing
 - Resume is capped at 2 pages — if changes push past 2 pages, ask before compressing
+- **Spacing rules to stay within 2 pages:**
+  - No blank paragraph between "Certifications" header and first cert entry
+  - No blank paragraph between last cert entry and next section header
+  - When creating the Certifications section, insert only a blank before the header (not after)
 - Match existing fonts and headings — do not change formatting
 - Headers stay at the beginning of each page
 - Template at `~/Resume/original/MatthewDruhl.docx` is the formatting standard

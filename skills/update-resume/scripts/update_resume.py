@@ -330,13 +330,11 @@ def cmd_add_certs(args):
                 blank_template = child
                 break
 
-        # Insert: blank, header, blank
+        # Insert: blank, header (no trailing blank — keep compact for 2-page limit)
         blank_before = copy.deepcopy(blank_template)
-        blank_after = copy.deepcopy(blank_template)
 
         insert_before.addprevious(blank_before)
         blank_before.addnext(new_header)
-        new_header.addnext(blank_after)
 
         print("Created Certifications section.")
 
@@ -390,18 +388,8 @@ def cmd_add_certs(args):
     # Re-find section range after removals
     cert_start, cert_end = find_section_range(doc, "certifications")
 
-    # Find insertion point: after header (and its following blank line)
-    insert_after_idx = cert_start
-    for i in range(cert_start + 1, cert_end):
-        child = list(body)[i]
-        tag = etree.QName(child.tag).localname
-        if tag == "p" and not get_paragraph_text(child).strip():
-            insert_after_idx = i
-            break
-        else:
-            break
-
-    insert_after_elem = list(body)[insert_after_idx]
+    # Insert directly after the Certifications header (no blank line between)
+    insert_after_elem = list(body)[cert_start]
 
     # Insert all certs in reverse chronological order
     for cert in reversed(all_certs):
@@ -409,6 +397,10 @@ def cmd_add_certs(args):
         insert_after_elem.addnext(new_para)
         label = "Added" if cert.get("source") == "new" else "Kept"
         print(f"{label}: {cert['name']}, {cert['issuer']}, {cert['date']}")
+
+    # Remove any blank paragraphs between last cert and next section header
+    # to keep the resume compact for the 2-page limit
+    _remove_trailing_blanks(doc, "certifications")
 
     # Restructure Technical Skills table
     _restructure_skills_table(doc)
@@ -427,6 +419,23 @@ def _parse_cert_date(date_str):
         return datetime.strptime(date_str.strip(), "%b %Y")
     except ValueError:
         return datetime.min
+
+
+def _remove_trailing_blanks(doc, section_name):
+    """Remove blank paragraphs between a section's last content and the next section header."""
+    body = doc.element.body
+    start_idx, end_idx = find_section_range(doc, section_name)
+    if start_idx is None:
+        return
+    children = list(body)
+    # Walk backwards from end of section, removing blank paragraphs
+    for i in range(end_idx - 1, start_idx, -1):
+        child = children[i]
+        tag = etree.QName(child.tag).localname
+        if tag == "p" and not get_paragraph_text(child).strip():
+            body.remove(child)
+        else:
+            break
 
 
 def _create_cert_paragraph(cert, content_template, body):
