@@ -156,7 +156,6 @@
 | `/plan` | Weekly planning session (set priorities) |
 | `/dashboard` | Project momentum dashboard |
 | `/analytics` | Session analytics and trends |
-| `/obsidian` | Sync content to Obsidian vault |
 | `/resume` | View or edit your resume |
 | `/commit` | Review and commit git changes |
 | `/code` | Open MARVIN in your IDE |
@@ -176,8 +175,7 @@
   - Show a summary of what was added
 3. Check Gmail for job responses
 4. Read your current state, goals, learning tracker, and habits
-5. Check Obsidian vault for new notes (if configured)
-6. Give you a briefing: calendar, priorities, learning reviews due, habit streaks, follow-up reminders
+5. Give you a briefing: calendar, priorities, learning reviews due, habit streaks, follow-up reminders
 
 **During a session:**
 - Just talk naturally
@@ -190,7 +188,6 @@
 - Prompt for habit check (did you exercise/study/code today?)
 - Save everything to the session log
 - Update your current state
-- Sync to Obsidian vault (if configured)
 
 ---
 
@@ -222,30 +219,6 @@ marvin/
 Your workspace is yours. Add folders, files, projects - whatever you need.
 
 **Note:** The setup scripts and integrations live in the template folder (the one you originally downloaded). Run `/sync` to pull updates from there.
-
----
-
-## Obsidian Integration
-
-MARVIN syncs content to an Obsidian vault for visual knowledge management.
-
-**Vault location:** Set `OBSIDIAN_VAULT_PATH` in `.env` (default: `~/Documents/ObsidianVault/marvin/`)
-
-**Sync direction:** One-way (MARVIN → Obsidian). MARVIN remains source of truth.
-
-**What syncs:**
-- Session logs → `MARVIN/Daily/`
-- Goals → `MARVIN/Goals/`
-- Projects → `MARVIN/Projects/`
-- Learning journal → `MARVIN/Learning/`
-- Job applications → `MARVIN/Jobs/`
-- Weekly reports → `MARVIN/Weekly Reports/`
-
-**Commands:** `/obsidian sync`, `/obsidian sync today`, `/obsidian read [topic]`, `/obsidian status`
-
-**Auto-sync:** At session end (`/end`), today's session is synced automatically if vault is configured.
-
-**Recommended Obsidian plugins:** Dataview, Calendar, Templater, Kanban (optional)
 
 ---
 
