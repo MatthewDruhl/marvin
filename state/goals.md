@@ -1,13 +1,17 @@
 # Goals
 
-Last updated: 2026-02-07
+Last updated: 2026-02-24
 
 ---
 
 ## Work Goals
 
-- Master Data Structures and Algorithms
-- Develop Data Engineering skills (Python, SQL, NoSQL, Linux, Shell Scripting, ETL/Data Pipelines, Data Warehouse Fundamentals)
+- Develop Python skills (PCAP certification track, projects)
+- AI & Prompt Engineering (Claude Code, CLAUDE.md optimization, AI-assisted development)
+- Project Management Certification (Google PM Certificate via Coursera)
+- Python coding skills (writing clean, functional Python code)
+- Pythonic code (idiomatic patterns, PEP 8, best practices)
+- Docker skills (containers, Compose, Dockerfiles)
 - Improve skills to land a new job
 
 ---
@@ -23,11 +27,15 @@ Last updated: 2026-02-07
 
 | Goal | Type | Status | Notes |
 |------|------|--------|-------|
-| Master DSA | Work | In Progress | Completed: Recursion, Linear/Binary Search, Bubble/Selection/Insertion/Quick/Merge Sort. Learning: Tree Traversals (Coursera). Next: Stack/Queue |
-| Data Engineering skills | Work | In Progress | Learning PostgreSQL, FastAPI, SQLAlchemy, Docker through projects. TODO: FreeCodeCamp Relational DB Design (6hr), Docker Handbook |
-| Land a new job | Work | In Progress | 7 active applications, 5 rejections, 2 opportunities to pursue. TWC weekly requirements met consistently |
+| Python skills | Work | In Progress | 4 UMich Python certs completed (Aug-Sep 2025). WordyPy learnings tracked. PCAP track. |
+| AI & Prompt Engineering | Work | In Progress | Claude Code workflows, CLAUDE.md patterns, AI-assisted development |
+| Project Management Cert | Work | New | Google PM Certificate (Coursera). Target: complete in 2-3 months |
+| Python coding skills | Work | In Progress | Writing clean, functional Python code through projects and practice |
+| Pythonic code | Work | In Progress | Idiomatic patterns, PEP 8, best practices |
+| Docker skills | Work | In Progress | Containers, Compose, Dockerfiles |
+| Land a new job | Work | In Progress | 6 active applications, 11 rejections. G2i failed code test Feb 24. 2 Coursera certs on resume. |
 | Exercise regularly | Personal | In Progress | Needs more consistent schedule |
-| DND coding project | Personal | In Progress | MCP complete, Web app Phase 3 complete (backend API), Combat engine 65 tests passing. See `content/dnd-project.md` |
+| DND coding project | Personal | In Progress | MCP complete, Web app Phase 3 complete (backend API), Combat engine 65 tests passing |
 
 ---
 
