@@ -6,22 +6,31 @@ Last updated: 2026-02-23
 
 ## Active Applications
 
-### PatientPoint - Advanced Software Engineer (Python)
+### Pearson - Software Engineer (Full Stack) — Data-Driven Systems
 - **Applied:** 2026-02-23
 - **Status:** Application submitted
+- **Type:** Full Stack / Data-Driven Systems
+- **URL:** https://pearson.jobs/austin-tx/senior-software-engineer/748CAE9E08DF41AAA4A4C6024E2608FF/job/
+- **Notes:** Former employer
+- **Next Action:** Wait for response
+
+### PatientPoint - Advanced Software Engineer (Python)
+- **Applied:** 2026-02-23
+- **Status:** Phone screen scheduled (Mar 6, 11:00 AM CT)
 - **Salary:** $130,000/yr
 - **Type:** Software Engineering (Python)
 - **URL:** https://job-boards.greenhouse.io/patientpoint/jobs/4654686005
-- **Next Action:** Wait for response
+- **Contact:** Erik Dawson (Manager, TA Ops & Sr. Tech Recruiter) — erik.dawson@patientpoint.com, 312-667-1458
+- **Next Action:** Prepare for phone screen — watch [company video](https://vimeo.com/912723416/0a500f16b2), review job description
 
 ### G2i - AI Software Engineer - Python
 - **Applied:** 2026-02-23
-- **Status:** Application submitted
+- **Status:** Rejected (failed DevSkiller code review test)
 - **Salary:** $30.00 - $70.00/hr (Freelance)
 - **Type:** AI Software Engineering (Python)
 - **Applied via:** flexjobs.com
 - **URL:** https://www.flexjobs.com/hostedjob.aspx?id=19a4b6db-f514-4e5b-96fc-ca409dae814a
-- **Next Action:** Wait for response
+- **Notes:** Took 123-min OOP/clean code refactoring test on Feb 24, did not pass. Use as learning opportunity.
 
 ### Cambium Learning Group - Software Engineer Python
 - **Applied:** 2026-02-23
@@ -144,6 +153,17 @@ Last updated: 2026-02-23
 - **Started:** 2026-01-11
 - **Status:** Not pursued
 - **Notes:** Started application but chose not to complete
+
+---
+
+## VA Benefits
+
+### VR&E (Veteran Readiness and Employment)
+- **Applied:** 2026-02-24
+- **Status:** Application received (VA Form 28-1900)
+- **Contact:** 1-800-827-1000 (Mon-Fri 8am-8pm ET) or [Ask VA](https://ask.va.gov/)
+- **Next Steps:** VA will review eligibility, then send appointment letter for initial evaluation with a Vocational Rehabilitation Counselor (VRC)
+- **Notes:** Do not reapply if no response — contact VA directly instead
 
 ---
 
