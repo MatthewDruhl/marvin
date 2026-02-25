@@ -24,10 +24,27 @@ Generate comprehensive daily briefing with priorities, progress, and alerts.
 
 ## Process
 
-### Step 1: Calendar Overview (if available)
-- Today's events with times
-- Tomorrow's events (preview)
-- Next 7 days: any important deadlines
+### Step 1: Calendar Overview
+Check if Google Workspace MCP is available. If so:
+1. Use Google Workspace MCP tools to query today's calendar events
+2. Also check tomorrow's events for preview
+3. Look ahead 7 days for important deadlines or meetings
+
+If Google Workspace MCP is NOT available:
+- Skip this step silently
+- Note: User can set up Google Calendar access via `.marvin/integrations/google-workspace/setup.sh`
+
+Display format:
+```
+**Today's Schedule:**
+- {time}: {event}
+- {time}: {event}
+
+**Tomorrow:** {preview of events}
+**This Week:** {any notable upcoming events}
+```
+
+If no events found, display: "No calendar events today."
 
 ### Step 2: Task Status
 From `state/current.md`:
@@ -54,6 +71,33 @@ Based on patterns:
 - "Deadline for {item} is in 3 days"
 - "Monthly review coming up — want to schedule?"
 
+### Step 6: Learning Reviews Due
+From `state/learning.md`:
+- List overdue topics (past their Next Review date)
+- List topics due today
+- List topics coming up in next 3 days
+- If overdue count > 3, flag as needing attention
+
+### Step 7: Habit Streaks
+From `state/habits.md`:
+- Show current streak for each active habit
+- Show this week's completion rate
+- Celebrate streak milestones (7, 14, 30, 60, 90 days)
+- Flag if any habit streak is about to break (not logged yesterday)
+
+### Step 8: Application Follow-Up Reminders
+From `content/jobs/applications.md`:
+- Calculate days since each active application was submitted
+- Surface applications pending 7+ days with no status change:
+  ```
+  **Follow-Up Reminders:**
+  - [Company] - [Role]: Applied [N] days ago — consider following up
+  - [Company] - [Role]: Applied [N] days ago — consider following up
+  ```
+- For applications 14+ days old, suggest drafting a follow-up email
+- If Gmail MCP is available, offer to draft follow-up email (always confirm with user before sending)
+- Skip applications already marked as "Follow-up sent" or "Rejected"
+
 ## Output Format
 
 Keep concise. Structure as:
@@ -66,6 +110,16 @@ Keep concise. Structure as:
 - {any urgent items}
 
 **Progress**: {goal status summary}
+
+**Learning Reviews Due:**
+- 🔴 Overdue: {topics past due date}
+- 🟡 Due Today: {topics due today}
+- 🟢 Upcoming: {next 3 days}
+
+**Habits:**
+- Exercise: {streak} day streak ({week}/7 this week)
+- DSA Practice: {streak} day streak ({week}/7 this week)
+- Coding: {streak} day streak ({week}/7 this week)
 
 **Focus**: {top 1-2 priorities}
 ```

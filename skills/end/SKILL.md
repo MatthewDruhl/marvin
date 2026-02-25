@@ -87,13 +87,20 @@ Ensure nothing falls through the cracks:
 - Commitments made → add to priorities with context
 - Follow-ups needed → add to open threads
 
-### Step 5: Confirm with User
+### Step 5: Habit Check
+If `state/habits.md` exists:
+- Check which habits haven't been logged today
+- Prompt user: "Before you go — did you do these today?"
+- List unchecked habits
+- Wait for response and log completions
+
+### Step 6: Confirm with User
 Show brief summary:
 - What was logged
 - Any follow-ups scheduled
 - State updated
 
-### Step 6: Commit Changes (Optional)
+### Step 7: Commit Changes (Optional)
 If user wants to commit:
 ```bash
 git add -A
