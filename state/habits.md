@@ -1,6 +1,6 @@
 # Habit Tracker
 
-Last updated: 2026-02-24
+Last updated: 2026-02-25
 
 ---
 
@@ -24,11 +24,11 @@ Last updated: 2026-02-24
 
 ### Coding
 - **Goal:** Daily coding (projects, learning, or practice)
-- **Current Streak:** 1 day
-- **Longest Streak:** 1 day
-- **This Week:** 1/7
-- **This Month:** 3/28
-- **Last Completed:** 2026-02-24
+- **Current Streak:** 2 days
+- **Longest Streak:** 2 days
+- **This Week:** 2/7
+- **This Month:** 4/28
+- **Last Completed:** 2026-02-25
 
 ---
 
@@ -39,6 +39,7 @@ Last updated: 2026-02-24
 | 2026-02-16 | | | X | Coursera - Python Project: SW Eng & Image Manipulation (all day) |
 | 2026-02-19 | | | X | Coursera - Python Project: SW Eng & Image Manipulation (all day) |
 | 2026-02-24 | | | X | Quiz session + G2i DevSkiller exam |
+| 2026-02-25 | | | X | Quiz consume pipeline implementation |
 
 ---
 

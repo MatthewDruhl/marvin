@@ -13,6 +13,7 @@ Persistent task list that carries across MARVIN sessions.
 | **Prep for PatientPoint phone screen** | 2026-02-25 | Fri Mar 6, 11:00 AM CT with Erik Dawson (phone call). Watch [company video](https://vimeo.com/912723416/0a500f16b2), review job description. |
 | **Complete decoratordojo project** | 2026-02-25 | Builds decorator skill in isolation. Exercise 4 recreates exam's `_validation` pattern. See `~/Code/Learning/ExamGap.md` |
 | **Complete paymentprocessor project** | 2026-02-25 | Full exam simulation — covers gaps 2-8 from G2i analysis. See `~/Code/Learning/ExamGap.md` |
+| **Gmail: Complete re-auth on next session** | 2026-02-26 | Config updated (removed --read-only). Next session will prompt browser re-auth for gmail.modify scope. |
 
 ---
 

@@ -32,15 +32,6 @@ Last updated: 2026-02-23
 - **URL:** https://www.flexjobs.com/hostedjob.aspx?id=19a4b6db-f514-4e5b-96fc-ca409dae814a
 - **Notes:** Took 123-min OOP/clean code refactoring test on Feb 24, did not pass. Use as learning opportunity.
 
-### Cambium Learning Group - Software Engineer Python
-- **Applied:** 2026-02-23
-- **Status:** Application submitted
-- **Salary:** $130,000/yr
-- **Type:** Software Engineering (Python)
-- **Applied via:** flexjobs.com
-- **URL:** https://www.flexjobs.com/hostedjob.aspx?id=1079c9f8-6db8-43ed-bb3e-16fa78b03ff1
-- **Next Action:** Wait for response
-
 ### VetsEZ - Full Stack Developer
 - **Applied:** 2026-02-02
 - **Status:** Application submitted
@@ -74,6 +65,15 @@ Last updated: 2026-02-23
 ---
 
 ## Recent Rejections
+
+### Cambium Learning Group - Software Engineer Python
+- **Applied:** 2026-02-23
+- **Rejected:** 2026-02-25
+- **Reason:** Position no longer available
+- **Salary:** $130,000/yr
+- **Type:** Software Engineering (Python)
+- **Applied via:** flexjobs.com
+- **URL:** https://www.flexjobs.com/hostedjob.aspx?id=1079c9f8-6db8-43ed-bb3e-16fa78b03ff1
 
 ### Tenable - Staff Software Engineer
 - **Applied:** 2026-01-15

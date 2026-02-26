@@ -74,8 +74,6 @@ When called from daily briefing, return:
 - Spaced repetition intervals: 1, 3, 7, 14, 30 days
 - Topics are grouped by category (DSA, Data Engineering, etc.)
 - Confidence scale: 1 (can't recall) to 5 (mastered)
-- Syncs to Obsidian Learning/ folder when obsidian-sync runs
-
 ---
 
 *Skill created: 2026-02-08*
