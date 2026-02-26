@@ -1,6 +1,6 @@
 # Question Bank
 
-Last updated: 2026-02-24
+Last updated: 2026-02-25
 
 ---
 
@@ -409,6 +409,626 @@ def read_json(path: str) -> dict | None:
 
 ---
 
+### Decorators
+
+**Q1 - Conceptual:** What does a decorator do in Python? Describe it without using the `@` syntax.
+**A:** A decorator is a function that takes another function as input, wraps it with additional behavior, and returns the modified function. `@my_dec` above `def foo()` is equivalent to writing `foo = my_dec(foo)`.
+
+**Q2 - Spot the Bug:** What's wrong with this decorator?
+```python
+def timer(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        print(f"Took {time.time() - start}s")
+```
+**A:** The decorator never returns `wrapper`, so applying `@timer` makes the decorated function `None`. Missing `return wrapper` at the end of `timer`, and missing `return result` inside `wrapper`.
+
+**Q3 - Predict the Output:** What does this print?
+```python
+def double_result(func):
+    def wrapper(*args, **kwargs):
+        return func(*args, **kwargs) * 2
+    return wrapper
+
+@double_result
+def add(a, b):
+    return a + b
+
+print(add(3, 5))
+```
+**A:** `16` — `add(3, 5)` returns `8`, then the decorator doubles it to `16`.
+
+**Q4 - Code Writing:** Write a decorator called `lowercase` that converts the return value of a function to lowercase.
+**A:**
+```python
+def lowercase(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return result.lower()
+    return wrapper
+```
+
+**Q5 - Fill in the Blank:** Complete the decorator so the original function runs:
+```python
+def logger(func):
+    def wrapper(*args, **kwargs):
+        print("Before call")
+        ____________________
+        print("After call")
+        return result
+    return wrapper
+```
+**A:** `result = func(*args, **kwargs)`
+
+---
+
+### *args and **kwargs
+
+**Q1 - Conceptual:** What types are `*args` and `**kwargs` collected into inside a function?
+**A:** `*args` is a **tuple** of positional arguments. `**kwargs` is a **dictionary** of keyword arguments.
+
+**Q2 - Predict the Output:** What does this print?
+```python
+def show(*args, **kwargs):
+    print(len(args), len(kwargs))
+
+show(1, 2, 3, x=10, y=20)
+```
+**A:** `3 2` — three positional args in the tuple, two keyword args in the dict.
+
+**Q3 - Spot the Bug:** Why will this decorator fail for `greet("Alice", greeting="Hi")`?
+```python
+def log(func):
+    def wrapper(name):
+        print("Logging")
+        return func(name)
+    return wrapper
+
+@log
+def greet(name, greeting="Hello"):
+    return f"{greeting}, {name}"
+```
+**A:** The wrapper hardcodes a single parameter `name`, so it can't accept the `greeting` keyword argument. It should use `*args, **kwargs` instead.
+
+**Q4 - Code Writing:** Write a function `combine` that accepts any number of strings and joins them with a separator keyword argument (default `" "`).
+**A:**
+```python
+def combine(*args, separator=" "):
+    return separator.join(args)
+```
+
+---
+
+### functools.wraps
+
+**Q1 - Conceptual:** What problem does `@functools.wraps(func)` solve?
+**A:** Without it, the wrapper function replaces the original function's `__name__`, `__doc__`, and other metadata. `@wraps(func)` copies the original function's metadata onto the wrapper so introspection, `help()`, and debugging show the correct information.
+
+**Q2 - Predict the Output:** What does this print?
+```python
+from functools import wraps
+
+def bold(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        return f"**{func(*args, **kwargs)}**"
+    return wrapper
+
+@bold
+def title():
+    """Return the page title."""
+    return "Home"
+
+print(title.__name__)
+print(title.__doc__)
+```
+**A:** `title` and `Return the page title.` — `@wraps` preserved the original function's name and docstring.
+
+**Q3 - Predict the Output:** What changes if `@wraps(func)` is removed from the decorator above?
+**A:** `title.__name__` would print `wrapper` and `title.__doc__` would print `None` — the wrapper's metadata replaces the original.
+
+---
+
+### Decorator Factories
+
+**Q1 - Conceptual:** How many levels of nesting does a decorator factory require, and what does each level receive?
+**A:** Three levels: (1) the factory receives the configuration argument, (2) the decorator receives the function, (3) the wrapper receives the call arguments.
+
+**Q2 - Spot the Bug:** What's wrong with this decorator factory?
+```python
+def repeat(n):
+    def wrapper(*args, **kwargs):
+        for _ in range(n):
+            result = func(*args, **kwargs)
+        return result
+    return wrapper
+
+@repeat(3)
+def say_hi():
+    print("hi")
+```
+**A:** Missing the middle nesting level. `repeat(n)` returns `wrapper` directly, but `wrapper` references `func` which is never defined. Needs a `decorator(func)` level between `repeat` and `wrapper`.
+
+**Q3 - Code Writing:** Write a decorator factory `tag(name)` that wraps a function's string return value in an HTML tag. Example: `@tag("b")` on a function returning `"hello"` produces `"<b>hello</b>"`.
+**A:**
+```python
+from functools import wraps
+
+def tag(name):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            result = func(*args, **kwargs)
+            return f"<{name}>{result}</{name}>"
+        return wrapper
+    return decorator
+```
+
+**Q4 - Fill in the Blank:** Complete this decorator factory:
+```python
+def retry(attempts):
+    def ________(func):
+        def wrapper(*args, **kwargs):
+            for i in range(attempts):
+                try:
+                    return func(*args, **kwargs)
+                except Exception:
+                    if i == attempts - 1:
+                        raise
+        return wrapper
+    return ________
+```
+**A:** `decorator` for both blanks — the middle level function that receives `func` and the return value of the factory.
+
+---
+
+### Class Decorators
+
+**Q1 - Conceptual:** When you define a decorator as a method inside a class, why doesn't it take `self` as its first parameter?
+**A:** The decorator runs at **class definition time**, before any instances exist. There is no instance to bind to `self`. The decorator receives only the function being decorated.
+
+**Q2 - Spot the Bug:** What's wrong here?
+```python
+class Validator:
+    def _check(self, func):
+        def wrapped(obj, *args, **kwargs):
+            print("Checking...")
+            return func(obj, *args, **kwargs)
+        return wrapped
+
+    @_check
+    def process(self, data):
+        return data
+```
+**A:** `_check` has `self` as its first parameter, but decorators defined in a class body run at class definition time — there's no instance. Remove `self` from `_check`.
+
+**Q3 - Predict the Output:** What does this print?
+```python
+class Formatter:
+    def _upper(func):
+        def wrapped(obj, *args, **kwargs):
+            return func(obj, *args, **kwargs).upper()
+        return wrapped
+
+    @_upper
+    def greet(self, name):
+        return f"hello {name}"
+
+f = Formatter()
+print(f.greet("world"))
+```
+**A:** `HELLO WORLD` — the `_upper` decorator uppercases the return value. `obj` receives the instance (`self`).
+
+---
+
+### getattr() Dynamic Dispatch
+
+**Q1 - Conceptual:** What does `getattr(obj, "method_name")` return?
+**A:** It returns the attribute (method, property, or value) named `"method_name"` from `obj`. It's equivalent to `obj.method_name` but the name is a string, allowing dynamic lookup at runtime.
+
+**Q2 - Code Writing:** Write a function `call_method(obj, name, *args)` that dynamically calls a method on `obj` by string name, passing any extra arguments.
+**A:**
+```python
+def call_method(obj, name, *args):
+    method = getattr(obj, name)
+    return method(*args)
+```
+
+**Q3 - Predict the Output:** What does this print?
+```python
+class Math:
+    def square(self, x):
+        return x ** 2
+    def cube(self, x):
+        return x ** 3
+
+m = Math()
+for op in ["square", "cube"]:
+    print(getattr(m, op)(4))
+```
+**A:** `16` then `64` — dynamically calls `m.square(4)` and `m.cube(4)`.
+
+---
+
+### Mutable Default Arguments
+
+**Q1 - Predict the Output:** What does this print?
+```python
+def track(event, log=[]):
+    log.append(event)
+    return log
+
+print(track("login"))
+print(track("logout"))
+print(track("login"))
+```
+**A:** `['login']`, then `['login', 'logout']`, then `['login', 'logout', 'login']` — the same list is reused across all calls because mutable defaults are created once at definition time.
+
+**Q2 - Conceptual:** *When* does Python evaluate default argument values — at function definition or at each call?
+**A:** At **function definition** time (when the `def` line executes). This is why mutable defaults like `[]` or `{}` are shared across calls.
+
+**Q3 - Refactor:** Fix this function so each call gets an independent list:
+```python
+def add_tag(tag, tags=[]):
+    tags.append(tag)
+    return tags
+```
+**A:**
+```python
+def add_tag(tag, tags=None):
+    if tags is None:
+        tags = []
+    tags.append(tag)
+    return tags
+```
+
+**Q4 - Spot the Bug:** What's wrong with this cache?
+```python
+def fetch_data(url, cache={}):
+    if url not in cache:
+        cache[url] = requests.get(url).json()
+    return cache[url]
+```
+**A:** The `cache={}` is a mutable default — it persists across calls, which here is actually the *intended* behavior (caching). But it's still a bug because: (1) the cache can never be cleared, (2) it survives across test runs causing flaky tests, (3) it's an implicit global. Use `None` sentinel and a class or module-level cache instead.
+
+---
+
+### None Sentinel Pattern
+
+**Q1 - Conceptual:** Why should you use `is None` instead of `== None` when checking for the None sentinel?
+**A:** `is` checks identity (is this the exact same object?), while `==` checks equality (do these have the same value?). `None` is a singleton, so `is` is both faster and more correct. An object could override `__eq__` to return `True` when compared to `None`, giving a false positive.
+
+**Q2 - Fill in the Blank:** Complete the function:
+```python
+def create_user(name, permissions=None):
+    if ________________:
+        permissions = ["read"]
+    return {"name": name, "permissions": permissions}
+```
+**A:** `permissions is None`
+
+**Q3 - Predict the Output:** What does this print?
+```python
+def register(name, members=None):
+    if members is None:
+        members = []
+    members.append(name)
+    return members
+
+a = register("Alice")
+b = register("Bob")
+print(a, b)
+```
+**A:** `['Alice'] ['Bob']` — each call creates a fresh list because of the None sentinel pattern. No leakage between calls.
+
+---
+
+### inspect.signature
+
+**Q1 - Conceptual:** What does `inspect.signature(func)` return, and what can you learn from it?
+**A:** It returns a `Signature` object describing the function's parameters — their names, default values, annotations, and kinds (positional, keyword, etc.).
+
+**Q2 - Predict the Output:** What does this print?
+```python
+import inspect
+
+def connect(host, port=5432, ssl=True):
+    pass
+
+sig = inspect.signature(connect)
+for name, param in sig.parameters.items():
+    if param.default is not inspect.Parameter.empty:
+        print(f"{name}={param.default}")
+```
+**A:** `port=5432` then `ssl=True` — skips `host` because it has no default (its default is `Parameter.empty`).
+
+**Q3 - Spot the Bug:** What's wrong with this check?
+```python
+import inspect
+
+sig = inspect.signature(func)
+for name, param in sig.parameters.items():
+    if param.default is not None:
+        print(f"{name} has a default")
+```
+**A:** Using `is not None` instead of `is not inspect.Parameter.empty`. Parameters without defaults don't have `None` as their default — they have the sentinel `inspect.Parameter.empty`. This check would miss parameters with `None` as an actual default and incorrectly flag parameters with no default.
+
+---
+
+### copy.deepcopy
+
+**Q1 - Conceptual:** What's the difference between `copy.copy()` (shallow) and `copy.deepcopy()`?
+**A:** Shallow copy creates a new outer object but shares references to nested objects. Deep copy recursively creates new copies of all nested objects. Modifying a nested object in a shallow copy affects the original; in a deep copy it doesn't.
+
+**Q2 - Predict the Output:** What does this print?
+```python
+import copy
+
+original = {"scores": [90, 85, 92]}
+shallow = copy.copy(original)
+shallow["scores"].append(100)
+print(original["scores"])
+```
+**A:** `[90, 85, 92, 100]` — shallow copy shares the inner list, so appending to the copy also modifies the original.
+
+**Q3 - Predict the Output:** What if we used `deepcopy` instead?
+```python
+import copy
+
+original = {"scores": [90, 85, 92]}
+deep = copy.deepcopy(original)
+deep["scores"].append(100)
+print(original["scores"])
+```
+**A:** `[90, 85, 92]` — deep copy created an independent copy of the nested list, so the original is untouched.
+
+**Q4 - Spot the Bug:** What's wrong here?
+```python
+defaults = {"tags": ["python"], "active": True}
+user_config = defaults
+user_config["tags"].append("sql")
+```
+**A:** `user_config = defaults` doesn't copy anything — both variables point to the same dict. Appending to `user_config["tags"]` also modifies `defaults["tags"]`. Use `copy.deepcopy(defaults)` for an independent copy.
+
+---
+
+### Instance Attributes and self
+
+**Q1 - Spot the Bug:** What's wrong with this class?
+```python
+class Timer:
+    def __init__(self, seconds):
+        seconds = seconds
+
+    def display(self):
+        print(f"{self.seconds} seconds remaining")
+```
+**A:** `seconds = seconds` assigns the parameter to itself — it doesn't store it on the instance. Should be `self.seconds = seconds`. Calling `display()` will raise `AttributeError`.
+
+**Q2 - Predict the Output:** What does this print?
+```python
+class Tracker:
+    def __init__(self):
+        self.count = 0
+
+    def tick(self):
+        self.count += 1
+        return self.count
+
+t = Tracker()
+print(t.tick(), t.tick(), t.tick())
+```
+**A:** `1 2 3` — each call increments `self.count` and returns the new value.
+
+**Q3 - Conceptual:** Why must you use `self.attribute` to access instance data inside methods, rather than just `attribute`?
+**A:** Without `self.`, Python looks for a local or global variable named `attribute`, not the instance's data. `self` explicitly refers to the current instance, so `self.attribute` accesses the value stored on that specific object.
+
+---
+
+### Class vs Instance Attributes
+
+**Q1 - Predict the Output:** What does this print?
+```python
+class Server:
+    MAX_CONNECTIONS = 100
+
+    def __init__(self, name):
+        self.name = name
+
+a = Server("alpha")
+b = Server("beta")
+print(a.MAX_CONNECTIONS, b.MAX_CONNECTIONS)
+print(a.name, b.name)
+```
+**A:** `100 100` then `alpha beta` — `MAX_CONNECTIONS` is shared (class attribute), `name` is unique per instance.
+
+**Q2 - Spot the Bug:** What's wrong with this class?
+```python
+class ChatRoom:
+    messages = []
+
+    def post(self, msg):
+        self.messages.append(msg)
+
+room1 = ChatRoom()
+room2 = ChatRoom()
+room1.post("hello")
+print(room2.messages)
+```
+**A:** `messages = []` is a class attribute, so all instances share the same list. `room2.messages` prints `["hello"]` even though only `room1` posted. Fix: initialize `self.messages = []` in `__init__`.
+
+**Q3 - Conceptual:** Where should you define a constant like `PI = 3.14159` — as a class attribute or an instance attribute? Why?
+**A:** As a class attribute. Constants are shared by all instances and never change per-object, so there's no reason to create separate copies. Access via `ClassName.PI` or `self.PI`.
+
+---
+
+### Abstract Base Classes
+
+**Q1 - Predict the Output:** What happens when you run this?
+```python
+import abc
+
+class Serializer(abc.ABC):
+    @abc.abstractmethod
+    def serialize(self, data) -> str:
+        pass
+
+s = Serializer()
+```
+**A:** `TypeError: Can't instantiate abstract class Serializer with abstract method serialize` — ABCs with abstract methods cannot be instantiated directly.
+
+**Q2 - Spot the Bug:** Why doesn't this enforce the abstract method?
+```python
+import abc
+
+class Database:
+    @abc.abstractmethod
+    def connect(self):
+        pass
+
+d = Database()
+```
+**A:** `Database` doesn't inherit from `abc.ABC`. Without that, `@abstractmethod` has no enforcement mechanism and `Database()` creates an instance without error.
+
+**Q3 - Code Writing:** Define an abstract class `Exporter` with two abstract methods: `export(data)` returning `str` and `file_extension()` returning `str`.
+**A:**
+```python
+import abc
+
+class Exporter(abc.ABC):
+    @abc.abstractmethod
+    def export(self, data) -> str:
+        pass
+
+    @abc.abstractmethod
+    def file_extension(self) -> str:
+        pass
+```
+
+**Q4 - Conceptual:** What happens if a concrete class inherits from an ABC but doesn't implement all abstract methods?
+**A:** Python raises `TypeError` when you try to instantiate the concrete class. It lists which abstract methods are still missing.
+
+---
+
+### __str__ Method
+
+**Q1 - Spot the Bug:** Why does `print(p)` show `<__main__.Product object at 0x...>` instead of the expected string?
+```python
+class Product:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+
+    def _str_(self):
+        return f"{self.name}: ${self.price:.2f}"
+```
+**A:** Single underscores `_str_` instead of double `__str__`. Python doesn't recognize it as the dunder method, so it falls back to the default object representation.
+
+**Q2 - Code Writing:** Write a `__str__` method for a `Coordinate` class that displays as `"(x, y)"` format.
+**A:**
+```python
+def __str__(self):
+    return f"({self.x}, {self.y})"
+```
+
+**Q3 - Conceptual:** What's the difference between `__str__` and `__repr__`?
+**A:** `__str__` is for human-readable display (used by `print()` and `str()`). `__repr__` is for unambiguous developer representation (used in the REPL and `repr()`). `__repr__` should ideally produce a string that could recreate the object. If only one is defined, `__repr__` is used as a fallback for `__str__`.
+
+---
+
+### Composition Over Inheritance
+
+**Q1 - Conceptual:** What's the difference between composition ("has-a") and inheritance ("is-a")?
+**A:** Inheritance means a class extends another — a `Dog` *is an* `Animal`. Composition means a class contains another as an attribute — a `Car` *has an* `Engine`. Composition is more flexible because you can swap components without changing the class hierarchy.
+
+**Q2 - Multiple Choice:** A `Playlist` manages a collection of `Song` objects. Which design is correct?
+- A) `class Playlist(Song):`
+- B) `class Playlist(list):`
+- C) `class Playlist:` with `self.songs = []` in `__init__`
+- D) `class Song(Playlist):`
+**A:** C — a Playlist *has* songs (composition). It's not a Song, and inheriting from `list` exposes too many internals.
+
+**Q3 - Refactor:** What's wrong with this design?
+```python
+class Garage(Car):
+    def __init__(self):
+        super().__init__()
+        self.cars = []
+```
+**A:** A Garage is not a Car — this is incorrect inheritance. A Garage *has* cars. Should be `class Garage:` with `self.cars = []`, no inheritance from `Car`.
+
+---
+
+### isinstance() and Polymorphism
+
+**Q1 - Predict the Output:** What does this print?
+```python
+class Animal:
+    pass
+
+class Dog(Animal):
+    pass
+
+d = Dog()
+print(isinstance(d, Dog))
+print(isinstance(d, Animal))
+print(type(d) == Animal)
+```
+**A:** `True`, `True`, `False` — `isinstance` checks inheritance (Dog is-a Animal), but `type()` checks the exact class only.
+
+**Q2 - Code Writing:** Given a list of mixed objects, write a one-liner that returns only the strings.
+```python
+items = [42, "hello", 3.14, "world", True, "foo"]
+```
+**A:**
+```python
+strings = [x for x in items if isinstance(x, str)]
+```
+
+**Q3 - Conceptual:** Why is `isinstance()` preferred over `type()` for type checking?
+**A:** `isinstance()` respects inheritance — it returns `True` for instances of subclasses. `type()` only matches the exact class. Using `isinstance()` supports polymorphism and doesn't break when someone subclasses your types.
+
+---
+
+### @property Decorator
+
+**Q1 - Predict the Output:** What does this print?
+```python
+class Square:
+    def __init__(self, side):
+        self.side = side
+
+    @property
+    def area(self):
+        return self.side ** 2
+
+s = Square(5)
+print(s.area)
+print(type(s.area))
+```
+**A:** `25` then `<class 'int'>` — `area` is accessed like an attribute (no parentheses) but computed by the method.
+
+**Q2 - Spot the Bug:** What's wrong here?
+```python
+s = Square(5)
+print(s.area())
+```
+**A:** `area` is a `@property`, so `s.area` already returns the value (an `int`). Adding `()` tries to call `25()`, which raises `TypeError: 'int' object is not callable`.
+
+**Q3 - Conceptual:** When would you use `@property` instead of a regular method?
+**A:** When the value is computed from existing attributes and should feel like accessing data rather than performing an action. Properties are good for derived/calculated values like `area`, `full_name`, or `is_valid` — things the caller thinks of as attributes, not operations.
+
+**Q4 - Code Writing:** Add a `@property` called `is_empty` to a class with a `self.items` list that returns `True` when the list has no elements.
+**A:**
+```python
+@property
+def is_empty(self):
+    return len(self.items) == 0
+```
+
+---
+
 ## Pythonic Code
 
 ### Idiomatic Patterns
@@ -511,6 +1131,76 @@ Issues: imports on one line, wildcard import, inconsistent spacing around `=`, u
 - C) Standard library, third-party, local
 - D) Alphabetical regardless of source
 **A:** C — Standard library first, then third-party, then local/project imports. Each group separated by a blank line.
+
+---
+
+### lambda with Built-in Functions
+
+**Q1 - Code Writing:** Given a list of tuples `students = [("Alice", 88), ("Bob", 95), ("Carol", 72)]`, use `max()` with a `lambda` to find the student with the highest score.
+**A:**
+```python
+top = max(students, key=lambda s: s[1])
+```
+
+**Q2 - Predict the Output:** What does this print?
+```python
+words = ["fig", "banana", "apple", "kiwi"]
+result = sorted(words, key=lambda w: len(w))
+print(result)
+```
+**A:** `['fig', 'kiwi', 'apple', 'banana']` — sorted by string length, shortest first.
+
+**Q3 - Spot the Bug:** Why does this raise an error?
+```python
+class Task:
+    def __init__(self, name, priority):
+        self.name = name
+        self.priority = priority
+
+tasks = [Task("a", 3), Task("b", 1), Task("c", 2)]
+urgent = max(tasks)
+```
+**A:** Python doesn't know how to compare `Task` objects. `max()` needs a `key` parameter: `max(tasks, key=lambda t: t.priority)`.
+
+**Q4 - Code Writing:** Use `sum()` with a generator expression to calculate the total price from a list of dicts: `items = [{"name": "A", "price": 10}, {"name": "B", "price": 25}, {"name": "C", "price": 8}]`.
+**A:**
+```python
+total = sum(item["price"] for item in items)
+```
+
+---
+
+### List Comprehension Filtering
+
+**Q1 - Refactor:** Rewrite this using a list comprehension:
+```python
+result = []
+for word in words:
+    if len(word) >= 4:
+        result.append(word.upper())
+```
+**A:**
+```python
+result = [word.upper() for word in words if len(word) >= 4]
+```
+
+**Q2 - Spot the Bug:** What's wrong with this approach?
+```python
+names = ["Alice", "Bob", "Charlie", "Dave"]
+for name in names:
+    if len(name) < 4:
+        names.remove(name)
+print(names)
+```
+**A:** Modifying a list while iterating over it. `remove()` shifts elements, causing items to be skipped. Result is unpredictable. Fix: `names = [n for n in names if len(n) >= 4]`.
+
+**Q3 - Predict the Output:** What does this print?
+```python
+nums = range(1, 11)
+result = [n ** 2 for n in nums if n % 3 == 0]
+print(result)
+```
+**A:** `[9, 36, 81]` — squares of 3, 6, and 9 (the multiples of 3 from 1-10).
 
 ---
 

@@ -3,7 +3,6 @@ name: learning-journal
 description: |
   Capture coding learnings, patterns, and insights during sessions. Creates a
   searchable knowledge base with concepts, code snippets, sources, and tags.
-  Syncs to Obsidian Learning/ folder.
 license: MIT
 compatibility: marvin
 metadata:
@@ -73,9 +72,8 @@ When user searches:
 
 ## Notes
 - Entries are appended chronologically
-- Tags use # prefix for Obsidian compatibility
+- Tags use # prefix for searchability
 - Code snippets include language for syntax highlighting
-- Journal syncs to Obsidian Learning/ folder as individual notes
 - Keep entries concise — focus on the key insight
 
 ---

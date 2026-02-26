@@ -28,6 +28,7 @@ Test your knowledge on topics you're learning with targeted questions.
 - During briefing when topics are overdue (suggest a quiz)
 - User says "quick quiz" (short 3-question session)
 - User says "teach me [topic]" or "teach back" (triggers teach-back mode directly)
+- User says "quiz consume" or "consume study guides"
 
 ## Process
 
@@ -87,6 +88,64 @@ If during the quiz you identify gaps in the question bank:
 - Note which topics need more questions
 - Offer to add new questions based on what tripped the user up
 - User can also say "add question: [topic] - [question]" anytime
+
+## Consume Study Guides
+
+Ingest study guides from Learning projects into the question bank.
+
+### Step 1: Discover
+- List all `*_study_guide.md` files in `~/marvin/skills/quiz/learning/`
+- If directory or files don't exist, report "No study guides to consume" and create directories if missing
+
+### Step 2: Parse Each Study Guide
+- Extract project name from filename (e.g., `decoratordojo` from `decoratordojo_study_guide.md`)
+- Parse markdown sections — each heading group has: "What It Is", "Syntax", "Mini Example", "Common Mistake"
+
+### Step 3: Generate Questions (scaled by content depth)
+- **Minimum:** 3 questions per section (simple/short topics)
+- **Standard:** 4-5 questions per section (typical with all 4 sub-parts)
+- **Maximum:** 6-7 questions per section (meaty topics with multiple examples)
+
+**Mapping from study guide parts to question types:**
+
+| Study Guide Part | → Question Type |
+|---|---|
+| What It Is | Conceptual |
+| Syntax | Fill in the Blank |
+| Mini Example | Predict the Output / Code Output |
+| Common Mistake (WRONG) | Spot the Bug |
+| Common Mistake (RIGHT) | Refactor |
+| What It Is + Syntax | Code Writing |
+| Cross-section | Compare/Contrast |
+
+**Rules:**
+- Follow existing format: `**Q[N] - [Type]:** [Question]` / `**A:** [Answer]`
+- Do NOT copy study guide examples verbatim — rephrase/modify values so the student has to think
+- Number questions sequentially within each sub-section
+
+### Step 4: Insert into question-bank.md
+- Create new `### [Topic Name]` sub-sections under the appropriate top-level `##` section
+- **Section mapping heuristic:**
+  - Algorithms, data structures, sorting, searching → `## DSA Topics`
+  - Python patterns (decorators, classes, error handling, OOP) → `## Python Coding Skills`
+  - Idiomatic Python (comprehensions, PEP 8, built-ins) → `## Pythonic Code`
+  - Docker, containers → `## Docker`
+  - No match → create new `## [Category]` section before the "Adding Questions" section at the bottom
+- If a sub-section with the same name already exists, append with incremented Q numbers
+- Update "Last updated" date at top of question-bank.md
+
+### Step 5: Archive and Report
+- Move processed file to `~/marvin/skills/quiz/learning/consumed/`
+- Create `consumed/` directory if it doesn't exist
+- Output a consumption report:
+  ```
+  ## Study Guide Consumption Report
+  **Processed:** [filename]
+  **Questions generated:** [N]
+  **Sections added/updated:**
+  - [Topic] → [Parent Section] (X questions)
+  **Moved to:** learning/consumed/[filename]
+  ```
 
 ## Question Types
 

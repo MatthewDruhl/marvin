@@ -153,7 +153,7 @@
 | `/end` | End session and save everything |
 | `/update` | Quick checkpoint (save progress) |
 | `/report` | Generate a weekly summary of your work |
-| `/plan` | Weekly planning session (set priorities) |
+| `/wkplan` | Weekly planning session (set priorities) |
 | `/dashboard` | Project momentum dashboard |
 | `/analytics` | Session analytics and trends |
 | `/resume` | View or edit your resume |

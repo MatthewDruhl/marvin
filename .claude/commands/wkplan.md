@@ -2,7 +2,7 @@
 description: Weekly planning session - set priorities and plan the week ahead
 ---
 
-# /plan - Weekly Planning Session
+# /wkplan - Weekly Planning Session
 
 Forward-looking planning complement to `/report`. Review last week, set upcoming priorities.
 
