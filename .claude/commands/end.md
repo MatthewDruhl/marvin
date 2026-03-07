@@ -72,3 +72,6 @@ Show a brief summary:
 - TWC PDFs status (if applicable)
 
 Keep it concise.
+
+### 8. Exit Session
+After all steps are complete and the summary is shown, exit the Claude Code session to return the user to their terminal prompt. Use the `/exit` command to end the session.
