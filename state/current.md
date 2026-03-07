@@ -1,38 +1,32 @@
 # Current State
 
-Last updated: 2026-02-26
+Last updated: 2026-03-07
 
 ## Active Priorities
 
-1. **Prep for PatientPoint phone screen** - Fri Mar 6, 11:00 AM CT with Erik Dawson (phone call). Watch company video, review job desc.
-2. **Job search** - 5 active applications, PatientPoint phone screen scheduled
-3. **G2i exam gap practice** - decoratordojo → paymentprocessor (see `~/Code/Learning/ExamGap.md`)
-4. **TWC weekly requirement (Feb 22-28)** - 5/4 complete
-5. **Python skills** - Course 5 in progress. 30+ topics due for review. Question bank: 135 questions.
+1. **PatientPoint CodeSignal assessment** — Due by Mar 13. Python 3, 90 min, 3 problems. Practice at `~/Code/Learning/PP/`
+2. **Job search** — 5 active applications, PatientPoint furthest along
+3. **TWC weekly requirement (Mar 1-7)** — 3/4 complete, need 1 more by Saturday
+4. **Python skills** — Course 5 in progress. 30+ topics due for review. Question bank: 135 questions.
 
 ## Open Threads
 
-- **PatientPoint:** Phone screen confirmed — Fri Mar 6, 11:00-11:30 AM CT, Erik calls you. Prep: watch company video, review job desc
-- **VR&E:** VA Form 28-1900 submitted Feb 24. Waiting for eligibility review + VRC appointment letter
-- **Gmail:** Config updated — re-auth will trigger on next session start (browser prompt for gmail.modify scope)
-- **CheckSammy:** Follow-up sent Jan 28 — no response in ~1 month. Consider closing out.
+- **PatientPoint:** Phone screen done. CodeSignal next → Alex (Director) → 2 staff engineers → Final. Notes at `content/jobs/interview-prep/patientpoint-phone-screen-2026-03-06.md`
+- **VR&E:** VA Form 28-1900 submitted Feb 24. Waiting for eligibility review
+- **CheckSammy:** No response in ~6 weeks. Close out.
 - **D&D Character Sheet:** Phase 3 complete. Next: migrate MCP to PostgreSQL or start frontend
-- **Recipe Book App:** Active development in separate session
-- **Learning reviews overdue:** 26+ Python topics need review
-- **Quiz skill:** No answers shown in questions (user pref). Teach-back mode for 4/5+ topics. Consume pipeline live — study guides auto-feed question bank.
-- **PM Cert:** Need to enroll in Google PM Certificate on Coursera
-- **Cambium Learning Group:** Rejected Feb 25 (position no longer available)
+- **Learning reviews overdue:** 30+ Python topics need review
+- **Google PM Cert:** Need to enroll on Coursera
 
 ## Projects
 
 | Project | Status | Details |
 |---------|--------|---------|
-| Job Search | 5 active apps, 1 interview | `content/jobs/applications.md` |
-| TWC Reporting | Week Feb 22-28: 5/4 | `content/jobs/TWC/` |
+| Job Search | 5 active apps, PatientPoint interviewing | `content/jobs/applications.md` |
+| TWC Reporting | Week Mar 1-7: 3/4 | `content/jobs/TWC/` |
+| CodeSignal Prep | 16 practice problems created | `~/Code/Learning/PP/` |
 | VR&E | Application submitted | VA benefits track |
-| G2i Exam Gap Practice | In progress | decoratordojo + paymentprocessor |
 | D&D Project | Phase 3 complete | `content/dnd-project.md` |
-| Recipe Book App | Active development | `content/recipe-app.md` |
 | Google PM Cert | New | Coursera — not yet enrolled |
 | Python 3 Specialization | Course 5 in progress | UMich (Coursera) |
 

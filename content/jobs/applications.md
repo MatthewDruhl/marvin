@@ -16,12 +16,15 @@ Last updated: 2026-02-23
 
 ### PatientPoint - Advanced Software Engineer (Python)
 - **Applied:** 2026-02-23
-- **Status:** Phone screen scheduled (Mar 6, 11:00 AM CT)
-- **Salary:** $130,000/yr
+- **Status:** Phone screen complete, awaiting Python coding assessment
+- **Salary:** $83,130 - $151,757 (posted $130k)
 - **Type:** Software Engineering (Python)
+- **Team:** Precision product (released 2024), 8 engineers growing to 11
+- **Reports to:** Alex Traanukha (Director)
 - **URL:** https://job-boards.greenhouse.io/patientpoint/jobs/4654686005
 - **Contact:** Erik Dawson (Manager, TA Ops & Sr. Tech Recruiter) — erik.dawson@patientpoint.com, 312-667-1458
-- **Next Action:** Prepare for phone screen — watch [company video](https://vimeo.com/912723416/0a500f16b2), review job description
+- **Interview Notes:** `content/jobs/interview-prep/patientpoint-phone-screen-2026-03-06.md`
+- **Next Action:** Complete Python coding assessment when received, then 3 interview rounds (Director → 2 staff engineers → final)
 
 ### G2i - AI Software Engineer - Python
 - **Applied:** 2026-02-23

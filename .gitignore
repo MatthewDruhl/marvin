@@ -3,3 +3,6 @@
 tmp/
 *.pdf
 .claude/settings.local.json
+
+#Google MCP
+g_client_secret.json

@@ -1,6 +1,6 @@
 # Goals
 
-Last updated: 2026-02-24
+Last updated: 2026-03-07
 
 ---
 
@@ -33,7 +33,7 @@ Last updated: 2026-02-24
 | Python coding skills | Work | In Progress | Writing clean, functional Python code through projects and practice |
 | Pythonic code | Work | In Progress | Idiomatic patterns, PEP 8, best practices |
 | Docker skills | Work | In Progress | Containers, Compose, Dockerfiles |
-| Land a new job | Work | In Progress | 5 active applications, 12 rejections. G2i failed code test Feb 24. 2 Coursera certs on resume. |
+| Land a new job | Work | In Progress | 5 active apps, PatientPoint interviewing (CodeSignal next). 12 rejections. CodeSignal prep at ~/Code/Learning/PP/ |
 | Exercise regularly | Personal | In Progress | Needs more consistent schedule |
 | DND coding project | Personal | In Progress | MCP complete, Web app Phase 3 complete (backend API), Combat engine 65 tests passing |
 
