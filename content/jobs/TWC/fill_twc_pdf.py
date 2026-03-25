@@ -6,8 +6,25 @@ Creates multiple pages if more than 5 activities.
 """
 
 import csv
+import os
 from datetime import datetime
+from pathlib import Path
 from PyPDF2 import PdfReader, PdfWriter
+from PyPDF2.generic import TextStringObject
+
+
+def load_env():
+    """Load variables from .env file."""
+    env_path = Path(__file__).resolve().parents[3] / ".env"
+    if not env_path.exists():
+        return
+    with open(env_path) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.split("=", 1)
+            os.environ.setdefault(key.strip(), value.strip())
 
 
 def fill_activities(field_mapping, activities, start_idx=0):
@@ -190,21 +207,29 @@ def fill_twc_pdf(csv_file, template_pdf, output_pdf):
 
         # Fill in the header fields
         field_mapping = {
-            'Enter Claimant Name': 'Matthew Druhl',
+            'Enter Claimant Name': os.environ.get('TWC_CLAIMANT_NAME', ''),
             'Enter Week Of': week_start.strftime('%m/%d/%Y'),
             'Enter End Date': week_end.strftime('%m/%d/%Y'),
-            'Enter Social Security Number First 3 Digits': '483',
-            'Enter Social Security Number Middle 2 Digits': '08',
-            'Enter Last 4 Digits of Social Security Number': '5631',
+            'Enter Social Security Number First 3 Digits': os.environ.get('TWC_SSN_FIRST3', ''),
+            'Enter Social Security Number Middle 2 Digits': os.environ.get('TWC_SSN_MID2', ''),
+            'Enter Last 4 Digits of Social Security Number': os.environ.get('TWC_SSN_LAST4', ''),
             'Enter Number of Required Searches': str(required_searches),
         }
 
         # Fill activities for this page
         fill_activities(field_mapping, activities, start_idx)
 
+        # Clear existing form field values to prevent double-print
+        page = writer.pages[0]
+        if "/Annots" in page:
+            for annot in page["/Annots"]:
+                annot_obj = annot.get_object()
+                if annot_obj.get("/FT") == "/Tx":  # Text fields
+                    annot_obj.update({"/V": TextStringObject("")})
+
         # Update form fields
         writer.update_page_form_field_values(
-            writer.pages[0],
+            page,
             field_mapping
         )
 
@@ -222,6 +247,7 @@ if __name__ == '__main__':
         print("Usage: python3 fill_twc_pdf.py <csv_file> [output_pdf]")
         sys.exit(1)
 
+    load_env()
     csv_file = sys.argv[1]
 
     if len(sys.argv) >= 3:
