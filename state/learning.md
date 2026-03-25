@@ -1,6 +1,6 @@
 # Learning Progress
 
-Last updated: 2026-02-25
+Last updated: 2026-03-20
 
 ---
 
@@ -22,11 +22,41 @@ Review intervals: 1 day → 3 days → 7 days → 14 days → 30 days
 
 ---
 
-## Project Management Topics
+## PMP Certification Topics
+
+*Topics added as covered in Udemy TIA course + PMBOK 7. Quiz daily at session start.*
 
 | Topic | Confidence | Questions | Last Reviewed | Next Review | Interval | Status |
 |-------|-----------|-----------|---------------|-------------|----------|--------|
-| Google PM Cert - Foundations | 1/5 | 0/10 | — | 2026-02-17 | 1 day | New |
+| Project vs Operations (temporary + unique) | 1/5 | 1/10 | 2026-03-25 | 2026-03-26 | 1 day | Active |
+| Milestones (zero duration, key events) | 1/5 | 1/10 | 2026-03-25 | 2026-03-26 | 1 day | Active |
+| PMP Exam Structure (breaks, sections) | 1/5 | 1/10 | 2026-03-25 | 2026-03-26 | 1 day | Active |
+| Project Management Plan (master document) | 1/5 | 1/10 | 2026-03-25 | 2026-03-26 | 1 day | Active |
+| Functional Manager (resource assignment authority) | 1/5 | 0/10 | 2026-03-25 | 2026-03-26 | 1 day | Active |
+| Project Charter (authorization + PM authority) | 1/5 | 1/10 | 2026-03-25 | 2026-03-26 | 1 day | Active |
+| Project Bosses (Sponsor, Program Manager roles) | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Product vs Project Management | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Areas of a Project (9 knowledge areas) | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| PM Approaches: Predictive vs Adaptive | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Organizational Structures (Functional, Matrix, Projectized) | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Risks vs Issues vs Assumptions vs Constraints | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Project Constraints (6 constraints hexagon) | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Emotional Intelligence in PM | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Leadership vs Management | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| PMI Code of Ethics (Responsibility, Respect, Fairness, Honesty) | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| 12 Principles of Project Management | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Stewardship (Integrity, Care, Trustworthiness, Compliance) | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Collaborative Team Environment (authority, accountability, responsibility) | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Stakeholder Engagement (proactive, impacts on project) | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Focus on Value (ultimate indicator of project success) | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Systems Thinking (holistic view, interdependencies) | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Leadership Behaviors (leadership ≠ authority) | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Tailoring Based on Context ("just enough" process) | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Build Quality into Processes and Deliverables | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Navigate Complexity (sources: human, system, uncertainty, tech) | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Optimize Risk Responses (positive/negative risks, appetite/threshold) | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Embrace Adaptability and Resiliency | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
+| Enable Change (current state → future state) | 1/5 | 0/10 | — | 2026-03-26 | 1 day | New |
 
 ---
 
@@ -58,6 +88,8 @@ Review intervals: 1 day → 3 days → 7 days → 14 days → 30 days
 | `self.method()` vs bare `method()` calls | 1/5 | 0/10 | — | 2026-02-25 | 1 day | New |
 | Variable Scoping in Class Methods | 1/5 | 0/10 | — | 2026-02-25 | 1 day | New |
 | Method Nesting vs Class-Level Definition | 1/5 | 0/10 | — | 2026-02-25 | 1 day | New |
+| Set `.add()` vs Calling the Set Directly | 1/5 | 0/10 | — | 2026-03-10 | 1 day | New |
+| Caesar Cipher Formula (`ord()`/`chr()` with modular arithmetic) | 1/5 | 0/10 | — | 2026-03-17 | 1 day | New |
 
 ### Topics Covered / Key Concepts (2/5)
 
@@ -92,6 +124,43 @@ Review intervals: 1 day → 3 days → 7 days → 14 days → 30 days
 | Chainable Methods (`return self`) | 2/5 | 0/10 | — | 2026-02-25 | 1 day | New |
 | Refactoring Procedural → OOP | 2/5 | 0/10 | — | 2026-02-25 | 1 day | New |
 | Reading & Extending Unfamiliar Codebases | 2/5 | 0/10 | — | 2026-02-25 | 1 day | New |
+| str() Built-in vs Dunder Methods | 2/5 | 0/10 | — | 2026-03-10 | 1 day | New |
+| Refactoring Methods for New Input Types | 2/5 | 0/10 | — | 2026-03-10 | 1 day | New |
+
+---
+
+## PP: CodeSignal Assessment Prep
+
+### PP Issues Needing More Guidance (1/5)
+
+| Topic | Confidence | Questions | Last Reviewed | Next Review | Interval | Status |
+|-------|-----------|-----------|---------------|-------------|----------|--------|
+| PP: Storing complement instead of actual value in seen dict | 1/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+
+### PP Topics Covered / Key Concepts (2/5)
+
+| Topic | Confidence | Questions | Last Reviewed | Next Review | Interval | Status |
+|-------|-----------|-----------|---------------|-------------|----------|--------|
+| PP: Sliding window for substring search (`s[i:i+m]`) | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: Tuple unpacking for multiple lengths | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: Case-insensitive search via `.lower()` | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: Early exit optimization | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: List comprehension as alternative to append loop | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: State machine for word counting (`in_word` flag) | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: Word frequency counting with punctuation stripping | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: Sorting with multi-key lambda (`-freq, alpha`) | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: `str.strip()` with custom character set | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: `dict.get()` for safe default values | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: Greedy resource allocation (first-fit, best-fit) | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: Mutable state tracking (capacity, active allocations) | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: Time-aware allocation with capacity release | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: Dual constraints (capacity + count limits) | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: Don't mutate input parameters (`hosts.copy()`) | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: `float('inf')` for best-fit initialization | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: Hash-based pair counting with `collections.Counter` | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: Complement pattern for O(n) pair lookups | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: Counter for unique value pairs vs dict for index pairs | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
+| PP: Absolute value as problem constraint, not code | 2/5 | 1/10 | 2026-03-10 | 2026-03-11 | 1 day | Active |
 
 ---
 
