@@ -5,12 +5,15 @@ Reads and edits a Word (.docx) resume while preserving formatting.
 Usage: uv run --with python-docx --with docx2pdf --with PyPDF2 python3 resume_tool.py <command> [options]
 
 Commands:
-  read          - Display resume structure and content
-  page-count    - Check page count (converts to PDF via Word)
-  backup        - Create a timestamped backup
-  add-section   - Add a new section header
-  add-entry     - Add an entry to an existing section
-  add-skill     - Add a skill to the Technical Skills table
+  read               - Display resume structure and content
+  page-count         - Check page count (converts to PDF via Word)
+  backup             - Create a timestamped backup
+  add-section        - Add a new section header
+  add-entry          - Add an entry to an existing section
+  add-skill          - Add a skill to the Technical Skills table
+  remove-skill       - Remove a skill from the Technical Skills table
+  create-variant     - Create a tailored resume copy for a job application
+  create-cover-letter - Generate a formatted cover letter .docx
 """
 
 import argparse
@@ -27,6 +30,7 @@ from lxml import etree
 
 RESUME_PATH = Path.home() / "Resume" / "MatthewDruhl.docx"
 BACKUP_DIR = Path.home() / "Resume" / "archive"
+APPLICATIONS_DIR = Path.home() / "Resume" / "applications"
 
 
 def get_body_elements(doc):
@@ -417,6 +421,182 @@ def cmd_add_skill(args):
     print(f"Skill '{args.skill}' added to Technical Skills table.")
 
 
+def cmd_remove_skill(args):
+    """Remove a skill from the Technical Skills table and compact remaining cells."""
+    file_path = Path(args.file) if args.file else RESUME_PATH
+    doc = Document(str(file_path))
+
+    if not doc.tables:
+        print("Error: No tables found in the resume.")
+        sys.exit(1)
+
+    table = doc.tables[0]  # Technical Skills is the first table
+    num_cols = len(table.columns)
+
+    # Collect all skills, preserving cell formatting from first non-empty cell
+    skills = []
+    found = False
+    for row in table.rows:
+        for cell in row.cells:
+            text = cell.text.strip()
+            if text:
+                if text.lower() == args.skill.lower():
+                    found = True
+                else:
+                    skills.append(text)
+
+    if not found:
+        print(f"Error: Skill '{args.skill}' not found in the table.")
+        existing = []
+        for row in table.rows:
+            for cell in row.cells:
+                t = cell.text.strip()
+                if t:
+                    existing.append(t)
+        print(f"Current skills: {', '.join(existing)}")
+        sys.exit(1)
+
+    # Clear all cells and refill with compacted list
+    cell_idx = 0
+    for row in table.rows:
+        for cell in row.cells:
+            # Clear existing text
+            for p in cell.paragraphs:
+                for run in p.runs:
+                    run.text = ""
+            if cell_idx < len(skills):
+                cell.paragraphs[0].runs[0].text = skills[cell_idx] if cell.paragraphs[0].runs else ""
+                if not cell.paragraphs[0].runs:
+                    cell.paragraphs[0].text = skills[cell_idx]
+                cell_idx += 1
+
+    # Remove empty trailing rows
+    rows_to_remove = []
+    for row in table.rows:
+        if all(not cell.text.strip() for cell in row.cells):
+            rows_to_remove.append(row)
+    for row in rows_to_remove:
+        row._element.getparent().remove(row._element)
+
+    doc.save(str(file_path))
+    print(f"Skill '{args.skill}' removed from Technical Skills table.")
+    print(f"Remaining skills ({len(skills)}): {', '.join(skills)}")
+
+
+def cmd_create_variant(args):
+    """Copy base resume to an application-specific directory."""
+    import shutil
+
+    company = args.company
+    title = args.title
+    jobnumber = args.jobnumber or ""
+
+    # Build directory name: title-jobnumber or just title
+    dir_name = f"{title}-{jobnumber}" if jobnumber else title
+    # Sanitize for filesystem
+    dir_name = dir_name.replace(" ", "-").replace("/", "-")
+    company_dir = company.replace(" ", "-").replace("/", "-")
+
+    target_dir = APPLICATIONS_DIR / company_dir / dir_name
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    # Build filename: Resume-MATTHEW-DRUHL-{Company}.docx
+    company_filename = company.replace(" ", "")
+    target_file = target_dir / f"Resume-MATTHEW-DRUHL-{company_filename}.docx"
+
+    if target_file.exists():
+        print(f"Warning: Variant already exists at {target_file}")
+        print("Overwriting with fresh copy from base resume.")
+
+    shutil.copy2(str(RESUME_PATH), str(target_file))
+    print(f"Variant created: {target_file}")
+    print(f"Directory: {target_dir}")
+
+
+def cmd_create_cover_letter(args):
+    """Create a formatted cover letter .docx matching the Sparksoft style."""
+    from docx.enum.text import WD_ALIGN_PARAGRAPH
+    from docx.shared import Pt
+
+    target_dir = Path(args.target_dir)
+    if not target_dir.exists():
+        print(f"Error: Target directory does not exist: {target_dir}")
+        sys.exit(1)
+
+    # Read body content from file
+    body_file = Path(args.body_file)
+    if not body_file.exists():
+        print(f"Error: Body file not found: {body_file}")
+        sys.exit(1)
+
+    body_paragraphs = body_file.read_text().strip().split("\n\n")
+
+    company = args.company
+    job_title = args.job_title
+    date_str = args.date or datetime.now().strftime("%B %d, %Y")
+
+    # Create document
+    doc = Document()
+
+    # Set default font
+    style = doc.styles["Normal"]
+    font = style.font
+    font.name = "Calibri"
+    font.size = Pt(11)
+
+    # Date and company line
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    run = p.add_run(f"{date_str}\n{company}")
+    run.font.size = Pt(11)
+    run.font.name = "Calibri"
+
+    # Salutation
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    run = p.add_run("Dear Hiring Manager,")
+    run.font.size = Pt(11)
+    run.font.name = "Calibri"
+
+    # Body paragraphs
+    for para_text in body_paragraphs:
+        p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        run = p.add_run(para_text.strip())
+        run.font.size = Pt(11)
+        run.font.name = "Calibri"
+
+    # Signature block
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    run = p.add_run("Matthew Druhl")
+    run.bold = True
+    run.font.size = Pt(11)
+    run.font.name = "Calibri"
+
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    tagline = "Empower Teams & Systems | Deliver Scalable Solutions & Seamless Collaboration"
+    contact_lines = [
+        tagline,
+        "+1 603-377-1038",
+        "matthewdruhl@gmail.com",
+        "www.linkedin.com/in/matthew-druhl",
+    ]
+    for i, line in enumerate(contact_lines):
+        run = p.add_run(line)
+        run.font.size = Pt(11)
+        run.font.name = "Calibri"
+        if i < len(contact_lines) - 1:
+            p.add_run("\n").font.size = Pt(11)
+
+    # Save
+    company_filename = company.replace(" ", "")
+    output_path = target_dir / f"CoverLetter-MATTHEW-DRUHL-{company_filename}.docx"
+    doc.save(str(output_path))
+    print(f"Cover letter created: {output_path}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Resume Editor Tool for MARVIN")
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
@@ -454,6 +634,31 @@ def main():
     )
     skill_parser.add_argument("--skill", required=True, help="Skill name to add")
 
+    # remove-skill
+    rm_skill_parser = subparsers.add_parser(
+        "remove-skill", help="Remove skill from Technical Skills table"
+    )
+    rm_skill_parser.add_argument("--skill", required=True, help="Skill name to remove")
+    rm_skill_parser.add_argument("--file", default="", help="Path to .docx file (defaults to active resume)")
+
+    # create-variant
+    variant_parser = subparsers.add_parser(
+        "create-variant", help="Create a tailored resume copy for a job application"
+    )
+    variant_parser.add_argument("--company", required=True, help="Company name")
+    variant_parser.add_argument("--title", required=True, help="Job title")
+    variant_parser.add_argument("--jobnumber", default="", help="Job number/ID (optional)")
+
+    # create-cover-letter
+    cl_parser = subparsers.add_parser(
+        "create-cover-letter", help="Generate a formatted cover letter .docx"
+    )
+    cl_parser.add_argument("--target-dir", required=True, help="Directory to save the cover letter")
+    cl_parser.add_argument("--company", required=True, help="Company name")
+    cl_parser.add_argument("--job-title", required=True, help="Job title")
+    cl_parser.add_argument("--date", default="", help="Date string (defaults to today)")
+    cl_parser.add_argument("--body-file", required=True, help="Path to .txt file with letter body paragraphs")
+
     args = parser.parse_args()
 
     if not args.command:
@@ -471,6 +676,9 @@ def main():
         "add-section": cmd_add_section,
         "add-entry": cmd_add_entry,
         "add-skill": cmd_add_skill,
+        "remove-skill": cmd_remove_skill,
+        "create-variant": cmd_create_variant,
+        "create-cover-letter": cmd_create_cover_letter,
     }
 
     commands[args.command](args)
