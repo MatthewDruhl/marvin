@@ -22,3 +22,4 @@ client_secret_*.json
 /pmp/NotStudied/
 /pmp/Slides.pdf
 /pmp/Project+Documents.pdf
+__pycache__/
