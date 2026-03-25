@@ -157,6 +157,7 @@
 | `/dashboard` | Project momentum dashboard |
 | `/analytics` | Session analytics and trends |
 | `/resume` | View or edit your resume |
+| `/learn-sync` | Sync topics-learned.md into learning tracker |
 | `/commit` | Review and commit git changes |
 | `/code` | Open MARVIN in your IDE |
 | `/help` | Show commands and available integrations |
