@@ -4,5 +4,21 @@ tmp/
 *.pdf
 .claude/settings.local.json
 
+# Obsidian
+.obsidian/
+*.canvas
+
+# Learning symlinks
+learning/
+
 #Google MCP
 g_client_secret.json
+client_secret_*.json
+.google-workspace-credentials/
+
+# PMP
+/pmp/screenshot*
+/pmp/processed/
+/pmp/NotStudied/
+/pmp/Slides.pdf
+/pmp/Project+Documents.pdf

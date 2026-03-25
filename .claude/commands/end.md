@@ -55,7 +55,7 @@ See `skills/twc-pdf/SKILL.md` for instructions. Run:
 ```bash
 cd content/jobs/TWC
 for file in work-search-week-*.csv; do
-    python3 fill_twc_pdf.py "$file" 2>/dev/null
+    uv run --with PyPDF2 python3 fill_twc_pdf.py "$file" 2>/dev/null
 done
 ```
 
@@ -72,6 +72,3 @@ Show a brief summary:
 - TWC PDFs status (if applicable)
 
 Keep it concise.
-
-### 8. Exit Session
-After all steps are complete and the summary is shown, exit the Claude Code session to return the user to their terminal prompt. Use the `/exit` command to end the session.
