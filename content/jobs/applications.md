@@ -1,73 +1,85 @@
 # Job Applications
 
-Last updated: 2026-02-23
+Last updated: 2026-03-20
 
 ---
 
 ## Active Applications
 
-### Pearson - Software Engineer (Full Stack) — Data-Driven Systems
-- **Applied:** 2026-02-23
+### Honor - Staff Data Analyst
+- **Applied:** 2026-03-17
 - **Status:** Application submitted
-- **Type:** Full Stack / Data-Driven Systems
-- **URL:** https://pearson.jobs/austin-tx/senior-software-engineer/748CAE9E08DF41AAA4A4C6024E2608FF/job/
-- **Notes:** Former employer
-- **Next Action:** Wait for response
-
-### PatientPoint - Advanced Software Engineer (Python)
-- **Applied:** 2026-02-23
-- **Status:** Phone screen complete, awaiting Python coding assessment
-- **Salary:** $83,130 - $151,757 (posted $130k)
-- **Type:** Software Engineering (Python)
-- **Team:** Precision product (released 2024), 8 engineers growing to 11
-- **Reports to:** Alex Traanukha (Director)
-- **URL:** https://job-boards.greenhouse.io/patientpoint/jobs/4654686005
-- **Contact:** Erik Dawson (Manager, TA Ops & Sr. Tech Recruiter) — erik.dawson@patientpoint.com, 312-667-1458
-- **Interview Notes:** `content/jobs/interview-prep/patientpoint-phone-screen-2026-03-06.md`
-- **Next Action:** Complete Python coding assessment when received, then 3 interview rounds (Director → 2 staff engineers → final)
-
-### G2i - AI Software Engineer - Python
-- **Applied:** 2026-02-23
-- **Status:** Rejected (failed DevSkiller code review test)
-- **Salary:** $30.00 - $70.00/hr (Freelance)
-- **Type:** AI Software Engineering (Python)
+- **Location:** Remote
+- **Salary:** $148,500 - $165,000 + equity
+- **Type:** Data Analytics
+- **Reports To:** VP of Data
 - **Applied via:** flexjobs.com
-- **URL:** https://www.flexjobs.com/hostedjob.aspx?id=19a4b6db-f514-4e5b-96fc-ca409dae814a
-- **Notes:** Took 123-min OOP/clean code refactoring test on Feb 24, did not pass. Use as learning opportunity.
-
-### VetsEZ - Full Stack Developer
-- **Applied:** 2026-02-02
-- **Status:** Application submitted
-- **Location:** Dallas, TX (Remote within continental US)
-- **Salary:** Not listed
-- **Type:** Full Stack Development
-- **Tech Stack:** Python, TypeScript, Node.js, AWS, LLMs (OpenAI/Bedrock/Claude)
-- **URL:** https://vetsez.breezy.hr/p/08425a01cbe801-full-stack-developer-remote-opportunity
-- **Notes:** Healthcare AI systems, requires government clearance, FHIR/HL7/X12 knowledge helpful
+- **URL:** https://job-boards.greenhouse.io/honor/jobs/8451598002
+- **Tech Stack:** Git, Fivetran, Redshift, DBT, Looker, Python (preferred)
+- **Requirements:** 5+ yrs analytics experience, stakeholder management, complex data systems
+- **Notes:** Team of 5 analysts. Benefits include 401k match, zero-cost medical plans, equity.
 - **Next Action:** Wait for response
-
-### Second Nature Home Wellness - Staff Platform Engineer
-- **Applied:** 2026-02-01
-- **Status:** Application submitted
-- **Location:** Remote, USA
-- **Salary:** $150,000 - $200,000/yr + Equity
-- **Type:** Platform Engineering
-- **Department:** Product & Technology/Engineering
-- **Applied via:** flexjobs.com
-- **Notes:** Full time position
-- **Next Action:** Wait for response
-
-### CheckSammy - Software Position
-- **Applied:** 2026-01-16 (interview/discussion)
-- **Status:** Follow-up sent
-- **Contact:** Derek (derek@checksammy.com)
-- **Type:** Software Engineering
-- **Notes:** Had initial discussion Jan 16, sent follow-up Jan 28. Awaiting response.
-- **Next Action:** Wait for Derek's response
 
 ---
 
 ## Recent Rejections
+
+### VetsEZ - Full Stack Developer
+- **Applied:** 2026-02-02
+- **Closed:** 2026-03-20
+- **Reason:** No response after 46 days
+- **Location:** Dallas, TX (Remote within continental US)
+- **Type:** Full Stack Development
+- **Tech Stack:** Python, TypeScript, Node.js, AWS, LLMs (OpenAI/Bedrock/Claude)
+- **URL:** https://vetsez.breezy.hr/p/08425a01cbe801-full-stack-developer-remote-opportunity
+
+### Second Nature Home Wellness - Staff Platform Engineer
+- **Applied:** 2026-02-01
+- **Closed:** 2026-03-20
+- **Reason:** No response after 47 days
+- **Location:** Remote, USA
+- **Salary:** $150,000 - $200,000/yr + Equity
+- **Type:** Platform Engineering
+- **Applied via:** flexjobs.com
+
+### Alkami Technology - Sr. Site Reliability Engineer (Container)
+- **Applied:** 2026-03-18
+- **Rejected:** 2026-03-18
+- **Reason:** Skills and background don't closely align with requirements
+- **Salary:** $115,000 - $134,000
+- **Type:** SRE / DevOps
+- **Applied via:** flexjobs.com
+- **Notes:** Same-day rejection
+
+### Pearson - Software Engineer (Full Stack) — Data-Driven Systems
+- **Applied:** 2026-02-23
+- **Rejected:** 2026-03-18
+- **Reason:** High number of strong profiles; decided to move forward with other applicants
+- **Type:** Full Stack / Data-Driven Systems
+- **Notes:** Former employer
+
+### G2i - AI Software Engineer - Python
+- **Applied:** 2026-02-23
+- **Rejected:** 2026-02-24
+- **Reason:** Failed DevSkiller code review test (123-min OOP/clean code refactoring)
+
+### Sparksoft Corporation - Python Developer
+- **Applied:** 2026-03-16
+- **Rejected:** 2026-03-16
+- **Reason:** Moving forward with other candidates whose skills more closely align
+- **Notes:** Same-day rejection via Greenhouse
+
+### Milliman - Client Engineer I (MedInsight)
+- **Applied:** 2026-03-12
+- **Rejected:** 2026-03-16
+- **Reason:** Pursuing other candidates
+
+### PatientPoint - Advanced Software Engineer (Python)
+- **Applied:** 2026-02-23
+- **Rejected:** 2026-03-16
+- **Reason:** CodeSignal score 301/700 — not high enough to advance
+- **Contact:** Erik Dawson — erik.dawson@patientpoint.com, 312-667-1458
+- **Notes:** Said they'll keep my background in mind for future roles
 
 ### Cambium Learning Group - Software Engineer Python
 - **Applied:** 2026-02-23
@@ -77,6 +89,13 @@ Last updated: 2026-02-23
 - **Type:** Software Engineering (Python)
 - **Applied via:** flexjobs.com
 - **URL:** https://www.flexjobs.com/hostedjob.aspx?id=1079c9f8-6db8-43ed-bb3e-16fa78b03ff1
+
+### CheckSammy - Software Position
+- **Applied:** 2026-01-16 (interview/discussion)
+- **Closed:** 2026-03-10
+- **Reason:** No response after ~8 weeks (follow-up sent Jan 28)
+- **Contact:** Derek (derek@checksammy.com)
+- **Type:** Software Engineering
 
 ### Tenable - Staff Software Engineer
 - **Applied:** 2026-01-15
@@ -167,6 +186,14 @@ Last updated: 2026-02-23
 - **Contact:** 1-800-827-1000 (Mon-Fri 8am-8pm ET) or [Ask VA](https://ask.va.gov/)
 - **Next Steps:** VA will review eligibility, then send appointment letter for initial evaluation with a Vocational Rehabilitation Counselor (VRC)
 - **Notes:** Do not reapply if no response — contact VA directly instead
+
+### Post-9/11 GI Bill (Chapter 33)
+- **Applied:** 2026-03-23
+- **Status:** Application received, under review (VA Form 22-1990)
+- **Contact:** 1-888-GI-BILL-1 (1-888-442-4551) or [Ask VA](https://ask.va.gov/)
+- **Expected Response:** Within 30 days
+- **Next Steps:** VA will notify of eligibility. No action required.
+- **Notes:** Can be used for PMP exam fee reimbursement (up to $2,000 per test) via VA Form 22-0803. Do not reapply if no response.
 
 ---
 
