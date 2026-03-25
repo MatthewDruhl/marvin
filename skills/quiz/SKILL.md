@@ -47,6 +47,7 @@ Test your knowledge on topics you're learning with targeted questions.
 3. Present ONE question at a time
 4. Wait for the user's answer before moving on
 5. Don't reveal the answer before the user attempts it
+6. **Every question MUST have a correct answer.** For "Spot the Bug" questions, always verify there is an actual bug in the code before presenting it. Never show working code and ask "what's wrong?" — that wastes time and erodes trust.
 
 ### Step 3: Evaluate Answer
 For each answer:

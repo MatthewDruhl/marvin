@@ -2,10 +2,11 @@
 Resume Editor Tool for MARVIN
 
 Reads and edits a Word (.docx) resume while preserving formatting.
-Usage: uv run --with python-docx python3 resume_tool.py <command> [options]
+Usage: uv run --with python-docx --with docx2pdf --with PyPDF2 python3 resume_tool.py <command> [options]
 
 Commands:
   read          - Display resume structure and content
+  page-count    - Check page count (converts to PDF via Word)
   backup        - Create a timestamped backup
   add-section   - Add a new section header
   add-entry     - Add an entry to an existing section
@@ -16,6 +17,7 @@ import argparse
 import copy
 import os
 import sys
+import tempfile
 from datetime import datetime
 from pathlib import Path
 
@@ -23,8 +25,8 @@ from docx import Document
 from docx.oxml.ns import qn
 from lxml import etree
 
-RESUME_PATH = Path.home() / "Jobs" / "Resume" / "Druhl Matthew resume.docx"
-BACKUP_DIR = Path.home() / "Jobs" / "Resume" / "backups"
+RESUME_PATH = Path.home() / "Resume" / "MatthewDruhl.docx"
+BACKUP_DIR = Path.home() / "Resume" / "archive"
 
 
 def get_body_elements(doc):
@@ -163,6 +165,44 @@ def cmd_read(args):
                 print(f"  | {' | '.join(cell_texts)} |")
 
     print(f"\n{'='*60}")
+
+
+def cmd_page_count(args):
+    """Convert resume to PDF via Word and count pages."""
+    resume_path = Path(args.file) if args.file else RESUME_PATH
+
+    if not resume_path.exists():
+        print(f"Error: File not found at {resume_path}")
+        sys.exit(1)
+
+    try:
+        from docx2pdf import convert
+        from PyPDF2 import PdfReader
+    except ImportError as e:
+        print(f"Error: Missing dependency — {e}")
+        print("Run with: uv run --with python-docx --with docx2pdf --with PyPDF2 python3 resume_tool.py page-count")
+        sys.exit(1)
+
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        pdf_path = Path(tmp_dir) / "resume.pdf"
+        print(f"Converting {resume_path.name} to PDF via Word...")
+        convert(str(resume_path), str(pdf_path))
+
+        reader = PdfReader(str(pdf_path))
+        page_count = len(reader.pages)
+
+    print(f"\n{'='*40}")
+    print(f"  File:  {resume_path.name}")
+    print(f"  Pages: {page_count}")
+    if page_count > 2:
+        print(f"  ⚠  OVER 2-PAGE LIMIT by {page_count - 2} page(s)")
+    elif page_count == 2:
+        print(f"  ✓  At 2-page limit")
+    else:
+        print(f"  ✓  Under 2-page limit")
+    print(f"{'='*40}")
+
+    return page_count
 
 
 def cmd_backup(args):
@@ -384,6 +424,10 @@ def main():
     # read
     subparsers.add_parser("read", help="Display resume structure and content")
 
+    # page-count
+    pc_parser = subparsers.add_parser("page-count", help="Check page count via Word PDF conversion")
+    pc_parser.add_argument("--file", default="", help="Path to .docx file (defaults to active resume)")
+
     # backup
     subparsers.add_parser("backup", help="Create a timestamped backup")
 
@@ -422,6 +466,7 @@ def main():
 
     commands = {
         "read": cmd_read,
+        "page-count": cmd_page_count,
         "backup": cmd_backup,
         "add-section": cmd_add_section,
         "add-entry": cmd_add_entry,

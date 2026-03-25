@@ -1,6 +1,6 @@
 # Question Bank
 
-Last updated: 2026-02-25
+Last updated: 2026-03-24
 
 ---
 
@@ -1284,6 +1284,335 @@ volumes:
 
 **Q4 - Conceptual:** What is a Docker volume and why would you use one?
 **A:** A volume is a persistent storage mechanism managed by Docker. Container filesystems are ephemeral — data is lost when the container is removed. Volumes persist data beyond the container lifecycle. Used for databases, config files, and any data you need to keep.
+
+---
+
+## PMP Topics
+
+### Project Bosses and Roles
+
+**Q1 - Multiple Choice:** What is the primary responsibility of a project sponsor?
+- A) Managing the day-to-day project tasks
+- B) Funding the project and making key decisions
+- C) Writing the project schedule
+- D) Managing the project team's performance reviews
+**A:** B — The sponsor is the project champion who funds the project and makes decisions. They can be internal or external to the organization.
+
+**Q2 - Multiple Choice:** Which role is senior to the project manager and may be responsible for several projects at the same time?
+- A) Sponsor
+- B) Functional Manager
+- C) Program Manager
+- D) Product Manager
+**A:** C — The Program Manager is senior to the project manager, may oversee several projects simultaneously, and helps resolve conflicts in the project.
+
+**Q3 - True/False:** Project management and product management are the same thing.
+**A:** False. Project management focuses on delivering specific projects within scope, timeline, and budget. Product management is the broader discipline encompassing strategic planning, development, and lifecycle management of a product. Project management is just one component of product development.
+
+**Q4 - Multiple Choice:** Which statement best describes the relationship between product management and project management?
+- A) They are the same discipline with different names
+- B) Project management is a component of product management
+- C) Product management is a component of project management
+- D) They are completely unrelated disciplines
+**A:** B — Product managers work with project managers to translate product strategy into actionable project plans. Project management is one component of the broader product development process.
+
+---
+
+### Areas of a Project
+
+**Q1 - Multiple Choice:** Which project area is concerned with "acquiring resources from outside the project team"?
+- A) Resources
+- B) Communications
+- C) Procurements
+- D) Stakeholders' Engagement
+**A:** C — Procurements deals with acquiring resources from outside the project team (vendors, contractors, purchased materials).
+
+**Q2 - Multiple Choice:** Which project area focuses on "managing the people and material resources" on the project team?
+- A) Procurements
+- B) Stakeholders' Engagement
+- C) Communications
+- D) Resources
+**A:** D — Resources is about managing the people and material resources already on or assigned to the project team.
+
+**Q3 - Multiple Choice:** Which project area ensures "all stakeholders get the correct information at the right time"?
+- A) Stakeholders' Engagement
+- B) Quality
+- C) Communications
+- D) Risk
+**A:** C — Communications ensures all stakeholders get the correct information at the right time.
+
+**Q4 - True/False:** The 9 areas of a project include Scope, Schedule, Cost, Quality, Resources, Communications, Risk, Procurements, and Stakeholders' Engagement.
+**A:** True. These are the 9 key knowledge areas of a project.
+
+---
+
+### Project Management Approaches
+
+**Q1 - Multiple Choice:** Which project management approach emphasizes "extensive upfront planning" and "limited changes with a well-defined change control process"?
+- A) Adaptive
+- B) Agile
+- C) Predictive
+- D) Kanban
+**A:** C — The Predictive (traditional/waterfall) approach follows a linear and sequential process with emphasis on control, documentation, and limited flexibility.
+
+**Q2 - Multiple Choice:** Which of the following is NOT a characteristic of the Adaptive approach?
+- A) Self-organizing teams
+- B) Sequential execution
+- C) Customer collaboration
+- D) Iterative and incremental development
+**A:** B — Sequential execution is a characteristic of the Predictive approach. The Adaptive approach uses iterative and incremental development with self-organizing teams and customer collaboration.
+
+**Q3 - True/False:** The Adaptive approach commonly uses methodologies like Scrum or Kanban.
+**A:** True. The adaptive approach, also known as agile or iterative, commonly uses Scrum or Kanban methodologies.
+
+**Q4 - True/False:** The Predictive approach embraces change throughout the project and emphasizes continuous feedback.
+**A:** False. That describes the Adaptive approach. The Predictive approach has limited flexibility and limited changes with a well-defined change control process.
+
+---
+
+### Organizational Structures
+
+**Q1 - Multiple Choice:** In which organizational structure does the project manager have "little to no" authority and resource availability?
+- A) Strong Matrix
+- B) Projectized
+- C) Functional
+- D) Balanced Matrix
+**A:** C — In a Functional organization, the PM has little/no authority, little/no resource availability, and budget is controlled by the functional manager.
+
+**Q2 - Multiple Choice:** In which organizational structure does the PM have the greatest amount of authority?
+- A) Functional
+- B) Weak Matrix
+- C) Balanced Matrix
+- D) Projectized
+**A:** D — In a Projectized organization, the PM has the greatest authority (High/Total). The team is assigned full-time and moves to other assignments when the project is complete.
+
+**Q3 - Multiple Choice:** What are the three types of matrix organizations?
+- A) Small, Medium, Large
+- B) Weak, Balanced, Strong
+- C) Simple, Complex, Hybrid
+- D) Functional, Operational, Strategic
+**A:** B — Weak, Balanced, and Strong. They differ in the PM's authority relative to the functional manager's authority.
+
+**Q4 - True/False:** In a Projectized organization, team members are assigned part-time and split between multiple projects.
+**A:** False. In a Projectized organization, the team is assigned to the project on a full-time basis. When the project is complete, team members move on to other assignments.
+
+**Q5 - Multiple Choice:** In a Functional organization, who controls the budget?
+- A) The Project Manager
+- B) The Functional Manager
+- C) The Sponsor
+- D) The budget is shared equally
+**A:** B — In a Functional organization, budget controls rest with the Functional Manager. The PM has little/no authority.
+
+**Q6 - True/False:** In a Balanced Matrix, the PM role is part-time/full-time (PT/FT) and PM staff are also PT/FT.
+**A:** True. In a Balanced Matrix, both PM role and PM staff are PT/FT, and authority is Low to Moderate.
+
+---
+
+### Issues, Risks, Assumptions, and Constraints
+
+**Q1 - Multiple Choice:** A team member says "We assume the vendor will deliver materials by March 15th." What is this statement classified as?
+- A) A Risk
+- B) An Issue
+- C) An Assumption
+- D) A Constraint
+**A:** C — An Assumption is a statement or belief considered to be true or valid for the purpose of planning and decision-making but hasn't been proven.
+
+**Q2 - Multiple Choice:** What is the key difference between a Risk and an Issue?
+- A) Risks are positive; issues are negative
+- B) Risks may occur in the future; issues have already arisen
+- C) Risks affect scope; issues affect schedule
+- D) There is no difference
+**A:** B — Risks are potential events that may occur in the future. Issues are problems or challenges that have already arisen during the project.
+
+**Q3 - True/False:** Constraints are limitations or restrictions that affect project planning and execution.
+**A:** True. Constraints limit or restrict what the project team can do during planning and execution.
+
+**Q4 - Multiple Choice:** The vendor notifies the team they will be 2 weeks late on delivery. This was previously listed as an assumption that they'd deliver on time. What has the assumption become?
+- A) A constraint
+- B) A risk
+- C) An issue
+- D) It's still an assumption
+**A:** C — An Issue. It was an assumption (believed to be true), and the possibility of late delivery was a risk. Now that it has actually happened, it's an issue — a problem that has arisen during the project.
+
+---
+
+### Project Constraints
+
+**Q1 - Multiple Choice:** Which of the following is NOT one of the 6 project constraints?
+- A) Scope
+- B) Schedule
+- C) Stakeholders
+- D) Quality
+**A:** C — The 6 project constraints are Scope, Schedule, Cost, Risk, Quality, and Resources. Stakeholders is a knowledge area but not one of the constraint hexagon sides.
+
+**Q2 - True/False:** Changing one project constraint has no effect on the other constraints.
+**A:** False. All 6 constraints (Scope, Schedule, Cost, Risk, Quality, Resources) are interrelated — changing one affects the others.
+
+---
+
+### Emotional Intelligence
+
+**Q1 - Multiple Choice:** What does Emotional Intelligence (EQ) refer to in project management?
+- A) The ability to calculate project metrics accurately
+- B) The ability to recognize, understand, and manage emotions in oneself and others
+- C) The ability to create detailed project schedules
+- D) The ability to negotiate contracts effectively
+**A:** B — EQ is the ability to recognize, understand, and manage emotions, both in oneself and in others. It involves self-awareness, empathy, and using emotions to guide thinking and behavior.
+
+**Q2 - Multiple Choice:** Which of the following is NOT one of the 5 areas where EQ plays a significant role in project management?
+- A) Relationship Building
+- B) Budget Forecasting
+- C) Communication and Conflict Management
+- D) Motivation and Influence
+**A:** B — The 5 areas are: Relationship Building, Communication and Conflict Management, Motivation and Influence, Leadership and Decision Making, and Stakeholders Management.
+
+---
+
+### Leadership vs. Management
+
+**Q1 - Multiple Choice:** According to PMI, Management "directs using positional power." What does Leadership use instead?
+- A) Contractual authority
+- B) Relational power (guide, influence, collaborate)
+- C) Financial incentives
+- D) Organizational hierarchy
+**A:** B — Leadership uses relational power to guide, influence, and collaborate. Management directs using positional power.
+
+**Q2 - Multiple Choice:** Which phrase is associated with Management (not Leadership)?
+- A) "Do the right things"
+- B) "Focus on long-range vision"
+- C) "Do things right"
+- D) "Challenge status quo"
+**A:** C — "Do things right" is Management. Leadership "does the right things." Management focuses on near-term goals and processes; Leadership focuses on long-range vision and inspiration.
+
+**Q3 - True/False:** Leadership should not be confused with authority.
+**A:** True. Authority is the right to exercise power and control individuals. Leadership is about inspiring and motivating people toward a common goal, aligning individual interests with the collective effort.
+
+**Q4 - Multiple Choice:** Which of the following describes Leadership rather than Management?
+- A) Focus on near-term goals
+- B) Maintain stability, control, and order
+- C) Inspire and influence others to collaborate
+- D) Focus on tasks, processes, and operations
+**A:** C — Leadership focuses on inspiring and influencing others, setting direction, motivating and empowering individuals, and encouraging collaboration, trust, and empowerment.
+
+---
+
+### PMI Code of Ethics and Professional Conduct
+
+**Q1 - Multiple Choice:** PMI's Code of Ethics and Professional Conduct is based on which four values?
+- A) Integrity, Transparency, Quality, Efficiency
+- B) Responsibility, Respect, Fairness, Honesty
+- C) Trust, Accountability, Communication, Leadership
+- D) Courage, Commitment, Focus, Openness
+**A:** B — Responsibility, Respect, Fairness, and Honesty.
+
+**Q2 - True/False:** Principles and morals are the same thing according to PMI.
+**A:** False. Principles can, but do not necessarily, reflect morals. A code of ethics is related to morals and can be adopted by a profession to establish expectations for moral conduct.
+
+---
+
+### The 12 Principles of Project Management
+
+**Q1 - Multiple Choice:** Which PM principle includes the sub-components of Integrity, Care, Trustworthiness, and Compliance?
+- A) Demonstrate leadership behaviors
+- B) Be a diligent, respectful, and caring steward
+- C) Create a collaborative project team environment
+- D) Focus on value
+**A:** B — Stewardship includes Integrity (behave honestly and ethically), Care (fiduciaries of organizational matters), Trustworthiness (represent themselves and their authority accurately), and Compliance (comply with laws, rules, regulations, and requirements).
+
+**Q2 - True/False:** Accountability can be shared among team members.
+**A:** False. Accountability is NOT shared — one person is answerable for the outcome. Responsibility, however, CAN be shared.
+
+**Q3 - Multiple Choice:** According to the "Focus on Value" principle, when can value be realized?
+- A) Only at the end of the project
+- B) Only after the project is complete
+- C) Throughout the project, at the end, or after completion
+- D) Only at predefined milestones
+**A:** C — Value can be realized throughout the project, at the end of the project, or after the project is complete. Value is the ultimate indicator of project success.
+
+**Q4 - Multiple Choice:** Systems Thinking in project management means:
+- A) Using the latest project management software tools
+- B) Taking a holistic view of the project as a system with its own working parts
+- C) Breaking the project into the smallest possible tasks
+- D) Focusing only on the project's internal processes
+**A:** B — Systems thinking means seeing the project as a system within larger systems. Internal and external conditions continuously change, and a single change can create several impacts.
+
+**Q5 - Multiple Choice:** What are the four common sources of complexity in projects?
+- A) Scope, Schedule, Cost, Quality
+- B) Human behavior, System behavior, Uncertainty and ambiguity, Technological innovation
+- C) Stakeholders, Budget, Timeline, Resources
+- D) Planning, Execution, Monitoring, Closing
+**A:** B — Human behavior, System behavior, Uncertainty and ambiguity, and Technological innovation.
+
+**Q6 - Multiple Choice:** What is the difference between Adaptability and Resiliency?
+- A) They mean the same thing
+- B) Adaptability is responding to change; Resiliency is recovering from setbacks
+- C) Adaptability is for agile projects only; Resiliency is for predictive projects only
+- D) Adaptability is a team skill; Resiliency is an organizational skill
+**A:** B — Adaptability is the ability to respond to changing conditions. Resiliency is the ability to absorb impacts and recover quickly from a setback or failure.
+
+**Q7 - Multiple Choice:** Which principle states that each project is unique and should use "just enough" process?
+- A) Navigate complexity
+- B) Optimize risk responses
+- C) Tailor based on context
+- D) Build quality into processes and deliverables
+**A:** C — Tailor based on context. Design the project development methods based on the needs of the project and its objectives. Use "just enough" process to accomplish the desired outcome while maximizing value, managing cost, and enhancing speed.
+
+**Q8 - True/False:** According to the "Optimize Risk Responses" principle, risks can only be negative (threats).
+**A:** False. Risks can be positive (opportunities) or negative (threats). Project teams seek to maximize positive risks and decrease exposure to negative risks.
+
+**Q9 - Multiple Choice:** What three factors influence how an organization addresses risk?
+- A) Budget, Schedule, Scope
+- B) Risk attitude, Risk appetite, Risk threshold
+- C) Sponsor preference, Team experience, Project size
+- D) Industry standards, Legal requirements, Stakeholder demands
+**A:** B — Risk attitude, risk appetite, and risk threshold influence how risk is addressed.
+
+**Q10 - Multiple Choice:** According to the "Demonstrate Leadership Behaviors" principle, who can demonstrate leadership on a project?
+- A) Only the project manager
+- B) Only senior management
+- C) Any project team member
+- D) Only the sponsor
+**A:** C — Any project team member can demonstrate leadership behaviors, regardless of role or position.
+
+**Q11 - Multiple Choice:** Which of the following is NOT something stakeholders can affect on a project?
+- A) Scope/requirements
+- B) Schedule and Cost
+- C) The weather
+- D) Risk and Quality
+**A:** C — Stakeholders can affect scope/requirements, schedule, cost, project team, plans, outcomes, culture, benefits realization, risk, quality, and success — but not the weather.
+
+**Q12 - True/False:** Effective change management uses a motivational strategy rather than a forceful one.
+**A:** True. The "Enable Change" principle states that effective change management uses motivation over force. Too much change too fast can lead to change fatigue and/or resistance.
+
+**Q13 - Multiple Choice:** What benefits does tailoring the project approach produce?
+- A) Higher costs but faster delivery
+- B) Deeper team commitment, reduced waste, customer focus, efficient resource use
+- C) More documentation and stricter controls
+- D) Standardized processes across all projects
+**A:** B — Tailoring produces deeper commitment from team members, reduction in waste, customer-oriented focus, and more efficient use of project resources.
+
+**Q14 - Multiple Choice:** Quality in project management is primarily about:
+- A) Using the most expensive materials available
+- B) Meeting the acceptance criteria for deliverables
+- C) Completing the project as fast as possible
+- D) Having zero defects in every deliverable
+**A:** B — Quality is about meeting the acceptance criteria for deliverables — satisfying stakeholders' expectations and fulfilling project and product requirements.
+
+**Q15 - Multiple Choice:** Which of the following is NOT a quality dimension?
+- A) Performance
+- B) Profitability
+- C) Reliability
+- D) Sustainability
+**A:** B — Quality dimensions include Performance, Conformity, Reliability, Resilience, Satisfaction, Efficiency, and Sustainability. Profitability is not a quality dimension.
+
+**Q16 - Multiple Choice:** Which capabilities support adaptability and resilience? (Select the BEST answer)
+- A) Rigid planning and strict change control
+- B) Short feedback loops, continuous learning, and small-scale experiments
+- C) Detailed upfront documentation and sequential execution
+- D) Centralized decision-making and formal reporting
+**A:** B — Short feedback loops, continuous learning and improvement, regular inspection and adaptation, open and transparent planning, and small-scale prototypes and experiments all support adaptability and resilience.
+
+**Q17 - True/False:** Risk responses should be owned by a responsible person and agreed to by relevant stakeholders.
+**A:** True. Risk responses should be: appropriate for the significance of the risk, cost effective, realistic within the project context, agreed to by relevant stakeholders, and owned by a responsible person.
 
 ---
 

@@ -19,7 +19,22 @@ Edit and manage your Word resume from within MARVIN.
 
 ## Resume Location
 
-`~/Jobs/Resume/Druhl Matthew resume.docx`
+**Active resume:** `~/Resume/MatthewDruhl.docx`
+
+### Directory Structure
+
+```
+~/Resume/
+├── MatthewDruhl.docx          ← Active resume (always edit this first)
+├── variants/                  ← Alternate resume formats
+│   ├── Druhl Matthew ATS resume.docx      (ATS-optimized, plain text, no tables)
+│   ├── Druhl Matthew network resume.docx  (1-page networking version)
+│   └── Druhl Matthew resume.docx          (2-column table format)
+├── profile/                   ← Personal branding
+│   └── Matthew Druhl Professional Profile.docx
+├── certs/                     ← Coursera certification PDFs
+└── archive/                   ← Old versions & backups
+```
 
 ## When to Use
 
@@ -91,26 +106,63 @@ After making changes, read the resume again to confirm:
 uv run --with python-docx python3 ~/marvin/skills/resume-editor/scripts/resume_tool.py read
 ```
 
-### Step 6: Confirm with User
+### Step 6: Check Page Count
+
+After any content changes, verify the resume stays within the 2-page limit:
+
+```bash
+uv run --with python-docx --with docx2pdf --with PyPDF2 python3 ~/marvin/skills/resume-editor/scripts/resume_tool.py page-count
+```
+
+For a specific file (e.g., a variant):
+```bash
+uv run --with python-docx --with docx2pdf --with PyPDF2 python3 ~/marvin/skills/resume-editor/scripts/resume_tool.py page-count --file ~/Resume/variants/SomeVariant.docx
+```
+
+This converts the .docx to PDF via Word and counts the actual rendered pages.
+
+### Step 7: Confirm with User
 
 Show what was changed and the current state. Ask if anything else needs updating.
 
-## Important Notes
+## Rules
 
-- Always backup before editing
+### Formatting Rules
 - The resume is a `.docx` file — never try to edit it as text
 - Section headers are: centered, bold, 14pt (matching existing style)
 - Entry formatting: **Bold text** followed by normal text on the same line
-- The Technical Skills section uses a 2-column table
-- Backups are saved to `~/Jobs/Resume/backups/` with timestamps
+- **Active resume max length: 2 pages.** Never allow changes that push it past 2 pages.
+- Backups are saved to `~/Resume/archive/` with timestamps
+
+### Technical Skills Table Rules
+- **Active resume uses a 4-column table** (alphabetized)
+- **ATS variant uses plain text list** (one skill per line, no table)
+- **Network variant uses grouped pairs** (e.g., "Confluence / Jira")
+- **Original variant uses a 2-column table**
+- When adding skills, fill empty cells first, then add new rows only if needed
+
+### Variant Sync Rules
+- **Always sync variants after changing the active resume.** Skills, certifications, and experience must match across all files.
+- **Preserve each variant's unique format:**
+  - ATS: plain text, no pipes/columns, no tables for skills, repeats "PEARSON, Iowa City, IA" per role
+  - Network: 1-page format, grouped skills, executive summary style, no certifications section
+  - Original: 2-column skills table, same structure as active but different table layout
+- **Copy paragraph XML from active resume** when possible to preserve spacing (`before=60`, `before=120`, etc.)
+- **Never add hard page breaks** (`w:br type="page"`). Let content flow naturally. The "Page Two" header is inline content, not tied to a page break.
+- After syncing, verify the variant paragraph structure matches the active resume (same paragraph count, same spacing attributes)
+
+### Safety Rules
+- Always backup before editing (to `~/Resume/archive/`)
+- Read current resume state before making changes
+- After changes, verify section order and content
 
 ## Current Resume Sections
 
 1. Header (name, contact info)
 2. Title & Summary
 3. Skills Keywords
-4. Technical Skills (table format)
-5. Certifications
+4. Technical Skills (4-column table)
+5. Certifications (consolidated format: "Specialization Name, Org (Platform), Date")
 6. Professional Experience
 7. Additional Relevant Experience
 8. Military Service
@@ -119,3 +171,4 @@ Show what was changed and the current state. Ask if anything else needs updating
 ---
 
 *Skill created: 2026-02-17*
+*Updated: 2026-03-11 — New file paths, variant sync rules, 2-page limit, 4-column table*
