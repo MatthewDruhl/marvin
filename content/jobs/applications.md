@@ -1,10 +1,23 @@
 # Job Applications
 
-Last updated: 2026-03-20
+Last updated: 2026-03-25
 
 ---
 
 ## Active Applications
+
+### Iterable - Senior Engineering Operations TPM
+- **Applied:** 2026-03-25
+- **Status:** Application submitted
+- **Location:** Remote US / Denver, CO
+- **Salary:** $133,500 - $212,000
+- **Type:** Technical Program Management / Engineering Operations
+- **Applied via:** Greenhouse
+- **URL:** https://job-boards.greenhouse.io/iterable/jobs/7501109
+- **Tech Stack:** BI tools (Sigma), AI productivity tools, SQL, Python
+- **Requirements:** Cross-functional program leadership, software lifecycle knowledge, technical judgment, data/tooling proficiency
+- **Notes:** Emphasis on engineering health visibility, developer experience, platform scalability. Comprehensive benefits including paid sabbatical.
+- **Next Action:** Wait for response
 
 ### Honor - Staff Data Analyst
 - **Applied:** 2026-03-17

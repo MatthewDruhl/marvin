@@ -1,16 +1,24 @@
 # Current State
 
-Last updated: 2026-03-25
+Last updated: 2026-03-28
 
 ## Active Priorities
 
-1. **PMP Certification** — Day 2 in progress. TIA course: 60/~200 videos. Sections 1-5 complete. Resume Section 6. Checklist at `pmp/study-checklist.md`.
-2. **Job search** — 1 active app (Honor). Iterable TPM resume ready, needs submission. Pipeline critically low.
-3. **TWC weekly requirement (Mar 22-28)** — 2/4, need 2 more by Saturday.
+1. **PMP Certification** — TIA course: 91/~200 videos. Sections 1-7 complete. Resume Section 8. Checklist at `pmp/study-checklist.md`.
+2. **Job search** — 2 active apps (Iterable TPM, Honor). Pipeline still low.
+3. **TWC weekly requirement (Mar 22-28)** — 4/4 complete.
 4. **Python skills** — CodeSignal practice. 50+ topics due for review. Question bank: 135 questions.
+
+## Recent Updates
+- **`/resume` skill rebuilt** — New data+template architecture. Automatic page break, strict match analysis, 4 modes (Apply/Match/Update/View). Design plan at `content/resume-skill-redesign-plan.md`.
+- **PMP Section 7 complete** — Traditional/Predictive Project Management (22 videos). 91 total.
+- **PMP quiz scores** — 25/28 (89%) then 27/28 (96%). Weak spots: Enable Change, Stewardship, Navigate Complexity.
+- **Iterable** — Recruiter Jelena shared Matt's profile with hiring manager (Mar 25). No update since.
+- **SQL added** to resume data file.
 
 ## Open Threads
 
+- **Resume data enrichment** — Use `/grill-me` to add more accomplishments, skills, tools per role to `resume-data.json`. On todo list.
 - **VR&E:** VA Form 28-1900 submitted Feb 24. Waiting for eligibility review.
 - **Post-9/11 GI Bill:** VA Form 22-1990 submitted Mar 23. Expect response within 30 days. Can reimburse PMP exam fee (up to $2,000).
 - **Google OAuth:** Published consent screen Mar 23. Tokens should persist ~6 months now.
@@ -21,10 +29,10 @@ Last updated: 2026-03-25
 
 | Project | Status | Details |
 |---------|--------|---------|
-| PMP Certification | In Progress | TIA course Day 2: 60 videos, Sections 1-5 complete. Target: May 2026. `pmp/` |
-| Job Search | 1 active app (Honor) | `content/jobs/applications.md` |
-| TWC Reporting | Week Mar 22-28: 2/4. PDFs fixed & regenerated. | `content/jobs/TWC/` |
-| Resume | Updated — Iterable TPM variant created | `~/Resume/` |
+| PMP Certification | In Progress | TIA course: 91 videos, Sections 1-7 complete. Target: May 2026. `pmp/` |
+| Job Search | 2 active apps (Iterable, Honor) | `content/jobs/applications.md` |
+| TWC Reporting | Week Mar 22-28: 4/4 complete | `content/jobs/TWC/` |
+| Resume | Skill rebuilt — data+template architecture | `skills/resume-editor/` |
 | VR&E | Application submitted | VA benefits track |
 | GI Bill (Ch. 33) | Application submitted | PMP exam reimbursement track |
 | D&D Project | Phase 3 complete | `content/dnd-project.md` |

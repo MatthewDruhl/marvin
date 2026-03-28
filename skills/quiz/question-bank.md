@@ -1289,7 +1289,69 @@ volumes:
 
 ## PMP Topics
 
-### Project Bosses and Roles
+*Source: TIA Education Group PDFs (PM+Terms, PM+Principles, PM+Domains, PM+Processes)*
+
+### Core Definitions (PM+Terms)
+
+**Q1 - Multiple Choice:** What are the three characteristics of a project?
+- A) Funded, Staffed, Scheduled
+- B) Unique, Temporary, Progressively Elaborated
+- C) Planned, Executed, Closed
+- D) Scoped, Budgeted, Delivered
+**A:** B — A project is a temporary endeavor that produces a unique product, service, or result. It is temporary (definite beginning and ending) and progressively elaborated.
+
+**Q2 - Multiple Choice:** What is the difference between a project, a program, and a portfolio?
+- A) They are different names for the same thing
+- B) A project is temporary work; a program is related projects managed together; a portfolio is programs and projects achieving strategic objectives
+- C) A project is small; a program is medium; a portfolio is large
+- D) A project has one PM; a program has two; a portfolio has three
+**A:** B — A project may or may not be part of a program, but a program will always have projects. A portfolio is a collection of projects, programs, and subsidiary portfolios managed to achieve strategic (long-term) objectives.
+
+**Q3 - Multiple Choice:** What is the difference between operations management and project management?
+- A) There is no difference
+- B) Operations deals with ongoing production of goods/services; projects are temporary endeavors
+- C) Operations are temporary; projects are permanent
+- D) Operations only happen in manufacturing
+**A:** B — Operations management deals with the ongoing production of goods and/or services. Projects are temporary and produce unique results.
+
+**Q4 - Multiple Choice:** A project takes a company from a current state to a desired state. What is this concept called?
+- A) Progressive elaboration
+- B) Projects enable changes
+- C) Operations management
+- D) Portfolio alignment
+**A:** B — Projects can be a vehicle for change in an organization, taking a company from its current state to a desired state.
+
+**Q5 - Multiple Choice:** What is a deliverable?
+- A) A project management plan
+- B) Any unique and verifiable product, service, or result that must be accepted by the customer or sponsor
+- C) The final project report
+- D) A status update sent to stakeholders
+**A:** B — A deliverable is any unique and verifiable product, service, or result. It may be tangible or intangible and must be accepted by the customer or sponsor for the phase.
+
+**Q6 - Multiple Choice:** What is a phase in project management?
+- A) A single task
+- B) A collection of logically related project activities that culminates in the completion of one or more deliverables
+- C) A project management methodology
+- D) A meeting with stakeholders
+**A:** B — The number of phases depends on the industry type and size/complexity of the project.
+
+**Q7 - Multiple Choice:** What are the three pillars of Project Governance?
+- A) Scope, Schedule, Cost
+- B) Structure, People, Information
+- C) Planning, Execution, Closing
+- D) Risk, Quality, Resources
+**A:** B — Project Governance is the framework within which project decisions are made, based on Structure, People, and Information.
+
+**Q8 - Multiple Choice:** What is a milestone?
+- A) A task that takes exactly one day
+- B) A significant event or achievement that marks a key point or completion of a major deliverable
+- C) A meeting with the sponsor
+- D) A budget checkpoint
+**A:** B — A milestone marks a key point or completion of a major deliverable. Task duration refers to the amount of time to complete a specific task or activity.
+
+---
+
+### Project Roles and Stakeholders (PM+Terms)
 
 **Q1 - Multiple Choice:** What is the primary responsibility of a project sponsor?
 - A) Managing the day-to-day project tasks
@@ -1305,160 +1367,159 @@ volumes:
 - D) Product Manager
 **A:** C — The Program Manager is senior to the project manager, may oversee several projects simultaneously, and helps resolve conflicts in the project.
 
-**Q3 - True/False:** Project management and product management are the same thing.
-**A:** False. Project management focuses on delivering specific projects within scope, timeline, and budget. Product management is the broader discipline encompassing strategic planning, development, and lifecycle management of a product. Project management is just one component of product development.
+**Q3 - Multiple Choice:** What is the hierarchy of project roles from strongest to weakest authority?
+- A) Expeditor → Coordinator → Manager
+- B) Manager → Coordinator → Expeditor
+- C) Coordinator → Manager → Expeditor
+- D) Manager → Expeditor → Coordinator
+**A:** B — Project Manager (empowered to lead, authorized to make decisions, responsible for success/failure) → Project Coordinator (weaker, may be authorized to make decisions) → Project Expeditor (weakest role, very limited decision ability).
 
-**Q4 - Multiple Choice:** Which statement best describes the relationship between product management and project management?
-- A) They are the same discipline with different names
-- B) Project management is a component of product management
-- C) Product management is a component of project management
-- D) They are completely unrelated disciplines
-**A:** B — Product managers work with project managers to translate product strategy into actionable project plans. Project management is one component of the broader product development process.
+**Q4 - Multiple Choice:** Which of the following is NOT one of the 6 roles of a Project Manager?
+- A) Initiator
+- B) Negotiator
+- C) Budget Analyst
+- D) Facilitator
+**A:** C — The 6 PM roles are: Initiator, Negotiator, Listener, Coach, Working Member, and Facilitator.
 
----
+**Q5 - Multiple Choice:** What is a stakeholder?
+- A) Only the project team members
+- B) An individual, group, or organization that may affect, be affected, or perceive to be affected by the project
+- C) Only the project sponsor
+- D) Only the customer
+**A:** B — Key stakeholders include: Project Manager, Customer, Project Team, Project Sponsor, and Functional Manager (who generally controls resources).
 
-### Areas of a Project
-
-**Q1 - Multiple Choice:** Which project area is concerned with "acquiring resources from outside the project team"?
-- A) Resources
-- B) Communications
-- C) Procurements
-- D) Stakeholders' Engagement
-**A:** C — Procurements deals with acquiring resources from outside the project team (vendors, contractors, purchased materials).
-
-**Q2 - Multiple Choice:** Which project area focuses on "managing the people and material resources" on the project team?
-- A) Procurements
-- B) Stakeholders' Engagement
-- C) Communications
-- D) Resources
-**A:** D — Resources is about managing the people and material resources already on or assigned to the project team.
-
-**Q3 - Multiple Choice:** Which project area ensures "all stakeholders get the correct information at the right time"?
-- A) Stakeholders' Engagement
-- B) Quality
-- C) Communications
-- D) Risk
-**A:** C — Communications ensures all stakeholders get the correct information at the right time.
-
-**Q4 - True/False:** The 9 areas of a project include Scope, Schedule, Cost, Quality, Resources, Communications, Risk, Procurements, and Stakeholders' Engagement.
-**A:** True. These are the 9 key knowledge areas of a project.
+**Q6 - True/False:** Project management and product management are the same thing.
+**A:** False. Project management focuses on delivering specific projects within scope, timeline, and budget. Product management is the broader discipline. Project management is one component of product development.
 
 ---
 
-### Project Management Approaches
+### PMO and Organizational Structures (PM+Terms)
 
-**Q1 - Multiple Choice:** Which project management approach emphasizes "extensive upfront planning" and "limited changes with a well-defined change control process"?
-- A) Adaptive
-- B) Agile
-- C) Predictive
-- D) Kanban
-**A:** C — The Predictive (traditional/waterfall) approach follows a linear and sequential process with emphasis on control, documentation, and limited flexibility.
+**Q1 - Multiple Choice:** What are the three types of Project Management Office (PMO)?
+- A) Small, Medium, Large
+- B) Supportive, Controlling, Directive
+- C) Functional, Matrix, Projectized
+- D) Strategic, Tactical, Operational
+**A:** B — Supportive (provides templates, training, lessons learned), Controlling (determines framework/methodology and specific forms), Directive (controls the project; PM is assigned and reports to the PMO).
 
-**Q2 - Multiple Choice:** Which of the following is NOT a characteristic of the Adaptive approach?
-- A) Self-organizing teams
-- B) Sequential execution
-- C) Customer collaboration
-- D) Iterative and incremental development
-**A:** B — Sequential execution is a characteristic of the Predictive approach. The Adaptive approach uses iterative and incremental development with self-organizing teams and customer collaboration.
-
-**Q3 - True/False:** The Adaptive approach commonly uses methodologies like Scrum or Kanban.
-**A:** True. The adaptive approach, also known as agile or iterative, commonly uses Scrum or Kanban methodologies.
-
-**Q4 - True/False:** The Predictive approach embraces change throughout the project and emphasizes continuous feedback.
-**A:** False. That describes the Adaptive approach. The Predictive approach has limited flexibility and limited changes with a well-defined change control process.
-
----
-
-### Organizational Structures
-
-**Q1 - Multiple Choice:** In which organizational structure does the project manager have "little to no" authority and resource availability?
+**Q2 - Multiple Choice:** In which organizational structure does the project manager have "little to no" authority?
 - A) Strong Matrix
 - B) Projectized
 - C) Functional
 - D) Balanced Matrix
-**A:** C — In a Functional organization, the PM has little/no authority, little/no resource availability, and budget is controlled by the functional manager.
+**A:** C — In a Functional organization, the PM has little/no authority and budget is controlled by the functional manager. Team members report directly to the functional manager.
 
-**Q2 - Multiple Choice:** In which organizational structure does the PM have the greatest amount of authority?
+**Q3 - Multiple Choice:** In which organizational structure does the PM have the greatest amount of authority?
 - A) Functional
 - B) Weak Matrix
 - C) Balanced Matrix
 - D) Projectized
 **A:** D — In a Projectized organization, the PM has the greatest authority (High/Total). The team is assigned full-time and moves to other assignments when the project is complete.
 
-**Q3 - Multiple Choice:** What are the three types of matrix organizations?
+**Q4 - Multiple Choice:** What are the three types of matrix organizations?
 - A) Small, Medium, Large
 - B) Weak, Balanced, Strong
 - C) Simple, Complex, Hybrid
 - D) Functional, Operational, Strategic
 **A:** B — Weak, Balanced, and Strong. They differ in the PM's authority relative to the functional manager's authority.
 
-**Q4 - True/False:** In a Projectized organization, team members are assigned part-time and split between multiple projects.
-**A:** False. In a Projectized organization, the team is assigned to the project on a full-time basis. When the project is complete, team members move on to other assignments.
-
 **Q5 - Multiple Choice:** In a Functional organization, who controls the budget?
 - A) The Project Manager
 - B) The Functional Manager
 - C) The Sponsor
 - D) The budget is shared equally
-**A:** B — In a Functional organization, budget controls rest with the Functional Manager. The PM has little/no authority.
-
-**Q6 - True/False:** In a Balanced Matrix, the PM role is part-time/full-time (PT/FT) and PM staff are also PT/FT.
-**A:** True. In a Balanced Matrix, both PM role and PM staff are PT/FT, and authority is Low to Moderate.
+**A:** B — In a Functional organization, budget controls rest with the Functional Manager.
 
 ---
 
-### Issues, Risks, Assumptions, and Constraints
+### Project Life Cycle and Approaches (PM+Terms)
 
-**Q1 - Multiple Choice:** A team member says "We assume the vendor will deliver materials by March 15th." What is this statement classified as?
+**Q1 - Multiple Choice:** What are the three main types of project life cycle approaches?
+- A) Fast, Medium, Slow
+- B) Plan-Driven/Predictive, Change-Driven/Adaptive, Hybrid
+- C) Waterfall, Scrum, Kanban
+- D) Simple, Complex, Critical
+**A:** B — The Project Life Cycle can be Plan-Driven/Predictive/Traditional, Change-Driven (Iterative, Incremental, Adaptive), or Hybrid.
+
+**Q2 - Multiple Choice:** Which project management approach emphasizes "extensive upfront planning" and "limited changes with a well-defined change control process"?
+- A) Adaptive
+- B) Agile
+- C) Predictive
+- D) Kanban
+**A:** C — The Predictive approach follows a linear and sequential process with emphasis on control, documentation, and limited flexibility.
+
+**Q3 - Multiple Choice:** Which of the following is NOT a characteristic of the Adaptive approach?
+- A) Self-organizing teams
+- B) Sequential execution
+- C) Customer collaboration
+- D) Iterative and incremental development
+**A:** B — Sequential execution is Predictive. Adaptive uses iterative/incremental development with self-organizing teams and customer collaboration.
+
+---
+
+### Issues, Risks, Assumptions, and Constraints (PM+Terms)
+
+**Q1 - Multiple Choice:** A team member says "We assume the vendor will deliver materials by March 15th." What is this classified as?
 - A) A Risk
 - B) An Issue
 - C) An Assumption
 - D) A Constraint
-**A:** C — An Assumption is a statement or belief considered to be true or valid for the purpose of planning and decision-making but hasn't been proven.
+**A:** C — An Assumption is a statement or belief considered to be true for planning purposes but hasn't been proven.
 
 **Q2 - Multiple Choice:** What is the key difference between a Risk and an Issue?
 - A) Risks are positive; issues are negative
 - B) Risks may occur in the future; issues have already arisen
 - C) Risks affect scope; issues affect schedule
 - D) There is no difference
-**A:** B — Risks are potential events that may occur in the future. Issues are problems or challenges that have already arisen during the project.
+**A:** B — Risks are potential future events. Issues are problems that have already arisen during the project.
 
-**Q3 - True/False:** Constraints are limitations or restrictions that affect project planning and execution.
-**A:** True. Constraints limit or restrict what the project team can do during planning and execution.
-
-**Q4 - Multiple Choice:** The vendor notifies the team they will be 2 weeks late on delivery. This was previously listed as an assumption that they'd deliver on time. What has the assumption become?
-- A) A constraint
-- B) A risk
-- C) An issue
-- D) It's still an assumption
-**A:** C — An Issue. It was an assumption (believed to be true), and the possibility of late delivery was a risk. Now that it has actually happened, it's an issue — a problem that has arisen during the project.
-
----
-
-### Project Constraints
-
-**Q1 - Multiple Choice:** Which of the following is NOT one of the 6 project constraints?
+**Q3 - Multiple Choice:** Which of the following is NOT one of the 6 project constraints?
 - A) Scope
 - B) Schedule
 - C) Stakeholders
 - D) Quality
-**A:** C — The 6 project constraints are Scope, Schedule, Cost, Risk, Quality, and Resources. Stakeholders is a knowledge area but not one of the constraint hexagon sides.
+**A:** C — The 6 constraints are Scope, Schedule, Cost, Risk, Quality, and Resources. They are interrelated — changing one affects the others.
 
-**Q2 - True/False:** Changing one project constraint has no effect on the other constraints.
-**A:** False. All 6 constraints (Scope, Schedule, Cost, Risk, Quality, Resources) are interrelated — changing one affects the others.
+**Q4 - Multiple Choice:** The vendor notifies the team they will be 2 weeks late. This was previously an assumption that they'd deliver on time. What has it become?
+- A) A constraint
+- B) A risk
+- C) An issue
+- D) It's still an assumption
+**A:** C — An Issue. The assumption (believed true) had a risk (might not deliver). Now that late delivery has occurred, it's an issue.
 
 ---
 
-### Emotional Intelligence
+### Areas of a Project (PM+Terms)
+
+**Q1 - Multiple Choice:** Which project area is concerned with "acquiring resources from outside the project team"?
+- A) Resources
+- B) Communications
+- C) Procurements
+- D) Stakeholders' Engagement
+**A:** C — Procurements deals with acquiring resources from outside the project team.
+
+**Q2 - Multiple Choice:** Which project area ensures "all stakeholders get the correct information at the right time"?
+- A) Stakeholders' Engagement
+- B) Quality
+- C) Communications
+- D) Risk
+**A:** C — Communications ensures all stakeholders get the correct information at the right time.
+
+**Q3 - True/False:** The 9 knowledge areas include Scope, Schedule, Cost, Quality, Resources, Communications, Risk, Procurements, and Stakeholders' Engagement.
+**A:** True. These are the 9 key knowledge areas of a project.
+
+---
+
+### Emotional Intelligence (PM+Terms)
 
 **Q1 - Multiple Choice:** What does Emotional Intelligence (EQ) refer to in project management?
 - A) The ability to calculate project metrics accurately
 - B) The ability to recognize, understand, and manage emotions in oneself and others
 - C) The ability to create detailed project schedules
 - D) The ability to negotiate contracts effectively
-**A:** B — EQ is the ability to recognize, understand, and manage emotions, both in oneself and in others. It involves self-awareness, empathy, and using emotions to guide thinking and behavior.
+**A:** B — EQ involves self-awareness, empathy, and using emotions to guide thinking and behavior.
 
-**Q2 - Multiple Choice:** Which of the following is NOT one of the 5 areas where EQ plays a significant role in project management?
+**Q2 - Multiple Choice:** Which of the following is NOT one of the 5 areas where EQ plays a significant role?
 - A) Relationship Building
 - B) Budget Forecasting
 - C) Communication and Conflict Management
@@ -1467,37 +1528,30 @@ volumes:
 
 ---
 
-### Leadership vs. Management
+### Leadership vs. Management (PM+Terms)
 
 **Q1 - Multiple Choice:** According to PMI, Management "directs using positional power." What does Leadership use instead?
 - A) Contractual authority
 - B) Relational power (guide, influence, collaborate)
 - C) Financial incentives
 - D) Organizational hierarchy
-**A:** B — Leadership uses relational power to guide, influence, and collaborate. Management directs using positional power.
+**A:** B — Leadership uses relational power. Management directs using positional power.
 
 **Q2 - Multiple Choice:** Which phrase is associated with Management (not Leadership)?
 - A) "Do the right things"
 - B) "Focus on long-range vision"
 - C) "Do things right"
 - D) "Challenge status quo"
-**A:** C — "Do things right" is Management. Leadership "does the right things." Management focuses on near-term goals and processes; Leadership focuses on long-range vision and inspiration.
+**A:** C — "Do things right" is Management. Leadership "does the right things."
 
 **Q3 - True/False:** Leadership should not be confused with authority.
-**A:** True. Authority is the right to exercise power and control individuals. Leadership is about inspiring and motivating people toward a common goal, aligning individual interests with the collective effort.
-
-**Q4 - Multiple Choice:** Which of the following describes Leadership rather than Management?
-- A) Focus on near-term goals
-- B) Maintain stability, control, and order
-- C) Inspire and influence others to collaborate
-- D) Focus on tasks, processes, and operations
-**A:** C — Leadership focuses on inspiring and influencing others, setting direction, motivating and empowering individuals, and encouraging collaboration, trust, and empowerment.
+**A:** True. Authority is the right to exercise power and control. Leadership is about inspiring and motivating toward a common goal.
 
 ---
 
-### PMI Code of Ethics and Professional Conduct
+### PMI Code of Ethics and Professional Conduct (PM+Principles)
 
-**Q1 - Multiple Choice:** PMI's Code of Ethics and Professional Conduct is based on which four values?
+**Q1 - Multiple Choice:** PMI's Code of Ethics is based on which four values?
 - A) Integrity, Transparency, Quality, Efficiency
 - B) Responsibility, Respect, Fairness, Honesty
 - C) Trust, Accountability, Communication, Leadership
@@ -1505,114 +1559,238 @@ volumes:
 **A:** B — Responsibility, Respect, Fairness, and Honesty.
 
 **Q2 - True/False:** Principles and morals are the same thing according to PMI.
-**A:** False. Principles can, but do not necessarily, reflect morals. A code of ethics is related to morals and can be adopted by a profession to establish expectations for moral conduct.
+**A:** False. Principles can, but do not necessarily, reflect morals. A code of ethics is related to morals.
 
 ---
 
-### The 12 Principles of Project Management
+### The 12 Principles of Project Management (PM+Principles)
 
-**Q1 - Multiple Choice:** Which PM principle includes the sub-components of Integrity, Care, Trustworthiness, and Compliance?
+**Q1 - Multiple Choice:** Which PM principle includes Integrity, Care, Trustworthiness, and Compliance?
 - A) Demonstrate leadership behaviors
 - B) Be a diligent, respectful, and caring steward
 - C) Create a collaborative project team environment
 - D) Focus on value
-**A:** B — Stewardship includes Integrity (behave honestly and ethically), Care (fiduciaries of organizational matters), Trustworthiness (represent themselves and their authority accurately), and Compliance (comply with laws, rules, regulations, and requirements).
+**A:** B — Stewardship includes Integrity (behave honestly), Care (fiduciaries of organizational matters), Trustworthiness (represent authority accurately), and Compliance (comply with laws/rules/regulations).
 
 **Q2 - True/False:** Accountability can be shared among team members.
-**A:** False. Accountability is NOT shared — one person is answerable for the outcome. Responsibility, however, CAN be shared.
+**A:** False. Accountability is NOT shared — one person is answerable for the outcome. Responsibility CAN be shared.
 
-**Q3 - Multiple Choice:** According to the "Focus on Value" principle, when can value be realized?
+**Q3 - Multiple Choice:** What is the difference between Authority, Accountability, and Responsibility?
+- A) They all mean the same thing
+- B) Authority is the right to make decisions; Accountability is being answerable for an outcome (not shared); Responsibility is being obligated to do something (can be shared)
+- C) Authority is for managers; Accountability is for teams; Responsibility is for sponsors
+- D) Authority and Accountability are the same; Responsibility is different
+**A:** B — Authority is the right to make decisions, establish procedures, apply resources, expend funds, or give approvals. Accountability is not shared. Responsibility can be shared.
+
+**Q4 - Multiple Choice:** According to "Focus on Value," when can value be realized?
 - A) Only at the end of the project
 - B) Only after the project is complete
 - C) Throughout the project, at the end, or after completion
 - D) Only at predefined milestones
-**A:** C — Value can be realized throughout the project, at the end of the project, or after the project is complete. Value is the ultimate indicator of project success.
+**A:** C — Value is the ultimate indicator of project success. A business case contains: business need, project justification, and business strategy.
 
-**Q4 - Multiple Choice:** Systems Thinking in project management means:
+**Q5 - Multiple Choice:** What does "Focus on Value" say about deliverables vs. outcomes?
+- A) Deliverables are more important than outcomes
+- B) Project teams should shift focus from deliverables to the intended outcomes to support value realization
+- C) Outcomes don't matter if deliverables are completed
+- D) Deliverables and outcomes are the same thing
+**A:** B — To support value realization, project teams shift focus from deliverables to intended outcomes, delivering on the vision rather than simply creating a specific deliverable.
+
+**Q6 - Multiple Choice:** Systems Thinking in project management means:
 - A) Using the latest project management software tools
 - B) Taking a holistic view of the project as a system with its own working parts
 - C) Breaking the project into the smallest possible tasks
-- D) Focusing only on the project's internal processes
-**A:** B — Systems thinking means seeing the project as a system within larger systems. Internal and external conditions continuously change, and a single change can create several impacts.
+- D) Focusing only on internal processes
+**A:** B — A project is a system of interdependent and interacting domains. Internal and external conditions continuously change, and a single change can create several impacts.
 
-**Q5 - Multiple Choice:** What are the four common sources of complexity in projects?
+**Q7 - Multiple Choice:** What are the four common sources of complexity in projects?
 - A) Scope, Schedule, Cost, Quality
 - B) Human behavior, System behavior, Uncertainty and ambiguity, Technological innovation
 - C) Stakeholders, Budget, Timeline, Resources
 - D) Planning, Execution, Monitoring, Closing
 **A:** B — Human behavior, System behavior, Uncertainty and ambiguity, and Technological innovation.
 
-**Q6 - Multiple Choice:** What is the difference between Adaptability and Resiliency?
+**Q8 - Multiple Choice:** What is the difference between Adaptability and Resiliency?
 - A) They mean the same thing
 - B) Adaptability is responding to change; Resiliency is recovering from setbacks
-- C) Adaptability is for agile projects only; Resiliency is for predictive projects only
-- D) Adaptability is a team skill; Resiliency is an organizational skill
-**A:** B — Adaptability is the ability to respond to changing conditions. Resiliency is the ability to absorb impacts and recover quickly from a setback or failure.
+- C) Adaptability is for agile only; Resiliency is for predictive only
+- D) Adaptability is a team skill; Resiliency is organizational
+**A:** B — Adaptability is responding to changing conditions. Resiliency is absorbing impacts and recovering quickly from setbacks.
 
-**Q7 - Multiple Choice:** Which principle states that each project is unique and should use "just enough" process?
+**Q9 - Multiple Choice:** Which principle states each project is unique and should use "just enough" process?
 - A) Navigate complexity
 - B) Optimize risk responses
 - C) Tailor based on context
 - D) Build quality into processes and deliverables
-**A:** C — Tailor based on context. Design the project development methods based on the needs of the project and its objectives. Use "just enough" process to accomplish the desired outcome while maximizing value, managing cost, and enhancing speed.
+**A:** C — Design methods based on project needs. Use "just enough" process to maximize value, manage cost, and enhance speed.
 
-**Q8 - True/False:** According to the "Optimize Risk Responses" principle, risks can only be negative (threats).
-**A:** False. Risks can be positive (opportunities) or negative (threats). Project teams seek to maximize positive risks and decrease exposure to negative risks.
+**Q10 - True/False:** Risks can only be negative (threats).
+**A:** False. Risks can be positive (opportunities) or negative (threats). Teams maximize positive risks and decrease exposure to negative risks.
 
-**Q9 - Multiple Choice:** What three factors influence how an organization addresses risk?
+**Q11 - Multiple Choice:** What three factors influence how an organization addresses risk?
 - A) Budget, Schedule, Scope
 - B) Risk attitude, Risk appetite, Risk threshold
 - C) Sponsor preference, Team experience, Project size
 - D) Industry standards, Legal requirements, Stakeholder demands
-**A:** B — Risk attitude, risk appetite, and risk threshold influence how risk is addressed.
+**A:** B — Risk attitude, risk appetite, and risk threshold.
 
-**Q10 - Multiple Choice:** According to the "Demonstrate Leadership Behaviors" principle, who can demonstrate leadership on a project?
+**Q12 - Multiple Choice:** Who can demonstrate leadership on a project?
 - A) Only the project manager
 - B) Only senior management
 - C) Any project team member
 - D) Only the sponsor
-**A:** C — Any project team member can demonstrate leadership behaviors, regardless of role or position.
+**A:** C — Any project team member can demonstrate leadership behaviors. Effective leaders adapt their style to the situation.
 
-**Q11 - Multiple Choice:** Which of the following is NOT something stakeholders can affect on a project?
-- A) Scope/requirements
-- B) Schedule and Cost
-- C) The weather
-- D) Risk and Quality
-**A:** C — Stakeholders can affect scope/requirements, schedule, cost, project team, plans, outcomes, culture, benefits realization, risk, quality, and success — but not the weather.
-
-**Q12 - True/False:** Effective change management uses a motivational strategy rather than a forceful one.
-**A:** True. The "Enable Change" principle states that effective change management uses motivation over force. Too much change too fast can lead to change fatigue and/or resistance.
-
-**Q13 - Multiple Choice:** What benefits does tailoring the project approach produce?
-- A) Higher costs but faster delivery
-- B) Deeper team commitment, reduced waste, customer focus, efficient resource use
-- C) More documentation and stricter controls
-- D) Standardized processes across all projects
-**A:** B — Tailoring produces deeper commitment from team members, reduction in waste, customer-oriented focus, and more efficient use of project resources.
+**Q13 - True/False:** Effective change management uses a motivational strategy rather than a forceful one.
+**A:** True. Too much change too fast leads to change fatigue and/or resistance.
 
 **Q14 - Multiple Choice:** Quality in project management is primarily about:
-- A) Using the most expensive materials available
+- A) Using the most expensive materials
 - B) Meeting the acceptance criteria for deliverables
 - C) Completing the project as fast as possible
-- D) Having zero defects in every deliverable
-**A:** B — Quality is about meeting the acceptance criteria for deliverables — satisfying stakeholders' expectations and fulfilling project and product requirements.
+- D) Having zero defects
+**A:** B — Meeting acceptance criteria, satisfying stakeholders' expectations, and fulfilling project and product requirements.
 
-**Q15 - Multiple Choice:** Which of the following is NOT a quality dimension?
-- A) Performance
-- B) Profitability
-- C) Reliability
-- D) Sustainability
-**A:** B — Quality dimensions include Performance, Conformity, Reliability, Resilience, Satisfaction, Efficiency, and Sustainability. Profitability is not a quality dimension.
+**Q15 - Multiple Choice:** What are the 12 Principles in order? (Select the correct first 6)
+- A) Stewardship, Team, Stakeholders, Value, Systems, Leadership
+- B) Planning, Executing, Monitoring, Controlling, Closing, Initiating
+- C) Scope, Schedule, Cost, Quality, Risk, Resources
+- D) Charter, Plan, Execute, Monitor, Close, Lessons Learned
+**A:** A — (1) Be a diligent, respectful, and caring steward, (2) Create a collaborative project team environment, (3) Effectively engage with stakeholders, (4) Focus on value, (5) Recognize, evaluate, and respond to system interactions, (6) Demonstrate leadership behaviors. The remaining 6 are: (7) Tailor based on context, (8) Build quality into processes and deliverables, (9) Navigate complexity, (10) Optimize risk responses, (11) Embrace adaptability and resiliency, (12) Enable change to achieve the envisioned future state.
 
-**Q16 - Multiple Choice:** Which capabilities support adaptability and resilience? (Select the BEST answer)
-- A) Rigid planning and strict change control
-- B) Short feedback loops, continuous learning, and small-scale experiments
-- C) Detailed upfront documentation and sequential execution
-- D) Centralized decision-making and formal reporting
-**A:** B — Short feedback loops, continuous learning and improvement, regular inspection and adaptation, open and transparent planning, and small-scale prototypes and experiments all support adaptability and resilience.
+---
 
-**Q17 - True/False:** Risk responses should be owned by a responsible person and agreed to by relevant stakeholders.
-**A:** True. Risk responses should be: appropriate for the significance of the risk, cost effective, realistic within the project context, agreed to by relevant stakeholders, and owned by a responsible person.
+### Performance Domains (PM+Domains)
+
+**Q1 - Multiple Choice:** How many Performance Domains are there in PMBOK 7th Edition?
+- A) 5
+- B) 8
+- C) 10
+- D) 12
+**A:** B — The 8 Performance Domains are: Stakeholders, Team, Development Approach and Life Cycle, Planning, Project Work, Delivery, Measurement, and Uncertainty.
+
+**Q2 - Multiple Choice:** What are the 5 steps of Effective Stakeholder Engagement (in order)?
+- A) Plan, Execute, Monitor, Control, Close
+- B) Identify, Understand, Analyze, Prioritize, Engage, Monitor
+- C) Identify, Understand and Analyze, Prioritize, Engage, Monitor
+- D) Define, Measure, Analyze, Improve, Control
+**A:** C — Identify → Understand and Analyze → Prioritize → Engage → Monitor (continuous cycle).
+
+**Q3 - Multiple Choice:** In the Stakeholder Performance Domain, what indicates stakeholders may NOT be engaged or aligned with project objectives?
+- A) On-time deliverables
+- B) A significant number of changes or modifications to scope and product requirements
+- C) Positive stakeholder feedback
+- D) Budget under-run
+**A:** B — A significant number of scope/requirement changes may indicate stakeholders are not engaged or aligned.
+
+**Q4 - Multiple Choice:** What are the three outcomes of the Team Performance Domain?
+- A) On-time, On-budget, On-scope
+- B) Shared ownership, A high-performing team, Appropriate leadership and interpersonal skills
+- C) Hired staff, Trained staff, Retained staff
+- D) Communication plan, RACI chart, Org chart
+**A:** B — Shared ownership (all members know vision/objectives), high-performing team (trusts, collaborates, adapts), and appropriate leadership/interpersonal skills demonstrated by all.
+
+**Q5 - Multiple Choice:** What is servant leadership?
+- A) A leadership style where the PM makes all decisions
+- B) A method based on understanding and addressing the needs and development of project team members
+- C) A management approach focused on efficiency
+- D) A style where team members serve the PM
+**A:** B — Servant leaders focus on: Are team members growing? Are they becoming healthier, wiser, freer, and more autonomous? Behaviors include obstacle removal, diversion shield, and encouragement/development opportunities.
+
+**Q6 - Multiple Choice:** Leadership can be centralized or distributed. What does "centralized" mean?
+- A) All team members share accountability equally
+- B) Accountability is assigned to one individual
+- C) The team votes on decisions
+- D) The sponsor makes all decisions
+**A:** B — Centralized: accountability is assigned to one individual. Distributed: shared among a project management team and project team members.
+
+**Q7 - Multiple Choice:** What does "delivery cadence" refer to in the Development Approach and Life Cycle Performance Domain?
+- A) The project management methodology
+- B) The timing and frequency of project deliverables
+- C) The meeting schedule
+- D) The sprint duration
+**A:** B — Delivery cadence refers to the timing and frequency of project deliverables. Projects can have single, multiple, or periodic deliveries.
+
+**Q8 - Multiple Choice:** Which three categories of factors influence the selection of a development approach?
+- A) Cost, Time, Quality
+- B) Product/service/result factors, Project factors, Organization factors
+- C) Team size, Budget, Deadline
+- D) Sponsor preference, Industry standard, Legal requirement
+**A:** B — Product/service/result (innovation, requirements certainty, scope stability, risk, regulations), Project (stakeholders, schedule constraints, funding), Organization (structure, culture, capability, team size/location).
+
+---
+
+### Process Groups and Processes (PM+Processes)
+
+**Q1 - Multiple Choice:** What are the 5 Process Groups?
+- A) Define, Plan, Build, Test, Deploy
+- B) Initiating, Planning, Executing, Monitoring & Controlling, Closing
+- C) Scope, Schedule, Cost, Quality, Risk
+- D) Start, Middle, End, Review, Archive
+**A:** B — Initiating (2 processes), Planning (24 processes), Executing (10 processes), Monitoring & Controlling (12 processes), Closing (1 process).
+
+**Q2 - Multiple Choice:** What are the two processes in the Initiating process group?
+- A) Plan Scope Management and Collect Requirements
+- B) Develop Project Charter and Identify Stakeholders
+- C) Direct and Manage Project Work and Monitor and Control Project Work
+- D) Develop Project Management Plan and Close Project or Phase
+**A:** B — Develop Project Charter and Identify Stakeholders.
+
+**Q3 - Multiple Choice:** What does the Project Charter formally do?
+- A) Assigns team members to tasks
+- B) Formally authorizes the existence of the project and assigns the PM and their authority level
+- C) Defines the project schedule
+- D) Establishes the project budget
+**A:** B — The Project Charter is signed by senior management, contains high-level requirements and risks, preliminary budget and schedule, and project purpose/justification. The approved charter formally initiates the project.
+
+**Q4 - Multiple Choice:** What are the two outputs of the "Develop Project Charter" process?
+- A) Project Management Plan and Schedule
+- B) Project Charter and Assumption Log
+- C) Stakeholder Register and Risk Register
+- D) WBS and Budget
+**A:** B — The Project Charter and the Assumption Log (a list of things perceived to be true and things that might constrain the project).
+
+**Q5 - Multiple Choice:** What is the Project Management Plan?
+- A) Just a schedule
+- B) A comprehensive document that outlines how the project is executed, monitored and controlled, and closed
+- C) A list of team members
+- D) The project budget
+**A:** B — It contains 4 baselines (Scope, Schedule, Cost, Performance Measurement), 14 subsidiary plans, and is only changed when a change request is generated and approved by the change control board.
+
+**Q6 - Multiple Choice:** What is the difference between Product Scope and Project Scope?
+- A) They are the same thing
+- B) Product Scope is features/functions of the product; Project Scope is the work needed to deliver it
+- C) Product Scope is bigger; Project Scope is smaller
+- D) Product Scope is for the customer; Project Scope is for the team
+**A:** B — Product Scope = features and functions that characterize a product, service, or result. Project Scope = the work needed to deliver a product, service, or result with specified features.
+
+**Q7 - Multiple Choice:** What is "Gold Plating" in project management?
+- A) Using expensive materials
+- B) Doing extra work not in the scope
+- C) Adding a gold standard quality check
+- D) Exceeding the budget
+**A:** B — Gold Plating is doing extra work not in the scope. Scope Creep is unauthorized work added to the scope. Both should be prevented.
+
+**Q8 - Multiple Choice:** The Salience Model categorizes stakeholders using which three dimensions?
+- A) Cost, Schedule, Scope
+- B) Power, Urgency, Legitimacy
+- C) Interest, Influence, Impact
+- D) Internal, External, Neutral
+**A:** B — Power (level of authority), Urgency (immediate attention), Legitimacy (how appropriate is their involvement).
+
+**Q9 - Multiple Choice:** What are the four Directions of Influence for stakeholders?
+- A) North, South, East, West
+- B) Upward, Downward, Outward, Sideward
+- C) Internal, External, Positive, Negative
+- D) High, Medium, Low, None
+**A:** B — Upward (senior management), Downward (team members), Outward (vendors, government, public, end-users), Sideward (peers such as other project managers).
+
+**Q10 - Multiple Choice:** What information should a Stakeholder Register contain?
+- A) Only names and phone numbers
+- B) Contact info, role, communication requirements, expectations, how affected, and power/influence level
+- C) Only their approval authority
+- D) Only their department
+**A:** B — The Stakeholder Register contains contact information, role (team member, sponsor, functional manager), communication requirements, expectations, how affected by project, and power/influence level.
 
 ---
 
@@ -1625,7 +1803,7 @@ To add a new question, use this format:
 **A:** [Answer]
 ```
 
-Types: Conceptual, Code Output, Code Writing, Compare/Contrast
+Types: Conceptual, Code Output, Code Writing, Compare/Contrast, Multiple Choice, True/False
 
 ---
 

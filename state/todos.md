@@ -16,7 +16,8 @@ Persistent task list that carries across MARVIN sessions.
 | **Complete decoratordojo project** | 2026-02-25 | Builds decorator skill in isolation. Exercise 4 recreates exam's `_validation` pattern. See `~/Code/Learning/ExamGap.md` |
 | **Complete paymentprocessor project** | 2026-02-25 | Full exam simulation — covers gaps 2-8 from G2i analysis. See `~/Code/Learning/ExamGap.md` |
 | **Draft PMP application project descriptions** | 2026-03-20 | Need 2-3 projects documenting project leadership experience (title, role, dates, hours, deliverables). 60 months required with associate's degree — 27 yrs experience covers this easily. Draft when ready to apply. |
-| **Set up Discord channel for PMP quiz on mobile** | 2026-03-25 | Use Claude Code Channels (v2.1.83 installed) to run `/pmp-quiz` from phone via Discord bot. Both Matt and Emily can quiz independently. Notes at `content/pmp-quiz-mobile-setup.md`. Steps: create Discord server, set up bot, configure Channels MCP. |
+| **Set up mobile PMP quiz via Claude Code Channels** | 2026-03-25 | Use Claude Code Channels to run `/pmp-quiz` from phone. Platform TBD (Discord vs Telegram). Both Matt and Emily can quiz independently. Notes at `content/pmp-quiz-mobile-setup.md`. |
+| **Enrich `resume-data.json` via `/grill-me`** | 2026-03-28 | Use `/grill-me` to interview Matt about each role in depth — pull out accomplishments, forgotten skills, languages, tools, and impact that aren't captured yet. Goal: make the data file comprehensive enough for strong match analysis and tailored resume generation. The data file is the master record; the built resume is a filtered snapshot. |
 
 ---
 
