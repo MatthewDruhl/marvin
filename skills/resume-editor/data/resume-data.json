@@ -1,0 +1,426 @@
+{
+  "header": {
+    "name": "Matthew Druhl",
+    "location": "Livingston, TX",
+    "phone": "603.377.1038",
+    "email": "matthewdruhl@gmail.com",
+    "linkedin": "www.linkedin.com/in/matthew-druhl"
+  },
+  "title": "Expert Senior Software Engineer",
+  "tagline": "Empower Teams & Systems | Deliver Scalable Solutions & Seamless Collaboration",
+  "summary": "Insightful software developer, designing and leading team projects that exceed business goals. Optimize customer experience by writing clear, concise code, managing projects efficiently, and collaborating with internal and external stakeholders to improve processes. Ensure broader objective alignment by triaging problems before driving solutions. Known for strong situational awareness and calm decision-making under pressure while maintaining clarity and discipline in high-stress, fast-changing environments. Expertise includes:",
+  "summary_keywords": [
+    "Strategic Problem Analysis",
+    "Kubernetes & Prometheus Application Support",
+    "IT Infrastructure Modernization",
+    "Cloud Solution Development",
+    "Cross-Platform Scripting & Automation",
+    "Production Workflow Control & Tracking",
+    "Modular & Reusable Code Design",
+    "Team Leadership & Mentoring",
+    "Agile Development & Sprint Planning",
+    "Microservice Design & Deployment",
+    "Compliance-Focused System Design",
+    "Serverless Architecture Implementation"
+  ],
+  "skills": [
+    {
+      "name": "AWS Serverless",
+      "categories": [
+        "cloud",
+        "serverless"
+      ]
+    },
+    {
+      "name": "C++ ProC",
+      "categories": [
+        "language"
+      ]
+    },
+    {
+      "name": "Confluence",
+      "categories": [
+        "collaboration"
+      ]
+    },
+    {
+      "name": "Docker",
+      "categories": [
+        "devops",
+        "containers"
+      ]
+    },
+    {
+      "name": "GitHub",
+      "categories": [
+        "devops",
+        "collaboration"
+      ]
+    },
+    {
+      "name": "Java",
+      "categories": [
+        "language"
+      ]
+    },
+    {
+      "name": "JavaScript",
+      "categories": [
+        "language"
+      ]
+    },
+    {
+      "name": "Jenkins",
+      "categories": [
+        "devops",
+        "ci-cd"
+      ]
+    },
+    {
+      "name": "Jira",
+      "categories": [
+        "collaboration"
+      ]
+    },
+    {
+      "name": "NoSQL & RDBMS",
+      "categories": [
+        "database"
+      ]
+    },
+    {
+      "name": "PL/SQL",
+      "categories": [
+        "language",
+        "database"
+      ]
+    },
+    {
+      "name": "Python",
+      "categories": [
+        "language"
+      ]
+    },
+    {
+      "name": "SQL",
+      "categories": [
+        "language",
+        "database"
+      ]
+    },
+    {
+      "name": "Terraform",
+      "categories": [
+        "devops",
+        "infrastructure"
+      ]
+    },
+    {
+      "name": "Terragrunt",
+      "categories": [
+        "devops",
+        "infrastructure"
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Python 3 Programming Specialization",
+      "org": "University of Michigan",
+      "platform": "Coursera",
+      "date": "Feb 2026"
+    },
+    {
+      "name": "Foundations of Data Structures and Algorithm Analysis",
+      "org": "Packt",
+      "platform": "Coursera",
+      "date": "Jan 2026"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Pearson",
+      "location": "Iowa City, IA",
+      "roles": [
+        {
+          "title": "Senior Site Reliability Engineering (SRE)",
+          "type": "Remote",
+          "start_year": 2022,
+          "end_year": 2025,
+          "max_bullets": 3,
+          "bullets": [
+            {
+              "text": "Modernized Terraform and Terragrunt configurations, aligning with current best practices and versioning standards while gaining familiarity with AWS networking resources to support scalable infrastructure.",
+              "tags": [
+                "infrastructure",
+                "cloud",
+                "terraform",
+                "devops",
+                "automation"
+              ]
+            },
+            {
+              "text": "Mentored junior SREs and team members newer to coding by promoting best practices, code quality standards, and self-service learning.",
+              "tags": [
+                "mentoring",
+                "leadership",
+                "culture"
+              ]
+            },
+            {
+              "text": "Guided team members on where to access up-to-date documentation and resources, enabling less-experienced team members to independently adapt as standards evolved and continuously improve their skills.",
+              "tags": [
+                "mentoring",
+                "leadership",
+                "documentation",
+                "culture"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Specialist Software Engineer",
+          "type": "Remote",
+          "start_year": 2019,
+          "end_year": 2022,
+          "max_bullets": 3,
+          "bullets": [
+            {
+              "text": "Accelerated modernization and enabled scalable infrastructure by leading analysis of on-premises applications and collaborating with development teams to design and implement cloud migration strategies.",
+              "tags": [
+                "cloud",
+                "migration",
+                "infrastructure",
+                "leadership",
+                "architecture"
+              ]
+            },
+            {
+              "text": "Rearchitected solutions to align with modern standards and cloud-native best practices, prioritizing optimization over simple lift-and-shift while guiding transformation of legacy code.",
+              "tags": [
+                "cloud",
+                "architecture",
+                "modernization",
+                "legacy"
+              ]
+            },
+            {
+              "text": "Simplified large monolithic systems into smaller microservices, improving maintainability, onboarding efficiency, and speed of code delivery.",
+              "tags": [
+                "microservices",
+                "architecture",
+                "modernization",
+                "delivery"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Senior Software Developer",
+          "type": "Remote",
+          "start_year": 2015,
+          "end_year": 2019,
+          "max_bullets": 4,
+          "bullets": [
+            {
+              "text": "Engineered applications that used hybrid architecture to combine serverless and traditional server-based code, using workflow tools to transfer files across on-premises servers, AWS Cloud, and customer environments.",
+              "tags": [
+                "serverless",
+                "cloud",
+                "architecture",
+                "aws",
+                "hybrid"
+              ]
+            },
+            {
+              "text": "Expanded application’s capabilities to establish cloud presence, enabling support for additional cloud-based business units.",
+              "tags": [
+                "cloud",
+                "expansion",
+                "business-impact"
+              ]
+            },
+            {
+              "text": "Built and led team of 3 full-time developers and 1 intern to support custom application, mentoring team members in application support to reallocate time to focus on system design enhancements, which drove application capability expansion to support additional internal and external business units.",
+              "tags": [
+                "leadership",
+                "mentoring",
+                "team-building",
+                "management",
+                "business-impact"
+              ]
+            },
+            {
+              "text": "Architected secure file delivery system that supported 184 transfer methods, encryption standards, and tracking database across cloud and on-premises environments, allowing system built in 2015 to continue to deliver millions of files annually to internal and external customers.",
+              "tags": [
+                "architecture",
+                "security",
+                "cloud",
+                "infrastructure",
+                "data-delivery",
+                "scale"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Integrator",
+          "type": null,
+          "start_year": 2014,
+          "end_year": 2015,
+          "max_bullets": 3,
+          "bullets": [
+            {
+              "text": "Developed cross-platform automation to replace manual tasks, increasing operational efficiency and significantly reducing human error.",
+              "tags": [
+                "automation",
+                "scripting",
+                "efficiency"
+              ]
+            },
+            {
+              "text": "Eliminated confusion and streamlined processing by establishing consistent file naming standards.",
+              "tags": [
+                "process-improvement",
+                "standards"
+              ]
+            },
+            {
+              "text": "Automated file delivery workflows and implemented tracking with sign-off checkpoints for data validation, ensuring accuracy and accountability.",
+              "tags": [
+                "automation",
+                "data-validation",
+                "workflow",
+                "tracking"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Software Developer III",
+          "type": null,
+          "start_year": 2008,
+          "end_year": 2014,
+          "max_bullets": 2,
+          "bullets": [
+            {
+              "text": "Created and designed stable microsystem to support growing code complexity, enabling ongoing report generation and delivery across 50+ endpoints.",
+              "tags": [
+                "architecture",
+                "systems-design",
+                "reporting",
+                "scale"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Software Developer II",
+          "type": null,
+          "start_year": 2000,
+          "end_year": 2008,
+          "max_bullets": 2,
+          "bullets": [
+            {
+              "text": "Orchestrated seamless consolidation and upgrade of help desk systems, unifying disparate versions of third-party software into a centralized platform without losing data or interrupting service.",
+              "tags": [
+                "migration",
+                "consolidation",
+                "systems-integration",
+                "uptime"
+              ]
+            },
+            {
+              "text": "Awarded Certificate of Excellence by Senior Vice President (SVP), Enterprise Services for results achieved.",
+              "tags": [
+                "recognition",
+                "excellence"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "additional_experience": [
+    {
+      "company": "ACT",
+      "location": "Iowa City, IA",
+      "roles": [
+        {
+          "title": "Software Developer",
+          "type": null,
+          "start_year": 1997,
+          "end_year": 2000,
+          "max_bullets": 2,
+          "bullets": [
+            {
+              "text": "Increased performance 40% as lead programmer for multi-million-dollar project by enforcing more control over production cycle, improving overall project design, and training users in standard operating procedures.",
+              "tags": [
+                "performance",
+                "leadership",
+                "training",
+                "project-management"
+              ]
+            },
+            {
+              "text": "Created and monitored schedule and project plan for Y2K and other improvements.",
+              "tags": [
+                "project-management",
+                "planning"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "military": {
+    "branch": "Army National Guard",
+    "location": "Iowa City, IA",
+    "role": "Medical Specialist",
+    "start": "Nov 1993",
+    "end": "Nov 2004",
+    "bullets": [
+      {
+        "text": "Provided strategic leadership in planning, training, and administration by coordinating team initiatives and optimizing workload distribution.",
+        "tags": [
+          "leadership",
+          "planning",
+          "administration"
+        ]
+      },
+      {
+        "text": "Provisioned clinical and ambulatory medical care and evacuation for US soldiers, supporting Operation Iraqi Freedom.",
+        "tags": [
+          "military",
+          "medical",
+          "combat"
+        ]
+      },
+      {
+        "text": "Received commendations for exceeding expectations as medic and soldier.",
+        "tags": [
+          "recognition",
+          "excellence"
+        ]
+      }
+    ]
+  },
+  "education": [
+    {
+      "degree": "Associate of Science (AS)",
+      "field": "Computer Science",
+      "school": "Indian Hills Community College",
+      "location": "Ottumwa, IA",
+      "years": "1995 - 1997"
+    },
+    {
+      "degree": "Associate of Arts (AA)",
+      "field": "Liberal Arts",
+      "school": "Upper Iowa University",
+      "location": "Fayette, IA",
+      "years": "1990 - 1992"
+    }
+  ]
+}
