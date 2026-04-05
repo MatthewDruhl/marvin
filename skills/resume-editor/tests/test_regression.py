@@ -7,7 +7,7 @@ refactors or bug fixes.
 
 Requires:
 - ~/Resume/applications/Generic/Resume-MATTHEW-DRUHL.docx (known-good)
-- ~/Resume/applications/Generic/tailoring-generic-v2.json (tailoring input)
+- ~/Resume/applications/Generic/tailoring-generic.json (tailoring input)
 - ~/Resume/MatthewDruhl.docx (base resume)
 """
 
