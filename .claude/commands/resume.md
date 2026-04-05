@@ -11,7 +11,9 @@ Four modes: **Apply** (build tailored resume + cover letter), **Match** (strict 
 Read and follow the skill definition at `skills/resume-editor/SKILL.md`.
 
 The builder script is at `skills/resume-editor/scripts/resume_builder.py`.
-Run it with: `uv run --with python-docx python3 skills/resume-editor/scripts/resume_builder.py <command>`
+Run it with: `uv run --with python-docx --with lxml python3 skills/resume-editor/scripts/resume_builder.py <command>`
+
+Available commands: `view`, `update`, `build`, `cover-letter`, `score`, `auto-trim`
 
 ### Mode Detection
 
@@ -26,15 +28,15 @@ Run it with: `uv run --with python-docx python3 skills/resume-editor/scripts/res
   - Outputs: Apply / Stretch / Don't Apply recommendation
 
 - **Update mode** — User says "update", "add skill", "add cert", "add bullet"
-  - Modifies `skills/resume-editor/data/resume-data.json`
+  - Modifies `~/Resume/data/resume-data.json`
   - Run `view` after to confirm changes
 
 - **View mode** — User says "view" or just `/resume` without other context
   - Displays current resume data file contents
 
 ### Key Rules
-- **Data file:** `skills/resume-editor/data/resume-data.json` (single source of truth)
-- **Template:** `skills/resume-editor/templates/resume-template.docx` (formatting only)
+- **Data file:** `~/Resume/data/resume-data.json` (single source of truth)
+- **Base resume:** `~/Resume/MatthewDruhl.docx` (formatting preserved)
 - **Voice:** Direct, concise, impact-first. No AI fluff.
 - **Never fabricate** — reword existing data only
 - **2-page max** — hard caps per role + auto-trim with transparency
