@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.marvin.slack-bot</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/matthewdruhl/.local/bin/uv</string>
+        <string>run</string>
+        <string>--project</string>
+        <string>/Users/matthewdruhl/marvin/integrations/slack</string>
+        <string>python</string>
+        <string>/Users/matthewdruhl/marvin/integrations/slack/bot.py</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Users/matthewdruhl/marvin</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/Users/matthewdruhl/marvin/tmp/slack-bot.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/matthewdruhl/marvin/tmp/slack-bot.err</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/Users/matthewdruhl/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+    </dict>
+</dict>
+</plist>

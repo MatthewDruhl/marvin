@@ -384,6 +384,197 @@ D) Implementing all changes immediately without stakeholder input
 
 ---
 
+## Section 7: Predictive Project Management Terms
+
+*Source: PM+Predictive+Terms.pdf (TIA)*
+
+### 5 Process Groups
+
+**Q1 - MC:** How many process groups are there in predictive project management?
+A) 3
+B) 4
+C) 5
+D) 6
+**A:** C) 5 — Initiating, Planning, Executing, Monitoring & Controlling, Closing.
+
+**Q2 - MC:** Which process group is done to establish the scope of the project and define the course of action required to attain the objectives?
+A) Initiating
+B) Planning
+C) Executing
+D) Monitoring & Controlling
+**A:** B) Planning.
+
+**Q3 - MC:** Which process group authorizes the start of the project and assigns the project manager?
+A) Planning
+B) Executing
+C) Initiating
+D) Closing
+**A:** C) Initiating — used to define a project or phase of an existing project.
+
+**Q4 - MC:** Which process group tracks, reviews, and regulates project progress and looks for areas where changes to the plan are required?
+A) Planning
+B) Executing
+C) Closing
+D) Monitoring & Controlling
+**A:** D) Monitoring & Controlling.
+
+**Q5 - MC:** The Closing process group is done to:
+A) Define the scope of the project
+B) Complete the work defined in the project management plan
+C) Formally complete or close the project, phase, or contract
+D) Track and regulate project performance
+**A:** C) Formally complete or close the project, phase, or contract.
+
+### 49 Processes
+
+**Q6 - MC:** How many processes are there in predictive project management?
+A) 39
+B) 49
+C) 59
+D) 69
+**A:** B) 49 processes across the 5 process groups.
+
+**Q7 - MC:** Which process group has the MOST processes?
+A) Initiating
+B) Planning
+C) Executing
+D) Monitoring & Controlling
+**A:** B) Planning — with 24 processes, it has the most.
+
+**Q8 - MC:** How many processes are in the Initiating process group?
+A) 1
+B) 2
+C) 5
+D) 10
+**A:** B) 2 — Develop Project Charter and Identify Stakeholders.
+
+### ITTO (Inputs, Tools & Techniques, Outputs)
+
+**Q9 - MC:** What does ITTO stand for?
+A) Internal Tools, Techniques, and Objectives
+B) Inputs, Tools, Techniques, and Outputs
+C) Integrated Testing and Technical Operations
+D) Inputs, Tasks, Tracking, and Outcomes
+**A:** B) Inputs, Tools, Techniques, and Outputs.
+
+**Q10 - T/F:** You should memorize all 660+ ITTOs for the PMP exam.
+**A:** False. TIA advises understanding them and why they exist, not memorizing them.
+
+**Q11 - MC:** In ITTO, what is an "Input"?
+A) The end result of the process
+B) The actions used to transform raw materials
+C) The starting point and raw materials needed to begin execution
+D) The tools used to track progress
+**A:** C) The starting point and raw materials needed to begin execution. An input could be the output of a previous process.
+
+**Q12 - MC:** In ITTO, "Tools and Techniques" are best described as:
+A) The raw materials to begin a process
+B) The actions or methods used to transform inputs into outputs
+C) The end results of a process
+D) The documents created during planning
+**A:** B) The actions or methods used to transform the raw materials into the output.
+
+### Common Inputs
+
+**Q13 - MC:** Which of the following is NOT one of the 4 common inputs to most processes?
+A) Project Management Plan
+B) Enterprise Environmental Factors (EEF)
+C) Organizational Process Assets (OPA)
+D) Work Breakdown Structure (WBS)
+**A:** D) WBS. The 4 common inputs are: Project Management Plan, EEF, OPA, and Project Documents.
+
+### Enterprise Environmental Factors (EEF)
+
+**Q14 - MC:** Enterprise Environmental Factors (EEF) are best described as:
+A) Documents created during the project
+B) Things that impact the project but are not part of the project itself
+C) Historical records from past projects
+D) The project manager's personal preferences
+**A:** B) Things that impact the project but are not part of the project itself. They can enhance or constrain project management options.
+
+**Q15 - MC:** Which of the following is an EXTERNAL Enterprise Environmental Factor?
+A) Organizational culture
+B) Resource availability
+C) Government or industry standards
+D) Information technology software
+**A:** C) Government or industry standards. Other external EEFs include political climate, legal restrictions, commercial databases, and financial considerations.
+
+**Q16 - MC:** Which of the following is an INTERNAL Enterprise Environmental Factor?
+A) Legal restrictions
+B) Political climate
+C) Organizational culture
+D) Commercial databases
+**A:** C) Organizational culture. Other internal EEFs include organizational structure, risk appetite, communication channels, IT software, infrastructure, resource availability, and employee capability.
+
+### Organizational Process Assets (OPA)
+
+**Q17 - MC:** Organizational Process Assets (OPA) are:
+A) External factors that constrain the project
+B) Information, policies, procedures, documents, or knowledge bases used to help achieve objectives
+C) The project manager's personal tools
+D) Government regulations that apply to the project
+**A:** B) Information, policies, procedures, documents, or knowledge bases that help achieve objectives. They are kept in a central repository and updated throughout the project.
+
+**Q18 - MC:** Which of the following is an example of an OPA?
+A) Government regulations
+B) Political climate
+C) Historical information and lessons learned
+D) Market conditions
+**A:** C) Historical information and lessons learned. Other OPA examples include project templates, software tools, project closure guidelines, risk/change control procedures, and issue/defect management procedures.
+
+### Project Documents vs Project Management Plan
+
+**Q19 - T/F:** Project documents are part of the project management plan.
+**A:** False. Project documents are additional documents created and used throughout the 49 processes that are NOT part of the project management plan.
+
+**Q20 - MC:** How many components does the Project Management Plan have?
+A) 10
+B) 14
+C) 18
+D) 24
+**A:** C) 18 components — 14 plans and 4 baselines.
+
+**Q21 - MC:** Which of the following is a baseline in the Project Management Plan?
+A) Risk Management Plan
+B) Scope Baseline
+C) Change Log
+D) Stakeholder Register
+**A:** B) Scope Baseline. The 4 baselines are: Scope Baseline, Schedule Baseline, Cost Baseline, and Performance Measurement Baseline.
+
+**Q22 - MC:** The Scope Baseline is created during which process?
+A) Plan Scope Management
+B) Define Scope
+C) Create WBS
+D) Collect Requirements
+**A:** C) Create WBS.
+
+**Q23 - MC:** How many project documents are there?
+A) 18
+B) 24
+C) 33
+D) 49
+**A:** C) 33 project documents.
+
+### Expert Judgment
+
+**Q24 - MC:** Expert Judgment in project management refers to:
+A) The project manager making all decisions alone
+B) Using people with specialized knowledge or training in a particular process, industry, or technology
+C) Following a strict decision-making framework
+D) Relying on historical data only
+**A:** B) Using people with specialized knowledge or training — includes hiring a subject matter expert (SME) to help plan or conduct a process.
+
+### Data Flow (Gathering, Analysis, Representation, Decision Making)
+
+**Q25 - MC:** What is the correct order of the data flow in project management tools and techniques?
+A) Data Analysis → Data Gathering → Decision Making → Data Representation
+B) Data Gathering → Data Analysis → Data Representation → Decision Making
+C) Decision Making → Data Gathering → Data Analysis → Data Representation
+D) Data Representation → Data Analysis → Data Gathering → Decision Making
+**A:** B) Data Gathering → Data Analysis → Data Representation → Decision Making.
+
+---
+
 ## Adding Questions
 
 To add new PMP questions:

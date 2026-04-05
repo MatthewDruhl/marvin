@@ -1,10 +1,23 @@
 # Job Applications
 
-Last updated: 2026-03-25
+Last updated: 2026-04-02
 
 ---
 
 ## Active Applications
+
+### Conduent - App Dev & Support Engineer II
+- **Applied:** 2026-04-02
+- **Status:** Application submitted
+- **Job ID:** 20999
+- **Location:** Remote (not specified)
+- **Type:** Application Development & Support / L2 Production Support
+- **Applied via:** Direct (Conduent careers)
+- **Tech Stack:** Linux, SQL (Oracle/Sybase/MSSQL), Bash/Perl scripting, Java, Kubernetes, file transfer tools, Jenkins
+- **Requirements:** Linux, SQL, scripting, Java stack traces, batch processing, on-call rotation, documentation
+- **Notes:** Strong match. Resume tailored with auto-trim. Mandatory arbitration agreement accepted.
+- **URL:** https://careers.conduent.com/us/en/job/COJCONUS20999EXTERNALENUS
+- **Next Action:** Wait for response
 
 ### Iterable - Senior Engineering Operations TPM
 - **Applied:** 2026-03-25

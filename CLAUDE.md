@@ -186,6 +186,7 @@
 
 **Ending (`/end`):**
 - I summarize what we covered
+- Log any non-obvious decisions made during the session to `state/decisions.md`
 - Prompt for habit check (did you exercise/study/code today?)
 - Save everything to the session log
 - Update your current state
@@ -202,6 +203,7 @@ marvin/
 ├── state/                 # Your current state
 │   ├── current.md         # Priorities and open threads
 │   ├── goals.md           # Your goals
+│   ├── decisions.md       # Key decisions with context (why, not just what)
 │   ├── learning.md        # Spaced repetition learning tracker
 │   └── habits.md          # Daily habit streaks
 ├── sessions/              # Daily session logs
