@@ -16,6 +16,11 @@ g_client_secret.json
 client_secret_*.json
 .google-workspace-credentials/
 
+# Truck - large binaries
+2021Ram3500/*.zip
+2021Ram3500/Recipts/
+2021Ram3500/118707-service/
+
 # PMP
 /pmp/screenshot*
 /pmp/processed/
