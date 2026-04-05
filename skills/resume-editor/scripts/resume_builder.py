@@ -603,6 +603,9 @@ def cmd_build(args: argparse.Namespace) -> None:
     output_file = output_dir / f"Resume-MATTHEW-DRUHL-{company_clean}.docx"
 
     # Open the original resume as our base (preserves all formatting perfectly)
+    if not RESUME_PATH.exists():
+        print(f"Error: Base resume not found at {RESUME_PATH}")
+        sys.exit(1)
     doc = Document(str(RESUME_PATH))
     body = doc.element.body
 
