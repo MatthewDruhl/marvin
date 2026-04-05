@@ -1226,7 +1226,7 @@ def cmd_cover_letter(args: argparse.Namespace) -> None:
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     contact_lines = [
-        "Empower Teams & Systems | Deliver Scalable Solutions & Seamless Collaboration",
+        "Empower Teams & Systems | Deliver Scalable Solutions & Reliable Collaboration",
         "+1 603-377-1038",
         "matthewdruhl@gmail.com",
         "www.linkedin.com/in/matthew-druhl",
