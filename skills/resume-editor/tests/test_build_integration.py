@@ -70,6 +70,29 @@ def minimal_tailoring(tmp_path):
     return tailoring_file, tailoring
 
 
+class TestBuildMissingFiles:
+    """Tests for error handling when required files are missing."""
+
+    def test_missing_base_resume_exits(self, tmp_path):
+        """Should sys.exit(1) with clear message when base resume is missing."""
+        from unittest.mock import patch
+
+        tailoring_file = tmp_path / "tailoring.json"
+        tailoring_file.write_text(json.dumps({"experience": [{"company": "Test", "roles": []}]}))
+        output_dir = tmp_path / "output"
+        output_dir.mkdir()
+
+        fake_resume = tmp_path / "nonexistent.docx"
+        args = argparse.Namespace(
+            tailoring_file=str(tailoring_file),
+            output_dir=str(output_dir),
+        )
+        with patch("resume_builder.RESUME_PATH", fake_resume):
+            with pytest.raises(SystemExit) as exc_info:
+                cmd_build(args)
+            assert exc_info.value.code == 1
+
+
 class TestBuildCommand:
     """Integration tests for the build command."""
 
