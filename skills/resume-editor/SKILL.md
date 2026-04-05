@@ -278,17 +278,8 @@ Not every bullet needs all three parts, but aim for at least X + Z. Use this as 
 - Include **scale indicators** (users, data volume, services, team size) — these signal seniority
 - Quantify mentorship outcomes where possible ("2 promoted to senior within 18 months")
 
-### Matt's Voice Samples
-These are direct quotes from role mining interviews. Use them as tone calibration:
-
-- "Nobody else in the company was really doing Serverless. So I was really breaking new ground for us."
-- "I wasn't going to be part of something that continued to not improve things."
-- "I stated look at the direction we are headed."
-- "We just created a new service when asked. Tested and rolled out to general use as all were created dynamically."
-- "I had the idea to use SyncSort but the company didn't want to spend the money on it. So we developed a solution using Unix."
-- "The developer who followed me met me like 5 years later and told me how much he enjoyed installing my code years later."
-- "I always had managers or team leads come and ask me for help with something here or there."
-- "I took that and improved messaging out of the system."
+### Voice Samples
+Read voice samples at `~/Resume/data/voice-samples.md` for tone calibration before writing or rewording bullets.
 
 ### Role Mining Context
 Role mining deep dives are at `~/Resume/data/role-deep-dive-*.json`. These contain:
