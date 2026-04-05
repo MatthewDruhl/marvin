@@ -6,13 +6,13 @@
 ~/Resume/                              (data home — outside marvin repo)
 ├── data/
 │   ├── resume-data.json               Single source of truth for all content
-│   └── role-deep-dive-*.json          Role mining interview transcripts (8 files)
-├── resume-template.docx               Formatting template (unused — see note)
-├── MatthewDruhl.docx                  Base resume (actual build source)
+│   ├── role-deep-dive-*.json          Role mining interview transcripts (8 files)
+│   └── voice-samples.md              Tone calibration quotes from interviews
+├── MatthewDruhl.docx                  Base resume (preserves all formatting)
 └── applications/
     └── {Company}/                     Output per company
-        ├── Resume-MATTHEW-DRUHL-{CO}.docx
-        ├── CoverLetter-MATTHEW-DRUHL-{CO}.docx
+        ├── Resume-{PREFIX}-{CO}.docx
+        ├── CoverLetter-{PREFIX}-{CO}.docx
         ├── tailoring.json             Tailoring input for this application
         └── tailoring-trimmed.json     Post-trim version (if auto-trimmed)
 
@@ -20,8 +20,7 @@
 ├── SKILL.md                           Skill instructions + voice rules
 ├── ARCHITECTURE.md                    This file
 ├── scripts/
-│   ├── resume_builder.py              CLI tool (view, update, build, cover-letter, score, auto-trim)
-│   └── create_template.py             One-time template generator
+│   └── resume_builder.py              CLI tool (view, update, build, cover-letter, score, auto-trim)
 └── tests/
     ├── __init__.py
     ├── test_scoring.py                score_bullet, score_tailoring
