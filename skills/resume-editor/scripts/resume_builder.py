@@ -729,30 +729,7 @@ def cmd_build(args: argparse.Namespace) -> None:
     # --- Estimate lines consumed before experience section ---
     # This running total determines where to insert the Page Two header
     compact = tailoring.get("compact", False)
-    # Header area: name, contact info, blank(s), title, tagline
-    line_count = HEADER_LINES if not compact else HEADER_LINES - 1
-    summary = tailoring.get("summary", "")
-    if summary:
-        line_count += estimate_lines(summary)
-    keywords = tailoring.get("keywords", [])
-    # Keywords: grouped in lines of 3
-    line_count += -(-len(keywords) // 3) if keywords else 0
-    if not compact:
-        line_count += 1  # blank after keywords
-    line_count += 1  # Technical Skills header
-    if not compact:
-        line_count += 1  # blank after header
-    skills = tailoring.get("skills", [])
-    skills_cols = tailoring.get("skills_columns", 4)
-    line_count += -(-len(skills) // skills_cols) + 1 if skills else 0  # table rows + spacing
-    if not compact:
-        line_count += 1  # blank after table
-    line_count += 1  # Certifications header
-    certs = tailoring.get("certifications", [])
-    line_count += len(certs)  # one line per cert
-    line_count += 1  # Prof Experience header
-    if not compact:
-        line_count += 1  # blank after header
+    line_count = _estimate_pre_experience_lines(tailoring)
 
     page_break_inserted = False
 
@@ -1386,26 +1363,25 @@ def remove_lowest_bullet(tailoring: dict[str, Any], scored: list[dict[str, Any]]
     return None
 
 
-def estimate_total_lines(tailoring: dict[str, Any]) -> int:
-    """Estimate total lines a tailoring file will produce in the resume."""
-    compact = tailoring.get("compact", False)
+def _estimate_pre_experience_lines(tailoring: dict[str, Any]) -> int:
+    """Estimate lines consumed before the experience section.
 
-    # Header area
+    Shared by cmd_build (for page break placement) and estimate_total_lines
+    (for auto-trim). Single source of truth for this calculation.
+    """
+    compact = tailoring.get("compact", False)
     lines = HEADER_LINES if not compact else HEADER_LINES - 1
 
-    # Summary
     summary = tailoring.get("summary", "")
     if summary:
         lines += estimate_lines(summary)
 
-    # Keywords
     keywords = tailoring.get("keywords", [])
     lines += -(-len(keywords) // 3) if keywords else 0
     if not compact:
         lines += 1  # blank after keywords
 
-    # Technical Skills section
-    lines += 1  # header
+    lines += 1  # Technical Skills header
     if not compact:
         lines += 1  # blank after header
     skills = tailoring.get("skills", [])
@@ -1414,19 +1390,33 @@ def estimate_total_lines(tailoring: dict[str, Any]) -> int:
     if not compact:
         lines += 1  # blank after table
 
-    # Certifications
-    lines += 1  # header
+    lines += 1  # Certifications header
     certs = tailoring.get("certifications", [])
     lines += len(certs)
 
-    # Experience sections
+    lines += 1  # Prof Experience header
+    if not compact:
+        lines += 1  # blank after header
+
+    return lines
+
+
+def estimate_total_lines(tailoring: dict[str, Any]) -> int:
+    """Estimate total lines a tailoring file will produce in the resume."""
+    compact = tailoring.get("compact", False)
+    lines = _estimate_pre_experience_lines(tailoring)
+
+    # Experience sections (minus the first Prof Experience header already counted)
+    first_section = True
     for section_key in ("experience", "additional_experience"):
         exp_data = tailoring.get(section_key, [])
         if not exp_data:
             continue
-        lines += 1  # section header
-        if not compact:
-            lines += 1  # blank after header
+        if not first_section:
+            lines += 1  # section header
+            if not compact:
+                lines += 1  # blank after header
+        first_section = False
         for comp in exp_data:
             lines += 1  # company header
             for role in comp.get("roles", []):
