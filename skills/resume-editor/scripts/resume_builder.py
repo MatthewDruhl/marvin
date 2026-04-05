@@ -66,6 +66,22 @@ def load_tailoring(path: str) -> dict[str, Any]:
     return json.loads(p.read_text())
 
 
+def get_header() -> dict[str, str]:
+    """Load the header (contact info) from resume-data.json."""
+    data = load_data()
+    return data["header"]
+
+
+def get_filename_prefix() -> str:
+    """Build the resume/cover letter filename prefix from resume-data.json.
+
+    e.g. 'MATTHEW-DRUHL' from header.name 'Matthew Druhl'
+    """
+    header = get_header()
+    name = header.get("name", "Resume")
+    return name.upper().replace(" ", "-")
+
+
 # ---------------------------------------------------------------------------
 # VIEW command
 # ---------------------------------------------------------------------------
@@ -597,9 +613,10 @@ def cmd_build(args: argparse.Namespace) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Determine output filename
+    prefix = get_filename_prefix()
     company = tailoring.get("experience", [{}])[0].get("company", "Company")
     company_clean = company.replace(" ", "")
-    output_file = output_dir / f"Resume-MATTHEW-DRUHL-{company_clean}.docx"
+    output_file = output_dir / f"Resume-{prefix}-{company_clean}.docx"
 
     # Open the original resume as our base (preserves all formatting perfectly)
     if not RESUME_PATH.exists():
@@ -1212,10 +1229,14 @@ def cmd_cover_letter(args: argparse.Namespace) -> None:
         run.font.size = Pt(11)
         run.font.name = "Calibri"
 
-    # Signature block
+    # Signature block — pull contact info from resume-data.json
+    header = get_header()
+    data = load_data()
+    tagline = data.get("tagline", "")
+
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    run = p.add_run("Matthew Druhl")
+    run = p.add_run(header.get("name", ""))
     run.bold = True
     run.font.size = Pt(11)
     run.font.name = "Calibri"
@@ -1223,11 +1244,12 @@ def cmd_cover_letter(args: argparse.Namespace) -> None:
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     contact_lines = [
-        "Empower Teams & Systems | Deliver Scalable Solutions & Reliable Collaboration",
-        "+1 603-377-1038",
-        "matthewdruhl@gmail.com",
-        "www.linkedin.com/in/matthew-druhl",
+        tagline,
+        header.get("phone", ""),
+        header.get("email", ""),
+        header.get("linkedin", ""),
     ]
+    contact_lines = [line for line in contact_lines if line]  # skip empty
     for i, line in enumerate(contact_lines):
         run = p.add_run(line)
         run.font.size = Pt(11)
@@ -1236,8 +1258,9 @@ def cmd_cover_letter(args: argparse.Namespace) -> None:
             p.add_run("\n").font.size = Pt(11)
 
     # Save
+    prefix = get_filename_prefix()
     company_clean = company.replace(" ", "")
-    output_file = output_dir / f"CoverLetter-MATTHEW-DRUHL-{company_clean}.docx"
+    output_file = output_dir / f"CoverLetter-{prefix}-{company_clean}.docx"
     doc.save(str(output_file))
     print(f"Cover letter created: {output_file}")
 
@@ -1516,28 +1539,29 @@ def cmd_auto_trim(args: argparse.Namespace) -> None:
     cmd_build(build_args)
     temp_tailoring_path.unlink(missing_ok=True)
 
+    prefix = get_filename_prefix()
     company = tailoring.get("experience", [{}])[0].get("company", "Company")
     company_clean = company.replace(" ", "")
-    output_file = output_dir / f"Resume-MATTHEW-DRUHL-{company_clean}.docx"
+    output_file = output_dir / f"Resume-{prefix}-{company_clean}.docx"
 
     # Rename output file if --company provided
     company_name = getattr(args, "company", "") or ""
+    glob_pattern = f"Resume-{prefix}-*.docx"
     if company_name:
-        # Find the built file and rename it
         docx_files = sorted(
-            output_dir.glob("Resume-MATTHEW-DRUHL-*.docx"),
+            output_dir.glob(glob_pattern),
             key=lambda p: p.stat().st_mtime,
             reverse=True,
         )
         if docx_files:
             output_file = docx_files[0]
-            new_name = output_dir / f"Resume-MATTHEW-DRUHL-{company_name.upper().replace(' ', '')}.docx"
+            new_name = output_dir / f"Resume-{prefix}-{company_name.upper().replace(' ', '')}.docx"
             if output_file != new_name:
                 output_file.rename(new_name)
                 output_file = new_name
     else:
         docx_files = sorted(
-            output_dir.glob("Resume-MATTHEW-DRUHL-*.docx"),
+            output_dir.glob(glob_pattern),
             key=lambda p: p.stat().st_mtime,
             reverse=True,
         )
