@@ -50,17 +50,25 @@ class TestScoreBullet:
     # These tests document the CURRENT behavior. When we fix the keyword
     # matching to use word boundaries, flip expected values.
 
-    def test_sql_matches_mysql_substring(self):
-        """BUG: 'SQL' currently matches inside 'MySQL' via substring."""
+    def test_sql_does_not_match_mysql(self):
+        """'SQL' should not match inside 'MySQL' (word-boundary matching)."""
         score = score_bullet("Configured MySQL databases", ["SQL"])
-        # This SHOULD be 0.0 with word-boundary matching, but currently is 1.0
-        assert score == 1.0, "Expected substring match (known bug)"
+        assert score == 0.0
 
-    def test_java_matches_javascript_substring(self):
-        """BUG: 'Java' currently matches inside 'JavaScript' via substring."""
+    def test_java_does_not_match_javascript(self):
+        """'Java' should not match inside 'JavaScript' (word-boundary matching)."""
         score = score_bullet("Built JavaScript frontends", ["Java"])
-        # This SHOULD be 0.0 with word-boundary matching, but currently is 1.0
-        assert score == 1.0, "Expected substring match (known bug)"
+        assert score == 0.0
+
+    def test_sql_matches_standalone_sql(self):
+        """'SQL' should still match when it appears as a standalone word."""
+        score = score_bullet("Wrote complex SQL queries for reporting", ["SQL"])
+        assert score == 1.0
+
+    def test_java_matches_standalone_java(self):
+        """'Java' should still match when it appears as a standalone word."""
+        score = score_bullet("Built Java microservices with Spring Boot", ["Java"])
+        assert score == 1.0
 
     def test_multiple_keywords_partial(self):
         """Score reflects fraction of keywords matched."""
