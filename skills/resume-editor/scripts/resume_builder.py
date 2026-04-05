@@ -34,7 +34,6 @@ from lxml import etree
 SCRIPT_DIR = Path(__file__).parent
 SKILL_DIR = SCRIPT_DIR.parent
 DATA_FILE = Path.home() / "Resume" / "data" / "resume-data.json"
-TEMPLATE_FILE = Path.home() / "Resume" / "resume-template.docx"
 RESUME_PATH = Path.home() / "Resume" / "MatthewDruhl.docx"
 
 WML_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
