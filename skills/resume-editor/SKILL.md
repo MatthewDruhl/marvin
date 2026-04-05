@@ -105,13 +105,13 @@ Wait for user approval before proceeding.
   "certifications": ["cert1, Org (Platform), Date"],
   "experience": [
     {
-      "company": "PEARSON",
-      "location": "Iowa City, IA",
+      "company": "COMPANY_NAME",
+      "location": "City, ST",
       "roles": [
         {
-          "title": "Senior SRE",
+          "title": "Role Title",
           "type": "Remote",
-          "dates": "2022 - 2025",
+          "dates": "YYYY - YYYY",
           "bullets": ["Reworded bullet 1", "Reworded bullet 2"]
         }
       ]
@@ -119,20 +119,20 @@ Wait for user approval before proceeding.
   ],
   "additional_experience": [...],
   "military": {
-    "branch": "ARMY NATIONAL GUARD",
-    "location": "Iowa City, IA",
-    "role": "Medical Specialist",
-    "start": "Nov 1993",
-    "end": "Nov 2004",
+    "branch": "BRANCH_NAME",
+    "location": "City, ST",
+    "role": "Role Title",
+    "start": "Mon YYYY",
+    "end": "Mon YYYY",
     "bullets": ["Bullet text"]
   },
   "education": [
     {
-      "degree": "Associate of Science (AS)",
-      "field": "Computer Science",
-      "school": "Indian Hills Community College",
-      "location": "Ottumwa, IA",
-      "years": "1995 - 1997"
+      "degree": "Degree",
+      "field": "Field of Study",
+      "school": "School Name",
+      "location": "City, ST",
+      "years": "YYYY - YYYY"
     }
   ]
 }
