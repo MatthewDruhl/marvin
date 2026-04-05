@@ -856,7 +856,6 @@ def cmd_build(args: argparse.Namespace) -> None:
             role_template = company_template
 
         # Add blank paragraph after section header (skip in compact mode)
-        compact = tailoring.get("compact", False)
         if not compact and (normal_template is not None or company_template is not None):
             tmpl = company_template if company_template is not None else normal_template
             blank = create_blank_paragraph(tmpl)
