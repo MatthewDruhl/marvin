@@ -961,11 +961,6 @@ def cmd_build(args: argparse.Namespace) -> None:
             to_remove = []
             in_section = False
             for j, child in enumerate(children):
-                if j == mil_idx:
-                    # Need to re-find since indices may have shifted
-                    if get_elem_text(child).strip() == "Military Service":
-                        in_section = True
-                        continue
                 if get_elem_text(child).strip() == "Military Service":
                     in_section = True
                     continue
