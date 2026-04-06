@@ -5,9 +5,6 @@ Does NOT require ~/Resume/MatthewDruhl.docx to exist — all tests use tmp_path
 fixtures or mocks.
 """
 
-import json
-import os
-import shutil
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -28,13 +25,8 @@ from update_resume import (
     cmd_scan_certs,
     cmd_show_certs,
     cmd_show_skills,
-    find_section_headers,
-    find_section_range,
-    get_paragraph_text,
-    is_section_header,
     safe_save,
 )
-
 
 # ---------------------------------------------------------------------------
 # Path constants
