@@ -16,7 +16,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
-from resume_builder import RESUME_PATH, DATA_FILE, cmd_build, cmd_auto_trim
+from resume_builder import DATA_FILE, RESUME_PATH, cmd_auto_trim, cmd_build
 
 # Skip all tests in this module if required files are missing
 pytestmark = pytest.mark.skipif(

@@ -9,6 +9,7 @@ import csv
 import os
 from datetime import datetime
 from pathlib import Path
+
 from PyPDF2 import PdfReader, PdfWriter
 from PyPDF2.generic import TextStringObject
 
