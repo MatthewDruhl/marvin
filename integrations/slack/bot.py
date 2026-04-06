@@ -32,6 +32,25 @@ load_dotenv(Path.home() / "marvin" / ".env")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger("marvin-slack")
 
+def _load_allowed_users() -> set[str]:
+    """Load allowed Slack user IDs from ALLOWED_SLACK_USERS env var.
+    Returns empty set if not configured (fail-closed: no one allowed)."""
+    raw = os.environ.get("ALLOWED_SLACK_USERS", "")
+    if not raw.strip():
+        log.warning("ALLOWED_SLACK_USERS not set — all users will be denied")
+        return set()
+    users = {u.strip() for u in raw.split(",") if u.strip()}
+    log.info(f"Access control: {len(users)} user(s) allowed")
+    return users
+
+ALLOWED_USERS = _load_allowed_users()
+
+
+def _is_authorized(user_id: str) -> bool:
+    """Check if a Slack user is authorized to use the bot."""
+    return user_id in ALLOWED_USERS
+
+
 MARVIN_DIR = str(Path.home() / "marvin")
 CLAUDE_TIMEOUT = 120  # seconds
 
@@ -244,6 +263,11 @@ def handle_mention(event, say, client):
         say(text="What can I help with?", thread_ts=event.get("thread_ts", event["ts"]))
         return
 
+    if not _is_authorized(event.get("user", "")):
+        say(text="Sorry, I'm not configured to respond to you. Contact the bot admin.", thread_ts=event.get("thread_ts", event["ts"]))
+        log.warning(f"Unauthorized mention from {event.get('user')}")
+        return
+
     thread_ts = event.get("thread_ts", event["ts"])
     thread_key = f"{event['channel']}:{thread_ts}"
 
@@ -286,6 +310,11 @@ def handle_dm(event, say, client):
         return
 
     thread_ts = event.get("thread_ts", event["ts"])
+
+    if not _is_authorized(event.get("user", "")):
+        say(text="Sorry, I'm not configured to respond to you. Contact the bot admin.", thread_ts=thread_ts)
+        log.warning(f"Unauthorized DM from {event.get('user')}")
+        return
     # DMs: use channel ID alone so all messages share one session
     # (users don't thread in DMs — each msg gets a unique ts)
     thread_key = event["channel"]
