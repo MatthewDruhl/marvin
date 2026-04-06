@@ -255,6 +255,6 @@ if __name__ == '__main__':
     else:
         output_pdf = csv_file.replace('.csv', '-filled.pdf')
 
-    template_pdf = '/Users/matthewdruhl/marvin/content/jobs/TWC/work-search-log-blank.pdf'
+    template_pdf = str(Path(__file__).parent / 'work-search-log-blank.pdf')
 
     fill_twc_pdf(csv_file, template_pdf, output_pdf)
