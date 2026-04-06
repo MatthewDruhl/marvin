@@ -157,7 +157,9 @@ def ask_claude(prompt: str, thread_key: str) -> str:
 
                 output = proc.stdout.strip()
                 if not output:
-                    return proc.stderr.strip() or "No response from Claude."
+                    if proc.stderr.strip():
+                        log.error(f"Claude stderr: {proc.stderr.strip()}")
+                    return "Something went wrong. Try again or say 'reset' to start a new session."
 
                 # Check for session conflict
                 if "Session ID" in output and "is already in use" in output:
@@ -254,8 +256,8 @@ def handle_mention(event, say, client):
     # Add eyes reaction to show we're working
     try:
         client.reactions_add(channel=event["channel"], timestamp=event["ts"], name="eyes")
-    except Exception:
-        pass
+    except Exception as e:
+        log.debug(f"Reaction failed: {e}")
 
     log.info(f"Mention from {event.get('user')}: {text[:80]} [thread={thread_key[:20]}]")
     response = ask_claude(text, thread_key)
@@ -265,8 +267,8 @@ def handle_mention(event, say, client):
     try:
         client.reactions_remove(channel=event["channel"], timestamp=event["ts"], name="eyes")
         client.reactions_add(channel=event["channel"], timestamp=event["ts"], name="white_check_mark")
-    except Exception:
-        pass
+    except Exception as e:
+        log.debug(f"Reaction failed: {e}")
 
 
 @app.event("message")
@@ -296,8 +298,8 @@ def handle_dm(event, say, client):
 
     try:
         client.reactions_add(channel=event["channel"], timestamp=event["ts"], name="eyes")
-    except Exception:
-        pass
+    except Exception as e:
+        log.debug(f"Reaction failed: {e}")
 
     log.info(f"DM from {event.get('user')}: {text[:80]} [session_key={thread_key}]")
     response = ask_claude(text, thread_key)
@@ -306,8 +308,8 @@ def handle_dm(event, say, client):
     try:
         client.reactions_remove(channel=event["channel"], timestamp=event["ts"], name="eyes")
         client.reactions_add(channel=event["channel"], timestamp=event["ts"], name="white_check_mark")
-    except Exception:
-        pass
+    except Exception as e:
+        log.debug(f"Reaction failed: {e}")
 
 
 if __name__ == "__main__":
