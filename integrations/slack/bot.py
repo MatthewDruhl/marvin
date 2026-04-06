@@ -254,8 +254,8 @@ def handle_mention(event, say, client):
     # Add eyes reaction to show we're working
     try:
         client.reactions_add(channel=event["channel"], timestamp=event["ts"], name="eyes")
-    except Exception:
-        pass
+    except Exception as e:
+        log.debug(f"Reaction failed: {e}")
 
     log.info(f"Mention from {event.get('user')}: {text[:80]} [thread={thread_key[:20]}]")
     response = ask_claude(text, thread_key)
@@ -265,8 +265,8 @@ def handle_mention(event, say, client):
     try:
         client.reactions_remove(channel=event["channel"], timestamp=event["ts"], name="eyes")
         client.reactions_add(channel=event["channel"], timestamp=event["ts"], name="white_check_mark")
-    except Exception:
-        pass
+    except Exception as e:
+        log.debug(f"Reaction failed: {e}")
 
 
 @app.event("message")
@@ -296,8 +296,8 @@ def handle_dm(event, say, client):
 
     try:
         client.reactions_add(channel=event["channel"], timestamp=event["ts"], name="eyes")
-    except Exception:
-        pass
+    except Exception as e:
+        log.debug(f"Reaction failed: {e}")
 
     log.info(f"DM from {event.get('user')}: {text[:80]} [session_key={thread_key}]")
     response = ask_claude(text, thread_key)
@@ -306,8 +306,8 @@ def handle_dm(event, say, client):
     try:
         client.reactions_remove(channel=event["channel"], timestamp=event["ts"], name="eyes")
         client.reactions_add(channel=event["channel"], timestamp=event["ts"], name="white_check_mark")
-    except Exception:
-        pass
+    except Exception as e:
+        log.debug(f"Reaction failed: {e}")
 
 
 if __name__ == "__main__":
