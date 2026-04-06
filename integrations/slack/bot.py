@@ -325,6 +325,8 @@ def handle_mention(event, say, client):
         log.debug(f"Reaction failed: {e}")
 
     log.info(f"Mention from {event.get('user')}: {text[:80]} [thread={thread_key[:20]}]")
+    global _consecutive_errors
+    _consecutive_errors = 0
     response = ask_claude(text, thread_key)
     send_response(say, event["channel"], thread_ts, response)
 
@@ -377,6 +379,8 @@ def handle_dm(event, say, client):
         log.debug(f"Reaction failed: {e}")
 
     log.info(f"DM from {event.get('user')}: {text[:80]} [session_key={thread_key}]")
+    global _consecutive_errors
+    _consecutive_errors = 0
     response = ask_claude(text, thread_key)
     send_response(say, event["channel"], thread_ts, response)
 
@@ -385,6 +389,21 @@ def handle_dm(event, say, client):
         client.reactions_add(channel=event["channel"], timestamp=event["ts"], name="white_check_mark")
     except Exception as e:
         log.debug(f"Reaction failed: {e}")
+
+
+# Track consecutive connection errors for restart logic
+_consecutive_errors = 0
+MAX_CONSECUTIVE_ERRORS = 5
+
+@app.error
+def handle_errors(error):
+    """Handle Slack connection errors."""
+    global _consecutive_errors
+    _consecutive_errors += 1
+    log.error(f"Slack error ({_consecutive_errors}/{MAX_CONSECUTIVE_ERRORS}): {error}")
+    if _consecutive_errors >= MAX_CONSECUTIVE_ERRORS:
+        log.error("Too many consecutive errors — exiting for launchd restart")
+        os._exit(1)  # Hard exit so launchd KeepAlive restarts us
 
 
 if __name__ == "__main__":
