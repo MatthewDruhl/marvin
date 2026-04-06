@@ -1,0 +1,31 @@
+# Job Applications
+
+Last updated: YYYY-MM-DD
+
+---
+
+## Active Applications
+
+### Company Name - Job Title
+- **Applied:** YYYY-MM-DD
+- **Status:** Application submitted
+- **Location:** Remote / City, ST
+- **Salary:** $X - $Y
+- **Type:** Role type
+- **Applied via:** Direct / LinkedIn / Greenhouse
+- **URL:** https://...
+- **Tech Stack:** Languages, tools, frameworks
+- **Next Action:** Wait for response
+
+---
+
+## Recent Rejections
+
+### Company Name - Job Title
+- **Applied:** YYYY-MM-DD
+- **Rejected:** YYYY-MM-DD
+- **Reason:** Reason given
+
+---
+
+*For TWC reporting, see: content/jobs/TWC/*
