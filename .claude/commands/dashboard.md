@@ -17,7 +17,7 @@ Read these files:
 - `state/goals.md` — Goal progress
 - `content/dnd-project.md` — D&D project details
 - `content/recipe-app.md` — Recipe app details
-- `content/jobs/applications.md` — Job search activity
+- `~/Resume/jobs/applications.md` — Job search activity
 
 ### 3. Scan Session Logs for Activity
 Read recent session logs from `sessions/` to determine:
