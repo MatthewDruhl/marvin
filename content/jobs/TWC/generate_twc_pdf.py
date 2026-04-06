@@ -5,11 +5,27 @@ Matches the EXACT format of the official TWC form - landscape orientation.
 """
 
 import csv
+import os
 from datetime import datetime
+from pathlib import Path
 from reportlab.lib.pagesizes import letter, landscape
 from reportlab.lib.units import inch
 from reportlab.pdfgen import canvas
 from reportlab.lib import colors
+
+
+def load_env():
+    """Load variables from .env file."""
+    env_path = Path(__file__).resolve().parents[3] / ".env"
+    if not env_path.exists():
+        return
+    with open(env_path) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.split("=", 1)
+            os.environ.setdefault(key.strip(), value.strip())
 
 
 def draw_checkbox(c, x, y, checked=False, size=10):
@@ -79,7 +95,7 @@ def generate_twc_pdf(csv_file, output_pdf):
     c.setFillColorRGB(0, 0, 0)  # Reset to black
 
     c.setFont("Helvetica", 10)
-    c.drawString(name_x + 0.05 * inch, y, "Matthew Druhl")
+    c.drawString(name_x + 0.05 * inch, y, os.environ.get('TWC_CLAIMANT_NAME', ''))
 
     # Week of - right side
     week_label_x = name_x + name_width + 0.5 * inch
@@ -103,11 +119,11 @@ def generate_twc_pdf(csv_file, output_pdf):
 
     ssn_x = left_margin + 1.1 * inch
     c.setFont("Helvetica", 10)
-    c.drawString(ssn_x, y, "483")
+    c.drawString(ssn_x, y, os.environ.get('TWC_SSN_FIRST3', ''))
     c.drawString(ssn_x + 0.25 * inch, y, "-")
-    c.drawString(ssn_x + 0.35 * inch, y, "08")
+    c.drawString(ssn_x + 0.35 * inch, y, os.environ.get('TWC_SSN_MID2', ''))
     c.drawString(ssn_x + 0.55 * inch, y, "-")
-    c.drawString(ssn_x + 0.65 * inch, y, "5631")
+    c.drawString(ssn_x + 0.65 * inch, y, os.environ.get('TWC_SSN_LAST4', ''))
 
     # Number of Required Searches - right side
     c.setFont("Helvetica-Bold", 10)
@@ -556,6 +572,8 @@ def draw_empty_row(c, y_top, col1_x, col2_x, col3_x, col4_x,
 
 if __name__ == '__main__':
     import sys
+
+    load_env()
 
     if len(sys.argv) < 2:
         print("Usage: python3 generate_twc_pdf.py <csv_file> [output_pdf]")
