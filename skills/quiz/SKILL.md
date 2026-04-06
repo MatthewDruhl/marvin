@@ -49,6 +49,11 @@ Test your knowledge on topics you're learning with targeted questions.
 5. Don't reveal the answer before the user attempts it
 6. **Every question MUST have a correct answer.** For "Spot the Bug" questions, always verify there is an actual bug in the code before presenting it. Never show working code and ask "what's wrong?" — that wastes time and erodes trust.
 
+**Answer verification (Issue #36):**
+- For Python "Predict the Output" and "Spot the Bug" questions: mentally execute the code step by step before presenting. Verify your expected answer is correct.
+- For generated questions (not from the question bank): double-check the answer by reasoning through the code again before presenting the question. If uncertain, prefer a question bank question instead.
+- If the user says "bad question" or "that answer is wrong": immediately re-verify. If the question was indeed wrong, acknowledge the error, discard the question (do not count it), and apologize. Log the bad question in the session notes so it can be removed from the bank.
+
 ### Step 3: Evaluate Answer
 For each answer:
 1. Compare to expected answer/key concepts
