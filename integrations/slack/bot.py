@@ -76,6 +76,22 @@ _locks_lock = threading.Lock()
 # Maps thread_key -> session_id (populated after first Claude call or by reset)
 _thread_sessions: dict[str, str] = {}
 
+# Track when each session was last used for TTL cleanup
+_session_last_used: dict[str, float] = {}
+SESSION_TTL = 28800  # 8 hours in seconds
+
+
+def _cleanup_stale_sessions():
+    """Remove session data older than SESSION_TTL."""
+    now = time.time()
+    stale_keys = [k for k, v in _session_last_used.items() if now - v > SESSION_TTL]
+    for key in stale_keys:
+        _thread_sessions.pop(key, None)
+        _session_locks.pop(key, None)
+        _session_last_used.pop(key, None)
+    if stale_keys:
+        log.info(f"Cleaned up {len(stale_keys)} stale session(s)")
+
 # Commands the bot handles directly (not sent to Claude)
 RESET_PATTERNS = re.compile(r"^(reset|reset session|new session|release session)$", re.IGNORECASE)
 
@@ -172,6 +188,9 @@ def _run_claude(prompt: str, *, resume_session: str | None = None, output_json: 
 
 def ask_claude(prompt: str, thread_key: str) -> str:
     """Send a message to Claude, continuing the thread's session if one exists."""
+    _cleanup_stale_sessions()
+    _session_last_used[thread_key] = time.time()
+
     existing_session = _thread_sessions.get(thread_key)
 
     # Use a lock based on thread_key to prevent concurrent calls
@@ -306,6 +325,8 @@ def handle_mention(event, say, client):
         log.debug(f"Reaction failed: {e}")
 
     log.info(f"Mention from {event.get('user')}: {text[:80]} [thread={thread_key[:20]}]")
+    global _consecutive_errors
+    _consecutive_errors = 0
     response = ask_claude(text, thread_key)
     send_response(say, event["channel"], thread_ts, response)
 
@@ -358,6 +379,8 @@ def handle_dm(event, say, client):
         log.debug(f"Reaction failed: {e}")
 
     log.info(f"DM from {event.get('user')}: {text[:80]} [session_key={thread_key}]")
+    global _consecutive_errors
+    _consecutive_errors = 0
     response = ask_claude(text, thread_key)
     send_response(say, event["channel"], thread_ts, response)
 
@@ -366,6 +389,21 @@ def handle_dm(event, say, client):
         client.reactions_add(channel=event["channel"], timestamp=event["ts"], name="white_check_mark")
     except Exception as e:
         log.debug(f"Reaction failed: {e}")
+
+
+# Track consecutive connection errors for restart logic
+_consecutive_errors = 0
+MAX_CONSECUTIVE_ERRORS = 5
+
+@app.error
+def handle_errors(error):
+    """Handle Slack connection errors."""
+    global _consecutive_errors
+    _consecutive_errors += 1
+    log.error(f"Slack error ({_consecutive_errors}/{MAX_CONSECUTIVE_ERRORS}): {error}")
+    if _consecutive_errors >= MAX_CONSECUTIVE_ERRORS:
+        log.error("Too many consecutive errors — exiting for launchd restart")
+        os._exit(1)  # Hard exit so launchd KeepAlive restarts us
 
 
 if __name__ == "__main__":
