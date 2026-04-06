@@ -5,14 +5,14 @@ Last updated: 2026-02-07
 ---
 
 ## D&D Campaign MCP (COMPLETE)
-- **Location:** `/Users/matthewdruhl/Code/AI/DnDProject/dnd-campaign-mcp`
+- **Location:** `~/Code/AI/DnDProject/dnd-campaign-mcp`
 - **Status:** Built and connected to Claude.ai Desktop
 - **Tools:** Character management (HP, XP) + Inventory (items, wealth)
 - **Features:** Multi-character support with active character system
 - **Next:** Test in live session, consider mobile sync pattern
 
 ## D&D Character Sheet Web App (Phase 3 COMPLETE)
-- **Location:** `/Users/matthewdruhl/Code/AI/DnDProject/dnd-character-sheet`
+- **Location:** `~/Code/AI/DnDProject/dnd-character-sheet`
 - **Status:** Phase 3 COMPLETE - Backend API functional and tested
 - **Branch:** feature/phase3-backend-api
 - **Tech Stack:** React (Vite) + FastAPI + PostgreSQL (Docker)
@@ -30,7 +30,7 @@ Last updated: 2026-02-07
 - **Learning approach:** Senior dev -> junior dev teaching style, Matt writes code with guidance
 
 ## DND Combat Engine (EXISTING)
-- **Location:** `/Users/matthewdruhl/Code/AI/DnDProject/dnd-combat-engine`
+- **Location:** `~/Code/AI/DnDProject/dnd-combat-engine`
 - **Status:** 65 tests passing, core mechanics complete
 - **Tech:** Python, pytest, TDD approach
 - **Note:** Could integrate with MCP server in future, kept separate from web app
