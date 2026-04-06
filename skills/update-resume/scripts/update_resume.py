@@ -17,7 +17,6 @@ Commands:
 import argparse
 import copy
 import json
-import os
 import stat
 import sys
 from datetime import datetime
@@ -255,7 +254,6 @@ def cmd_add_certs(args):
     # Filter out certs already on resume
     certs_to_add = []
     for cert in new_certs:
-        cert_text = f"{cert['name']}, {cert['issuer']}, {cert['date']}".lower()
         # Check if cert name already appears in any existing cert text
         name_lower = cert["name"].lower()
         if any(name_lower in existing for existing in existing_cert_texts):
@@ -534,10 +532,6 @@ def _restructure_skills_table(doc):
 
     # Get the table XML element
     tbl = table._tbl
-
-    # Store the first row's cell formatting for reference
-    first_row = table.rows[0]
-    cell_template = first_row.cells[0]._tc
 
     # Get table properties
     tblPr = tbl.find(qn("w:tblPr"))
