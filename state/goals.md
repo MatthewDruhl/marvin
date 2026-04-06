@@ -19,7 +19,7 @@ Last updated: 2026-04-02
 ## Personal Goals
 
 - Exercise regularly
-- Work on DND coding project (located at `/Users/matthewdruhl/Code/AI/DnDProject`)
+- Work on DND coding project (located at `~/Code/AI/DnDProject`)
 
 ---
 
