@@ -5,7 +5,6 @@ Tests input validation and authorization without importing bot.py
 """
 
 import os
-import pytest
 
 
 class TestValidateInput:

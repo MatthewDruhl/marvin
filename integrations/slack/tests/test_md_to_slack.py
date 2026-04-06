@@ -5,8 +5,6 @@ has runtime dependencies (slack_bolt, dotenv) that may not be available
 in the test environment.
 """
 
-import importlib.util
-import sys
 import types
 from pathlib import Path
 

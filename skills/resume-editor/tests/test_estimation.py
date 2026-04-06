@@ -8,7 +8,6 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 from resume_builder import (
     CHARS_PER_LINE,
     HEADER_LINES,
-    LINES_PER_PAGE,
     estimate_lines,
     estimate_pages,
     estimate_total_lines,

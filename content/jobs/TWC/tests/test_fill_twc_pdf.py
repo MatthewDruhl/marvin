@@ -3,11 +3,9 @@
 import csv
 import os
 import tempfile
-from datetime import datetime
 from pathlib import Path
 from unittest.mock import MagicMock, mock_open, patch
 
-import pytest
 
 import sys
 
