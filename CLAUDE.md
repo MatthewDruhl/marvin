@@ -27,7 +27,7 @@
 6. **Document everything** - Background agent outputs, designs, and research go in `content/` with descriptive names for future reference
 
 ### File Permissions
-**MARVIN workspace autonomy:** Full permission to read, write, edit, and create files within `/Users/matthewdruhl/marvin/` without asking for confirmation. This includes:
+**MARVIN workspace autonomy:** Full permission to read, write, edit, and create files within `~/marvin/` without asking for confirmation. This includes:
 - `state/` files (current.md, goals.md, todos.md)
 - `sessions/` daily logs
 - `content/` files (job tracking, notes, etc.)
