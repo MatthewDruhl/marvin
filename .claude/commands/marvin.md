@@ -21,7 +21,7 @@ Run `date +%Y-%m-%d` to get today's date. Store as TODAY.
 
 ### 3. Check Gmail for Job Responses
 Automatically search Gmail for responses to active job applications:
-- Read `content/jobs/applications.md` for active applications
+- Read `~/Resume/jobs/applications.md` for active applications
 - Search Gmail for emails from those companies
 - Search for keywords: "application", "interview", "thank you for applying"
 - If responses found, include in briefing with offer to update statuses

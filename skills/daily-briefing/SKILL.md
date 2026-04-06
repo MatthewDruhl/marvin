@@ -86,7 +86,7 @@ From `state/habits.md`:
 - Flag if any habit streak is about to break (not logged yesterday)
 
 ### Step 8: Application Follow-Up Reminders
-From `content/jobs/applications.md`:
+From `~/Resume/jobs/applications.md`:
 - Calculate days since each active application was submitted
 - Surface applications pending 7+ days with no status change:
   ```

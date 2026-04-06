@@ -36,13 +36,13 @@ Prepare for interviews with targeted practice and research.
 
 ### Step 2: Company Prep
 When preparing for a specific company:
-1. Read the application from `content/jobs/applications.md`
+1. Read the application from `~/Resume/jobs/applications.md`
 2. Research the company (tech stack, culture, recent news)
 3. Generate targeted questions:
    - 3-5 behavioral questions relevant to the role
    - 3-5 technical questions matching the tech stack
    - 2-3 system design questions at the right level
-4. Create prep guide in `content/jobs/interview-prep/company-research/{company}.md`
+4. Create prep guide in `~/Resume/jobs/interview-prep/company-research/{company}.md`
 
 ### Step 3: Mock Interview
 When running a mock session:
@@ -51,7 +51,7 @@ When running a mock session:
 3. Let user answer
 4. Provide constructive feedback using STAR framework
 5. Rate each answer: Strong / Okay / Needs Work
-6. Log session to `content/jobs/interview-prep/mock-sessions.md`
+6. Log session to `~/Resume/jobs/interview-prep/mock-sessions.md`
 
 ### Step 4: Auto-Prep (Gmail Integration)
 When an interview invite is detected:

@@ -14,6 +14,8 @@
 
 **If setup is needed:** Read `.marvin/onboarding.md` and follow that guide instead of the normal `/marvin` flow.
 
+**After cloning:** Run `git config core.hooksPath .hooks` to activate the pre-commit linter (ruff). This only needs to be done once per clone.
+
 ---
 
 ## How MARVIN Works
@@ -42,13 +44,16 @@
 
 ## Job Tracking Workflow
 
-**Location:** All job tracking files are in `content/jobs/`
+**Location:** Job tracking data is split between two locations:
+- **`~/Resume/jobs/`** — Applications, opportunities, interview prep (personal data, outside repo)
+- **`content/jobs/`** — Contacts, search strings, TWC reporting (in repo, TWC CSVs gitignored)
 
 ### Files
-- **applications.md** - Active applications with current status (markdown, human-readable)
-- **opportunities.md** - Roles to research and apply for
-- **contacts.md** - Recruiter conversations and follow-ups
-- **TWC/** - Official Texas Workforce Commission reporting (CSV format)
+- **`~/Resume/jobs/applications.md`** - Active applications with current status
+- **`~/Resume/jobs/opportunities.md`** - Roles to research and apply for
+- **`~/Resume/jobs/interview-prep/`** - Question banks, mock sessions, company research
+- **`content/jobs/contacts.md`** - Recruiter conversations and follow-ups
+- **`content/jobs/TWC/`** - Official Texas Workforce Commission reporting (CSV format, gitignored)
   - `job-application-tracker.csv` - Master list of all applications
   - `work-search-week-*.csv` - Weekly activity logs (4 required per week)
 
@@ -61,7 +66,7 @@
 **User says:** "applied for [Job Title] at [Company] [URL]" or similar
 
 **I do:**
-1. Add to `applications.md` with status "Application submitted"
+1. Add to `~/Resume/jobs/applications.md` with status "Application submitted"
 2. Add to `TWC/job-application-tracker.csv` for official reporting
 3. Add to current week's `work-search-week-*.csv` (create new week file if needed)
 4. If optional details weren't provided, try fetching from URL to fill in salary, location, tech stack
@@ -83,7 +88,7 @@
 **When:** At every `/marvin` session start (automatic)
 
 **I do:**
-1. Search Gmail for emails from companies in `applications.md`
+1. Search Gmail for emails from companies in `~/Resume/jobs/applications.md`
 2. Search for keywords: "application", "interview", "thank you for applying"
 3. Report any new responses
 4. Ask if user wants to update application statuses
@@ -223,10 +228,8 @@ marvin/
 ├── reports/               # Weekly reports and analytics
 ├── content/               # Your content and notes
 │   ├── learning-journal.md # Code learning journal (TIL entries)
-│   └── jobs/              # Job tracking
-│       ├── applications.md
-│       ├── contacts.md    # Networking CRM
-│       └── interview-prep/ # Question bank and mock sessions
+│   └── jobs/              # Job tracking (contacts, search strings, TWC)
+│       └── contacts.md    # Networking CRM
 ├── skills/                # Capabilities (add your own!)
 └── .claude/               # Slash commands
 ```

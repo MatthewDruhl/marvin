@@ -31,5 +31,14 @@ client_secret_*.json
 /pmp/NotStudied/
 /pmp/Slides.pdf
 /pmp/Project+Documents.pdf
+# Personal data — not tracked (Issue #49)
+sessions/
+state/
+content/jobs/TWC/*.csv
+content/jobs/TWC/*.pdf
+content/jobs/applications.md
+content/jobs/opportunities.md
+content/jobs/interview-prep/
+
 __pycache__/
 .venv/
