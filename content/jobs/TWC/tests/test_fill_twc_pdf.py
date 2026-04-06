@@ -518,3 +518,103 @@ class TestEmptyCSV:
             mock_reader_cls.assert_not_called()
         finally:
             os.unlink(csv_path)
+
+
+# ---------------------------------------------------------------------------
+# Output validation (Issue #34)
+# ---------------------------------------------------------------------------
+
+class TestOutputValidation:
+    """Verify that field_mapping produced by fill_activities matches source CSV data."""
+
+    def test_all_required_fields_populated(self):
+        """Every required field should be present in the mapping for a complete activity."""
+        activities = [make_activity()]
+        field_mapping = {}
+        fill_activities(field_mapping, activities)
+
+        required_fields = [
+            "Enter Date of Job Search Activity",
+            "Enter Work Search Activity",
+            "Enter Job Type",
+            "Enter Name of Organization - 1",
+        ]
+        for field in required_fields:
+            assert field in field_mapping, f"Missing required field: {field}"
+            assert field_mapping[field].strip(), f"Field is empty: {field}"
+
+    def test_date_format_matches_mm_dd_yyyy(self):
+        """Output dates must be in MM/DD/YYYY format for the government form."""
+        activities = [make_activity(date="2026-03-15")]
+        field_mapping = {}
+        fill_activities(field_mapping, activities)
+
+        date_val = field_mapping["Enter Date of Job Search Activity"]
+        # Verify MM/DD/YYYY format
+        parsed = datetime.strptime(date_val, "%m/%d/%Y")
+        assert parsed.year == 2026
+        assert parsed.month == 3
+        assert parsed.day == 15
+
+    def test_field_mapping_roundtrip_preserves_company(self):
+        """Company name in field_mapping should exactly match CSV source."""
+        company = "Acme & Sons, Inc."
+        activities = [make_activity(company=company)]
+        field_mapping = {}
+        fill_activities(field_mapping, activities)
+
+        assert field_mapping["Enter Name of Organization - 1"] == company
+
+    def test_field_mapping_roundtrip_preserves_job_type(self):
+        """Job type in field_mapping should exactly match CSV source."""
+        job_type = "Senior Platform Engineer"
+        activities = [make_activity(job_type=job_type)]
+        field_mapping = {}
+        fill_activities(field_mapping, activities)
+
+        assert field_mapping["Enter Job Type"] == job_type
+
+    def test_field_mapping_roundtrip_preserves_work_search(self):
+        """Work search activity should exactly match CSV source."""
+        work_search = "Applied for position online"
+        activities = [make_activity(work_search=work_search)]
+        field_mapping = {}
+        fill_activities(field_mapping, activities)
+
+        assert field_mapping["Enter Work Search Activity"] == work_search
+
+    def test_five_activities_all_have_dates(self):
+        """Every activity in a full page should have a date field set."""
+        activities = [make_activity(date=f"2026-01-{26+i}") for i in range(5)]
+        field_mapping = {}
+        fill_activities(field_mapping, activities)
+
+        # First uses base name, rest use numbered suffix
+        assert "Enter Date of Job Search Activity" in field_mapping
+        for i in range(2, 6):
+            assert f"Enter Date of Job Search Activity - {i}" in field_mapping
+
+    def test_phone_split_produces_correct_digits(self):
+        """Phone number split should preserve all digits correctly."""
+        activities = [make_activity(phone="(737) 867-5309")]
+        field_mapping = {}
+        fill_activities(field_mapping, activities)
+
+        assert field_mapping["Enter Area Code - Organization 1"] == "737"
+        assert field_mapping["Enter Middle 3 Phone Digits"] == "867"
+        assert field_mapping["Enter Last 4 Phone Digits"] == "5309"
+
+    def test_location_combines_city_state_zip(self):
+        """City, State, Zip should be combined into one field."""
+        activities = [make_activity(city="Dallas", state="TX", zip_code="75201")]
+        field_mapping = {}
+        fill_activities(field_mapping, activities)
+
+        assert field_mapping["Enter City, State, Zip Code - Organization 1"] == "Dallas, TX 75201"
+
+    def test_malformed_date_raises(self):
+        """A completely invalid date should raise an error, not produce silent garbage."""
+        activities = [make_activity(date="not-a-date")]
+        field_mapping = {}
+        with pytest.raises(ValueError):
+            fill_activities(field_mapping, activities)

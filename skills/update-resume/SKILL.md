@@ -102,6 +102,24 @@ If the resume exceeds 2 pages, **stop and ask** before removing or compressing c
 - Certs listed in reverse chronological order (newest first)
 - Skip certs already on the resume
 
+## Boundary with resume-editor (Issue #50)
+
+**This skill (`update-resume`) owns:**
+- Scanning cert PDFs and extracting cert info
+- Adding/removing certifications on the base resume
+- Restructuring the Technical Skills table layout
+- Creating backups before modifications
+
+**The `resume-editor` skill owns:**
+- Tailoring resumes for specific job postings
+- Building tailored .docx files from structured data
+- Scoring and trimming bullets
+- Cover letter generation
+
+**Rule:** `update-resume` modifies the *base* resume (`~/Resume/MatthewDruhl.docx`).
+`resume-editor` reads the base resume as a template and produces *copies* in output directories.
+Both should never run concurrently on the same file.
+
 ## Important Notes
 
 - Always backup before editing

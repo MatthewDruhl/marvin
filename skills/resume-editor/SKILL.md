@@ -17,6 +17,23 @@ metadata:
 
 Build tailored resumes from structured data (`resume-data.json`) + a base resume (`MatthewDruhl.docx`). No more copy-and-edit.
 
+## Boundary with update-resume (Issue #50)
+
+**This skill (`resume-editor`) owns:**
+- Tailoring resumes for specific job postings (build, auto-trim)
+- Scoring bullets against job keywords
+- Cover letter generation
+- Managing `resume-data.json` (view, update)
+
+**The `update-resume` skill owns:**
+- Scanning cert PDFs and adding certifications to the base resume
+- Restructuring the Technical Skills table layout on the base resume
+- Creating backups before base resume modifications
+
+**Rule:** `resume-editor` reads the base resume as a formatting template and produces
+tailored *copies* in output directories. `update-resume` modifies the base resume in-place.
+Both should never run concurrently on the same file.
+
 ## Architecture
 
 ```

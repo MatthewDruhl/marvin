@@ -255,6 +255,9 @@ if __name__ == '__main__':
     else:
         output_pdf = csv_file.replace('.csv', '-filled.pdf')
 
-    template_pdf = str(Path(__file__).parent / 'work-search-log-blank.pdf')
+    template_pdf = os.environ.get(
+        'TWC_TEMPLATE_PDF',
+        str(Path(__file__).parent / 'work-search-log-blank.pdf'),
+    )
 
     fill_twc_pdf(csv_file, template_pdf, output_pdf)
