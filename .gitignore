@@ -32,3 +32,4 @@ client_secret_*.json
 /pmp/Slides.pdf
 /pmp/Project+Documents.pdf
 __pycache__/
+.venv/
