@@ -78,7 +78,7 @@ _thread_sessions: dict[str, str] = {}
 
 # Track when each session was last used for TTL cleanup
 _session_last_used: dict[str, float] = {}
-SESSION_TTL = 86400  # 24 hours in seconds
+SESSION_TTL = 28800  # 8 hours in seconds
 
 
 def _cleanup_stale_sessions():
