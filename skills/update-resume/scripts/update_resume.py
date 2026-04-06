@@ -27,10 +27,12 @@ from docx import Document
 from docx.oxml.ns import qn
 from lxml import etree
 
-RESUME_PATH = Path.home() / "Resume" / "MatthewDruhl.docx"
-TEMPLATE_PATH = Path.home() / "Resume" / "original" / "MatthewDruhl.docx"
-BACKUP_DIR = Path.home() / "Resume" / "backup"
-CERTS_DIR = Path.home() / "Resume" / "certs"
+# Paths — configurable via environment variables (Issue #29, #51)
+_RESUME_DIR = Path(os.environ.get("RESUME_DATA_DIR", str(Path.home() / "Resume")))
+RESUME_PATH = Path(os.environ.get("RESUME_DOCX_PATH", str(_RESUME_DIR / "MatthewDruhl.docx")))
+TEMPLATE_PATH = _RESUME_DIR / "original" / RESUME_PATH.name
+BACKUP_DIR = _RESUME_DIR / "backup"
+CERTS_DIR = _RESUME_DIR / "certs"
 
 def safe_save(doc, path):
     """Save document, temporarily making file writable if needed."""

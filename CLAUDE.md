@@ -105,6 +105,15 @@
 
 ## Learning
 
+### Topic Dedup for /learn-sync (Issue #35)
+When syncing topics, normalize before comparing to prevent duplicates:
+1. Lowercase both strings
+2. Strip whitespace
+3. Remove trailing "s" (basic plural: "List Comprehensions" matches "List Comprehension")
+4. Check if normalized new topic is a substring of an existing topic (or vice versa)
+5. If a near-match is found, skip and note: "skipped (matches existing: [name])"
+
+### General
 - verify against official documentation and `topics-learned.md` examples
 - update the topics in `state/learning.md`
   - Confidence column on Topics table
@@ -189,7 +198,10 @@
 - Log any non-obvious decisions made during the session to `state/decisions.md`
 - Prompt for habit check (did you exercise/study/code today?)
 - Save everything to the session log
-- Update your current state
+- **Preview state changes before writing** (Issue #33): Show proposed changes to `state/current.md` and ask "Does this look right?" before saving. Same pattern as `/wkplan`.
+
+**Checkpointing (`/update`):**
+- If state changes are needed, preview them first and ask for confirmation before writing.
 
 ---
 
