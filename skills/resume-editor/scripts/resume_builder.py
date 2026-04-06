@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import os
 import re
 import sys
 import tempfile
@@ -30,11 +31,12 @@ from docx.oxml.ns import qn
 from docx.shared import Pt
 from lxml import etree
 
-# Paths
+# Paths — configurable via environment variables (Issue #29, #51)
 SCRIPT_DIR = Path(__file__).parent
 SKILL_DIR = SCRIPT_DIR.parent
-DATA_FILE = Path.home() / "Resume" / "data" / "resume-data.json"
-RESUME_PATH = Path.home() / "Resume" / "MatthewDruhl.docx"
+_RESUME_DIR = Path(os.environ.get("RESUME_DATA_DIR", str(Path.home() / "Resume")))
+DATA_FILE = _RESUME_DIR / "data" / "resume-data.json"
+RESUME_PATH = Path(os.environ.get("RESUME_DOCX_PATH", str(_RESUME_DIR / "MatthewDruhl.docx")))
 
 WML_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
 
