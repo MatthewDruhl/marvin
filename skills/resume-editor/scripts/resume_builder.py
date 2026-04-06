@@ -1188,7 +1188,6 @@ def cmd_cover_letter(args: argparse.Namespace) -> None:
 
     body_paragraphs = body_file.read_text().strip().split("\n\n")
     company = args.company
-    job_title = args.job_title
     date_str = args.date or datetime.now().strftime("%B %d, %Y")
 
     doc = Document()

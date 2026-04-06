@@ -2,18 +2,15 @@
 
 import csv
 import os
+import sys
 import tempfile
 from pathlib import Path
 from unittest.mock import MagicMock, mock_open, patch
-
-
-import sys
 
 # Add parent directory to path so we can import fill_twc_pdf
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from fill_twc_pdf import fill_activities, fill_twc_pdf, load_env
-
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -412,8 +409,6 @@ class TestMultiPagePagination:
         try:
             with patch("builtins.open", mock_open()) as mo:
                 # Let the CSV file be read normally
-                real_open = open.__class__
-
                 original_open = open
 
                 def side_effect_open(path, *args, **kwargs):
