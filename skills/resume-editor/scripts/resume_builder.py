@@ -101,7 +101,7 @@ def cmd_view(_args: argparse.Namespace) -> None:
 
     print(f"\n  TITLE: {data['title']}")
     print(f"  TAGLINE: {data['tagline']}")
-    print(f"\n  SUMMARY:")
+    print("\n  SUMMARY:")
     print(f"  {data['summary'][:120]}...")
 
     print(f"\n  KEYWORDS ({len(data['summary_keywords'])}):")
@@ -141,13 +141,13 @@ def cmd_view(_args: argparse.Namespace) -> None:
 
     if data.get("military"):
         mil = data["military"]
-        print(f"\n  MILITARY:")
+        print("\n  MILITARY:")
         print(f"    {mil['branch']}, {mil['location']}")
         print(f"    {mil['role']}  ({mil['start']} - {mil['end']})")
         for b in mil["bullets"]:
             print(f"      - {b['text'][:80]}...")
 
-    print(f"\n  EDUCATION:")
+    print("\n  EDUCATION:")
     for ed in data["education"]:
         print(f"    {ed['degree']}, {ed['field']}")
         print(f"      {ed['school']}, {ed['location']}  ({ed['years']})")
@@ -1190,7 +1190,6 @@ def cmd_cover_letter(args: argparse.Namespace) -> None:
 
     body_paragraphs = body_file.read_text().strip().split("\n\n")
     company = args.company
-    job_title = args.job_title
     date_str = args.date or datetime.now().strftime("%B %d, %Y")
 
     doc = Document()
@@ -1496,7 +1495,7 @@ def cmd_auto_trim(args: argparse.Namespace) -> None:
     max_iterations = 20
 
     # Phase 1: Fast estimation loop
-    print(f"\n  Phase 1: Estimating and trimming...")
+    print("\n  Phase 1: Estimating and trimming...")
     total_lines = estimate_total_lines(tailoring)
     est_pages = estimate_pages(tailoring)
     total_bullets = sum(
@@ -1526,7 +1525,7 @@ def cmd_auto_trim(args: argparse.Namespace) -> None:
         print(f"             ~{total_lines} lines, ~{est_pages} pages")
 
     # Phase 2: Build the final DOCX
-    print(f"\n  Phase 2: Building final resume...")
+    print("\n  Phase 2: Building final resume...")
     with tempfile.NamedTemporaryFile(
         mode="w", suffix=".json", delete=False, dir=output_dir
     ) as f:
@@ -1580,7 +1579,7 @@ def cmd_auto_trim(args: argparse.Namespace) -> None:
 
     # Final summary
     print(f"\n{'=' * 60}")
-    print(f"  Auto-Trim Complete")
+    print("  Auto-Trim Complete")
     print(f"  Final: ~{est_pages} pages (estimated), {total_bullets} bullets")
     print(f"  Output: {output_file}")
     print(f"{'=' * 60}")

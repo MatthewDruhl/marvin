@@ -8,7 +8,6 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
 from resume_builder import score_bullet, score_tailoring
 
-
 # ---------------------------------------------------------------------------
 # score_bullet
 # ---------------------------------------------------------------------------
