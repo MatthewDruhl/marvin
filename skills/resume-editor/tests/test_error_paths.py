@@ -15,8 +15,6 @@ import pytest
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
 from resume_builder import (
-    DATA_FILE,
-    RESUME_PATH,
     cmd_build,
     cmd_cover_letter,
     cmd_update,
@@ -28,7 +26,6 @@ from resume_builder import (
     score_bullet,
     score_tailoring,
 )
-
 
 # ---------------------------------------------------------------------------
 # load_data error paths
