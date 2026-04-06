@@ -1,0 +1,19 @@
+#!/bin/sh
+# Pre-commit hook: run ruff on staged Python files
+# Only checks files being committed, not the whole repo
+
+STAGED_PY=$(git diff --cached --name-only --diff-filter=ACM | grep '\.py$')
+
+if [ -z "$STAGED_PY" ]; then
+    exit 0  # No Python files staged, skip
+fi
+
+# Run ruff check on staged files only
+# Uses uvx so ruff doesn't need to be installed globally
+uvx ruff check $STAGED_PY
+if [ $? -ne 0 ]; then
+    echo ""
+    echo "Lint errors found. Fix with: uvx ruff check --fix ."
+    echo "Then re-stage and commit."
+    exit 1
+fi
