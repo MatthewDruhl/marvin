@@ -76,6 +76,22 @@ _locks_lock = threading.Lock()
 # Maps thread_key -> session_id (populated after first Claude call or by reset)
 _thread_sessions: dict[str, str] = {}
 
+# Track when each session was last used for TTL cleanup
+_session_last_used: dict[str, float] = {}
+SESSION_TTL = 86400  # 24 hours in seconds
+
+
+def _cleanup_stale_sessions():
+    """Remove session data older than SESSION_TTL."""
+    now = time.time()
+    stale_keys = [k for k, v in _session_last_used.items() if now - v > SESSION_TTL]
+    for key in stale_keys:
+        _thread_sessions.pop(key, None)
+        _session_locks.pop(key, None)
+        _session_last_used.pop(key, None)
+    if stale_keys:
+        log.info(f"Cleaned up {len(stale_keys)} stale session(s)")
+
 # Commands the bot handles directly (not sent to Claude)
 RESET_PATTERNS = re.compile(r"^(reset|reset session|new session|release session)$", re.IGNORECASE)
 
@@ -172,6 +188,9 @@ def _run_claude(prompt: str, *, resume_session: str | None = None, output_json: 
 
 def ask_claude(prompt: str, thread_key: str) -> str:
     """Send a message to Claude, continuing the thread's session if one exists."""
+    _cleanup_stale_sessions()
+    _session_last_used[thread_key] = time.time()
+
     existing_session = _thread_sessions.get(thread_key)
 
     # Use a lock based on thread_key to prevent concurrent calls
