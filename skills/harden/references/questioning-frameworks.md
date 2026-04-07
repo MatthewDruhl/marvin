@@ -53,6 +53,32 @@ Run this after generating findings for each scope:
 4. **Respect frameworks** — If a framework handles X (CSRF, XSS, SQL injection), don't flag X as missing unless the project bypasses the framework's protection
 5. **Inversion pass** — Run the inversion framework once to check for gaps your scope-by-scope scan may have missed
 
+## Performed vs Genuine Thoroughness
+
+Use this table to gut-check your findings across ALL scopes, not just AI. A long list of "considerations" with no concrete code impact is fake thoroughness.
+
+| Fake Thoroughness | Genuine Thoroughness |
+|---|---|
+| Long list of "considerations" with no concrete code reference | Each finding cites a specific file and line |
+| Generic warnings that apply to any project | Findings specific to THIS project's architecture |
+| "Could potentially" language without evidence | "This code does X, which means Y" |
+| Flagging missing features the project doesn't need | Flagging gaps in features the project actually uses |
+| Every finding sounds equally important | Clear severity gradient with most findings at Medium/Low |
+
+## Framework Attribution
+
+Each finding should note which reasoning framework surfaced it. This prevents "gut feeling" findings and ensures the self-check frameworks are actually being used.
+
+Valid attributions:
+- **Code reading** — Found by directly reading the source code
+- **Pre-mortem** — Surfaced by imagining a catastrophic failure
+- **Inversion** — Surfaced by asking "what would guarantee failure?"
+- **Five whys** — Severity validated by tracing impact chain
+- **Steel-manning** — Survived the "strongest argument this is correct" test
+- **Blind spots** — Triggered by a detection question from `engineering-blind-spots.md`
+
+If you can't attribute a finding to a specific framework or code observation, it's likely a generic concern rather than a real finding. Drop it.
+
 ---
 
-*Steel-manning, "So What?" test, and self-check process inspired by the [devils-advocate skill](https://github.com/notmanas/claude-code-skills/tree/main/skills/devils-advocate) by notmanas.*
+*Steel-manning, "So What?" test, self-check process, and "Performed vs Genuine Thoroughness" table inspired by the [devils-advocate skill](https://github.com/notmanas/claude-code-skills/tree/main/skills/devils-advocate) by notmanas.*

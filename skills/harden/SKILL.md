@@ -122,10 +122,12 @@ Every finding must include all of these. If you can't fill them all in, the find
 **What:** [The specific issue]
 **Proof:** [What you observed in the code that triggered this]
 **Impact:** [What actually happens if ignored]
+**Surfaced by:** [Code reading | Pre-mortem | Inversion | Five whys | Blind spots]
 **Fix:** [Concrete suggested fix]
 ```
 
 **Blocking** = must address before shipping. **Non-blocking** = fix when convenient.
+**Surfaced by** = which reasoning framework or method found this issue. See [questioning-frameworks.md](references/questioning-frameworks.md) for valid attributions.
 
 ## Scorecard
 
