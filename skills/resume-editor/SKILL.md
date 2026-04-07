@@ -83,12 +83,14 @@ Fetch a job posting, tailor the resume, build the .docx + cover letter.
 **Step 1: Fetch & Analyze**
 - WebFetch the URL
 - Extract: company, title, job ID, requirements, tech stack, salary, location
+- **Extract 15-20 ATS keywords** from the job description — exact terms and phrases the posting uses (e.g., "Kubernetes", "CI/CD", "cross-functional"). Prefer the posting's exact phrasing over synonyms. Include both required and preferred skills.
+- Save extracted keywords in the tailoring JSON `keywords` field — these drive `auto-trim` scoring and `score` output
 - Read `resume-data.json` via `view` command
 
 **Step 2: Checkpoint 1 — Strategy**
 Present to user:
-- Which keywords to emphasize for this role
-- Which bullets to include (by tag relevance)
+- **Extracted keywords** (from Step 1) — confirm or adjust before proceeding
+- Which bullets to include (by tag relevance to extracted keywords)
 - Which skills to feature vs drop
 - Title/summary reframe recommendation
 - Bullets to cut (least relevant by tag score) for 2-page fit
@@ -106,8 +108,8 @@ Present to user:
 Wait for user approval before proceeding.
 
 **Step 4: Build**
-1. Write the tailoring JSON file to a temp location
-2. Run `auto-trim --tailoring-file FILE --output-dir DIR --keywords KW1,KW2,... --company NAME` to build the resume with automatic 2-page enforcement. This scores all bullets against the job posting keywords and removes the lowest-relevance bullets until it fits. It shows what was cut so the user can override.
+1. Write the tailoring JSON file to a temp location (keywords from Step 1 are already in the JSON)
+2. Run `auto-trim --tailoring-file FILE --output-dir DIR --keywords KW1,KW2,... --company NAME` using the keywords extracted in Step 1. No manual keyword input needed — pass them from the tailoring JSON `keywords` field.
 3. If auto-trim is not needed (already within page limit), use `build --tailoring-file FILE --output-dir DIR` directly.
 4. Write cover letter body to temp .txt file
 5. Run `cover-letter --company NAME --job-title TITLE --body-file FILE --output-dir DIR`
@@ -160,7 +162,14 @@ Wait for user approval before proceeding.
 - Show cover letter summary
 - Show file paths
 
-**Step 6: Log**
+**Step 6: Optional Post-Build Steps**
+Offer these after the resume and cover letter are built:
+
+- **STAR+R Story Bank** — "Want me to generate interview stories from your role deep dives?" If yes, generate 3-5 STAR+R stories mapped to this JD's requirements (see `/resume stories` below).
+- **Application Form Answers** — "Want me to draft answers for common application questions?" If yes, generate 5 short answers (see `/resume form-answers` below). Only offer when `/resume match` would recommend "Apply."
+- **LinkedIn Outreach** — "Want me to draft a LinkedIn connection message?" If yes, generate a 3-sentence message (see `/resume outreach` below).
+
+**Step 7: Log**
 Ask: "Ready to apply? I'll log to applications.md + TWC when you confirm."
 
 If confirmed, follow the job tracking workflow from CLAUDE.md.
@@ -206,7 +215,7 @@ Score all bullets in a tailoring file against a set of job posting keywords. Out
 
 Run: `score --tailoring-file FILE --keywords KW1,KW2,...`
 
-Keywords should be comma-separated terms extracted from the job posting (e.g., `Linux,SQL,Bash,Kubernetes,Java,troubleshooting`).
+Keywords should be comma-separated terms extracted from the job posting (e.g., `Linux,SQL,Bash,Kubernetes,Java,troubleshooting`). When running as part of `/resume apply`, use the keywords already extracted in Step 1 and stored in the tailoring JSON `keywords` field.
 
 ---
 
@@ -231,6 +240,78 @@ Run: `auto-trim --tailoring-file FILE --output-dir DIR --keywords KW1,KW2,... [-
 Display the current contents of `resume-data.json` in a readable format.
 
 Run: `view` command on the builder script.
+
+---
+
+### `/resume stories`
+
+Generate STAR+R (Situation, Task, Action, Result + Reflection) interview stories from role-deep-dive data.
+
+**When used standalone:** Ask which role or theme to generate stories for.
+**When used during `/resume apply`:** Auto-generate 3-5 stories mapped to the JD's key requirements using context already loaded.
+
+#### Story format
+```
+**Theme:** [e.g., "Leading a team through ambiguity"]
+**Role:** Senior Software Developer, Pearson
+
+- **Situation:** [Context and challenge]
+- **Task:** [Your specific responsibility]
+- **Action:** [What you did — specific, detailed]
+- **Result:** [Measurable outcome]
+- **Reflection:** [What you learned or would do differently]
+```
+
+#### Rules
+- Source stories from `~/Resume/data/role-deep-dive-*.json` — use Matt's actual language
+- Each story must map to a specific JD requirement or behavioral competency
+- Append to `~/Resume/jobs/interview-prep/story-bank.md` (create if needed)
+- Dedup by theme — don't add duplicate stories across applications
+- 3-5 stories per application, covering different competencies (leadership, technical, conflict, etc.)
+
+---
+
+### `/resume form-answers`
+
+Pre-draft answers to common application form questions using JD and company context.
+
+**When used standalone:** Ask for the company and role context.
+**When used during `/resume apply`:** Use context already loaded from the JD.
+
+#### Common questions to draft
+1. "Why are you interested in this role?"
+2. "Why do you want to work at [Company]?"
+3. "Describe a relevant accomplishment."
+4. "What makes you a strong candidate?"
+5. "Is there anything else you'd like us to know?"
+
+#### Rules
+- Keep each answer to 2-4 sentences — concise, specific, not generic
+- Reference specific details from the JD and company (not boilerplate)
+- Use Matt's voice — direct, practical, no AI fluff
+- Save to the application output directory alongside resume/cover letter as `form-answers.md`
+- Only offer during `/resume apply` when the match is strong ("Apply" recommendation)
+
+---
+
+### `/resume outreach`
+
+Generate a short LinkedIn connection message for hiring managers or recruiters at the target company.
+
+**When used standalone:** Ask for company, role, and target person.
+**When used during `/resume apply`:** Use context already loaded.
+
+#### Message format
+3 sentences, max 300 characters (LinkedIn connection message limit):
+1. **Hook** — specific tie to the role or company (not generic)
+2. **Proof point** — one concrete experience that matches
+3. **Call to action** — soft ask (coffee chat, learn more, etc.)
+
+#### Rules
+- Never sound desperate or overly eager
+- No AI fluff — direct and professional
+- Reference something specific about the company or role
+- Save to the application output directory as `outreach.md`
 
 ---
 
