@@ -7,9 +7,12 @@ Usage:
   uv run --with python-docx python3 resume_builder.py view
   uv run --with python-docx python3 resume_builder.py update <subcommand> [options]
   uv run --with python-docx python3 resume_builder.py build --tailoring-file FILE --output-dir DIR
-  uv run --with python-docx python3 resume_builder.py cover-letter --company NAME --job-title TITLE --body-file FILE --output-dir DIR
-  uv run --with python-docx python3 resume_builder.py score --tailoring-file FILE --keywords KW1,KW2,...
-  uv run --with python-docx python3 resume_builder.py auto-trim --tailoring-file FILE --output-dir DIR --keywords KW1,KW2,...
+  uv run --with python-docx python3 resume_builder.py cover-letter \\
+      --company NAME --job-title TITLE --body-file FILE --output-dir DIR
+  uv run --with python-docx python3 resume_builder.py score \\
+      --tailoring-file FILE --keywords KW1,KW2,...
+  uv run --with python-docx python3 resume_builder.py auto-trim \\
+      --tailoring-file FILE --output-dir DIR --keywords KW1,KW2,...
 """
 
 from __future__ import annotations
@@ -122,7 +125,8 @@ def cmd_view(_args: argparse.Namespace) -> None:
         print(f"\n    {company['company']}, {company['location']}")
         for role in company["roles"]:
             role_type = f", {role['type']}" if role.get("type") else ""
-            print(f"      {role['title']}{role_type}  ({role['start_year']} - {role['end_year']})  [max {role['max_bullets']} bullets]")
+            years = f"{role['start_year']} - {role['end_year']}"
+            print(f"      {role['title']}{role_type}  ({years})  [max {role['max_bullets']} bullets]")
             for b in role["bullets"]:
                 tags = ", ".join(b["tags"])
                 print(f"        - {b['text'][:80]}...")
@@ -414,6 +418,70 @@ def create_blank_paragraph(template_para: etree._Element) -> etree._Element:
     return new_para
 
 
+def build_skills_grouped_paragraphs(
+    template_para: etree._Element,
+    skills_grouped: list[dict[str, str]],
+) -> list[etree._Element]:
+    """Build skill paragraphs in grouped bullet-point format.
+
+    Each group becomes a bullet: "Category: items"
+    with the category name bold and items in normal weight.
+    """
+    paragraphs: list[etree._Element] = []
+    for group in skills_grouped:
+        category = group["category"]
+        items = group["items"]
+        # Create paragraph with two runs: bold category, normal items
+        new_para = copy.deepcopy(template_para)
+        runs = list(new_para.iter(f"{{{WML_NS}}}r"))
+        if not runs:
+            continue
+
+        # Clear all runs except first
+        for run in runs[1:]:
+            run.getparent().remove(run)
+
+        first_run = runs[0]
+        # Set first run to bold category text
+        t_elems = list(first_run.iter(f"{{{WML_NS}}}t"))
+        if t_elems:
+            t_elems[0].text = f"{category}: "
+            t_elems[0].set(qn("xml:space"), "preserve")
+            for t in t_elems[1:]:
+                t.getparent().remove(t)
+
+        # Ensure bold on first run
+        rPr = first_run.find(qn("w:rPr"))
+        if rPr is None:
+            rPr = etree.SubElement(first_run, qn("w:rPr"))
+            first_run.insert(0, rPr)
+        if rPr.find(qn("w:b")) is None:
+            etree.SubElement(rPr, qn("w:b"))
+        # Remove caps/smallCaps
+        for caps_tag in (qn("w:caps"), qn("w:smallCaps")):
+            caps_elem = rPr.find(caps_tag)
+            if caps_elem is not None:
+                rPr.remove(caps_elem)
+
+        # Create second run for items (normal weight)
+        items_run = copy.deepcopy(first_run)
+        items_rPr = items_run.find(qn("w:rPr"))
+        if items_rPr is not None:
+            b_elem = items_rPr.find(qn("w:b"))
+            if b_elem is not None:
+                items_rPr.remove(b_elem)
+        items_t = list(items_run.iter(f"{{{WML_NS}}}t"))
+        if items_t:
+            items_t[0].text = items
+            items_t[0].set(qn("xml:space"), "preserve")
+        new_para.append(items_run)
+
+        # Add bullet formatting (list style) via numbering if template has it,
+        # otherwise just use the indented paragraph style as-is
+        paragraphs.append(new_para)
+    return paragraphs
+
+
 def build_skills_table(
     template_table: etree._Element,
     skills: list[str],
@@ -688,10 +756,40 @@ def cmd_build(args: argparse.Namespace) -> None:
                 insert_after.addnext(new_para)
                 insert_after = new_para
 
-    # --- Rebuild Technical Skills table ---
+    # --- Rebuild Technical Skills section ---
+    skills_grouped = tailoring.get("skills_grouped", [])
     skills = tailoring.get("skills", [])
     skills_columns = tailoring.get("skills_columns", 4)
-    if skills:
+    if skills_grouped:
+        # Grouped bullet-point format: replace table with paragraphs
+        children = list(body)
+        for i, child in enumerate(children):
+            tag = etree.QName(child.tag).localname
+            if tag == "tbl":
+                # Find a bullet paragraph to use as template
+                bullet_template = None
+                for c in children:
+                    if etree.QName(c.tag).localname == "p":
+                        text = get_elem_text(c).strip()
+                        pPr = c.find(qn("w:pPr"))
+                        if pPr is not None and pPr.find(qn("w:numPr")) is not None:
+                            bullet_template = c
+                            break
+                # Fallback: use a regular paragraph near the table
+                if bullet_template is None and i > 0:
+                    bullet_template = children[i - 1]
+                if bullet_template is not None:
+                    paras = build_skills_grouped_paragraphs(
+                        bullet_template, skills_grouped
+                    )
+                    # Insert paragraphs where the table was
+                    insert_after = child
+                    for para in paras:
+                        insert_after.addnext(para)
+                        insert_after = para
+                body.remove(child)
+                break
+    elif skills:
         children = list(body)
         for i, child in enumerate(children):
             tag = etree.QName(child.tag).localname
@@ -761,6 +859,26 @@ def cmd_build(args: argparse.Namespace) -> None:
     ]:
         exp_data = tailoring.get(section_key, [])
         if not exp_data:
+            # Remove the section header and content from the template
+            children = list(body)
+            sections = find_all_section_indices(body)
+            section_idx = None
+            next_section_idx = None
+            for i, (idx, name) in enumerate(sections):
+                if name == section_name:
+                    section_idx = idx
+                    if i + 1 < len(sections):
+                        next_section_idx = sections[i + 1][0]
+                    break
+            if section_idx is not None and next_section_idx is not None:
+                remove_elements_between(body, section_idx - 1, next_section_idx)
+                # Also remove the header itself
+                children = list(body)
+                for child in children:
+                    if (etree.QName(child.tag).localname == "p"
+                            and get_elem_text(child).strip() == section_name):
+                        body.remove(child)
+                        break
             continue
 
         children = list(body)
@@ -1404,9 +1522,14 @@ def _estimate_pre_experience_lines(tailoring: dict[str, Any]) -> int:
     lines += 1  # Technical Skills header
     if not compact:
         lines += 1  # blank after header
+    skills_grouped = tailoring.get("skills_grouped", [])
     skills = tailoring.get("skills", [])
     skills_cols = tailoring.get("skills_columns", 4)
-    lines += -(-len(skills) // skills_cols) + 1 if skills else 0
+    if skills_grouped:
+        # Each group is one line (category: items)
+        lines += len(skills_grouped)
+    elif skills:
+        lines += -(-len(skills) // skills_cols) + 1
     if not compact:
         lines += 1  # blank after table
 

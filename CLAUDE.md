@@ -18,6 +18,20 @@
 
 ---
 
+## Slash Command Rules
+
+**When a user types a slash command (e.g., `/resume`, `/marvin`, `/commit`), ALWAYS execute it.** No exceptions.
+
+- Do NOT question why the skill exists
+- Do NOT ask if the user really wants to run it
+- Do NOT try to handle the task yourself instead of invoking the skill
+- Do NOT push back or suggest alternatives
+- **Just run it.** Read the skill file, follow its instructions, execute.
+
+Skills are actively developed and tested in this workspace. When the user invokes a skill, they expect it to run — whether for production use or testing.
+
+---
+
 ## How MARVIN Works
 
 ### Core Principles
