@@ -4,7 +4,7 @@ description: View, match, update, or tailor your resume for a job application
 
 # /resume - Resume Builder
 
-Four modes: **Apply** (build tailored resume + cover letter), **Match** (strict gap analysis), **Update** (modify data), **View** (display data).
+Modes: **Apply** (build tailored resume + cover letter), **Match** (strict gap analysis), **Update** (modify data), **View** (display data), **Stories** (STAR+R interview prep), **Form Answers** (application question drafts), **Outreach** (LinkedIn messages).
 
 ## Instructions
 
@@ -33,6 +33,18 @@ Available commands: `view`, `update`, `build`, `cover-letter`, `score`, `auto-tr
 
 - **View mode** — User says "view" or just `/resume` without other context
   - Displays current resume data file contents
+
+- **Stories mode** — User says "stories", "interview prep", "STAR stories"
+  - Generates STAR+R stories from role deep dives
+  - Saves to `~/Resume/jobs/interview-prep/story-bank.md`
+
+- **Form Answers mode** — User says "form answers", "application questions"
+  - Drafts answers to common application form questions
+  - Saves to application output directory as `form-answers.md`
+
+- **Outreach mode** — User says "outreach", "LinkedIn message"
+  - Generates a 3-sentence LinkedIn connection message
+  - Saves to application output directory as `outreach.md`
 
 ### Key Rules
 - **Data file:** `~/Resume/data/resume-data.json` (single source of truth)
