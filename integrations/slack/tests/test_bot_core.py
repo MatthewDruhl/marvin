@@ -218,7 +218,84 @@ class TestCleanupStaleSessions:
 
 
 # ---------------------------------------------------------------------------
-# 5. ask_claude with mocked subprocess
+# 5. _run_claude command construction
+# ---------------------------------------------------------------------------
+
+class TestRunClaude:
+    """Tests for _run_claude command construction (bot.py _run_claude).
+
+    We mirror the function here since bot.py has runtime deps on slack_bolt.
+    """
+
+    MARVIN_DIR = "/fake/marvin"
+    MCP_CONFIG = "/fake/marvin/.mcp.json"
+
+    def _run_claude(
+        self,
+        prompt: str,
+        *,
+        resume_session: str | None = None,
+        output_json: bool = False,
+        system_prompt: str | None = None,
+    ) -> list[str]:
+        """Mirror of _run_claude that returns the command list instead of running it."""
+        cmd = ["claude", "--print", "--mcp-config", self.MCP_CONFIG]
+        if resume_session:
+            cmd += ["--resume", resume_session]
+        if output_json:
+            cmd += ["--output-format", "json"]
+        if system_prompt:
+            cmd += ["--system-prompt", system_prompt]
+        cmd.append(prompt)
+        return cmd
+
+    def test_basic_command(self):
+        cmd = self._run_claude("hello")
+        assert cmd == [
+            "claude", "--print", "--mcp-config", self.MCP_CONFIG, "hello"
+        ]
+
+    def test_mcp_config_always_present(self):
+        cmd = self._run_claude("test")
+        assert "--mcp-config" in cmd
+        assert self.MCP_CONFIG in cmd
+
+    def test_resume_session(self):
+        cmd = self._run_claude("follow up", resume_session="abc-123")
+        assert "--resume" in cmd
+        assert "abc-123" in cmd
+
+    def test_output_json(self):
+        cmd = self._run_claude("hello", output_json=True)
+        assert "--output-format" in cmd
+        assert "json" in cmd
+
+    def test_system_prompt(self):
+        cmd = self._run_claude("hello", system_prompt="Be helpful")
+        assert "--system-prompt" in cmd
+        assert "Be helpful" in cmd
+
+    def test_all_flags_together(self):
+        cmd = self._run_claude(
+            "hello",
+            resume_session="sess-1",
+            output_json=True,
+            system_prompt="Be helpful",
+        )
+        assert "--mcp-config" in cmd
+        assert "--resume" in cmd
+        assert "--output-format" in cmd
+        assert "--system-prompt" in cmd
+        # Prompt is always last
+        assert cmd[-1] == "hello"
+
+    def test_prompt_is_last_argument(self):
+        cmd = self._run_claude("my prompt", resume_session="s1")
+        assert cmd[-1] == "my prompt"
+
+
+# ---------------------------------------------------------------------------
+# 6. ask_claude with mocked subprocess
 # ---------------------------------------------------------------------------
 
 class TestAskClaude:

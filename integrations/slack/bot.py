@@ -18,6 +18,7 @@ import logging
 import os
 import re
 import subprocess
+import sys
 import threading
 import time
 from pathlib import Path
@@ -166,9 +167,18 @@ def _get_session_lock(session_id: str) -> threading.Lock:
         return _session_locks[session_id]
 
 
-def _run_claude(prompt: str, *, resume_session: str | None = None, output_json: bool = False, system_prompt: str | None = None) -> subprocess.CompletedProcess:
+MCP_CONFIG = os.path.join(MARVIN_DIR, ".mcp.json")
+
+
+def _run_claude(
+    prompt: str,
+    *,
+    resume_session: str | None = None,
+    output_json: bool = False,
+    system_prompt: str | None = None,
+) -> subprocess.CompletedProcess:
     """Run claude --print. If resume_session is set, resumes that session."""
-    cmd = ["claude", "--print"]
+    cmd = ["claude", "--print", "--mcp-config", MCP_CONFIG]
     if resume_session:
         cmd += ["--resume", resume_session]
     if output_json:
@@ -264,8 +274,31 @@ def ask_claude(prompt: str, thread_key: str) -> str:
     return "No response from Claude."
 
 
+# Patterns that should never appear in Slack responses
+_SECRET_PATTERNS = re.compile(
+    r"(?:"
+    r"xoxb-[A-Za-z0-9\-]+"        # Slack bot token
+    r"|xapp-[A-Za-z0-9\-]+"       # Slack app token
+    r"|sk-[A-Za-z0-9]{20,}"       # OpenAI/Anthropic-style API key
+    r"|AKIA[A-Z0-9]{16}"          # AWS access key
+    r"|ghp_[A-Za-z0-9]{36}"       # GitHub personal access token
+    r"|gho_[A-Za-z0-9]{36}"       # GitHub OAuth token
+    r")",
+    re.MULTILINE,
+)
+
+
+def _scrub_secrets(text: str) -> str:
+    """Redact known secret patterns from Claude's response before sending to Slack."""
+    scrubbed = _SECRET_PATTERNS.sub("[REDACTED]", text)
+    if scrubbed != text:
+        log.warning("Scrubbed potential secret(s) from Claude response")
+    return scrubbed
+
+
 def send_response(say, channel: str, thread_ts: str, text: str):
     """Send response, splitting into chunks if needed (Slack 4000 char limit)."""
+    text = _scrub_secrets(text)
     text = md_to_slack(text)
     max_len = 3900
     if len(text) <= max_len:
@@ -300,7 +333,8 @@ def handle_mention(event, say, client):
         return
 
     if not _is_authorized(event.get("user", "")):
-        say(text="Sorry, I'm not configured to respond to you. Contact the bot admin.", thread_ts=event.get("thread_ts", event["ts"]))
+        msg = "Sorry, I'm not configured to respond to you. Contact the bot admin."
+        say(text=msg, thread_ts=event.get("thread_ts", event["ts"]))
         log.warning(f"Unauthorized mention from {event.get('user')}")
         return
 
@@ -325,8 +359,7 @@ def handle_mention(event, say, client):
         log.debug(f"Reaction failed: {e}")
 
     log.info(f"Mention from {event.get('user')}: {text[:80]} [thread={thread_key[:20]}]")
-    global _consecutive_errors
-    _consecutive_errors = 0
+    _state["consecutive_errors"] = 0
     response = ask_claude(text, thread_key)
     send_response(say, event["channel"], thread_ts, response)
 
@@ -379,8 +412,7 @@ def handle_dm(event, say, client):
         log.debug(f"Reaction failed: {e}")
 
     log.info(f"DM from {event.get('user')}: {text[:80]} [session_key={thread_key}]")
-    global _consecutive_errors
-    _consecutive_errors = 0
+    _state["consecutive_errors"] = 0
     response = ask_claude(text, thread_key)
     send_response(say, event["channel"], thread_ts, response)
 
@@ -392,18 +424,18 @@ def handle_dm(event, say, client):
 
 
 # Track consecutive connection errors for restart logic
-_consecutive_errors = 0
+_state = {"consecutive_errors": 0}
 MAX_CONSECUTIVE_ERRORS = 5
 
 @app.error
 def handle_errors(error):
     """Handle Slack connection errors."""
-    global _consecutive_errors
-    _consecutive_errors += 1
-    log.error(f"Slack error ({_consecutive_errors}/{MAX_CONSECUTIVE_ERRORS}): {error}")
-    if _consecutive_errors >= MAX_CONSECUTIVE_ERRORS:
+    _state["consecutive_errors"] += 1
+    count = _state["consecutive_errors"]
+    log.error(f"Slack error ({count}/{MAX_CONSECUTIVE_ERRORS}): {error}")
+    if count >= MAX_CONSECUTIVE_ERRORS:
         log.error("Too many consecutive errors — exiting for launchd restart")
-        os._exit(1)  # Hard exit so launchd KeepAlive restarts us
+        sys.exit(1)
 
 
 if __name__ == "__main__":
