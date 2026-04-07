@@ -64,17 +64,6 @@ These are the baseline — always check these first:
 **Example finding:** A simple config loader wrapped in a Strategy pattern with a Factory and an Abstract Base Class for one implementation.
 **Severity guidance:** Low in most cases. Medium if the abstraction obscures bugs or makes maintenance harder.
 
-## Self-Check: Performed vs Genuine Thoroughness
-
-After completing the AI scope, verify your findings are genuine:
-
-| Fake Thoroughness | Genuine Thoroughness |
-|---|---|
-| Long list of "considerations" with no concrete code reference | Each finding cites a specific file and line |
-| Generic warnings that apply to any AI project | Findings specific to THIS project's architecture |
-| "Could potentially" language without evidence | "This code does X, which means Y" |
-| Flagging missing features the project doesn't need | Flagging gaps in features the project actually uses |
-
 ---
 
-*"Performed vs Genuine Thoroughness" table inspired by the [devils-advocate skill](https://github.com/notmanas/claude-code-skills/tree/main/skills/devils-advocate) by notmanas.*
+*Extended AI checks inspired by research on AI code quality and the [devils-advocate skill](https://github.com/notmanas/claude-code-skills/tree/main/skills/devils-advocate) by notmanas.*
