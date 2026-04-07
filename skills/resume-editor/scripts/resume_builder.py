@@ -6,7 +6,7 @@ Build tailored resumes and cover letters from structured data + template.
 Usage:
   uv run --with python-docx python3 resume_builder.py view
   uv run --with python-docx python3 resume_builder.py update <subcommand> [options]
-  uv run --with python-docx python3 resume_builder.py build --tailoring-file FILE --output-dir DIR
+  uv run --with python-docx python3 resume_builder.py build --tailoring-file FILE --output-dir DIR [--verify]
   uv run --with python-docx python3 resume_builder.py cover-letter \\
       --company NAME --job-title TITLE --body-file FILE --output-dir DIR
   uv run --with python-docx python3 resume_builder.py score \\
@@ -22,6 +22,8 @@ import copy
 import json
 import os
 import re
+import shutil
+import subprocess
 import sys
 import tempfile
 from datetime import datetime
@@ -694,6 +696,53 @@ def _insert_page_break(
     return insert_after, True
 
 
+# ---------------------------------------------------------------------------
+# Page count verification via LibreOffice headless
+# ---------------------------------------------------------------------------
+
+def verify_page_count(docx_path: str | Path) -> int | None:
+    """Convert .docx to PDF via LibreOffice headless and count pages.
+
+    Returns the page count as an integer, or None if LibreOffice (soffice)
+    is not available.  The temporary PDF is cleaned up after counting.
+    """
+    soffice = shutil.which("soffice")
+    if soffice is None:
+        return None
+
+    docx_path = Path(docx_path)
+    with tempfile.TemporaryDirectory() as tmpdir:
+        try:
+            subprocess.run(
+                [
+                    soffice,
+                    "--headless",
+                    "--convert-to",
+                    "pdf",
+                    "--outdir",
+                    tmpdir,
+                    str(docx_path),
+                ],
+                check=True,
+                capture_output=True,
+                timeout=60,
+            )
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired, OSError) as exc:
+            print(f"  Warning: LibreOffice conversion failed: {exc}")
+            return None
+
+        pdf_path = Path(tmpdir) / (docx_path.stem + ".pdf")
+        if not pdf_path.exists():
+            print("  Warning: PDF not created by LibreOffice")
+            return None
+
+        # Count pages by finding /Type /Page entries (not /Type /Pages)
+        pdf_bytes = pdf_path.read_bytes()
+        # Use regex on raw bytes for robustness
+        page_count = len(re.findall(rb"/Type\s*/Page(?!\w)", pdf_bytes))
+        return page_count
+
+
 def cmd_build(args: argparse.Namespace) -> None:
     """Build a tailored resume .docx from template + tailoring file."""
     tailoring = load_tailoring(args.tailoring_file)
@@ -1311,6 +1360,20 @@ def cmd_build(args: argparse.Namespace) -> None:
     doc.save(str(output_file))
     print(f"Resume built: {output_file}")
 
+    # Optional page count verification via LibreOffice headless
+    if getattr(args, "verify", False):
+        page_count = verify_page_count(output_file)
+        if page_count is None:
+            print("  Page verification skipped (LibreOffice not available)")
+        else:
+            max_pages = getattr(args, "max_pages", 2)
+            print(f"  Verified page count: {page_count}")
+            if page_count > max_pages:
+                print(
+                    f"  WARNING: Resume is {page_count} pages "
+                    f"(exceeds {max_pages}-page limit)"
+                )
+
 
 # ---------------------------------------------------------------------------
 # COVER-LETTER command
@@ -1733,6 +1796,18 @@ def cmd_auto_trim(args: argparse.Namespace) -> None:
             print(f"    [{entry['score']:.2f}] {entry['company']} / {entry['role']}")
             print(f"          {entry['text']}")
 
+    # Verify actual page count via LibreOffice headless
+    page_count = verify_page_count(output_file)
+    if page_count is not None:
+        print(f"  Verified page count: {page_count}")
+        if page_count > max_pages:
+            print(
+                f"  WARNING: Resume is still {page_count} pages after trimming "
+                f"(exceeds {max_pages}-page limit)"
+            )
+    else:
+        print("  Page verification skipped (LibreOffice not available)")
+
     # Save final tailoring file
     final_tailoring_path = output_dir / "tailoring-trimmed.json"
     final_tailoring_path.write_text(json.dumps(tailoring, indent=2) + "\n")
@@ -1782,6 +1857,8 @@ def main() -> None:
     build_parser = subparsers.add_parser("build", help="Build tailored resume from template + tailoring file")
     build_parser.add_argument("--tailoring-file", required=True, help="Path to tailoring JSON file")
     build_parser.add_argument("--output-dir", required=True, help="Output directory")
+    build_parser.add_argument("--verify", action="store_true", help="Verify page count via LibreOffice headless")
+    build_parser.add_argument("--max-pages", type=int, default=2, help="Max pages for --verify warning (default: 2)")
 
     # cover-letter
     cl_parser = subparsers.add_parser("cover-letter", help="Build a cover letter")
