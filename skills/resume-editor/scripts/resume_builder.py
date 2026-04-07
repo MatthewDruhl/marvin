@@ -859,6 +859,26 @@ def cmd_build(args: argparse.Namespace) -> None:
     ]:
         exp_data = tailoring.get(section_key, [])
         if not exp_data:
+            # Remove the section header and content from the template
+            children = list(body)
+            sections = find_all_section_indices(body)
+            section_idx = None
+            next_section_idx = None
+            for i, (idx, name) in enumerate(sections):
+                if name == section_name:
+                    section_idx = idx
+                    if i + 1 < len(sections):
+                        next_section_idx = sections[i + 1][0]
+                    break
+            if section_idx is not None and next_section_idx is not None:
+                remove_elements_between(body, section_idx - 1, next_section_idx)
+                # Also remove the header itself
+                children = list(body)
+                for child in children:
+                    if (etree.QName(child.tag).localname == "p"
+                            and get_elem_text(child).strip() == section_name):
+                        body.remove(child)
+                        break
             continue
 
         children = list(body)
