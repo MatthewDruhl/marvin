@@ -52,3 +52,7 @@ Run this after generating findings for each scope:
 3. **No style flags** — Don't flag naming preferences, formatting choices, or "I would have done it differently" as findings
 4. **Respect frameworks** — If a framework handles X (CSRF, XSS, SQL injection), don't flag X as missing unless the project bypasses the framework's protection
 5. **Inversion pass** — Run the inversion framework once to check for gaps your scope-by-scope scan may have missed
+
+---
+
+*Steel-manning, "So What?" test, and self-check process inspired by the [devils-advocate skill](https://github.com/notmanas/claude-code-skills/tree/main/skills/devils-advocate) by notmanas.*

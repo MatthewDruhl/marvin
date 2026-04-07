@@ -74,3 +74,7 @@ After completing the AI scope, verify your findings are genuine:
 | Generic warnings that apply to any AI project | Findings specific to THIS project's architecture |
 | "Could potentially" language without evidence | "This code does X, which means Y" |
 | Flagging missing features the project doesn't need | Flagging gaps in features the project actually uses |
+
+---
+
+*"Performed vs Genuine Thoroughness" table inspired by the [devils-advocate skill](https://github.com/notmanas/claude-code-skills/tree/main/skills/devils-advocate) by notmanas.*

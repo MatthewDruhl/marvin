@@ -41,3 +41,7 @@ Detection questions organized by scope. Use these to probe for issues your initi
 - **Config in code:** Are environment-specific values (dev/staging/prod) in source files instead of config?
 - **Circular dependencies:** Do modules import each other? Does changing A require changing B?
 - **Mixed concerns:** Does a single file handle business logic, I/O, and presentation?
+
+---
+
+*Detection question pattern inspired by the [devils-advocate skill](https://github.com/notmanas/claude-code-skills/tree/main/skills/devils-advocate) by notmanas.*
