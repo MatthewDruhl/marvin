@@ -278,11 +278,13 @@ def ask_claude(prompt: str, thread_key: str) -> str:
 _SECRET_PATTERNS = re.compile(
     r"(?:"
     r"xoxb-[A-Za-z0-9\-]+"        # Slack bot token
+    r"|xoxp-[A-Za-z0-9\-]+"       # Slack user token
     r"|xapp-[A-Za-z0-9\-]+"       # Slack app token
     r"|sk-[A-Za-z0-9]{20,}"       # OpenAI/Anthropic-style API key
     r"|AKIA[A-Z0-9]{16}"          # AWS access key
     r"|ghp_[A-Za-z0-9]{36}"       # GitHub personal access token
     r"|gho_[A-Za-z0-9]{36}"       # GitHub OAuth token
+    r"|ghs_[A-Za-z0-9]{36}"       # GitHub fine-grained PAT
     r")",
     re.MULTILINE,
 )

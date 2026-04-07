@@ -104,11 +104,13 @@ class TestScrubSecrets:
     _SECRET_PATTERNS = re.compile(
         r"(?:"
         r"xoxb-[A-Za-z0-9\-]+"
+        r"|xoxp-[A-Za-z0-9\-]+"
         r"|xapp-[A-Za-z0-9\-]+"
         r"|sk-[A-Za-z0-9]{20,}"
         r"|AKIA[A-Z0-9]{16}"
         r"|ghp_[A-Za-z0-9]{36}"
         r"|gho_[A-Za-z0-9]{36}"
+        r"|ghs_[A-Za-z0-9]{36}"
         r")",
         re.MULTILINE,
     )
@@ -149,6 +151,18 @@ class TestScrubSecrets:
         text = "ghp_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghij"
         result = self._scrub_secrets(text)
         assert "ghp_" not in result
+        assert "[REDACTED]" in result
+
+    def test_github_fine_grained_pat_redacted(self):
+        text = "ghs_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghij"
+        result = self._scrub_secrets(text)
+        assert "ghs_" not in result
+        assert "[REDACTED]" in result
+
+    def test_slack_user_token_redacted(self):
+        text = "Token: xoxp-1234-5678-90ab-cdef"
+        result = self._scrub_secrets(text)
+        assert "xoxp-" not in result
         assert "[REDACTED]" in result
 
     def test_multiple_secrets_all_redacted(self):
