@@ -10,6 +10,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 
+from dotenv import load_dotenv
 from PyPDF2 import PdfReader, PdfWriter
 from PyPDF2.generic import TextStringObject
 
@@ -17,15 +18,7 @@ from PyPDF2.generic import TextStringObject
 def load_env():
     """Load variables from .env file."""
     env_path = Path(__file__).resolve().parents[3] / ".env"
-    if not env_path.exists():
-        return
-    with open(env_path) as f:
-        for line in f:
-            line = line.strip()
-            if not line or line.startswith("#") or "=" not in line:
-                continue
-            key, value = line.split("=", 1)
-            os.environ.setdefault(key.strip(), value.strip())
+    load_dotenv(env_path)
 
 
 def fill_activities(field_mapping, activities, start_idx=0):
@@ -43,7 +36,10 @@ def fill_activities(field_mapping, activities, start_idx=0):
         activity_num = '' if i == 0 else f' - {i+1}'
 
         # Date of Activity
-        date_field = f'Enter Date of Job Search Activity{activity_num}' if i > 0 else 'Enter Date of Job Search Activity'
+        date_field = (
+            f'Enter Date of Job Search Activity{activity_num}'
+            if i > 0 else 'Enter Date of Job Search Activity'
+        )
         field_mapping[date_field] = activity_date.strftime('%m/%d/%Y')
 
         # Work Search Activity
@@ -110,7 +106,11 @@ def fill_activities(field_mapping, activities, start_idx=0):
 
         # Email checkbox
         if 'email' in contact_method or 'online' in contact_method:
-            email_checkbox = f'Click this checkbox if you contacted organization by email{activity_num}' if i > 0 else 'Click this checkbox if you contacted organization by email'
+            email_checkbox = (
+                f'Click this checkbox if you contacted organization by email{activity_num}'
+                if i > 0
+                else 'Click this checkbox if you contacted organization by email'
+            )
             field_mapping[email_checkbox] = '/Yes'
 
         # Mail checkbox
@@ -122,7 +122,8 @@ def fill_activities(field_mapping, activities, start_idx=0):
             elif i == 2:
                 field_mapping['Click this checkbox if you contacted organization by mail - 3'] = '/Yes'
             elif i == 3:
-                field_mapping['Click this checkbox if you contacted organization by mail  - 4'] = '/Yes'  # Note: double space
+                # Note: double space before "- 4" matches the PDF field name
+                field_mapping['Click this checkbox if you contacted organization by mail  - 4'] = '/Yes'
             else:
                 field_mapping['Click this checkbox if you contacted organization by mail - 5'] = '/Yes'
 
