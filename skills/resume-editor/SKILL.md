@@ -186,12 +186,35 @@ Strict validation against resume data. No hand-waving.
 - **Years of experience:** Math against actual dates in resume-data.json.
 - **Tech stack:** Exact match against skills list. Missing = gap.
 - **Preferred vs Required:** Separate sections. Preferred gaps are OK. Required gaps are risks.
-- **Recommendation:** One of:
-  - **Apply** — meets all required, most preferred
-  - **Stretch** — meets most required, clear gaps in preferred
-  - **Don't Apply** — missing required qualifications
 
-Present the analysis with clear YES/NO columns, then the recommendation with reasoning.
+Present the qualification analysis with clear YES/NO columns.
+
+#### Multi-Dimensional Scoring
+
+After the YES/NO analysis, score the role across 5 dimensions (1-5 scale):
+
+| Dimension | What to evaluate | Score |
+|-----------|-----------------|-------|
+| **CV Match** | How well skills/experience align with required and preferred qualifications | X/5 |
+| **North-Star Alignment** | Fit with career goals — platform eng, DevOps, app support, TPM, integration (not SRE) | X/5 |
+| **Compensation** | Salary range vs. market expectations for the role level | X/5 |
+| **Cultural Signals** | Remote-friendly, team size, growth indicators, company stability | X/5 |
+| **Red Flags** | Dealbreakers — SRE-heavy, Java-heavy, same-day rejection history with company, unrealistic requirements | X/5 |
+
+**Overall Score:** Average of all 5 dimensions.
+
+#### Scoring Bands
+- **4.5+** = Strong match, apply immediately
+- **3.5-4.4** = Stretch, worth applying with tailored resume
+- **Below 3.5** = Skip unless there's a compelling reason
+
+#### Recommendation
+Based on the overall score and qualification analysis:
+- **Apply** — 4.5+ overall, meets all required qualifications
+- **Stretch** — 3.5-4.4 overall, meets most required, clear gaps in preferred
+- **Don't Apply** — below 3.5, or missing required qualifications regardless of score
+
+Present the scorecard table, overall score, and recommendation with reasoning.
 
 ---
 
