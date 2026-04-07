@@ -83,12 +83,14 @@ Fetch a job posting, tailor the resume, build the .docx + cover letter.
 **Step 1: Fetch & Analyze**
 - WebFetch the URL
 - Extract: company, title, job ID, requirements, tech stack, salary, location
+- **Extract 15-20 ATS keywords** from the job description — exact terms and phrases the posting uses (e.g., "Kubernetes", "CI/CD", "cross-functional"). Prefer the posting's exact phrasing over synonyms. Include both required and preferred skills.
+- Save extracted keywords in the tailoring JSON `keywords` field — these drive `auto-trim` scoring and `score` output
 - Read `resume-data.json` via `view` command
 
 **Step 2: Checkpoint 1 — Strategy**
 Present to user:
-- Which keywords to emphasize for this role
-- Which bullets to include (by tag relevance)
+- **Extracted keywords** (from Step 1) — confirm or adjust before proceeding
+- Which bullets to include (by tag relevance to extracted keywords)
 - Which skills to feature vs drop
 - Title/summary reframe recommendation
 - Bullets to cut (least relevant by tag score) for 2-page fit
@@ -106,8 +108,8 @@ Present to user:
 Wait for user approval before proceeding.
 
 **Step 4: Build**
-1. Write the tailoring JSON file to a temp location
-2. Run `auto-trim --tailoring-file FILE --output-dir DIR --keywords KW1,KW2,... --company NAME` to build the resume with automatic 2-page enforcement. This scores all bullets against the job posting keywords and removes the lowest-relevance bullets until it fits. It shows what was cut so the user can override.
+1. Write the tailoring JSON file to a temp location (keywords from Step 1 are already in the JSON)
+2. Run `auto-trim --tailoring-file FILE --output-dir DIR --keywords KW1,KW2,... --company NAME` using the keywords extracted in Step 1. No manual keyword input needed — pass them from the tailoring JSON `keywords` field.
 3. If auto-trim is not needed (already within page limit), use `build --tailoring-file FILE --output-dir DIR` directly.
 4. Write cover letter body to temp .txt file
 5. Run `cover-letter --company NAME --job-title TITLE --body-file FILE --output-dir DIR`
@@ -206,7 +208,7 @@ Score all bullets in a tailoring file against a set of job posting keywords. Out
 
 Run: `score --tailoring-file FILE --keywords KW1,KW2,...`
 
-Keywords should be comma-separated terms extracted from the job posting (e.g., `Linux,SQL,Bash,Kubernetes,Java,troubleshooting`).
+Keywords should be comma-separated terms extracted from the job posting (e.g., `Linux,SQL,Bash,Kubernetes,Java,troubleshooting`). When running as part of `/resume apply`, use the keywords already extracted in Step 1 and stored in the tailoring JSON `keywords` field.
 
 ---
 
