@@ -359,16 +359,22 @@ Design page 1 accordingly: contact, summary, last 2-3 roles, and key skills must
 - Structure: date+company header, salutation, 2-3 body paragraphs, signature block
 - 1 page max
 - Same voice rules as resume
+- **Don't repeat the resume** — elaborate on highlights that don't fit on the resume, not rehash bullets
+- **Make it about the company** — lead with why this company and role, not just why you're qualified. Research the org's mission, recent news, and what drew the user to apply.
+- **Connect the dots** — explain career transitions, remote experience, or how different roles built transferable skills. Help the hiring manager picture the user in the role.
 - Include concrete examples — match job requirements to specific experiences
 - Maintain authentic voice — the final letter must sound like the user, not AI
-- Research the org's mission and recent news to personalize
-- Address career gaps or transitions directly and persuasively
+- Address career gaps or transitions directly and persuasively (certifications, projects, continued learning)
+- **Career break entry:** Available in `resume-data.json` under `career_break` key. Only add to tailoring if Matt explicitly requests it. Do not include by default.
 - Check application instructions — some orgs restrict AI use
+- If posting says "Do not include a cover letter" — skip it. Following instructions matters.
 
-### Skills Table
-- 4-column table, alphabetized
+### Skills Section
+- **Preferred format:** Bullet points grouped by category (uses `skills_grouped` from resume-data.json)
+  - Cloud & Architecture, Infrastructure as Code (IaC), Languages & Tools, Leadership
+- **Fallback format:** 4-column table, alphabetized (uses flat `skills` array)
 - Add role-relevant skills, remove irrelevant ones
-- Fill empty cells first, then add rows
+- When tailoring, adjust items within each category group to match the job posting
 
 ### Formatting
 - Template preserves all original formatting: margins, fonts, spacing, section headers
@@ -394,6 +400,7 @@ Different companies value different framing:
 - [UPenn — Optimizing Your Resume for AI Scanners](https://careerservices.upenn.edu/blog/2024/10/08/optimizing-your-resume-for-ai-scanners/)
 - [Nick Singh — 36 Resume Rules for Software Engineers](https://www.nicksingh.com/posts/36-resume-rules-for-software-engineers)
 - [Tech Interview Handbook — Resume Guide](https://www.techinterviewhandbook.org/resume/)
+- [FlexJobs — Guide to Resumes, Cover Letters, & Interviews (2021)](~/Resume/data/FlexJobs_guide_to_resumes_cover_letters_and_interviews.pdf) — STAR method, ATS optimization, employment gap handling, cover letter structure, interview prep
 - [SWE Resume — XYZ Method](https://www.sweresume.app/articles/xyz-method-resume/)
 - [Jobscan — Resume PDF vs Word](https://www.jobscan.co/blog/resume-pdf-vs-word/)
 
