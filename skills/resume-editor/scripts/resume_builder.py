@@ -632,7 +632,7 @@ def find_all_section_indices(body: etree._Element) -> list[tuple[int, str]]:
 
 # Resume page capacity: 10.5pt Calibri, single-spaced, 7.5" usable width, 10" usable height
 # ~14pt line height (10.5pt + leading), 720pt usable = ~51 lines per page
-LINES_PER_PAGE = 51
+LINES_PER_PAGE = 46
 CHARS_PER_LINE = 95  # approximate characters per line at 10.5pt Calibri on 7.5" width
 # Lines consumed by fixed header area (name, contact, blanks, title, tagline, blank)
 HEADER_LINES = 8
@@ -651,8 +651,13 @@ def _insert_page_break(
     company_template: etree._Element | None,
     normal_template: etree._Element | None,
     current_company_name: str | None,
+    current_role: dict[str, Any] | None = None,
+    role_template: etree._Element | None = None,
 ) -> tuple[etree._Element, bool]:
-    """Insert the Page Two header, blank line, and (continued) line.
+    """Insert the Page Two header, blank line, and (continued) lines.
+
+    If current_role is provided and the break happens mid-role, also inserts
+    a role continuation header (e.g. 'Specialist Software Engineer, Remote (continued)').
 
     Returns (new_insert_after, True).
     """
@@ -666,12 +671,25 @@ def _insert_page_break(
         insert_after.addnext(blank)
         insert_after = blank
 
-    # "(continued)" line
+    # Company "(continued)" line
     if current_company_name and company_template is not None:
         continued_text = f"{current_company_name} (continued)"
         cont_para = clone_paragraph_with_text(company_template, continued_text, bold=True)
         insert_after.addnext(cont_para)
         insert_after = cont_para
+
+    # Role "(continued)" line — when break happens mid-role
+    if current_role and role_template is not None:
+        role_title = current_role.get("title", "")
+        role_type = current_role.get("type")
+        dates = current_role.get("dates", "")
+        title_with_cont = f"{role_title} (continued)"
+        role_cont_para = create_role_header_paragraph(
+            role_template, title_with_cont, role_type, dates,
+        )
+        set_keep_with_next(role_cont_para)
+        insert_after.addnext(role_cont_para)
+        insert_after = role_cont_para
 
     return insert_after, True
 
@@ -1027,11 +1045,13 @@ def cmd_build(args: argparse.Namespace) -> None:
 
                     # Check if adding this bullet would overflow page 1
                     if not page_break_inserted and (line_count + bullet_lines) > LINES_PER_PAGE:
-                        # Insert page break before this bullet
+                        # Insert page break before this bullet (mid-role)
                         if page_two_header is not None:
                             insert_after, page_break_inserted = _insert_page_break(
                                 insert_after, page_two_header, company_template, normal_template,
                                 current_company_name,
+                                current_role=role,
+                                role_template=role_template,
                             )
 
                     if bullet_template is not None:
