@@ -29,7 +29,8 @@ from lxml import etree
 
 # Paths — configurable via environment variables (Issue #29, #51)
 _RESUME_DIR = Path(os.environ.get("RESUME_DATA_DIR", str(Path.home() / "Resume")))
-RESUME_PATH = Path(os.environ.get("RESUME_DOCX_PATH", str(_RESUME_DIR / "MatthewDruhl.docx")))
+_default_docx = next(_RESUME_DIR.glob("*.docx"), _RESUME_DIR / "resume.docx")
+RESUME_PATH = Path(os.environ.get("RESUME_DOCX_PATH", str(_default_docx)))
 TEMPLATE_PATH = _RESUME_DIR / "original" / RESUME_PATH.name
 BACKUP_DIR = _RESUME_DIR / "backup"
 CERTS_DIR = _RESUME_DIR / "certs"
@@ -196,7 +197,7 @@ def cmd_backup(args):
 
     BACKUP_DIR.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    backup_name = f"MatthewDruhl_{timestamp}.docx"
+    backup_name = f"{RESUME_PATH.stem}_{timestamp}.docx"
     backup_path = BACKUP_DIR / backup_name
 
     import shutil

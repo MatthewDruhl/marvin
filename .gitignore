@@ -20,10 +20,8 @@ g_client_secret.json
 client_secret_*.json
 .google-workspace-credentials/
 
-# Truck - large binaries
-2021Ram3500/*.zip
-2021Ram3500/Recipts/
-2021Ram3500/118707-service/
+# Truck (moved to ~/Documents/truck/)
+2021Ram3500/
 
 # PMP
 /pmp/screenshot*
@@ -38,6 +36,7 @@ content/jobs/TWC/*.csv
 content/jobs/TWC/*.pdf
 content/jobs/applications.md
 content/jobs/opportunities.md
+content/jobs/contacts.md
 content/jobs/interview-prep/
 
 __pycache__/

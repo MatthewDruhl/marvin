@@ -1,0 +1,78 @@
+# Networking & Contact CRM
+
+Last updated: 2026-01-01
+
+---
+
+## Active Contacts
+
+*No active networking contacts yet. Track contacts with "add contact: [name] at [company]"*
+
+---
+
+## Company Contacts
+
+### Acme Corp
+- **Contact:** Jane Doe
+- **Email:** jane.doe@example.com
+- **Relationship:** Applied
+- **Last Interaction:** 2026-01-15 (application submitted)
+- **Follow-up Date:** 2026-01-29
+- **Notes:** Senior Platform Engineer role
+
+### Globex Inc
+- **Contact:** John Smith
+- **Email:** john.smith@example.com
+- **Relationship:** Active Discussion
+- **Last Interaction:** 2026-01-20 (phone screen)
+- **Follow-up Date:** 2026-01-27
+- **Interaction History:**
+  - 2026-01-10: Applied online
+  - 2026-01-20: Phone screen with recruiter
+- **Notes:** DevOps Engineer position, remote-friendly
+
+---
+
+## LinkedIn Activity
+
+**Appeared in Recruiter Searches:** 0 searches
+- Source: LinkedIn job seeker profile
+- Action: Monitor for direct outreach
+
+---
+
+## Follow-up Strategy
+
+**When to Follow Up:**
+- 1-2 weeks after application (if no response)
+- After interviews (within 24 hours)
+- After rejections (thank you note, stay in touch)
+- Networking contacts: Every 2-4 weeks to maintain relationship
+
+**Relationship Strength Levels:**
+- Cold -- No interaction or only rejection
+- Warm -- Some back-and-forth, follow-up pending
+- Active -- Regular interaction, ongoing conversation
+- Strong -- Multiple interactions, mutual engagement
+
+---
+
+## Contact Template
+
+When adding a new contact:
+```
+### [Name] - [Company]
+- **Contact:** [Full Name]
+- **Email:** [email]
+- **Role:** [their role]
+- **Relationship:** [Cold/Warm/Active/Strong]
+- **Last Interaction:** [date] ([what happened])
+- **Follow-up Date:** [when to reach out next]
+- **Interaction History:**
+  - [date]: [what happened]
+- **Notes:** [anything relevant]
+```
+
+---
+
+*Managed by MARVIN networking skill*

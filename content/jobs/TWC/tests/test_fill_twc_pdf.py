@@ -17,11 +17,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from fill_twc_pdf import (
     ALL_FIELD_DICTS,
     HEADER_FIELDS,
+    VALID_ACTIVITY_TYPES,
     FieldValidationError,
+    TWCComplianceError,
     fill_activities,
     fill_twc_pdf,
     get_all_expected_field_names,
     load_env,
+    validate_csv,
     validate_pdf_fields,
 )
 
@@ -716,3 +719,142 @@ class TestValidatePdfFields:
         err = FieldValidationError("test")
         assert isinstance(err, Exception)
         assert str(err) == "test"
+
+
+# ---------------------------------------------------------------------------
+# CSV compliance validation (Issue #116)
+# ---------------------------------------------------------------------------
+
+class TestValidateCSV:
+    """Tests for validate_csv TWC compliance checks."""
+
+    def _week_start(self):
+        return datetime(2026, 1, 25)  # Sunday
+
+    def _week_end(self):
+        return datetime(2026, 1, 31)  # Saturday
+
+    def _valid_activities(self, count=4):
+        """Return a list of valid activities within the declared week."""
+        types = list(VALID_ACTIVITY_TYPES)
+        return [
+            make_activity(
+                date=f"2026-01-{26 + i}",
+                work_search=types[i % len(types)],
+            )
+            for i in range(count)
+        ]
+
+    def test_valid_csv_passes(self):
+        """Four valid activities within the week should pass validation."""
+        activities = self._valid_activities(4)
+        # Should not raise
+        validate_csv(activities, self._week_start(), self._week_end())
+
+    def test_more_than_four_activities_passes(self):
+        """More than the minimum should also pass."""
+        activities = self._valid_activities(6)
+        validate_csv(activities, self._week_start(), self._week_end())
+
+    def test_too_few_activities_raises(self):
+        """Fewer than 4 activities should fail compliance."""
+        activities = self._valid_activities(3)
+        with pytest.raises(TWCComplianceError, match="at least 4 activities"):
+            validate_csv(activities, self._week_start(), self._week_end())
+
+    def test_zero_activities_raises(self):
+        """Zero activities should fail compliance."""
+        with pytest.raises(TWCComplianceError, match="at least 4 activities"):
+            validate_csv([], self._week_start(), self._week_end())
+
+    def test_date_before_week_start_raises(self):
+        """An activity date before the week start should fail."""
+        activities = self._valid_activities(4)
+        activities[0] = make_activity(
+            date="2026-01-24",  # Saturday before the week
+            work_search="Applied for job",
+        )
+        with pytest.raises(TWCComplianceError, match="outside the declared week"):
+            validate_csv(activities, self._week_start(), self._week_end())
+
+    def test_date_after_week_end_raises(self):
+        """An activity date after the week end should fail."""
+        activities = self._valid_activities(4)
+        activities[3] = make_activity(
+            date="2026-02-01",  # Sunday after the week
+            work_search="Applied for job",
+        )
+        with pytest.raises(TWCComplianceError, match="outside the declared week"):
+            validate_csv(activities, self._week_start(), self._week_end())
+
+    def test_boundary_dates_pass(self):
+        """Activities on the exact start and end dates should pass."""
+        activities = [
+            make_activity(date="2026-01-25", work_search="Applied for job"),
+            make_activity(date="2026-01-26", work_search="Interview"),
+            make_activity(date="2026-01-30", work_search="Searched online"),
+            make_activity(date="2026-01-31", work_search="Follow-up email"),
+        ]
+        validate_csv(activities, self._week_start(), self._week_end())
+
+    def test_invalid_activity_type_raises(self):
+        """An activity type not in the valid TWC list should fail."""
+        activities = self._valid_activities(4)
+        activities[1] = make_activity(
+            date="2026-01-27",
+            work_search="Took an online course",
+        )
+        with pytest.raises(TWCComplianceError, match="invalid activity type"):
+            validate_csv(activities, self._week_start(), self._week_end())
+
+    def test_multiple_errors_reported(self):
+        """All errors should be collected and reported, not just the first."""
+        activities = [
+            make_activity(date="2026-01-24", work_search="Invalid type"),
+            make_activity(date="2026-01-26", work_search="Another bad type"),
+        ]
+        with pytest.raises(TWCComplianceError) as exc_info:
+            validate_csv(activities, self._week_start(), self._week_end())
+        msg = str(exc_info.value)
+        # Should report: too few, out-of-range date, and invalid types
+        assert "at least 4" in msg
+        assert "outside the declared week" in msg
+        assert "invalid activity type" in msg
+
+    def test_date_with_time_component_validates(self):
+        """Dates with a time component should still validate correctly."""
+        activities = [
+            make_activity(date="2026-01-26 14:30:00", work_search="Applied for job"),
+            make_activity(date="2026-01-27 09:00:00", work_search="Interview"),
+            make_activity(date="2026-01-28", work_search="Searched online"),
+            make_activity(date="2026-01-29", work_search="Follow-up email"),
+        ]
+        validate_csv(activities, self._week_start(), self._week_end())
+
+    def test_invalid_date_format_reported(self):
+        """A completely invalid date string should be reported as an error."""
+        activities = self._valid_activities(4)
+        activities[2] = make_activity(date="not-a-date", work_search="Applied for job")
+        with pytest.raises(TWCComplianceError, match="invalid date"):
+            validate_csv(activities, self._week_start(), self._week_end())
+
+    def test_fill_twc_pdf_rejects_noncompliant_csv(self):
+        """fill_twc_pdf should raise TWCComplianceError for non-compliant data."""
+        # Only 2 activities — below the 4 minimum
+        activities = [
+            make_activity(date="2026-01-26", work_search="Applied for job"),
+            make_activity(date="2026-01-27", work_search="Interview"),
+        ]
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False) as csv_f:
+            fieldnames = list(activities[0].keys())
+            writer = csv.DictWriter(csv_f, fieldnames=fieldnames)
+            writer.writeheader()
+            for a in activities:
+                writer.writerow(a)
+            csv_path = csv_f.name
+
+        try:
+            with pytest.raises(TWCComplianceError, match="at least 4 activities"):
+                fill_twc_pdf(csv_path, "template.pdf", "output.pdf")
+        finally:
+            os.unlink(csv_path)
