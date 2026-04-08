@@ -70,6 +70,46 @@ def _validate_input(text: str) -> str | None:
         return f"Message too long ({len(text):,} chars). Max is {MAX_INPUT_LENGTH:,}."
     return None
 
+# ---------------------------------------------------------------------------
+# Per-user rate limiting (sliding window, 30 calls/hour)
+# ---------------------------------------------------------------------------
+RATE_LIMIT_MAX = 30
+RATE_LIMIT_WINDOW = 3600  # 1 hour in seconds
+
+_rate_limits: dict[str, list[float]] = {}
+_rate_lock = threading.Lock()
+
+
+def _check_rate_limit(user_id: str) -> bool:
+    """Return True if the user is within rate limits, False if exceeded.
+
+    Uses a sliding window: keeps only timestamps within the last RATE_LIMIT_WINDOW
+    seconds, then checks count against RATE_LIMIT_MAX.
+    """
+    now = time.time()
+    cutoff = now - RATE_LIMIT_WINDOW
+    with _rate_lock:
+        timestamps = _rate_limits.get(user_id, [])
+        # Prune old entries
+        timestamps = [t for t in timestamps if t > cutoff]
+        if len(timestamps) >= RATE_LIMIT_MAX:
+            _rate_limits[user_id] = timestamps
+            return False
+        timestamps.append(now)
+        _rate_limits[user_id] = timestamps
+        return True
+
+
+def _cleanup_rate_limits() -> None:
+    """Remove rate-limit entries for users with no recent activity."""
+    now = time.time()
+    cutoff = now - RATE_LIMIT_WINDOW
+    with _rate_lock:
+        stale = [uid for uid, ts in _rate_limits.items() if all(t <= cutoff for t in ts)]
+        for uid in stale:
+            del _rate_limits[uid]
+
+
 # Per-session locks to prevent concurrent Claude calls on the same session
 _session_locks: dict[str, threading.Lock] = {}
 _locks_lock = threading.Lock()
@@ -199,6 +239,7 @@ def _run_claude(
 def ask_claude(prompt: str, thread_key: str) -> str:
     """Send a message to Claude, continuing the thread's session if one exists."""
     _cleanup_stale_sessions()
+    _cleanup_rate_limits()
     _session_last_used[thread_key] = time.time()
 
     existing_session = _thread_sessions.get(thread_key)
@@ -269,8 +310,9 @@ def ask_claude(prompt: str, thread_key: str) -> str:
                 return "That took too long (>2 min). Try a simpler question."
             except FileNotFoundError:
                 return "Error: `claude` CLI not found. Make sure Claude Code is installed."
-            except Exception as e:
-                return f"Error: {e}"
+            except Exception:
+                log.exception("Unexpected error in ask_claude")
+                return "Something went wrong. Try again or say 'reset'."
     return "No response from Claude."
 
 
@@ -340,6 +382,15 @@ def handle_mention(event, say, client):
         log.warning(f"Unauthorized mention from {event.get('user')}")
         return
 
+    user_id = event.get("user", "")
+    if not _check_rate_limit(user_id):
+        say(
+            text="You're sending messages too quickly. Please wait a bit and try again.",
+            thread_ts=event.get("thread_ts", event["ts"]),
+        )
+        log.warning(f"Rate limit exceeded for user {user_id}")
+        return
+
     validation_error = _validate_input(text)
     if validation_error:
         say(text=validation_error, thread_ts=event.get("thread_ts", event["ts"]))
@@ -361,7 +412,8 @@ def handle_mention(event, say, client):
         log.debug(f"Reaction failed: {e}")
 
     log.info(f"Mention from {event.get('user')}: {text[:80]} [thread={thread_key[:20]}]")
-    _state["consecutive_errors"] = 0
+    with _state_lock:
+        _state["consecutive_errors"] = 0
     response = ask_claude(text, thread_key)
     send_response(say, event["channel"], thread_ts, response)
 
@@ -393,6 +445,16 @@ def handle_dm(event, say, client):
         say(text="Sorry, I'm not configured to respond to you. Contact the bot admin.", thread_ts=thread_ts)
         log.warning(f"Unauthorized DM from {event.get('user')}")
         return
+
+    user_id = event.get("user", "")
+    if not _check_rate_limit(user_id):
+        say(
+            text="You're sending messages too quickly. Please wait a bit and try again.",
+            thread_ts=thread_ts,
+        )
+        log.warning(f"Rate limit exceeded for user {user_id}")
+        return
+
     validation_error = _validate_input(text)
     if validation_error:
         say(text=validation_error, thread_ts=thread_ts)
@@ -414,7 +476,8 @@ def handle_dm(event, say, client):
         log.debug(f"Reaction failed: {e}")
 
     log.info(f"DM from {event.get('user')}: {text[:80]} [session_key={thread_key}]")
-    _state["consecutive_errors"] = 0
+    with _state_lock:
+        _state["consecutive_errors"] = 0
     response = ask_claude(text, thread_key)
     send_response(say, event["channel"], thread_ts, response)
 
@@ -425,15 +488,18 @@ def handle_dm(event, say, client):
         log.debug(f"Reaction failed: {e}")
 
 
-# Track consecutive connection errors for restart logic
+# Track consecutive connection errors for restart logic.
+# Guarded by _state_lock since Slack bolt dispatches events across threads.
 _state = {"consecutive_errors": 0}
+_state_lock = threading.Lock()
 MAX_CONSECUTIVE_ERRORS = 5
 
 @app.error
 def handle_errors(error):
     """Handle Slack connection errors."""
-    _state["consecutive_errors"] += 1
-    count = _state["consecutive_errors"]
+    with _state_lock:
+        _state["consecutive_errors"] += 1
+        count = _state["consecutive_errors"]
     log.error(f"Slack error ({count}/{MAX_CONSECUTIVE_ERRORS}): {error}")
     if count >= MAX_CONSECUTIVE_ERRORS:
         log.error("Too many consecutive errors — exiting for launchd restart")
