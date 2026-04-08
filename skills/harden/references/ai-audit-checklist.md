@@ -64,6 +64,11 @@ These are the baseline — always check these first:
 **Example finding:** A simple config loader wrapped in a Strategy pattern with a Factory and an Abstract Base Class for one implementation.
 **Severity guidance:** Low in most cases. Medium if the abstraction obscures bugs or makes maintenance harder.
 
+### 16. Token Efficiency
+**What to look for:** Are prompts, skill instructions, and file I/O patterns minimizing token consumption? Look for: duplicate instruction files loaded together, sequential reads that could be parallel, verbose templates the model doesn't need, conversation re-scanning when incremental summaries exist, interactive pauses that could be combined into a single prompt.
+**Example finding:** A skill loads a 138-line SKILL.md and a 75-line command file with overlapping instructions. Reads 5 state files sequentially instead of in one parallel batch. Re-summarizes the full conversation even when checkpoints exist.
+**Severity guidance:** Medium if token waste is consistent across frequent operations (daily skills, session management). Low for rarely-used skills. Consider cumulative cost — a 40% overhead on a skill run 2x/day adds up fast.
+
 ---
 
 *Extended AI checks inspired by research on AI code quality and the [devils-advocate skill](https://github.com/notmanas/claude-code-skills/tree/main/skills/devils-advocate) by notmanas.*
