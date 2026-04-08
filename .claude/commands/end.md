@@ -4,71 +4,51 @@ description: End MARVIN session - save context and state
 
 # /end - End MARVIN Session
 
-Wrap up the current session and save context for continuity.
+## Step 1: Load Context (parallel batch)
 
-## Instructions
+Read ALL of these in one parallel batch:
+- `state/current.md`
+- `state/habits.md`
+- `state/goals.md`
+- `sessions/{TODAY}.md` (if exists)
 
-### 1. Summarize This Session
-Review the conversation and extract:
-- **Topics discussed** - What did we work on?
-- **Decisions made** - What was decided?
-- **Open threads** - What's unfinished or needs follow-up?
-- **Action items** - What needs to happen next?
+Get today's date with `date +%Y-%m-%d` in the same batch.
 
-### 2. Update Session Log
-Get today's date with `date +%Y-%m-%d`.
+## Step 2: Summarize + Preview + Habit Check (single output)
 
-Append to `sessions/{TODAY}.md` (create if doesn't exist):
-```markdown
-## Session: {TIME}
+Review the conversation and prepare ONE combined message with all three sections:
 
-### Topics
-- {topic 1}
-- {topic 2}
+**Session Summary:**
+- Topics discussed, decisions made, open threads, action items
 
-### Decisions
-- {decision 1}
+**State Changes Preview:**
+- Show proposed changes to `state/current.md` (new priorities, changed statuses, completed items, new open threads)
+- If goal progress was made, show proposed `state/goals.md` updates
+- If content was shipped, note it for `content/log.md`
 
-### Open Threads
-- {thread 1}
+**Habit Check:**
+- List any habits from `state/habits.md` not yet logged today
+- Ask: "Did you do any of these today?"
 
-### Next Actions
-- {action 1}
-```
+Present all three sections in one message. Wait for user response once.
 
-If creating new file, add header: `# Session Log: {TODAY}`
+## Step 3: Write Everything (parallel batch)
 
-### 3. Update State
-Update `state/current.md` with:
-- Any new priorities
-- Changed project statuses
-- New open threads
-- Removed/completed items
+After user confirms, write ALL updates in one parallel batch:
+- Append to `sessions/{TODAY}.md` (create with `# Session Log: {TODAY}` header if new)
+- Edit `state/current.md` (keep under 50 lines — move details to `content/`)
+- Update `state/habits.md` with reported completions
+- Edit `state/goals.md` only if progress was discussed
+- Append to `content/log.md` only if content was shipped
 
-Keep `current.md` under 50 lines. Move project details to `content/` files, not current.md.
+## Step 4: Conditional Cleanup (skip if nothing to do)
 
-### 4. Update Goals (if applicable)
-If any goal-related progress was made this session, update `state/goals.md` tracking table with current status and "Last updated" date.
+Only run each if applicable:
+- **TWC PDFs:** Only if a `work-search-week-*.csv` in `content/jobs/TWC/` was modified today
+- **Archive:** Only if more than 14 files in `sessions/` (move >2 weeks old to `sessions/archive/YYYY-MM/`)
+- **Git commit:** Only if user requests it
 
-### 5. Generate TWC PDFs
-See `skills/twc-pdf/SKILL.md` for instructions. Run:
-```bash
-cd content/jobs/TWC
-for file in work-search-week-*.csv; do
-    uv run --with PyPDF2 python3 fill_twc_pdf.py "$file" 2>/dev/null
-done
-```
-
-If PDFs were generated, note: "TWC PDFs updated"
-
-### 6. Archive Old Sessions
-If there are more than 14 session files in `sessions/`, move files older than 2 weeks to `sessions/archive/YYYY-MM/`.
-
-### 7. Confirm
-Show a brief summary:
-- What was logged
-- Key items for next session
-- State updated confirmation
-- TWC PDFs status (if applicable)
-
-Keep it concise.
+## Notes
+- Multiple `/end` calls in one day append to the same session file
+- Keep summaries concise but complete for future context
+- Log non-obvious decisions to `state/decisions.md`
