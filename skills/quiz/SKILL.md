@@ -240,12 +240,26 @@ During daily briefing, if topics are overdue:
 - Mention: "You have X topics overdue for review. Want a quick quiz?"
 - If 3+ topics overdue for 3+ days, nudge harder
 
+## Question Types by Confidence Level
+
+### (1/5) and (2/5)
+- Spot the bug — Show broken code, find what's wrong
+- Multiple choice — One question with 4 choices, ONE correct answer
+
+### (2/5) and (3/5)
+- Refactor — Show working but non-idiomatic code, rewrite it better
+
+### (3/5) and (4/5)
+- Predict the output — Show a code snippet, say what it produces
+- Fill in the blank — Show code with a key part removed, complete it
+
+### (4/5) and (5/5)
+- Coding Challenges — Small problem to solve from scratch
+- Teach the Teacher — Explain the topic; verify the explanation
+- Teach-Back Mode — Auto-triggers after passing quiz questions (see above)
+
 ## Notes
 - Keep quiz sessions focused — 5-10 questions is a good default
-- Vary question difficulty based on current confidence level
-- Low confidence (1-2): Start with fundamentals
-- Medium confidence (3): Mix of conceptual and applied
-- High confidence (4-5): Edge cases, tricky scenarios, code challenges
 - **Teach-back is the assessment method for confidence 4/5 and 5/5** — auto-triggers after passing quiz questions at those levels
 - Track quiz history in session logs for trend analysis
 - Questions should be Python-focused where applicable (user's primary language)

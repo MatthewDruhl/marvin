@@ -19,6 +19,13 @@ Run `date +%Y-%m-%d` to get today's date. Store as TODAY.
 - `sessions/{TODAY}.md` - If exists, we're resuming today's session
 - If no today file, read the most recent file in `sessions/` for continuity
 
+### 2b. Sync Learning Tracker
+Update learning tracker with new topics from `~/Code/Learning/topics-learned.md`:
+- Do not repeat information already in `state/learning.md`
+- `Issues Needing More Guidance` items start at confidence 1/5
+- `Topics Covered` and `Key Concepts Practiced` start at confidence 2/5
+- Show a summary of what was added
+
 ### 3. Check Gmail for Job Responses
 Automatically search Gmail for responses to active job applications:
 - Read `~/Resume/jobs/applications.md` for active applications

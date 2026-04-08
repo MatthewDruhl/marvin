@@ -68,6 +68,7 @@ These are the baseline — always check these first:
 **What to look for:** Are prompts, skill instructions, and file I/O patterns minimizing token consumption? Look for: duplicate instruction files loaded together, sequential reads that could be parallel, verbose templates the model doesn't need, conversation re-scanning when incremental summaries exist, interactive pauses that could be combined into a single prompt.
 **Example finding:** A skill loads a 138-line SKILL.md and a 75-line command file with overlapping instructions. Reads 5 state files sequentially instead of in one parallel batch. Re-summarizes the full conversation even when checkpoints exist.
 **Severity guidance:** Medium if token waste is consistent across frequent operations (daily skills, session management). Low for rarely-used skills. Consider cumulative cost — a 40% overhead on a skill run 2x/day adds up fast.
+**Always-loaded files:** Check CLAUDE.md, system prompts, and other files loaded every session. Content that could live in on-demand skill files (setup instructions, reference tables, detailed procedures) is a per-session tax. Only behavioral guidance and core rules belong in always-loaded files.
 
 ---
 
