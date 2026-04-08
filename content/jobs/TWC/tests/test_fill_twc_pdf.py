@@ -9,17 +9,23 @@ from pathlib import Path
 from unittest.mock import MagicMock, mock_open, patch
 
 import pytest
+from PyPDF2 import PdfWriter
 
 # Add parent directory to path so we can import fill_twc_pdf
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from fill_twc_pdf import (
+    ALL_FIELD_DICTS,
+    HEADER_FIELDS,
     VALID_ACTIVITY_TYPES,
+    FieldValidationError,
     TWCComplianceError,
     fill_activities,
     fill_twc_pdf,
+    get_all_expected_field_names,
     load_env,
     validate_csv,
+    validate_pdf_fields,
 )
 
 # ---------------------------------------------------------------------------
@@ -621,6 +627,98 @@ class TestOutputValidation:
         field_mapping = {}
         with pytest.raises(ValueError):
             fill_activities(field_mapping, activities)
+
+
+# ---------------------------------------------------------------------------
+# Field constants (Issue #118 / CQ-1)
+# ---------------------------------------------------------------------------
+
+class TestFieldConstants:
+    """Verify that extracted constants are complete and consistent."""
+
+    def test_all_activity_dicts_have_five_entries(self):
+        """Each per-activity field dict should have exactly 5 entries (indices 0-4)."""
+        for d in ALL_FIELD_DICTS:
+            assert set(d.keys()) == {0, 1, 2, 3, 4}, f"Bad keys in {d}"
+
+    def test_header_fields_complete(self):
+        """Header fields dict should contain all seven expected keys."""
+        expected_keys = {
+            "claimant_name", "week_of", "end_date",
+            "ssn_first3", "ssn_mid2", "ssn_last4", "required_searches",
+        }
+        assert set(HEADER_FIELDS.keys()) == expected_keys
+
+    def test_no_duplicate_field_names(self):
+        """No two constant dicts should share the same PDF field name."""
+        all_names: list[str] = list(HEADER_FIELDS.values())
+        for d in ALL_FIELD_DICTS:
+            all_names.extend(d.values())
+        assert len(all_names) == len(set(all_names)), "Duplicate field names detected"
+
+    def test_get_all_expected_field_names_returns_set(self):
+        """Utility should return a non-empty set of strings."""
+        names = get_all_expected_field_names()
+        assert isinstance(names, set)
+        assert len(names) > 0
+        assert all(isinstance(n, str) for n in names)
+
+    def test_constants_match_fill_activities_output(self):
+        """Field names produced by fill_activities should be a subset of declared constants."""
+        activities = [make_activity(
+            contact_method="Email",
+            results="Application filed",
+            notes="test note",
+        )]
+        field_mapping: dict[str, str] = {}
+        fill_activities(field_mapping, activities)
+
+        expected = get_all_expected_field_names()
+        for key in field_mapping:
+            assert key in expected, f"Unexpected field name from fill_activities: {key}"
+
+    def test_five_activities_all_fields_in_constants(self):
+        """All field names from a full 5-activity page should be declared constants."""
+        activities = [make_activity(
+            company=f"Co {i+1}",
+            contact_method="Email",
+            results="Application filed",
+            notes="n",
+        ) for i in range(5)]
+        field_mapping: dict[str, str] = {}
+        fill_activities(field_mapping, activities)
+
+        expected = get_all_expected_field_names()
+        for key in field_mapping:
+            assert key in expected, f"Unexpected field: {key}"
+
+
+# ---------------------------------------------------------------------------
+# PDF field validation (Issue #118 / CQ-1)
+# ---------------------------------------------------------------------------
+
+class TestValidatePdfFields:
+    """Tests for validate_pdf_fields()."""
+
+    def test_missing_fields_raises_error(self, tmp_path):
+        """A PDF with no form fields should raise FieldValidationError."""
+        # Create a minimal PDF via PdfWriter (no form fields)
+        pdf_path = tmp_path / "empty.pdf"
+        writer = PdfWriter()
+        writer.add_blank_page(width=612, height=792)
+        with open(pdf_path, "wb") as f:
+            writer.write(f)
+
+        with pytest.raises(FieldValidationError) as exc_info:
+            validate_pdf_fields(str(pdf_path))
+
+        assert "expected field(s) not found" in str(exc_info.value)
+
+    def test_field_validation_error_is_exception(self):
+        """FieldValidationError should be a proper Exception subclass."""
+        err = FieldValidationError("test")
+        assert isinstance(err, Exception)
+        assert str(err) == "test"
 
 
 # ---------------------------------------------------------------------------
