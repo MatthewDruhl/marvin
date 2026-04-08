@@ -14,6 +14,80 @@ from dotenv import load_dotenv
 from PyPDF2 import PdfReader, PdfWriter
 from PyPDF2.generic import TextStringObject
 
+VALID_ACTIVITY_TYPES = frozenset([
+    "Applied for job",
+    "Interview",
+    "Follow-up email",
+    "Searched online",
+    "Job fair",
+    "Networking event",
+    "Career counseling",
+])
+
+MIN_ACTIVITIES_PER_WEEK = 4
+
+
+class TWCComplianceError(Exception):
+    """Raised when CSV data fails TWC compliance validation."""
+
+
+def validate_csv(
+    activities: list[dict],
+    week_start: datetime,
+    week_end: datetime,
+) -> None:
+    """Validate CSV activities for TWC compliance before PDF generation.
+
+    Checks:
+    - At least 4 activities per week
+    - All activity dates fall within the declared week (Sunday-Saturday)
+    - Activity types are from the valid TWC list
+
+    Raises:
+        TWCComplianceError: If any compliance check fails.
+    """
+    errors: list[str] = []
+
+    # Check minimum activity count
+    if len(activities) < MIN_ACTIVITIES_PER_WEEK:
+        errors.append(
+            f"TWC requires at least {MIN_ACTIVITIES_PER_WEEK} activities per week, "
+            f"but only {len(activities)} found."
+        )
+
+    for i, activity in enumerate(activities, start=1):
+        # Parse activity date
+        date_str = activity["Date of Activity"]
+        if " " in date_str:
+            date_str = date_str.split()[0]
+        try:
+            activity_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+        except ValueError:
+            errors.append(f"Activity {i}: invalid date '{activity['Date of Activity']}'.")
+            continue
+
+        # Check date is within the declared week
+        ws = week_start.date() if isinstance(week_start, datetime) else week_start
+        we = week_end.date() if isinstance(week_end, datetime) else week_end
+        if activity_date < ws or activity_date > we:
+            errors.append(
+                f"Activity {i}: date {activity_date} is outside the declared week "
+                f"{ws} to {we}."
+            )
+
+        # Check activity type
+        activity_type = activity.get("Work Search Activity", "")
+        if activity_type not in VALID_ACTIVITY_TYPES:
+            errors.append(
+                f"Activity {i}: invalid activity type '{activity_type}'. "
+                f"Must be one of: {', '.join(sorted(VALID_ACTIVITY_TYPES))}."
+            )
+
+    if errors:
+        raise TWCComplianceError(
+            "CSV failed TWC compliance validation:\n- " + "\n- ".join(errors)
+        )
+
 
 def load_env():
     """Load variables from .env file."""
@@ -183,6 +257,9 @@ def fill_twc_pdf(csv_file, template_pdf, output_pdf):
     week_start = datetime.strptime(activities[0]['Week Starting'], '%Y-%m-%d')
     week_end = datetime.strptime(activities[0]['Week Ending'], '%Y-%m-%d')
     required_searches = activities[0]['Required Searches']
+
+    # Validate compliance before generating PDF
+    validate_csv(activities, week_start, week_end)
 
     # Create PDFs for all activities (5 per page)
     num_pages = (len(activities) + 4) // 5  # Round up
