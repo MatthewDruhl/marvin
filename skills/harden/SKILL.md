@@ -14,15 +14,20 @@ Load these as needed during the audit — do not read all upfront.
 
 ## Phase 0: Context Gathering
 
-Before scanning, ask these questions to calibrate the audit. The user can answer inline or say "skip" to assume worst-case (strictest ratings).
+Use `AskUserQuestion` to present all 5 calibration questions at once:
 
-1. **Visibility** — Is this repo private, or could it go public?
-2. **Access** — Just you, a team, or open source?
-3. **Deployment** — Local only, server, or cloud?
-4. **Compliance** — Any regulatory or legal requirements? (government forms, PII rules, HIPAA, etc.)
-5. **Known issues** — Areas you already know are problematic? (prioritize or skip)
+1. **Visibility** — "Is this repo private or could it go public?"
+   - Options: Private, Public, Planning to open-source
+2. **Access** — "Who has access to this codebase?"
+   - Options: Just me, Small team, Open source
+3. **Deployment** — "Where does this run?"
+   - Options: Local only, Server/cloud, Not deployed yet
+4. **Compliance** — "Any regulatory or legal requirements?"
+   - Options: None, Yes (PII/HIPAA/SOC2/etc.), Not sure
+5. **Known issues** — "Areas you already know are problematic?"
+   - Options: None, Yes (describe in Other)
 
-If the user skips, assume: public visibility, shared access, compliance required.
+If the user skips any question, assume worst-case: public visibility, shared access, compliance required.
 
 **After calibration, state assumptions and set scrutiny level:**
 
