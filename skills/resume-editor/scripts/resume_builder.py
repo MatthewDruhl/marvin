@@ -41,7 +41,8 @@ SCRIPT_DIR = Path(__file__).parent
 SKILL_DIR = SCRIPT_DIR.parent
 _RESUME_DIR = Path(os.environ.get("RESUME_DATA_DIR", str(Path.home() / "Resume")))
 DATA_FILE = _RESUME_DIR / "data" / "resume-data.json"
-RESUME_PATH = Path(os.environ.get("RESUME_DOCX_PATH", str(_RESUME_DIR / "MatthewDruhl.docx")))
+_default_docx = next(_RESUME_DIR.glob("*.docx"), _RESUME_DIR / "resume.docx")
+RESUME_PATH = Path(os.environ.get("RESUME_DOCX_PATH", str(_default_docx)))
 
 WML_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
 
