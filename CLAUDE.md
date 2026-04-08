@@ -8,27 +8,13 @@
 
 ## First-Time Setup
 
-**Check if setup is needed:**
-- Does `state/current.md` contain placeholders like "[Add your priorities here]"?
-- Is there NO user profile below?
-
-**If setup is needed:** Read `.marvin/onboarding.md` and follow that guide instead of the normal `/marvin` flow.
-
-**After cloning:** Run `git config core.hooksPath .hooks` to activate the pre-commit linter (ruff). This only needs to be done once per clone.
+See `SETUP.md` for onboarding and post-clone steps.
 
 ---
 
 ## Slash Command Rules
 
-**When a user types a slash command (e.g., `/resume`, `/marvin`, `/commit`), ALWAYS execute it.** No exceptions.
-
-- Do NOT question why the skill exists
-- Do NOT ask if the user really wants to run it
-- Do NOT try to handle the task yourself instead of invoking the skill
-- Do NOT push back or suggest alternatives
-- **Just run it.** Read the skill file, follow its instructions, execute.
-
-Skills are actively developed and tested in this workspace. When the user invokes a skill, they expect it to run — whether for production use or testing.
+**When a user types a slash command, execute it immediately.** No pushback, no alternatives — just run it.
 
 ---
 
@@ -147,80 +133,23 @@ When syncing topics, normalize before comparing to prevent duplicates:
     - Correct Answer increase by 1
     - Wrong Answer provide validation on correct and incorrect answers.  Do not increase count
 
-## Quiz workflow
-
-### (1/5) and (2/5)
-  - Spot the bug — Show broken code, you find what's wrong. Your "Issues Needing More Guidance" examples are perfect for this.
-  - Multiple choice - one question with 4 choices possible answers. Where ONE is the correct answer
-### (2/5) and (3/5)
-  - Refactor — Show working but non-idiomatic code, you rewrite it the better way. Maps directly to your Pythonic before/after examples.
-### (3/5) and (4/5)
-  - Predict the output — Show a code snippet, you say what it produces. Good for catching misconceptions like the word.split() one.
-  - Fill in the blank — Show code with a key part removed, you complete it. Good for syntax recall.
-### (4/5) and (5/5)
-  - Coding Challenges - Give a small problem to solve using a specific concept. No starter code — write it from scratch.
-  - Teach the Teacher - ask me to explain the topic to you. You verify that I can explain it.
-  - Teach-Back Mode - Auto-triggers after passing quiz questions. Rotate through ELI5, Applied Reasoning, and Code Walkthrough styles. See `skills/quiz/SKILL.md` for full process.
+Quiz question types by confidence level are defined in `skills/quiz/SKILL.md`.
 
 ---
-
-## Commands
-
-### Shell Commands (from terminal)
-
-| Command | What It Does |
-|---------|--------------|
-| `marvin` | Open MARVIN (Claude Code in this directory) |
-| `mcode` | Open MARVIN in your IDE |
-
-### Slash Commands (inside MARVIN)
-
-| Command | What It Does |
-|---------|--------------|
-| `/marvin` | Start a session with a briefing |
-| `/end` | End session and save everything |
-| `/update` | Quick checkpoint (save progress) |
-| `/report` | Generate a weekly summary of your work |
-| `/wkplan` | Weekly planning session (set priorities) |
-| `/dashboard` | Project momentum dashboard |
-| `/analytics` | Session analytics and trends |
-| `/resume` | View or edit your resume |
-| `/learn-sync` | Sync topics-learned.md into learning tracker |
-| `/commit` | Review and commit git changes |
-| `/code` | Open MARVIN in your IDE |
-| `/help` | Show commands and available integrations |
-| `/sync` | Get updates from the MARVIN template |
 
 ---
 
 ## Session Flow
 
-**Starting (`/marvin`):**
-1. Check the date
-2. Update learning tracker with new topics from `~/Code/Learning/topics-learned.md`
-  - Do not repeat information.
-  - `Issues Needing More Guidance` items start at lowest confidence rating (1/5)
-  - `Topics Covered` and `Key Concepts Practiced` low confidence rating (2/5)
-  - Show a summary of what was added
-3. Check Gmail for job responses
-4. Read your current state, goals, learning tracker, and habits
-5. Give you a briefing: calendar, priorities, learning reviews due, habit streaks, follow-up reminders
+Start with `/marvin`, end with `/end`. Each has its own skill file with detailed instructions.
 
 **During a session:**
 - Just talk naturally
 - Ask me to add tasks, track progress, take notes
 - Say "TIL..." to log learnings, "did exercise" to track habits
 - Use `/update` periodically to save progress
-
-**Ending (`/end`):**
-- I summarize what we covered
-- Log any non-obvious decisions made during the session to `state/decisions.md`
-- Prompt for habit check (did you exercise/study/code today?)
-- Save everything to the session log
-- **Preview state changes before writing** (Issue #33): Show proposed changes to `state/current.md` and ask "Does this look right?" before saving. Same pattern as `/wkplan`.
-
-**Checkpointing (`/update`):**
-- If state changes are needed, preview them first and ask for confirmation before writing.
+- Log non-obvious decisions to `state/decisions.md`
+- **Preview state changes before writing** — show proposed changes and ask "Does this look right?" before saving.
 
 ---
 
@@ -250,23 +179,7 @@ marvin/
 
 Your workspace is yours. Add folders, files, projects - whatever you need.
 
-**Note:** The setup scripts and integrations live in the template folder (the one you originally downloaded). Run `/sync` to pull updates from there.
-
----
-
-## Integrations
-
-Type `/help` to see available integrations.
-
-**To add integrations:** Navigate to your template folder (check `.marvin-source` for the path) and run the setup scripts from there:
-
-| Integration | Setup Command (from template folder) | What It Does |
-|-------------|--------------------------------------|--------------|
-| Google Workspace | `./.marvin/integrations/google-workspace/setup.sh` | Gmail, Calendar |
-| Microsoft 365 | `./.marvin/integrations/ms365/setup.sh` | Outlook, Calendar, OneDrive, Teams |
-| Atlassian | `./.marvin/integrations/atlassian/setup.sh` | Jira, Confluence |
-
-**Building a new integration?** See `.marvin/integrations/CLAUDE.md` for required patterns and `.marvin/integrations/README.md` for full documentation.
+Type `/help` to see available integrations and commands.
 
 ---
 
