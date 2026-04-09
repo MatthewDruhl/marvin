@@ -41,3 +41,6 @@ content/jobs/interview-prep/
 
 __pycache__/
 .venv/
+
+# uv lock file — marvin has no pyproject.toml, uv.lock appears as a vestigial artifact
+uv.lock
