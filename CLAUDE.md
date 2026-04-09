@@ -45,17 +45,24 @@ See `SETUP.md` for onboarding and post-clone steps.
 ## Job Tracking Workflow
 
 **Location:** Job tracking data is split between two locations:
-- **`~/Resume/jobs/`** — Applications, opportunities, interview prep (personal data, outside repo)
+- **`~/Resume/jobs/`** — Applications, opportunities, interview prep, job research/analysis (personal data, outside repo)
 - **`content/jobs/`** — Contacts, search strings, TWC reporting (in repo, TWC CSVs gitignored)
 
 ### Files
 - **`~/Resume/jobs/applications.md`** - Active applications with current status
 - **`~/Resume/jobs/opportunities.md`** - Roles to research and apply for
 - **`~/Resume/jobs/interview-prep/`** - Question banks, mock sessions, company research
+- **`~/Resume/jobs/research/`** - Job posting analysis, match scores, salary research, job search session outputs (personal evaluation data — never in repo)
 - **`content/jobs/contacts.md`** - Recruiter conversations and follow-ups
 - **`content/jobs/TWC/`** - Official Texas Workforce Commission reporting (CSV format, gitignored)
   - `job-application-tracker.csv` - Master list of all applications
   - `work-search-week-*.csv` - Weekly activity logs (4 required per week)
+
+### Job Research Workflow
+
+**When analyzing a job posting, researching a company, or running a job search session:** save output to `~/Resume/jobs/research/` (never to `content/jobs/`). This includes match scorecards, salary context research, and job search session summaries. These contain Matt's personal evaluation data and must stay outside the repo.
+
+**File naming:** `{company}-{role}-{jobid}.md` for posting analyses, `{company}-search-{YYYY-MM-DD}.md` for broader searches.
 
 ### Tracking New Applications
 
