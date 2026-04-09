@@ -80,12 +80,23 @@ Fetch a job posting, tailor the resume, build the .docx + cover letter.
 
 #### Checkpoint Flow
 
+**Step 0: Pre-flight Load (MANDATORY — ground truth before JD)**
+
+Before fetching the job posting, load canonical source material into context in this order. Do NOT fetch the JD first — JD vocabulary will shape your baseline understanding of what the user has done, and that's exactly backwards.
+
+1. **`~/Resume/data/platforms.md`** — canonical definitions of the user's built systems and cross-system banned framings. This file is the anchor. If a claim about a system isn't supported here, it's fabricated.
+2. **`~/Resume/data/role-deep-dive-*.json`** — deep dive interview transcripts for the roles that will be tailored (typically the most recent 2-3 roles). These contain the user's actual language, specific accomplishments, and strength ratings.
+3. **`~/Resume/data/resume-data.json`** — source of truth for bullets, titles, dates, skills. Every reworded bullet must trace back to an original here.
+4. **Then** proceed to Step 1 and fetch the JD.
+
+**Why this order matters:** Fetching the JD first lets its vocabulary shape the generation — invented capabilities, composite titles, and relabeled systems follow. Grounding in source material first makes the JD a filter against reality, not a template for invention.
+
 **Step 1: Fetch & Analyze**
 - WebFetch the URL
 - Extract: company, title, job ID, requirements, tech stack, salary, location
 - **Extract 15-20 ATS keywords** from the job description — exact terms and phrases the posting uses (e.g., "Kubernetes", "CI/CD", "cross-functional"). Prefer the posting's exact phrasing over synonyms. Include both required and preferred skills.
 - Save extracted keywords in the tailoring JSON `keywords` field — these drive `auto-trim` scoring and `score` output
-- Read `resume-data.json` via `view` command
+- For each extracted keyword, note whether it maps to something in `platforms.md` / `resume-data.json`. Keywords with no mapping are NOT licenses to invent — they're signals that the user may not be a strong fit for those specific terms.
 
 **Step 2: Checkpoint 1 — Strategy**
 Present to user:
@@ -98,14 +109,65 @@ Present to user:
 
 Wait for user approval before proceeding.
 
-**Step 3: Checkpoint 2 — Content Review**
-Present to user:
-- Reworded summary paragraph
-- Selected and reworded bullets per role
-- Skills list
-- Certifications to include
+**Step 3: Generate + Self-audit + Checkpoint 2 — Content Review**
 
-Wait for user approval before proceeding.
+This step has three substeps. The self-audit is MANDATORY — do not skip it, and do not present unaudited content to the user. The user's time is for editing and judgment calls, not for catching fabrications.
+
+**3a. Generate privately**
+- Write the reworded summary, bullets per role, Expertise Includes list, and skills list
+- Do NOT stream this into the conversation yet
+- Do NOT present to the user yet
+
+**3b. Self-audit (MANDATORY gate)**
+
+For every generated sentence and every Expertise Includes line, answer: "What specific source supports this claim?" A source must be one of:
+- A file loaded in Step 0 (`platforms.md`, `role-deep-dive-*.json`, `resume-data.json`) — cite the exact section/field/bullet
+- An extracted keyword from the JD that legitimately maps to something in the user's data
+- A direct statement the user made earlier in this conversation
+
+If any sentence has no source, **rewrite it to match a source or cut it** before presenting. Do not hedge with "approximately" to hide uncertainty. Do not present unsourced claims and hope the user doesn't notice.
+
+**Audit trap categories** (see `~/Resume/data/platforms.md` "Cross-system banned framings" for the specific list):
+- **Title / identity fabrications** — inventing a composite title to match a JD when the user's actual titles are in `resume-data.json`
+- **Invented capabilities** — adding an Expertise Includes line that doesn't trace to any specific bullet or deep-dive entry
+- **System relabeling** — describing the user's systems using JD vocabulary that doesn't match what the systems actually do
+- **Overclaiming domain ownership** — describing narrow features as broad domain expertise (e.g., a specific validation check ≠ "security engineer")
+
+If the audit surfaces one fabrication, assume there are more. Multiple fabrications in one output are usually the same root-cause mistake expressed multiple ways — fix all instances in one pass, then add the specific trap to `~/Resume/data/platforms.md`.
+
+**3c. Checkpoint 2 — Present audited content with claim→source mapping**
+
+Present to the user with source citations so they can audit the audit. Use this format:
+
+```
+## Summary
+
+Sentence 1: "<reworded sentence text>"
+  Source: <file path> > <section/field/bullet reference>
+
+Sentence 2: "<reworded sentence text>"
+  Source: <file path> > <section/field/bullet reference>
+
+## Expertise Includes
+
+- <Expertise line 1>
+    Source: <file path> > <section/field/bullet reference>
+- <Expertise line 2>
+    Source: <file path> > <section/field/bullet reference>
+
+## Bullets (per role)
+
+<Company> — <Role Title> (<dates>)
+- "<reworded bullet text>"
+    Source: <file path> > <exact bullet location>
+```
+
+Also present:
+- Skills list (grouped by category)
+- Certifications to include
+- Cover letter tone reminder (confident or professional from Checkpoint 1)
+
+Wait for user approval before proceeding. If the user flags a claim, fix it AND check adjacent content for the same error pattern (don't wait to be asked about each location individually).
 
 **Step 4: Build**
 1. Write the tailoring JSON file to a temp location (keywords from Step 1 are already in the JSON)
@@ -351,6 +413,23 @@ Generate a short LinkedIn connection message for hiring managers or recruiters a
 - Every bullet must answer **"So what?"** — if it doesn't state why someone should care, rewrite or cut it
 - Frame as **architect, not coder** for senior roles — "designed systems" > "wrote code"
 - Show **business impact**, not just technical details — companies want engineers who understand cost, revenue, and users
+
+### Banned Framings (fabrication traps)
+
+The canonical list of banned framings lives in **`~/Resume/data/platforms.md`** (outside this repo — personal data). That file has two parts:
+
+1. **Per-system banned framings** — listed under each system definition. Describes how each of the user's built systems must and must not be framed.
+2. **Cross-system banned framings** — identity/title fabrications, invented Expertise Includes items, and overclaimed domain ownership. Applies regardless of which system is being described.
+
+**Behavioral rules (apply to any resume work):**
+
+- **Identity/title fabrications** — Never invent a composite title. Use only titles found in `resume-data.json > experience[].roles[].title`. If the JD uses a title the user has not held, do not adopt it as the user's title — at most, reference it in the cover letter as the target role.
+- **System relabeling** — Never describe the user's systems using JD vocabulary that doesn't match what they do. If a JD wants "ETL pipeline" and the user's system is workflow orchestration, do not call it an ETL pipeline. Find a different system that genuinely is a pipeline, or leave the gap.
+- **Invented Expertise Includes items** — Every line must map to a real bullet in `resume-data.json` or a deep-dive entry. No line gets added to match a JD keyword without a source.
+- **Overclaiming domain ownership** — Narrow features (a validation check, a specific integration) are not broad domains (security engineer, data governance lead). Describe what was built, not a title the work suggests.
+- **Keyword gaps are better than fabrications** — If the JD wants a term that is not in `platforms.md`, `resume-data.json`, or the deep dives, **do not invent a claim to match it**. Gaps in keyword match are better than fabrications in interviews.
+
+**When a new fabrication is caught:** Add it to `~/Resume/data/platforms.md` under the appropriate section (per-system or cross-system). The skill file stays generic; specific examples stay in the user's personal data file. This keeps the skill shareable while preserving the audit trail for the user's specific traps.
 
 ### AI-Tell Checklist
 Before finalizing any bullet, check for these patterns and remove them:
