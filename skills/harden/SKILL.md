@@ -10,7 +10,7 @@ Load these as needed during the audit — do not read all upfront.
 
 - [ai-audit-checklist.md](references/ai-audit-checklist.md) — Extended AI checks (read before Scope 2)
 - [questioning-frameworks.md](references/questioning-frameworks.md) — Self-check frameworks (read after each scope)
-- [engineering-blind-spots.md](references/engineering-blind-spots.md) — Detection questions by scope (read if a scope feels thin)
+- [engineering-blind-spots.md](references/engineering-blind-spots.md) — Detection questions by scope (read only if initial findings for a scope total fewer than 2)
 
 ## Phase 0: Context Gathering
 
@@ -149,6 +149,8 @@ After completing all scopes, present a scorecard.
 | C | 5-9 |
 | D | 10-14 |
 | F | 15+ |
+
+> Run `uv run python skills/harden/score_audit.py findings.json` to auto-generate this scorecard. See script for JSON input format.
 
 **Scorecard format:**
 

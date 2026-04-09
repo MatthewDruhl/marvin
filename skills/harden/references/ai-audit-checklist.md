@@ -2,14 +2,7 @@
 
 Detailed checks for Scope 2 (AI-Specific Gaps). Read this file before evaluating the AI scope.
 
-## Core Checks (from SKILL.md)
-
-These are the baseline — always check these first:
-1. Prompt injection risks (user input flowing into prompts unsanitized)
-2. Data exposure through AI context (secrets, PII, or sensitive content visible to the model)
-3. Access control on AI interfaces (who can invoke the AI, rate limits, cost controls)
-4. Output validation (does the system verify AI outputs before acting on them?)
-5. Fragile model assumptions (hardcoded model names, unpinned versions, deterministic output expectations)
+> Core checks (1–5) are defined in SKILL.md Scope 2. Start with those, then continue below.
 
 ## Extended Checks
 
