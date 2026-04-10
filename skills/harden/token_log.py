@@ -37,7 +37,7 @@ def main() -> None:
             "output_tokens": args.output_tokens,
             "total_tokens": total,
         })
-    print(f"Logged: {args.project} / {args.scope} — {args.input_tokens + args.output_tokens:,} tokens total")
+    print(f"Logged: {args.project} / {args.scope} — {total:,} tokens total")
     print(f"  Written to: {log_file}")
 
 

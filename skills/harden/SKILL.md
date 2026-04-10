@@ -58,7 +58,7 @@ Note the printed marker path.
 >
 > Follow all instructions in `~/.claude/skills/harden/SKILL.md` starting from **Severity Definitions** through **Batch Plan**. Write findings to `findings.json` in the audited project directory using the JSON format from `score_audit.py`.
 >
-> **Scope restriction:** Only write to `findings.json` in the audited project directory. Do not modify any other files — in particular, do not write to any MARVIN state files (current.md, goals.md, decisions.md, todos.md, habits.md, learning.md) or any file outside the audited project directory.
+> **Scope restriction:** Only write to `[OUTPUT_FILE]` in the audited project directory. Do not modify any other files — in particular, do not write to any MARVIN state files (current.md, goals.md, decisions.md, todos.md, habits.md, learning.md) or any file outside the audited project directory.
 >
 > **Final step (token capture) — run after writing findings.json:**
 > ```bash

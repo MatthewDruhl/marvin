@@ -73,12 +73,16 @@ def compute_scorecard(findings: list[dict]) -> None:
         blocking = [f for f in scope_findings if f.get("blocking", False)]
         non_blocking = [f for f in scope_findings if not f.get("blocking", False)]
 
-        total_points = sum(SEVERITY_POINTS.get(f.get("severity", "").lower(), 0) for f in scope_findings)
+        total_points = sum(
+            SEVERITY_POINTS.get(f.get("severity", "").lower(), 0) for f in scope_findings
+        )
         has_critical = any(f.get("severity", "").lower() == "critical" for f in scope_findings)
         grade = points_to_grade(total_points, has_critical)
         gpa_values.append(GRADE_TO_GPA[grade])
 
-        rows.append((scope, grade, format_severity_counts(blocking), format_severity_counts(non_blocking)))
+        rows.append((
+            scope, grade, format_severity_counts(blocking), format_severity_counts(non_blocking)
+        ))
 
     overall_gpa = int(sum(gpa_values) / len(gpa_values) + 0.5)
     overall_grade = GPA_TO_GRADE[overall_gpa]
