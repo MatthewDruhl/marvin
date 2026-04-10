@@ -1,3 +1,5 @@
+<!-- PHASE GATE: Do not read if 2 or more findings already identified. Load only when finding count is low. -->
+
 # Engineering Blind Spots
 
 Detection questions organized by scope. Use these to probe for issues your initial scan may have missed. These are prompts for investigation, not a checklist of things to flag.

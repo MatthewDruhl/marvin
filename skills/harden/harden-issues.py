@@ -31,6 +31,7 @@ findings.json format (array of finding objects):
 """
 import argparse
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -38,10 +39,21 @@ from pathlib import Path
 from schema import REQUIRED_FIELDS
 from schema import VALID_SEVERITIES as SEVERITY_LABELS
 
+MAX_BODY_LEN = 65535
+
+
+def _strip_html(text: str) -> str:
+    """Remove raw HTML tags from a string."""
+    return re.sub(r'<[^>]+>', '', text)
+
 
 def build_body(f: dict) -> str:
     blocking_str = "Yes" if f.get("blocking") else "No"
-    return f"""### {f['id']}: {f['title']}
+    what = _strip_html(f.get('what', ''))
+    proof = _strip_html(f.get('proof', ''))
+    impact = _strip_html(f.get('impact', ''))
+    fix = _strip_html(f.get('fix', ''))
+    body = f"""### {f['id']}: {f['title']}
 
 **Scope:** {f['scope']}
 **Severity:** {f['severity']}
@@ -49,20 +61,23 @@ def build_body(f: dict) -> str:
 **Where:** `{f['where']}`
 
 **What:**
-{f.get('what', '')}
+{what}
 
 **Proof:**
-{f.get('proof', '')}
+{proof}
 
 **Impact:**
-{f.get('impact', '')}
+{impact}
 
 **Fix:**
-{f.get('fix', '')}
+{fix}
 
 ---
 *Filed by harden-issues.py from audit findings.json*
 """
+    if len(body) > MAX_BODY_LEN:
+        body = body[:MAX_BODY_LEN] + "\n\n*(truncated)*"
+    return body
 
 
 def create_issue(finding: dict, repo: str, batch: int, dry_run: bool) -> None:
@@ -101,7 +116,9 @@ def validate_findings(findings: list[dict]) -> list[str]:
         if missing:
             errors.append(f"Finding {i}: missing fields {missing}")
         if f.get("severity", "").lower() not in SEVERITY_LABELS:
-            errors.append(f"Finding {i} ({f.get('id', '?')}): invalid severity '{f.get('severity')}'")
+            errors.append(
+                f"Finding {i} ({f.get('id', '?')}): invalid severity '{f.get('severity')}'"
+            )
     return errors
 
 
@@ -109,8 +126,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="File GitHub issues from harden audit findings")
     parser.add_argument("findings", help="Path to findings.json")
     parser.add_argument("--repo", required=True, help="GitHub repo in owner/repo format")
-    parser.add_argument("--dry-run", action="store_true", help="Print what would be created without filing")
-    parser.add_argument("--batch", type=int, default=None, help="Only file issues for this batch number")
+    parser.add_argument(
+        "--dry-run", action="store_true", help="Print what would be created without filing"
+    )
+    parser.add_argument(
+        "--batch", type=int, default=None, help="Only file issues for this batch number"
+    )
     args = parser.parse_args()
 
     findings_path = Path(args.findings)
