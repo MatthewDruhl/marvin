@@ -63,6 +63,17 @@ Detailed checks for Scope 2 (AI-Specific Gaps). Read this file before evaluating
 **Severity guidance:** Medium if token waste is consistent across frequent operations (daily skills, session management). Low for rarely-used skills. Consider cumulative cost — a 40% overhead on a skill run 2x/day adds up fast.
 **Always-loaded files:** Check CLAUDE.md, system prompts, and other files loaded every session. Content that could live in on-demand skill files (setup instructions, reference tables, detailed procedures) is a per-session tax. Only behavioral guidance and core rules belong in always-loaded files.
 
+### 17. AI-to-Code Offload Opportunities
+**What to look for:** Tasks currently performed by multi-step AI reasoning that a script could handle — codebase exploration done turn-by-turn instead of via a recon script, structured data collection (file inventories, git history, dependency graphs) forcing repeated tool calls, post-AI actions (filing issues, updating files) done manually via copy-paste, repeated parsing of the same files across audit phases.
+**Example finding:** An audit skill reads 15 files individually to build a picture of the repo. A 50-line recon script could produce the same inventory in one context injection, reducing input tokens by 40-60%.
+**Severity guidance:** Medium if the pattern recurs across frequent skill runs. Low for one-off or rarely used skills.
+**Tier check:** Not all offloading requires a script. Evaluate which tier each step needs:
+- Script — structured data, math, formatting, file I/O
+- Cheap model (haiku-class) — pattern scanning, candidate flagging, output formatting
+- Full model — judgment calls, ambiguous findings, severity calibration, steel-manning
+
+Flag any step using a full model where a cheaper tier produces equivalent output.
+
 ---
 
 *Extended AI checks inspired by research on AI code quality and the [devils-advocate skill](https://github.com/notmanas/claude-code-skills/tree/main/skills/devils-advocate) by notmanas.*
