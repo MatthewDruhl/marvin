@@ -7,8 +7,13 @@ import time
 from datetime import date
 from pathlib import Path
 
-LOG_FILE = Path.home() / ".claude" / "harden" / "token_usage.csv"
 FIELDNAMES = ["date", "project", "scope", "input_tokens", "output_tokens", "total_tokens"]
+
+
+def log_file_path(output_dir: str | None = None) -> Path:
+    """Return the token log path: harden_{date}_token_usage.csv in output_dir (default: cwd)."""
+    directory = Path(output_dir) if output_dir else Path.cwd()
+    return directory / f"harden_{date.today().isoformat()}_token_usage.csv"
 
 # Lookback window for time-based JSONL search (seconds). Covers long audits.
 RECENT_WINDOW_SECS = 7200  # 2 hours
@@ -100,10 +105,9 @@ def sum_tokens(jsonl_path: Path) -> tuple[int, int]:
     return input_tokens, output_tokens
 
 
-def write_log(project: str, scope: str, input_tokens: int, output_tokens: int) -> None:
-    LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
-    write_header = not LOG_FILE.exists()
-    with open(LOG_FILE, "a", newline="") as f:
+def write_log(project: str, scope: str, input_tokens: int, output_tokens: int, log_file: Path) -> None:
+    write_header = not log_file.exists()
+    with open(log_file, "a", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
         if write_header:
             writer.writeheader()
@@ -127,6 +131,10 @@ def main() -> None:
         help="Explicit Claude project directory path (overrides cwd-based computation)",
     )
     parser.add_argument(
+        "--output-dir",
+        help="Directory to write token log (default: current working directory)",
+    )
+    parser.add_argument(
         "--verbose", action="store_true",
         help="Print debug info: project_dir, found JSONLs, mtime values",
     )
@@ -143,9 +151,11 @@ def main() -> None:
     print(f"Reading tokens from: {jsonl_path}")
     input_tokens, output_tokens = sum_tokens(jsonl_path)
 
-    write_log(args.project, args.scope, input_tokens, output_tokens)
+    log_file = log_file_path(args.output_dir)
+    write_log(args.project, args.scope, input_tokens, output_tokens, log_file)
     print(f"Logged: {args.project} / {args.scope} — {input_tokens + output_tokens:,} tokens total")
     print(f"  Input: {input_tokens:,}  Output: {output_tokens:,}")
+    print(f"  Written to: {log_file}")
 
     if marker_path and marker_path.exists() and str(marker_path).startswith("/tmp/"):
         marker_path.unlink()
