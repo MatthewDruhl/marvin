@@ -18,4 +18,8 @@ git config core.hooksPath .hooks
 for skill in skills/grill-me skills/harden skills/improve-codebase-architecture skills/prd-to-issues skills/tdd skills/write-a-prd; do
   ln -sf "$PWD/$skill" "$HOME/.claude/skills/$(basename $skill)"
 done
+
+# 3. Install RTK — compresses Bash command output to reduce token usage (60-90% on git, tests, etc.)
+brew install rtk
+rtk init -g   # adds a hook to ~/.claude/settings.json; restart Claude Code after
 ```
