@@ -188,19 +188,7 @@ Every finding must include all of these. If you can't fill them all in, the find
 
 After completing all scopes, present a scorecard.
 
-**Grading formula:**
-- Points per finding: Critical = 4, High = 3, Medium = 2, Low = 1
-- **Any critical finding in a scope = D minimum (cannot grade above D until resolved)**
-
-| Grade | Points |
-|-------|--------|
-| A | 0 |
-| B | 1-4 |
-| C | 5-9 |
-| D | 10-14 |
-| F | 15+ |
-
-> Run `uv run python skills/harden/validate_findings.py findings.json && uv run python skills/harden/score_audit.py findings.json` to validate then auto-generate this scorecard. See `score_audit.py` for JSON input format.
+> Run `uv run python skills/harden/validate_findings.py findings.json && uv run python skills/harden/score_audit.py findings.json` to validate then auto-generate this scorecard. `score_audit.py` is the source of truth for the grading formula — see its module docstring for point values, grade thresholds, and the critical-floor rule.
 
 **Scorecard format:** Columns: Scope | Grade | Blocking | Non-blocking. One row per scope, then Overall grade. Mark skipped scopes as **N/A — not in scope** and omit them from the grade columns.
 

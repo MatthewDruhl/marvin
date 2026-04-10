@@ -2,10 +2,10 @@
 """Log per-run token usage for /harden audits."""
 import argparse
 import csv
-import os
 from datetime import date
+from pathlib import Path
 
-LOG_FILE = os.path.join(os.path.dirname(__file__), "token_usage.csv")
+LOG_FILE = Path.home() / ".claude" / "harden" / "token_usage.csv"
 FIELDNAMES = ["date", "project", "scope", "input_tokens", "output_tokens", "total_tokens"]
 
 
@@ -17,7 +17,8 @@ def main() -> None:
     parser.add_argument("--output-tokens", type=int, required=True, dest="output_tokens")
     args = parser.parse_args()
 
-    write_header = not os.path.exists(LOG_FILE)
+    LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+    write_header = not LOG_FILE.exists()
     with open(LOG_FILE, "a", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
         if write_header:
