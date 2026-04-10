@@ -24,6 +24,17 @@ Review changes and create clean, well-structured git commits.
 
 ## Process
 
+### Step 0: Branch Check
+
+```bash
+git branch --show-current
+```
+
+If on `main`:
+1. Ask the user for a branch name, or suggest one based on the staged changes (e.g. `docs/setup-rtk`, `fix/login-timeout`)
+2. Create and switch to the branch: `git checkout -b <branch-name>`
+3. Then proceed with the commit steps below
+
 ### Step 1: Check Current Status
 ```bash
 git status --short
