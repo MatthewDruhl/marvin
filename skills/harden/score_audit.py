@@ -12,6 +12,7 @@ Input JSON format:
 """
 
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -22,12 +23,12 @@ SEVERITY_POINTS: dict[str, int] = {
     "low": 1,
 }
 
-GRADE_THRESHOLDS: list[tuple[int, int, str]] = [
+GRADE_THRESHOLDS: list[tuple[float, float, str]] = [
     (0, 0, "A"),
     (1, 4, "B"),
     (5, 9, "C"),
     (10, 14, "D"),
-    (15, 10_000, "F"),
+    (15, math.inf, "F"),
 ]
 
 GRADE_TO_GPA: dict[str, int] = {"A": 4, "B": 3, "C": 2, "D": 1, "F": 0}
@@ -46,7 +47,7 @@ def points_to_grade(points: int, has_critical: bool) -> str:
 def format_severity_counts(findings: list[dict]) -> str:
     counts: dict[str, int] = {}
     for f in findings:
-        sev = f["severity"].lower()
+        sev = f.get("severity", "").lower()
         counts[sev] = counts.get(sev, 0) + 1
     if not counts:
         return "—"
@@ -72,8 +73,8 @@ def compute_scorecard(findings: list[dict]) -> None:
         blocking = [f for f in scope_findings if f.get("blocking", False)]
         non_blocking = [f for f in scope_findings if not f.get("blocking", False)]
 
-        total_points = sum(SEVERITY_POINTS.get(f["severity"].lower(), 0) for f in scope_findings)
-        has_critical = any(f["severity"].lower() == "critical" for f in scope_findings)
+        total_points = sum(SEVERITY_POINTS.get(f.get("severity", "").lower(), 0) for f in scope_findings)
+        has_critical = any(f.get("severity", "").lower() == "critical" for f in scope_findings)
         grade = points_to_grade(total_points, has_critical)
         gpa_values.append(GRADE_TO_GPA[grade])
 
@@ -93,8 +94,8 @@ def compute_scorecard(findings: list[dict]) -> None:
 def main() -> None:
     if "--help" in sys.argv or "-h" in sys.argv:
         print(__doc__)
-        print("Usage: uv run python skills/harden/score_audit.py [findings.json]")
-        print("       cat findings.json | uv run python skills/harden/score_audit.py")
+        print(f"Usage: uv run python {sys.argv[0]} [findings.json]")
+        print(f"       cat findings.json | uv run python {sys.argv[0]}")
         sys.exit(0)
 
     if len(sys.argv) > 1:
@@ -102,13 +103,21 @@ def main() -> None:
         if not path.exists() or path.stat().st_size == 0:
             print("No findings — Grade: A")
             sys.exit(0)
-        findings = json.loads(path.read_text())
+        try:
+            findings = json.loads(path.read_text())
+        except json.JSONDecodeError as e:
+            print(f"Error: invalid JSON in {path}: {e}", file=sys.stderr)
+            sys.exit(1)
     else:
         data = sys.stdin.read().strip()
         if not data:
             print("No findings — Grade: A")
             sys.exit(0)
-        findings = json.loads(data)
+        try:
+            findings = json.loads(data)
+        except json.JSONDecodeError as e:
+            print(f"Error: invalid JSON on stdin: {e}", file=sys.stderr)
+            sys.exit(1)
 
     compute_scorecard(findings)
 
