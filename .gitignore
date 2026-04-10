@@ -45,3 +45,7 @@ __pycache__/
 # uv lock file — marvin has no pyproject.toml, uv.lock appears as a vestigial artifact
 uv.lock
 harden_*_token_usage.csv
+
+# youtube-transcribe skill output
+transcript.txt
+transcript*.srt
