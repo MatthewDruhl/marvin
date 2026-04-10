@@ -6,11 +6,10 @@ Perform a systematic hardening audit of this project. Work through each phase be
 
 ## Reference Files
 
-Load these as needed during the audit — do not read all upfront.
+**Phase gates — load only when triggered. Do not read before the gate.**
 
-- [ai-audit-checklist.md](references/ai-audit-checklist.md) — Extended AI checks (read before Scope 2)
-- [questioning-frameworks.md](references/questioning-frameworks.md) — Self-check frameworks (read after each scope)
-- [engineering-blind-spots.md](references/engineering-blind-spots.md) — Detection questions by scope (read only if initial findings for a scope total fewer than 2)
+- [ai-audit-checklist.md](references/ai-audit-checklist.md) — Extended AI checks. Load at the start of Scope 2, not before.
+- [engineering-blind-spots.md](references/engineering-blind-spots.md) — Detection questions by scope. Load only if initial findings for a scope total fewer than 2.
 
 ## Phase 0: Context Gathering
 
@@ -59,7 +58,12 @@ Work through these one at a time. For each scope:
 
 1. **Steel-man first** — Before listing findings, state why the current approach is reasonable. Acknowledge what the project does well in this area. If you skip this step, your findings will be noisy.
 2. **Explore and find issues** — Read files, check configs, scan patterns.
-3. **Self-check** — Read [questioning-frameworks.md](references/questioning-frameworks.md) and run the 5-step self-check. Drop findings that don't survive the "so what?" test.
+3. **Self-check** — Run these 5 steps. Drop findings that don't survive.
+   1. Drop any where real-world impact is negligible
+   2. Every Critical/High must cite file + line — no citation means it's not a real finding
+   3. No style flags — don't flag naming preferences or formatting choices
+   4. Respect frameworks — don't flag X if the framework handles X
+   5. Inversion pass — check for gaps your scope-by-scope scan may have missed
 4. **Summarize** — Present findings, then ask if the user wants to go deeper or move on.
 
 ### 1. Security
@@ -75,6 +79,7 @@ Work through these one at a time. For each scope:
 - Access control on AI interfaces (who can invoke the AI, rate limits, cost controls)
 - Output validation (does the system verify AI outputs before acting on them?)
 - Fragile model assumptions (hardcoded model names, unpinned versions, deterministic output expectations)
+- AI-to-code offload opportunities (tasks done by multi-step AI reasoning that a script or cheaper model could handle)
 
 For the full extended checklist (10 additional checks including tool use validation, context stuffing, agent permissions, cost control, and more), read [ai-audit-checklist.md](references/ai-audit-checklist.md) before evaluating this scope.
 
@@ -132,7 +137,7 @@ Every finding must include all of these. If you can't fill them all in, the find
 ```
 
 **Blocking** = must address before shipping. **Non-blocking** = fix when convenient.
-**Surfaced by** = which reasoning framework or method found this issue. See [questioning-frameworks.md](references/questioning-frameworks.md) for valid attributions.
+**Surfaced by** = Code reading | Pre-mortem | Inversion | Five whys | Steel-manning | Blind spots
 
 ## Scorecard
 
@@ -152,19 +157,7 @@ After completing all scopes, present a scorecard.
 
 > Run `uv run python skills/harden/score_audit.py findings.json` to auto-generate this scorecard. See script for JSON input format.
 
-**Scorecard format:**
-
-```
-| Scope | Grade | Blocking | Non-blocking |
-|-------|-------|----------|--------------|
-| Security | C | 1 critical, 1 high | 1 medium |
-| AI | B | — | 2 high |
-| Tests | D | 3 high | — |
-| Code Quality | B | — | 1 medium, 2 low |
-| Decoupling | C | 1 high | 1 high |
-
-Overall: C
-```
+**Scorecard format:** Columns: Scope | Grade | Blocking | Non-blocking. One row per scope, then Overall grade.
 
 **Overall grade:** Average of scope grades (A=4, B=3, C=2, D=1, F=0), rounded.
 
@@ -203,6 +196,7 @@ Only create issues after the user reviews and approves the batches.
 ## Rules
 
 **Hard rules — no exceptions:**
+- **Phase gate reference files.** `ai-audit-checklist.md` loads at Scope 2, not before. `engineering-blind-spots.md` loads only if fewer than 2 findings per scope. No reference file loads before its gate.
 - **Steel-man every scope.** Before listing findings, state what the project does well. If you skip this, your findings are noise.
 - **"So what?" test.** For every finding, ask: "If they ignore this, what actually happens?" If the answer is "nothing much," drop it.
 - **Findings cap: 5 per scope, 15 total.** If you found more, keep only the highest severity. This forces prioritization.
@@ -216,3 +210,13 @@ Only create issues after the user reviews and approves the batches.
 - Only flag real issues you find in the code — not theoretical risks.
 - Prioritize findings by severity: critical > high > medium > low, calibrated by Phase 0 context.
 - The scorecard, verdict, and batch plan are mandatory outputs. Do not skip them.
+
+**Performed vs. Genuine Thoroughness** — gut-check your findings across all scopes before presenting:
+
+| Fake Thoroughness | Genuine Thoroughness |
+|---|---|
+| Long list of "considerations" with no concrete code reference | Each finding cites a specific file and line |
+| Generic warnings that apply to any project | Findings specific to THIS project's architecture |
+| "Could potentially" language without evidence | "This code does X, which means Y" |
+| Flagging missing features the project doesn't need | Flagging gaps in features the project actually uses |
+| Every finding sounds equally important | Clear severity gradient with most findings at Medium/Low |
