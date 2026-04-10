@@ -80,7 +80,7 @@ def compute_scorecard(findings: list[dict]) -> None:
 
         rows.append((scope, grade, format_severity_counts(blocking), format_severity_counts(non_blocking)))
 
-    overall_gpa = round(sum(gpa_values) / len(gpa_values))
+    overall_gpa = int(sum(gpa_values) / len(gpa_values) + 0.5)
     overall_grade = GPA_TO_GRADE[overall_gpa]
 
     print("| Scope | Grade | Blocking | Non-blocking |")

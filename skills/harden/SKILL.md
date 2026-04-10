@@ -155,7 +155,7 @@ After completing all scopes, present a scorecard.
 | D | 10-14 |
 | F | 15+ |
 
-> Run `uv run python skills/harden/score_audit.py findings.json` to auto-generate this scorecard. See script for JSON input format.
+> Run `uv run python skills/harden/validate_findings.py findings.json && uv run python skills/harden/score_audit.py findings.json` to validate then auto-generate this scorecard. See `score_audit.py` for JSON input format.
 
 **Scorecard format:** Columns: Scope | Grade | Blocking | Non-blocking. One row per scope, then Overall grade.
 
