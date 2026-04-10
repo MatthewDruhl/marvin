@@ -80,7 +80,8 @@ def build_body(f: dict) -> str:
     return body
 
 
-def create_issue(finding: dict, repo: str, batch: int, dry_run: bool) -> None:
+def create_issue(finding: dict, repo: str, batch: int, dry_run: bool) -> str | None:
+    """Create a GitHub issue for a finding. Returns the issue URL on success, None on failure."""
     labels = ["harden", finding["severity"].lower()]
     if finding.get("blocking"):
         labels.append("blocking")
@@ -99,13 +100,16 @@ def create_issue(finding: dict, repo: str, batch: int, dry_run: bool) -> None:
     if dry_run:
         print(f"[dry-run] Would create: {title}")
         print(f"          Labels: {labels}")
-        return
+        return None
 
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
         print(f"ERROR creating issue for {finding['id']}: {result.stderr.strip()}", file=sys.stderr)
-    else:
-        print(f"Created: {result.stdout.strip()}")
+        return None
+
+    url = result.stdout.strip()
+    print(f"Created: {url}")
+    return url
 
 
 def validate_findings(findings: list[dict]) -> list[str]:
@@ -163,12 +167,25 @@ def main() -> None:
             print(f"  - {e}", file=sys.stderr)
         sys.exit(1)
 
-    # File in batch order
+    # File in batch order, collect issue URLs grouped by batch
     findings_sorted = sorted(findings, key=lambda f: (f.get("batch", 99), f.get("id", "")))
+    batch_issues: dict[int, list[str]] = {}
     for finding in findings_sorted:
-        create_issue(finding, repo=args.repo, batch=finding.get("batch", 1), dry_run=args.dry_run)
+        url = create_issue(
+            finding, repo=args.repo, batch=finding.get("batch", 1), dry_run=args.dry_run
+        )
+        if url:
+            batch_num = finding.get("batch", 1)
+            batch_issues.setdefault(batch_num, []).append(url)
 
-    print("Done.")
+    # Print Closes block for each batch — paste into PR body to auto-close issues on merge
+    if batch_issues:
+        print("\n--- Closes blocks (paste into PR body) ---")
+        for batch_num, urls in sorted(batch_issues.items()):
+            closes = " ".join(f"Closes {u}" for u in urls)
+            print(f"Batch {batch_num}: {closes}")
+
+    print("\nDone.")
 
 
 if __name__ == "__main__":
