@@ -101,7 +101,9 @@ def validate_findings(findings: list[dict]) -> list[str]:
         if missing:
             errors.append(f"Finding {i}: missing fields {missing}")
         if f.get("severity", "").lower() not in SEVERITY_LABELS:
-            errors.append(f"Finding {i} ({f.get('id', '?')}): invalid severity '{f.get('severity')}'")
+            errors.append(
+                f"Finding {i} ({f.get('id', '?')}): invalid severity '{f.get('severity')}'"
+            )
     return errors
 
 
@@ -109,8 +111,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="File GitHub issues from harden audit findings")
     parser.add_argument("findings", help="Path to findings.json")
     parser.add_argument("--repo", required=True, help="GitHub repo in owner/repo format")
-    parser.add_argument("--dry-run", action="store_true", help="Print what would be created without filing")
-    parser.add_argument("--batch", type=int, default=None, help="Only file issues for this batch number")
+    parser.add_argument(
+        "--dry-run", action="store_true", help="Print what would be created without filing"
+    )
+    parser.add_argument(
+        "--batch", type=int, default=None, help="Only file issues for this batch number"
+    )
     args = parser.parse_args()
 
     findings_path = Path(args.findings)

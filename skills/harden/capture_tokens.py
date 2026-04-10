@@ -105,7 +105,9 @@ def sum_tokens(jsonl_path: Path) -> tuple[int, int]:
     return input_tokens, output_tokens
 
 
-def write_log(project: str, scope: str, input_tokens: int, output_tokens: int, log_file: Path) -> None:
+def write_log(
+    project: str, scope: str, input_tokens: int, output_tokens: int, log_file: Path
+) -> None:
     write_header = not log_file.exists()
     with open(log_file, "a", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
