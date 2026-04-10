@@ -62,7 +62,7 @@ Note the printed marker path.
 >
 > **Final step (token capture) — run after writing findings.json:**
 > ```bash
-> uv run python ~/.claude/skills/harden/capture_tokens.py --project [project-name] --scope [scope] --marker [MARKER path from Step 1]
+> uv run python ~/.claude/skills/harden/capture_tokens.py --project [project-name] --scope [scope] --marker [MARKER path from Step 1] --output-dir [absolute path of directory being audited]
 > ```
 
 **Step 3:** Tell the user: "Audit running in the background. You'll be notified when it's done. Findings will land in `findings.json`."
@@ -251,12 +251,12 @@ To file a single batch only: add `--batch 1`. To preview without filing: add `--
 | `validate_findings.py` | Validate all required fields before scoring | `uv run python skills/harden/validate_findings.py findings.json` |
 | `score_audit.py` | Compute per-scope grades and overall scorecard | `uv run python skills/harden/score_audit.py findings.json` |
 | `harden-issues.py` | File GitHub issues from findings.json in batch order | `uv run python skills/harden/harden-issues.py findings.json --repo owner/repo` |
-| `capture_tokens.py` | Read agent JSONL to log token usage automatically | `uv run python ~/.claude/skills/harden/capture_tokens.py --project <name> --scope All --marker /tmp/harden_audit_<ts>` |
-| `token_log.py` | Manually log token usage (fallback if capture_tokens.py fails) | `uv run python skills/harden/token_log.py --project <name> --scope <scope> --input-tokens <N> --output-tokens <N>` |
+| `capture_tokens.py` | Read agent JSONL to log token usage automatically | `uv run python ~/.claude/skills/harden/capture_tokens.py --project <name> --scope All --marker /tmp/harden_audit_<ts> --output-dir <audited-project-dir>` |
+| `token_log.py` | Manually log token usage (fallback if capture_tokens.py fails) | `uv run python skills/harden/token_log.py --project <name> --scope <scope> --input-tokens <N> --output-tokens <N> --output-dir <audited-project-dir>` |
 
 **Prerequisites for harden-issues.py:** `gh` CLI authenticated; labels `harden`, `blocking`, `Critical`, `High`, `Medium`, `Low` must exist in the target repo.
 
-**Token logging:** The background agent runs `capture_tokens.py` automatically at the end of every audit. Token counts are read from the agent's Claude Code session JSONL and written to `token_usage.csv` (gitignored, stays local). Use `token_log.py` only if automatic capture fails.
+**Token logging:** The background agent runs `capture_tokens.py` automatically at the end of every audit. Token counts are read from the agent's Claude Code session JSONL and written to `harden_{date}_token_usage.csv` in the audited project directory (gitignored, stays local). Use `token_log.py` only if automatic capture fails.
 
 **Browsing usage:** Use `npx ccusage daily --breakdown` to view token spend by project/model/time period across all Claude Code sessions. Complements `token_usage.csv` (which tracks per-audit scope breakdowns).
 
