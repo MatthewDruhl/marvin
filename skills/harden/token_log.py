@@ -2,10 +2,9 @@
 """Log per-run token usage for /harden audits."""
 import argparse
 import csv
-import os
 from datetime import date
+from pathlib import Path
 
-LOG_FILE = os.path.join(os.path.dirname(__file__), "token_usage.csv")
 FIELDNAMES = ["date", "project", "scope", "input_tokens", "output_tokens", "total_tokens"]
 
 
@@ -15,10 +14,17 @@ def main() -> None:
     parser.add_argument("--scope", required=True, help="Scope name (e.g. Security, AI, Tests, All)")
     parser.add_argument("--input-tokens", type=int, required=True, dest="input_tokens")
     parser.add_argument("--output-tokens", type=int, required=True, dest="output_tokens")
+    parser.add_argument(
+        "--output-dir",
+        help="Directory to write token log (default: current working directory)",
+    )
     args = parser.parse_args()
 
-    write_header = not os.path.exists(LOG_FILE)
-    with open(LOG_FILE, "a", newline="") as f:
+    directory = Path(args.output_dir) if args.output_dir else Path.cwd()
+    log_file = directory / f"harden_{date.today().isoformat()}_token_usage.csv"
+
+    write_header = not log_file.exists()
+    with open(log_file, "a", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
         if write_header:
             writer.writeheader()
@@ -32,6 +38,7 @@ def main() -> None:
             "total_tokens": total,
         })
     print(f"Logged: {args.project} / {args.scope} — {args.input_tokens + args.output_tokens:,} tokens total")
+    print(f"  Written to: {log_file}")
 
 
 if __name__ == "__main__":

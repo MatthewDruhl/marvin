@@ -62,7 +62,7 @@ Note the printed marker path.
 >
 > **Final step (token capture) — run after writing findings.json:**
 > ```bash
-> uv run python ~/.claude/skills/harden/capture_tokens.py --project [project-name] --scope [scope] --marker [MARKER path from Step 1]
+> uv run python ~/.claude/skills/harden/capture_tokens.py --project [project-name] --scope [scope] --marker [MARKER path from Step 1] --output-dir [absolute path of directory being audited]
 > ```
 
 **Step 3:** Tell the user: "Audit running in the background. You'll be notified when it's done. Findings will land in `findings.json`."
@@ -188,19 +188,7 @@ Every finding must include all of these. If you can't fill them all in, the find
 
 After completing all scopes, present a scorecard.
 
-**Grading formula:**
-- Points per finding: Critical = 4, High = 3, Medium = 2, Low = 1
-- **Any critical finding in a scope = D minimum (cannot grade above D until resolved)**
-
-| Grade | Points |
-|-------|--------|
-| A | 0 |
-| B | 1-4 |
-| C | 5-9 |
-| D | 10-14 |
-| F | 15+ |
-
-> Run `uv run python skills/harden/validate_findings.py findings.json && uv run python skills/harden/score_audit.py findings.json` to validate then auto-generate this scorecard. See `score_audit.py` for JSON input format.
+> Run `uv run python skills/harden/validate_findings.py findings.json && uv run python skills/harden/score_audit.py findings.json` to validate then auto-generate this scorecard. `score_audit.py` is the source of truth for the grading formula — see its module docstring for point values, grade thresholds, and the critical-floor rule.
 
 **Scorecard format:** Columns: Scope | Grade | Blocking | Non-blocking. One row per scope, then Overall grade. Mark skipped scopes as **N/A — not in scope** and omit them from the grade columns.
 
@@ -263,12 +251,12 @@ To file a single batch only: add `--batch 1`. To preview without filing: add `--
 | `validate_findings.py` | Validate all required fields before scoring | `uv run python skills/harden/validate_findings.py findings.json` |
 | `score_audit.py` | Compute per-scope grades and overall scorecard | `uv run python skills/harden/score_audit.py findings.json` |
 | `harden-issues.py` | File GitHub issues from findings.json in batch order | `uv run python skills/harden/harden-issues.py findings.json --repo owner/repo` |
-| `capture_tokens.py` | Read agent JSONL to log token usage automatically | `uv run python ~/.claude/skills/harden/capture_tokens.py --project <name> --scope All --marker /tmp/harden_audit_<ts>` |
-| `token_log.py` | Manually log token usage (fallback if capture_tokens.py fails) | `uv run python skills/harden/token_log.py --project <name> --scope <scope> --input-tokens <N> --output-tokens <N>` |
+| `capture_tokens.py` | Read agent JSONL to log token usage automatically | `uv run python ~/.claude/skills/harden/capture_tokens.py --project <name> --scope All --marker /tmp/harden_audit_<ts> --output-dir <audited-project-dir>` |
+| `token_log.py` | Manually log token usage (fallback if capture_tokens.py fails) | `uv run python skills/harden/token_log.py --project <name> --scope <scope> --input-tokens <N> --output-tokens <N> --output-dir <audited-project-dir>` |
 
 **Prerequisites for harden-issues.py:** `gh` CLI authenticated; labels `harden`, `blocking`, `Critical`, `High`, `Medium`, `Low` must exist in the target repo.
 
-**Token logging:** The background agent runs `capture_tokens.py` automatically at the end of every audit. Token counts are read from the agent's Claude Code session JSONL and written to `token_usage.csv` (gitignored, stays local). Use `token_log.py` only if automatic capture fails.
+**Token logging:** The background agent runs `capture_tokens.py` automatically at the end of every audit. Token counts are read from the agent's Claude Code session JSONL and written to `harden_{date}_token_usage.csv` in the audited project directory (gitignored, stays local). Use `token_log.py` only if automatic capture fails.
 
 **Browsing usage:** Use `npx ccusage daily --breakdown` to view token spend by project/model/time period across all Claude Code sessions. Complements `token_usage.csv` (which tracks per-audit scope breakdowns).
 
