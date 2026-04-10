@@ -191,7 +191,13 @@ Effort: [Low / Medium / High]
 
 After presenting the batch plan, ask: **"Ready to create GitHub issues? I'll file them in batch order."**
 
-Only create issues after the user reviews and approves the batches.
+Only create issues after the user reviews and approves the batches. Once approved, run:
+
+```
+uv run python skills/harden/harden-issues.py findings.json --repo <owner>/<repo>
+```
+
+To file a single batch only: add `--batch 1`. To preview without filing: add `--dry-run`.
 
 ## Rules
 
@@ -204,6 +210,21 @@ Only create issues after the user reviews and approves the batches.
 - **Evidence required.** Every finding must cite a file path and line. No finding based on "I didn't see X" without checking.
 - **Respect frameworks.** If the framework handles it (Django CSRF, React XSS escaping, etc.), don't flag it as missing unless the project bypasses the protection.
 - **No style opinions.** Don't flag naming preferences, formatting choices, or "I would have done it differently."
+
+## Scripts
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `validate_findings.py` | Validate all required fields before scoring | `uv run python skills/harden/validate_findings.py findings.json` |
+| `score_audit.py` | Compute per-scope grades and overall scorecard | `uv run python skills/harden/score_audit.py findings.json` |
+| `harden-issues.py` | File GitHub issues from findings.json in batch order | `uv run python skills/harden/harden-issues.py findings.json --repo owner/repo` |
+| `token_log.py` | Log per-run token usage to token_usage.csv | `uv run python skills/harden/token_log.py --project <name> --scope <scope> --input-tokens <N> --output-tokens <N>` |
+
+**Prerequisites for harden-issues.py:** `gh` CLI authenticated; labels `harden`, `blocking`, `Critical`, `High`, `Medium`, `Low` must exist in the target repo.
+
+**Token logging:** After each audit run, log usage with `token_log.py`. The CSV (`token_usage.csv`) is gitignored and stays local.
+
+## Rules
 
 **Standard rules:**
 - Explore the codebase yourself before asking questions. Read files, check configs, scan for patterns.
