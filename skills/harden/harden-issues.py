@@ -35,8 +35,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-SEVERITY_LABELS = {"critical", "high", "medium", "low"}
-REQUIRED_FIELDS = {"id", "title", "scope", "severity", "blocking", "where", "what", "fix", "batch"}
+from schema import REQUIRED_FIELDS
+from schema import VALID_SEVERITIES as SEVERITY_LABELS
 
 
 def build_body(f: dict) -> str:
@@ -93,6 +93,18 @@ def create_issue(finding: dict, repo: str, batch: int, dry_run: bool) -> None:
         print(f"Created: {result.stdout.strip()}")
 
 
+def validate_findings(findings: list[dict]) -> list[str]:
+    """Return a list of validation error strings; empty list means valid."""
+    errors: list[str] = []
+    for i, f in enumerate(findings):
+        missing = REQUIRED_FIELDS - set(f.keys())
+        if missing:
+            errors.append(f"Finding {i}: missing fields {missing}")
+        if f.get("severity", "").lower() not in SEVERITY_LABELS:
+            errors.append(f"Finding {i} ({f.get('id', '?')}): invalid severity '{f.get('severity')}'")
+    return errors
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="File GitHub issues from harden audit findings")
     parser.add_argument("findings", help="Path to findings.json")
@@ -123,15 +135,7 @@ def main() -> None:
     else:
         print(f"Filing {len(findings)} issue(s) across all batches")
 
-    # Validate required fields
-    errors = []
-    for i, f in enumerate(findings):
-        missing = REQUIRED_FIELDS - set(f.keys())
-        if missing:
-            errors.append(f"Finding {i}: missing fields {missing}")
-        if f.get("severity", "").lower() not in SEVERITY_LABELS:
-            errors.append(f"Finding {i} ({f.get('id', '?')}): invalid severity '{f.get('severity')}'")
-
+    errors = validate_findings(findings)
     if errors:
         print("Validation errors — fix before filing:", file=sys.stderr)
         for e in errors:

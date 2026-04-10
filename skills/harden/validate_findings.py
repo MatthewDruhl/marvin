@@ -13,8 +13,7 @@ import json
 import sys
 from pathlib import Path
 
-VALID_SEVERITIES = {"critical", "high", "medium", "low"}
-REQUIRED_FIELDS = ("scope", "severity", "blocking")
+from schema import REQUIRED_FIELDS, VALID_SEVERITIES
 
 
 def validate(findings: list[dict]) -> list[str]:
