@@ -25,8 +25,14 @@ Use `AskUserQuestion` to present all 5 calibration questions at once:
    - Options: None, Yes (PII/HIPAA/SOC2/etc.), Not sure
 5. **Known issues** — "Areas you already know are problematic?"
    - Options: None, Yes (describe in Other)
+6. **Scope selection** — "Which scopes do you want to audit?"
+   - Options: All (default), Security, AI, Tests, Code Quality, Decoupling
+   - Multi-select — any combination. Default is All.
+   - Skipped scopes will be marked N/A in the scorecard and excluded from the overall grade.
 
 If the user skips any question, assume worst-case: public visibility, shared access, compliance required.
+
+**File-read budget:** Before starting, estimate repo size (count files with Glob). For repos >50 files, cap reads at 20 files per scope. Exceed this only if a Critical finding warrants deeper exploration — state explicitly when you do.
 
 **After calibration, state assumptions and set scrutiny level:**
 
@@ -157,9 +163,9 @@ After completing all scopes, present a scorecard.
 
 > Run `uv run python skills/harden/validate_findings.py findings.json && uv run python skills/harden/score_audit.py findings.json` to validate then auto-generate this scorecard. See `score_audit.py` for JSON input format.
 
-**Scorecard format:** Columns: Scope | Grade | Blocking | Non-blocking. One row per scope, then Overall grade.
+**Scorecard format:** Columns: Scope | Grade | Blocking | Non-blocking. One row per scope, then Overall grade. Mark skipped scopes as **N/A — not in scope** and omit them from the grade columns.
 
-**Overall grade:** Average of scope grades (A=4, B=3, C=2, D=1, F=0), rounded.
+**Overall grade:** Average of scope grades (A=4, B=3, C=2, D=1, F=0), rounded. Exclude N/A scopes from the average.
 
 ## Verdict
 
