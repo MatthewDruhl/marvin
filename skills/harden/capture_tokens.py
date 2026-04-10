@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Capture token usage for a background harden audit from Claude Code session logs."""
+"""Capture token usage for a background harden audit from Claude Code session logs.
+
+NOTE: This module reads Claude Code session JSONL files which contain full conversation
+history, potentially including PII or sensitive data. Token counts are the only values
+used; no conversation content is retained.
+"""
 import argparse
 import csv
 import json
@@ -94,6 +99,7 @@ def sum_tokens(jsonl_path: Path) -> tuple[int, int]:
             if not line:
                 continue
             try:
+                # Only token fields are extracted; conversation content is discarded
                 entry = json.loads(line)
                 usage = entry.get("message", {}).get("usage", {})
                 input_tokens += usage.get("input_tokens", 0)
@@ -105,7 +111,9 @@ def sum_tokens(jsonl_path: Path) -> tuple[int, int]:
     return input_tokens, output_tokens
 
 
-def write_log(project: str, scope: str, input_tokens: int, output_tokens: int, log_file: Path) -> None:
+def write_log(
+    project: str, scope: str, input_tokens: int, output_tokens: int, log_file: Path
+) -> None:
     write_header = not log_file.exists()
     with open(log_file, "a", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=FIELDNAMES)

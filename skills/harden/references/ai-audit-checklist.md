@@ -1,3 +1,5 @@
+<!-- PHASE GATE: Do not read before Scope 2. Load only after completing Scope 1 findings. -->
+
 # AI Audit Checklist
 
 Detailed checks for Scope 2 (AI-Specific Gaps). Read this file before evaluating the AI scope.
