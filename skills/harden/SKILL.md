@@ -32,6 +32,43 @@ Use `AskUserQuestion` to present all 5 calibration questions at once:
 
 If the user skips any question, assume worst-case: public visibility, shared access, compliance required.
 
+## Phase 0.5: Background Agent Launch
+
+After Phase 0 calibration is complete, hand off the audit to a background agent:
+
+**Step 1:** Create a start marker (run via Bash tool):
+```bash
+MARKER=/tmp/harden_audit_$(date +%s) && touch $MARKER && echo $MARKER
+```
+Note the printed marker path.
+
+**Step 2:** Launch a background agent (Agent tool, `run_in_background: true`) with this prompt — fill in all bracketed values from Phase 0:
+
+> You are running a /harden audit. Calibration is done — skip Phase 0 and 0.5.
+>
+> **Target:** [absolute path of directory being audited]
+> **Calibration answers:**
+> - Visibility: [answer]
+> - Access: [answer]
+> - Deployment: [answer]
+> - Compliance: [answer]
+> - Known issues: [answer]
+> - Scopes selected: [answer]
+> - Scrutiny level: [Light / Full / Strict]
+>
+> Follow all instructions in `~/.claude/skills/harden/SKILL.md` starting from **Severity Definitions** through **Batch Plan**. Write findings to `findings.json` in the audited project directory using the JSON format from `score_audit.py`.
+>
+> **Final step (token capture) — run after writing findings.json:**
+> ```bash
+> uv run python ~/.claude/skills/harden/capture_tokens.py --project [project-name] --scope [scope] --marker [MARKER path from Step 1]
+> ```
+
+**Step 3:** Tell the user: "Audit running in the background. You'll be notified when it's done. Findings will land in `findings.json`."
+
+Do not proceed further — the background agent handles all scopes.
+
+---
+
 **File-read budget:** Before starting, estimate repo size (count files with Glob). For repos >50 files, cap reads at 20 files per scope. Exceed this only if a Critical finding warrants deeper exploration — state explicitly when you do.
 
 **After calibration, state assumptions and set scrutiny level:**
@@ -224,11 +261,14 @@ To file a single batch only: add `--batch 1`. To preview without filing: add `--
 | `validate_findings.py` | Validate all required fields before scoring | `uv run python skills/harden/validate_findings.py findings.json` |
 | `score_audit.py` | Compute per-scope grades and overall scorecard | `uv run python skills/harden/score_audit.py findings.json` |
 | `harden-issues.py` | File GitHub issues from findings.json in batch order | `uv run python skills/harden/harden-issues.py findings.json --repo owner/repo` |
-| `token_log.py` | Log per-run token usage to token_usage.csv | `uv run python skills/harden/token_log.py --project <name> --scope <scope> --input-tokens <N> --output-tokens <N>` |
+| `capture_tokens.py` | Read agent JSONL to log token usage automatically | `uv run python ~/.claude/skills/harden/capture_tokens.py --project <name> --scope All --marker /tmp/harden_audit_<ts>` |
+| `token_log.py` | Manually log token usage (fallback if capture_tokens.py fails) | `uv run python skills/harden/token_log.py --project <name> --scope <scope> --input-tokens <N> --output-tokens <N>` |
 
 **Prerequisites for harden-issues.py:** `gh` CLI authenticated; labels `harden`, `blocking`, `Critical`, `High`, `Medium`, `Low` must exist in the target repo.
 
-**Token logging:** After each audit run, log usage with `token_log.py`. The CSV (`token_usage.csv`) is gitignored and stays local.
+**Token logging:** The background agent runs `capture_tokens.py` automatically at the end of every audit. Token counts are read from the agent's Claude Code session JSONL and written to `token_usage.csv` (gitignored, stays local). Use `token_log.py` only if automatic capture fails.
+
+**Browsing usage:** Use `npx ccusage daily --breakdown` to view token spend by project/model/time period across all Claude Code sessions. Complements `token_usage.csv` (which tracks per-audit scope breakdowns).
 
 ## Rules
 
