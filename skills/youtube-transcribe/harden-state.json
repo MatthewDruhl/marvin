@@ -1,0 +1,76 @@
+{
+  "project": "youtube-transcribe",
+  "target": "/Users/matthewdruhl/marvin/skills/youtube-transcribe",
+  "repo": "matthewdruhl/marvin",
+  "date": "2026-04-10",
+  "grade": "B",
+  "token_usage": 0,
+  "findings_file": "/Users/matthewdruhl/marvin/skills/youtube-transcribe/findings.json",
+  "batches": {
+    "1": {
+      "status": "filed",
+      "description": "Security",
+      "count": 1,
+      "issues": [
+        {
+          "id": "SEC-1",
+          "url": "https://github.com/MatthewDruhl/marvin/issues/184"
+        }
+      ]
+    },
+    "2": {
+      "status": "filed",
+      "description": "Security",
+      "count": 5,
+      "issues": [
+        {
+          "id": "AI-1",
+          "url": "https://github.com/MatthewDruhl/marvin/issues/185"
+        },
+        {
+          "id": "AI-2",
+          "url": "https://github.com/MatthewDruhl/marvin/issues/186"
+        },
+        {
+          "id": "SEC-2",
+          "url": "https://github.com/MatthewDruhl/marvin/issues/187"
+        },
+        {
+          "id": "SEC-3",
+          "url": "https://github.com/MatthewDruhl/marvin/issues/188"
+        },
+        {
+          "id": "TST-1",
+          "url": "https://github.com/MatthewDruhl/marvin/issues/189"
+        }
+      ]
+    },
+    "3": {
+      "status": "filed",
+      "description": "Code Quality",
+      "count": 5,
+      "issues": [
+        {
+          "id": "CQ-1",
+          "url": "https://github.com/MatthewDruhl/marvin/issues/190"
+        },
+        {
+          "id": "CQ-2",
+          "url": "https://github.com/MatthewDruhl/marvin/issues/191"
+        },
+        {
+          "id": "DEC-1",
+          "url": "https://github.com/MatthewDruhl/marvin/issues/192"
+        },
+        {
+          "id": "DEC-2",
+          "url": "https://github.com/MatthewDruhl/marvin/issues/193"
+        },
+        {
+          "id": "DEC-3",
+          "url": "https://github.com/MatthewDruhl/marvin/issues/194"
+        }
+      ]
+    }
+  }
+}
