@@ -4,6 +4,25 @@ description: Audit a software project for hardening — security, AI gaps, test 
 
 Perform a systematic hardening audit of this project. Work through each phase below, exploring the codebase to find real issues — not hypothetical ones.
 
+## Audit Mode Selection
+
+Before starting, ask the user which mode to use. Present this choice once using `AskUserQuestion`:
+
+---
+
+**Which audit mode would you like to run?**
+
+| | Mode | How it works | Best for |
+|-|------|-------------|----------|
+| **1** | **Full Run** *(default)* | The AI reads the codebase directly and finds issues in a single pass. Thorough coverage, higher token usage. | Small–medium repos, first-time audits, when you want maximum coverage |
+| **2** | **Recon-First Run** | A fast static scanner (`harden-recon.py`) runs first and flags candidate patterns (secrets, bare excepts, test gaps, etc.). The AI then audits only the flagged areas instead of the full codebase. Lower token usage, slightly narrower coverage. | Large repos, repeat audits, when you want faster/cheaper results |
+
+If the user does not specify, default to **Full Run**.
+
+Store the chosen mode as `AUDIT_MODE` (either `full` or `recon-first`) and carry it into Phase 0.5.
+
+---
+
 ## Reference Files
 
 **Phase gates — load only when triggered. Do not read before the gate.**
@@ -28,9 +47,15 @@ Skipped scopes are marked N/A in the scorecard and excluded from the overall gra
 
 ## Phase 0.5: Background Agent Launch
 
-After Phase 0 calibration is complete, hand off the audit to a background agent:
+After Phase 0 calibration is complete, hand off the audit to a background agent.
 
-> **Optional:** Run `harden-recon.py <target>` first to generate a candidate list. Pass the output as context to the background agent to reduce token usage on large repos.
+**If `AUDIT_MODE` is `recon-first`:** Run the static scanner first and capture its output:
+```bash
+uv run python skills/harden/harden-recon.py <target_dir> --json
+```
+Store the JSON output as `RECON_CANDIDATES`. Include it in the background agent prompt below under a `**Recon candidates (Pass 1 output):**` heading — the agent should audit these locations instead of scanning the full codebase.
+
+**If `AUDIT_MODE` is `full`:** Skip the recon step and proceed directly to Step 1.
 
 **Step 1:** Create a start marker (run via Bash tool):
 ```bash
@@ -41,6 +66,13 @@ Note the printed marker path.
 **Step 2:** Launch a background agent (Agent tool, `run_in_background: true`) with this prompt — fill in all bracketed values from Phase 0:
 
 > You are running a /harden audit. Calibration is done — skip Phase 0 and 0.5.
+>
+> **Audit mode:** [full — read the codebase directly] OR [recon-first — focus on the candidate list below, skip files not listed]
+>
+> **Recon candidates (Pass 1 output — recon-first mode only):**
+> ```json
+> [paste RECON_CANDIDATES here, or omit this block entirely for full mode]
+> ```
 >
 > **Target:** [absolute path of directory being audited]
 > **Calibration answers:**
