@@ -64,6 +64,24 @@ Note the printed marker path.
 > ```bash
 > uv run python ~/.claude/skills/harden/capture_tokens.py --project [project-name] --scope [scope] --marker [MARKER path from Step 1] --output-dir [absolute path of directory being audited]
 > ```
+>
+> **Final step (write state file) — run after token capture:**
+> ```python
+> # Write harden-state.json alongside findings.json
+> import json, sys
+> sys.path.insert(0, 'skills/harden')
+> from harden_state import build_initial_state, batches_from_findings, write_state
+> from pathlib import Path
+> findings = json.loads(Path('[OUTPUT_FILE]').read_text())
+> state = build_initial_state(
+>     project='[PROJECT]', target='[TARGET_DIR]', repo='[REPO]',
+>     grade='[GRADE]', token_usage=[TOKEN_TOTAL],
+>     findings_file='[OUTPUT_FILE]',
+>     batches=batches_from_findings(findings)
+> )
+> write_state(Path('[TARGET_DIR]/harden-state.json'), state)
+> print('State written to [TARGET_DIR]/harden-state.json')
+> ```
 
 **Step 3:** Tell the user: "Audit running in the background. You'll be notified when it's done. Findings will land in `findings.json`."
 
@@ -231,6 +249,83 @@ uv run python skills/harden/harden-issues.py findings.json --repo <owner>/<repo>
 ```
 
 To file a single batch only: add `--batch 1`. To preview without filing: add `--dry-run`.
+
+## On Notification
+
+When the background agent task notification arrives, do the following before responding to the user:
+
+**Step 1:** Read `harden-state.json` from the audited project directory:
+```python
+import json
+from pathlib import Path
+state = json.loads(Path('[TARGET_DIR]/harden-state.json').read_text())
+```
+
+**Step 2:** Render a findings summary table derived from the state file. Each row corresponds to one batch. Derive blocking / non-blocking counts from `findings.json` if needed.
+
+**Step 3:** Present the notification summary and action menu:
+
+```
+Audit complete — Grade: [grade] | [total findings] findings | [token_usage] tokens
+
+| Batch | Description       | Status  | Issues |
+|-------|-------------------|---------|--------|
+| 1     | [description]     | pending | N      |
+| 2     | [description]     | pending | N      |
+...
+
+[1] File Batch 1 (N issues) — uv run python skills/harden/harden-issues.py findings.json --repo <repo> --batch 1 --create-pr
+[2] File all batches now
+[3] Skip — I'll come back later (/harden resume <path> to return)
+```
+
+**Step 4:** Execute the chosen action:
+- **[1]** — run `harden-issues.py --batch 1 --create-pr` for the selected batch
+- **[2]** — run `harden-issues.py` without `--batch` to file all batches, then `--create-pr` per batch
+- **[3]** — acknowledge and remind user they can resume with `/harden resume [TARGET_DIR]`
+
+Use the `repo` field from `harden-state.json` if available; otherwise prompt the user for `--repo owner/repo`.
+
+## Phase 7: Resume
+
+**Trigger:** Arguments start with `resume` (e.g. `/harden resume skills/harden` or `/harden resume --state /path/to/project/harden-state.json`).
+
+**Purpose:** Pick up a completed audit and file remaining batches without re-running the audit.
+
+**Usage:**
+```
+/harden resume <project-directory>
+/harden resume --state <path-to-harden-state.json>
+```
+
+**Steps:**
+
+1. Locate `harden-state.json`:
+   - If `--state <path>` is given, use that path directly.
+   - Otherwise look for `<project-directory>/harden-state.json`.
+   - If not found, tell the user: "No harden-state.json found at `<path>`. Run `/harden <project>` first to generate one."
+
+2. Read the state file and display the batch status table:
+
+```
+Project: [project]  Repo: [repo]  Grade: [grade]  Date: [date]  Tokens: [token_usage]
+
+| Batch | Description       | Status  | Issues filed |
+|-------|-------------------|---------|--------------|
+| 1     | [description]     | filed   | 3            |
+| 2     | [description]     | pending | 0            |
+...
+```
+
+3. Present the action menu (same as the notification handler, filtered to pending batches):
+
+```
+[1] File Batch 2 (N issues)
+[2] File all pending batches now
+[3] Skip — come back later
+```
+
+4. Execute the chosen action using `harden-issues.py` with the batch number and `--create-pr`. Use the `repo` field from `harden-state.json`; prompt if missing.
 
 ## Rules
 
