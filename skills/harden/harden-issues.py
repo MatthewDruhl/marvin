@@ -46,6 +46,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+from harden_state import mark_batch_filed, update_batch_state
 from schema import REQUIRED_FIELDS
 from schema import VALID_SEVERITIES as SEVERITY_LABELS
 
@@ -237,6 +238,7 @@ def main() -> None:
         sys.exit(1)
 
     findings_path = Path(args.findings)
+    state_path = findings_path.parent / "harden-state.json"
     if not findings_path.exists():
         print(f"ERROR: {findings_path} not found", file=sys.stderr)
         sys.exit(1)
@@ -277,11 +279,15 @@ def main() -> None:
             )
             if url and not args.dry_run:
                 save_issue_url(findings_path, finding["id"], url)
+                update_batch_state(state_path, finding.get("batch", 1), finding["id"], url)
                 # Reload so create_pr sees fresh issue_url values
                 batch_findings = [
                     f for f in json.loads(findings_path.read_text())
                     if f.get("batch") == args.batch
                 ]
+
+    if args.batch is not None and not args.dry_run and not args.skip_issues:
+        mark_batch_filed(state_path, args.batch)
 
     if args.create_pr:
         print("\nCreating PR...")
