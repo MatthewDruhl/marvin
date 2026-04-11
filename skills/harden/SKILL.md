@@ -13,24 +13,18 @@ Perform a systematic hardening audit of this project. Work through each phase be
 
 ## Phase 0: Context Gathering
 
-Use `AskUserQuestion` to present all 5 calibration questions at once:
+Use `AskUserQuestion` to present all calibration questions at once:
 
-1. **Visibility** — "Is this repo private or could it go public?"
-   - Options: Private, Public, Planning to open-source
-2. **Access** — "Who has access to this codebase?"
-   - Options: Just me, Small team, Open source
-3. **Deployment** — "Where does this run?"
-   - Options: Local only, Server/cloud, Not deployed yet
-4. **Compliance** — "Any regulatory or legal requirements?"
-   - Options: None, Yes (PII/HIPAA/SOC2/etc.), Not sure
-5. **Known issues** — "Areas you already know are problematic?"
-   - Options: None, Yes (describe in Other)
-6. **Scope selection** — "Which scopes do you want to audit?"
-   - Options: All (default), Security, AI, Tests, Code Quality, Decoupling
-   - Multi-select — any combination. Default is All.
-   - Skipped scopes will be marked N/A in the scorecard and excluded from the overall grade.
+| # | Question | Options |
+|---|----------|---------|
+| 1 | Is this repo private or could it go public? | Private / Public / Planning to open-source |
+| 2 | Who has access to this codebase? | Just me / Small team / Open source |
+| 3 | Where does this run? | Local only / Server/cloud / Not deployed yet |
+| 4 | Any regulatory or legal requirements? | None / Yes (PII/HIPAA/SOC2/etc.) / Not sure |
+| 5 | Areas you already know are problematic? | None / Yes (describe) |
+| 6 | Which scopes to audit? | All (default) / Security / AI / Tests / Code Quality / Decoupling |
 
-If the user skips any question, assume worst-case: public visibility, shared access, compliance required.
+Skipped scopes are marked N/A in the scorecard and excluded from the overall grade. If the user skips any question, assume worst-case: public, shared access, compliance required.
 
 ## Phase 0.5: Background Agent Launch
 
@@ -60,9 +54,24 @@ Note the printed marker path.
 >
 > **Scope restriction:** Only write to `[OUTPUT_FILE]` in the audited project directory. Do not modify any other files — in particular, do not write to any MARVIN state files (current.md, goals.md, decisions.md, todos.md, habits.md, learning.md) or any file outside the audited project directory.
 >
-> **Final step (token capture) — run after writing findings.json:**
+> **Final step (token capture + state) — run after writing findings.json:**
 > ```bash
 > uv run python ~/.claude/skills/harden/capture_tokens.py --project [project-name] --scope [scope] --marker [MARKER path from Step 1] --output-dir [absolute path of directory being audited]
+> ```
+> Then write the state file:
+> ```python
+> import json, sys
+> sys.path.insert(0, 'skills/harden')
+> from harden_state import build_initial_state, batches_from_findings, write_state
+> from pathlib import Path
+> findings = json.loads(Path('[OUTPUT_FILE]').read_text())
+> state = build_initial_state(
+>     project='[project-name]', target='[absolute path of directory being audited]',
+>     repo='[owner/repo]', grade='[OVERALL_GRADE]', token_usage=[TOKEN_TOTAL],
+>     findings_file='[OUTPUT_FILE]', batches=batches_from_findings(findings)
+> )
+> write_state(Path('[absolute path of directory being audited]/harden-state.json'), state)
+> print('State written.')
 > ```
 >
 > **Final step (write state file) — run after token capture:**
@@ -222,15 +231,15 @@ Based on blocking findings, give one clear recommendation:
 
 ## Batch Plan
 
-After the verdict, propose batches for fixing the findings.
+After the verdict, generate the batch plan using `batch_plan.py`:
 
-**Batching rules:**
-1. **Blocking findings go in Batch 1** — always
-2. **Dependencies first** — if finding X blocks finding Y, X goes in an earlier batch
-3. **Logical grouping** — findings that touch the same files or fix related problems go together
-4. **Non-blocking findings in later batches** — ordered by severity
+```bash
+uv run python skills/harden/batch_plan.py findings.json
+```
 
-**Batch format:**
+This deterministically groups findings: blocking findings in Batch 1, non-blocking grouped by scope in severity order. To write batch numbers back to `findings.json`, add `--assign`.
+
+**Batch format (for reference):**
 
 ```
 ### Batch 1 — [description] ([count] issues)
@@ -244,11 +253,11 @@ After presenting the batch plan, ask: **"Ready to create GitHub issues? I'll fil
 
 Only create issues after the user reviews and approves the batches. Once approved, run:
 
-```
-uv run python skills/harden/harden-issues.py findings.json --repo <owner>/<repo>
+```bash
+uv run python skills/harden/harden-issues.py findings.json --repo <owner>/<repo> --batch 1 --create-pr
 ```
 
-To file a single batch only: add `--batch 1`. To preview without filing: add `--dry-run`.
+To preview without filing: add `--dry-run`.
 
 ## On Notification
 
@@ -345,7 +354,8 @@ Project: [project]  Repo: [repo]  Grade: [grade]  Date: [date]  Tokens: [token_u
 |--------|---------|-------|
 | `validate_findings.py` | Validate all required fields before scoring | `uv run python skills/harden/validate_findings.py findings.json` |
 | `score_audit.py` | Compute per-scope grades and overall scorecard | `uv run python skills/harden/score_audit.py findings.json` |
-| `harden-issues.py` | File GitHub issues from findings.json in batch order | `uv run python skills/harden/harden-issues.py findings.json --repo owner/repo` |
+| `batch_plan.py` | Deterministically assign findings to batches | `uv run python skills/harden/batch_plan.py findings.json [--assign]` |
+| `harden-issues.py` | File GitHub issues and create PR with auto-close links | `uv run python skills/harden/harden-issues.py findings.json --repo owner/repo --batch 1 --create-pr` |
 | `capture_tokens.py` | Read agent JSONL to log token usage automatically | `uv run python ~/.claude/skills/harden/capture_tokens.py --project <name> --scope All --marker /tmp/harden_audit_<ts> --output-dir <audited-project-dir>` |
 | `token_log.py` | Manually log token usage (fallback if capture_tokens.py fails) | `uv run python skills/harden/token_log.py --project <name> --scope <scope> --input-tokens <N> --output-tokens <N> --output-dir <audited-project-dir>` |
 
