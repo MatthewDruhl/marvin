@@ -30,6 +30,8 @@ Skipped scopes are marked N/A in the scorecard and excluded from the overall gra
 
 After Phase 0 calibration is complete, hand off the audit to a background agent:
 
+> **Optional:** Run `harden-recon.py <target>` first to generate a candidate list. Pass the output as context to the background agent to reduce token usage on large repos.
+
 **Step 1:** Create a start marker (run via Bash tool):
 ```bash
 MARKER=/tmp/harden_audit_$(date +%s) && touch $MARKER && echo $MARKER
@@ -352,6 +354,7 @@ Project: [project]  Repo: [repo]  Grade: [grade]  Date: [date]  Tokens: [token_u
 
 | Script | Purpose | Usage |
 |--------|---------|-------|
+| `harden-recon.py` | Fast static scan for candidate issues (Pass 1 recon before full audit) | `uv run python skills/harden/harden-recon.py <target>` |
 | `validate_findings.py` | Validate all required fields before scoring | `uv run python skills/harden/validate_findings.py findings.json` |
 | `score_audit.py` | Compute per-scope grades and overall scorecard | `uv run python skills/harden/score_audit.py findings.json` |
 | `batch_plan.py` | Deterministically assign findings to batches | `uv run python skills/harden/batch_plan.py findings.json [--assign]` |
