@@ -4,6 +4,30 @@ description: Audit a software project for hardening — security, AI gaps, test 
 
 Perform a systematic hardening audit of this project. Work through each phase below, exploring the codebase to find real issues — not hypothetical ones.
 
+## Audit Mode Selection
+
+Before starting, ask the user which mode and model to use. Present both choices at once using a single `AskUserQuestion` call with two questions:
+
+**Question 1 — Audit mode:**
+
+| | Mode | How it works | Best for |
+|-|------|-------------|----------|
+| **1** | **Full Run** *(default)* | The AI reads the codebase directly and finds issues in a single pass. Thorough coverage, higher token usage. | Small–medium repos, first-time audits, when you want maximum coverage |
+| **2** | **Recon-First Run** | A fast static scanner (`harden-recon.py`) runs first and flags candidate patterns (secrets, bare excepts, test gaps, etc.). The AI then audits only the flagged areas instead of the full codebase. Lower token usage, slightly narrower coverage. | Large repos, repeat audits, when you want faster/cheaper results |
+
+**Question 2 — Model:**
+
+| | Model | Quality | Cost |
+|-|-------|---------|------|
+| **Sonnet** *(default)* | Deep reasoning, best finding quality | ~40K tokens on a small skill | Standard |
+| **Haiku** | Good for small/low-risk targets, slightly lower finding quality | ~4K tokens on a small skill | ~10x cheaper |
+
+If the user does not specify, default to **Full Run** + **Sonnet**.
+
+Store the chosen mode as `AUDIT_MODE` (`full` or `recon-first`) and the chosen model as `AUDIT_MODEL` (`sonnet` or `haiku`). Carry both into Phase 0.5.
+
+---
+
 ## Reference Files
 
 **Phase gates — load only when triggered. Do not read before the gate.**
@@ -28,7 +52,29 @@ Skipped scopes are marked N/A in the scorecard and excluded from the overall gra
 
 ## Phase 0.5: Background Agent Launch
 
-After Phase 0 calibration is complete, hand off the audit to a background agent:
+After Phase 0 calibration is complete, hand off the audit to a background agent.
+
+**If `AUDIT_MODE` is `recon-first`:** Run the static scanner first and capture its output:
+```bash
+uv run python skills/harden/harden-recon.py <target_dir> --json
+```
+Store the JSON output as `RECON_CANDIDATES`. Include it in the background agent prompt below under a `**Recon candidates (Pass 1 output):**` heading — the agent should audit these locations instead of scanning the full codebase.
+
+**Recon threshold check (recon-first mode only):**
+After capturing `RECON_CANDIDATES`, count the files in the target:
+```bash
+find <target_dir> -type f | wc -l
+```
+If `RECON_CANDIDATES` is empty (`[]`) **and** file count is fewer than 5, ask the user via `AskUserQuestion` before launching the agent:
+
+> **Recon found 0 candidates across N files. Run the AI pass anyway?**
+> - **Run AI pass** — catches issues recon can't detect (bash scripts, configs, YAML, SKILL.md). Recommended if target has non-Python files.
+> - **Skip — report clean** — saves ~40K tokens. Treats 0 recon candidates as a passing grade.
+
+- If user chooses **Skip**: write `[]` to `findings.json` in the target directory, write a minimal `harden-state.json` with grade `A` and 0 findings, tell the user the audit is complete (Grade: A, 0 findings), and stop — do not launch an agent.
+- If user chooses **Run AI pass**: continue to Step 1 as normal.
+
+**If `AUDIT_MODE` is `full`:** Skip the recon step and proceed directly to Step 1.
 
 **Step 1:** Create a start marker (run via Bash tool):
 ```bash
@@ -36,9 +82,16 @@ MARKER=/tmp/harden_audit_$(date +%s) && touch $MARKER && echo $MARKER
 ```
 Note the printed marker path.
 
-**Step 2:** Launch a background agent (Agent tool, `run_in_background: true`) with this prompt — fill in all bracketed values from Phase 0:
+**Step 2:** Launch a background agent (Agent tool, `run_in_background: true`, `model: [AUDIT_MODEL]`) with this prompt — fill in all bracketed values from Phase 0:
 
 > You are running a /harden audit. Calibration is done — skip Phase 0 and 0.5.
+>
+> **Audit mode:** [full — read the codebase directly] OR [recon-first — focus on the candidate list below, skip files not listed]
+>
+> **Recon candidates (Pass 1 output — recon-first mode only):**
+> ```json
+> [paste RECON_CANDIDATES here, or omit this block entirely for full mode]
+> ```
 >
 > **Target:** [absolute path of directory being audited]
 > **Calibration answers:**
@@ -352,6 +405,7 @@ Project: [project]  Repo: [repo]  Grade: [grade]  Date: [date]  Tokens: [token_u
 
 | Script | Purpose | Usage |
 |--------|---------|-------|
+| `harden-recon.py` | Fast static scan for candidate issues (Pass 1 recon before full audit) | `uv run python skills/harden/harden-recon.py <target>` |
 | `validate_findings.py` | Validate all required fields before scoring | `uv run python skills/harden/validate_findings.py findings.json` |
 | `score_audit.py` | Compute per-scope grades and overall scorecard | `uv run python skills/harden/score_audit.py findings.json` |
 | `batch_plan.py` | Deterministically assign findings to batches | `uv run python skills/harden/batch_plan.py findings.json [--assign]` |

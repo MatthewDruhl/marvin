@@ -1,0 +1,426 @@
+"""harden-recon.py — Fast static Pass 1 candidate scanner.
+
+Scans a target directory for candidate issues using regex pattern matching.
+No AI calls needed. Produces structured output for Pass 2 (full harden audit).
+
+Usage:
+    uv run python skills/harden/harden-recon.py <target_dir> [--output candidates.md] [--json]
+"""
+
+import argparse
+import json
+import re
+import sys
+import time
+from dataclasses import dataclass, field
+from pathlib import Path
+
+# ---------------------------------------------------------------------------
+# Patterns
+# ---------------------------------------------------------------------------
+
+SECRET_KEYWORDS = ["api_key", "secret", "password", "token", "private_key"]
+
+# Matches: keyword = "literal" or keyword = 'literal'
+# Does NOT match: keyword = os.environ.get(...) or keyword = config["..."]
+SECRET_PATTERN = re.compile(
+    r"""(?i)\w*(?:"""
+    + "|".join(re.escape(k) for k in SECRET_KEYWORDS)
+    + r""")\w*\s*=\s*['"][^'"]{1,}['"]""",
+)
+
+BARE_EXCEPT_PATTERN = re.compile(r"^\s*except\s*(?:Exception\s*)?:\s*$", re.MULTILINE)
+HARDCODED_IP_PATTERN = re.compile(r"\b(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})\b")
+HARDCODED_PORT_PATTERN = re.compile(r"\bport\s*=\s*(\d{2,5})\b", re.IGNORECASE)
+
+HANDLER_FUNC_PATTERN = re.compile(r"^\s*def\s+(handle_|process_|parse_)\w+\s*\(", re.MULTILINE)
+VALIDATION_PATTERN = re.compile(r"\b(if not|raise|assert)\b")
+
+EXCLUDED_DIRS = {"__pycache__", ".git", "node_modules", "venv", ".venv"}
+EXCLUDED_SUFFIXES = {".lock", ".min.js"}
+
+LARGE_FILE_THRESHOLD = 300
+
+# Valid IP octet range check
+def _is_valid_ip(groups: tuple[str, ...]) -> bool:
+    return all(0 <= int(g) <= 255 for g in groups)
+
+
+# ---------------------------------------------------------------------------
+# Data model
+# ---------------------------------------------------------------------------
+
+@dataclass
+class Candidate:
+    category: str
+    file: str
+    line: int | None
+    detail: str
+
+    def to_dict(self) -> dict:
+        return {
+            "category": self.category,
+            "file": self.file,
+            "line": self.line,
+            "detail": self.detail,
+        }
+
+
+@dataclass
+class ReconResult:
+    target: str
+    files_scanned: int
+    duration: float
+    candidates: list[Candidate] = field(default_factory=list)
+
+    def by_category(self) -> dict[str, list[Candidate]]:
+        result: dict[str, list[Candidate]] = {}
+        for c in self.candidates:
+            result.setdefault(c.category, []).append(c)
+        return result
+
+
+# ---------------------------------------------------------------------------
+# File collection
+# ---------------------------------------------------------------------------
+
+def _collect_python_files(target: Path) -> list[Path]:
+    """Return all .py files, excluding blacklisted dirs and suffixes."""
+    files: list[Path] = []
+    for path in target.rglob("*.py"):
+        # Check no excluded dir is in the path parts
+        if any(part in EXCLUDED_DIRS for part in path.parts):
+            continue
+        if path.suffix in EXCLUDED_SUFFIXES:
+            continue
+        files.append(path)
+    return files
+
+
+def _collect_all_files(target: Path) -> list[Path]:
+    """Return all non-excluded files (any extension)."""
+    files: list[Path] = []
+    for path in target.rglob("*"):
+        if not path.is_file():
+            continue
+        if any(part in EXCLUDED_DIRS for part in path.parts):
+            continue
+        if path.suffix in EXCLUDED_SUFFIXES:
+            continue
+        files.append(path)
+    return files
+
+
+# ---------------------------------------------------------------------------
+# Scanners
+# ---------------------------------------------------------------------------
+
+def _scan_secrets(path: Path, rel: str) -> list[Candidate]:
+    candidates: list[Candidate] = []
+    try:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return candidates
+    for i, line in enumerate(text.splitlines(), start=1):
+        if SECRET_PATTERN.search(line):
+            # Extract which keyword triggered the match
+            stripped = line.strip()
+            keyword = next(
+                (k for k in SECRET_KEYWORDS if k.lower() in stripped.lower()),
+                "secret",
+            )
+            candidates.append(
+                Candidate(
+                    category="secrets",
+                    file=rel,
+                    line=i,
+                    detail=f"hardcoded {keyword} assignment",
+                )
+            )
+    return candidates
+
+
+def _scan_bare_excepts(path: Path, rel: str) -> list[Candidate]:
+    candidates: list[Candidate] = []
+    try:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return candidates
+
+    lines = text.splitlines()
+    for i, line in enumerate(lines, start=1):
+        if re.match(r"^\s*except\s*(?:Exception\s*)?:\s*$", line):
+            # Check if there's a re-raise or logging in the next ~5 lines
+            block = lines[i : i + 5]  # lines after except (i is 1-based, index is i)
+            block_text = "\n".join(block)
+            reraise_pat = re.compile(
+                r"\braise\b|\blog(ging)?\b|logger\b|print\b|warn\b", re.IGNORECASE
+            )
+            has_reraise = bool(reraise_pat.search(block_text))
+            if not has_reraise:
+                candidates.append(
+                    Candidate(
+                        category="bare_excepts",
+                        file=rel,
+                        line=i,
+                        detail="bare except with no logging/re-raise",
+                    )
+                )
+    return candidates
+
+
+def _scan_missing_validation(path: Path, rel: str) -> list[Candidate]:
+    """Flag handle_*/process_*/parse_* functions with no early validation."""
+    candidates: list[Candidate] = []
+    try:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return candidates
+
+    lines = text.splitlines()
+    for i, line in enumerate(lines, start=1):
+        m = re.match(r"^\s*def\s+(handle_\w+|process_\w+|parse_\w+)\s*\(", line)
+        if not m:
+            continue
+        func_name = m.group(1)
+        # Check first 5 lines of function body for validation
+        body_lines = lines[i : i + 5]  # i is 1-based so lines[i] is line after def
+        body_text = "\n".join(body_lines)
+        if not VALIDATION_PATTERN.search(body_text):
+            candidates.append(
+                Candidate(
+                    category="missing_input_validation",
+                    file=rel,
+                    line=i,
+                    detail=f"{func_name}(): no early validation",
+                )
+            )
+    return candidates
+
+
+def _scan_hardcoded_values(path: Path, rel: str) -> list[Candidate]:
+    candidates: list[Candidate] = []
+    # Skip test files for port scanning (but still scan IPs)
+    is_test = "test_" in path.name or path.name.startswith("test")
+    try:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return candidates
+
+    for i, line in enumerate(text.splitlines(), start=1):
+        # Hardcoded IPs
+        for m in HARDCODED_IP_PATTERN.finditer(line):
+            if _is_valid_ip(m.groups()):
+                ip = m.group(0)
+                candidates.append(
+                    Candidate(
+                        category="hardcoded_values",
+                        file=rel,
+                        line=i,
+                        detail=f"hardcoded IP: {ip}",
+                    )
+                )
+
+        # Hardcoded ports (non-test files only)
+        if not is_test:
+            for m in HARDCODED_PORT_PATTERN.finditer(line):
+                port = int(m.group(1))
+                if 1 <= port <= 65535:
+                    candidates.append(
+                        Candidate(
+                            category="hardcoded_values",
+                            file=rel,
+                            line=i,
+                            detail=f"hardcoded port: {port}",
+                        )
+                    )
+    return candidates
+
+
+def _build_test_file_set(all_py_files: list[Path]) -> set[str]:
+    """Return set of base names that test files cover (e.g. 'module' from 'test_module.py')."""
+    covered: set[str] = set()
+    for f in all_py_files:
+        if f.name.startswith("test_"):
+            covered.add(f.name[5:])  # strip "test_" prefix
+        elif f.name.endswith("_test.py"):
+            covered.add(f.name[: -len("_test.py")] + ".py")
+    return covered
+
+
+def _scan_test_gaps(target: Path, py_files: list[Path]) -> list[Candidate]:
+    """Flag source files that have no corresponding test file anywhere in the tree."""
+    candidates: list[Candidate] = []
+    test_covered = _build_test_file_set(py_files)
+
+    for path in py_files:
+        # Only flag src/ files or root-level .py files (not test files themselves)
+        rel_parts = path.relative_to(target).parts
+        in_src = len(rel_parts) >= 1 and rel_parts[0] == "src"
+        is_root_level = len(rel_parts) == 1
+        is_test_file = path.name.startswith("test_") or path.name.endswith("_test.py")
+
+        if is_test_file:
+            continue
+
+        if in_src or is_root_level:
+            if path.name not in test_covered:
+                candidates.append(
+                    Candidate(
+                        category="test_gaps",
+                        file=str(path.relative_to(target)),
+                        line=None,
+                        detail="no test file found",
+                    )
+                )
+    return candidates
+
+
+def _scan_large_files(target: Path, py_files: list[Path]) -> list[Candidate]:
+    """Flag files > 300 lines with no corresponding test file."""
+    candidates: list[Candidate] = []
+    test_covered = _build_test_file_set(py_files)
+
+    for path in py_files:
+        is_test_file = path.name.startswith("test_") or path.name.endswith("_test.py")
+        if is_test_file:
+            continue
+        try:
+            line_count = path.read_text(encoding="utf-8", errors="ignore").count("\n")
+        except OSError:
+            continue
+        if line_count > LARGE_FILE_THRESHOLD and path.name not in test_covered:
+            candidates.append(
+                Candidate(
+                    category="large_files",
+                    file=str(path.relative_to(target)),
+                    line=None,
+                    detail=f"{line_count} lines, no test file",
+                )
+            )
+    return candidates
+
+
+# ---------------------------------------------------------------------------
+# Main scan entry point
+# ---------------------------------------------------------------------------
+
+def run_recon(target_dir: str | Path) -> ReconResult:
+    target = Path(target_dir).resolve()
+    start = time.monotonic()
+
+    py_files = _collect_python_files(target)
+    all_files_count = len(_collect_all_files(target))
+
+    candidates: list[Candidate] = []
+
+    for path in py_files:
+        rel = str(path.relative_to(target))
+        candidates.extend(_scan_secrets(path, rel))
+        candidates.extend(_scan_bare_excepts(path, rel))
+        candidates.extend(_scan_missing_validation(path, rel))
+        candidates.extend(_scan_hardcoded_values(path, rel))
+
+    # File-level checks (no per-line context needed)
+    candidates.extend(_scan_test_gaps(target, py_files))
+    candidates.extend(_scan_large_files(target, py_files))
+
+    duration = time.monotonic() - start
+    return ReconResult(
+        target=str(target),
+        files_scanned=all_files_count,
+        duration=duration,
+        candidates=candidates,
+    )
+
+
+# ---------------------------------------------------------------------------
+# Output formatters
+# ---------------------------------------------------------------------------
+
+CATEGORY_LABELS: dict[str, str] = {
+    "secrets": "Secrets",
+    "bare_excepts": "Bare Excepts",
+    "missing_input_validation": "Missing Input Validation",
+    "hardcoded_values": "Hardcoded Values",
+    "test_gaps": "Test Gaps",
+    "large_files": "Large Files",
+}
+
+CATEGORY_ORDER = list(CATEGORY_LABELS.keys())
+
+
+def format_markdown(result: ReconResult) -> str:
+    lines: list[str] = [
+        "# Harden Recon — Candidates",
+        "",
+        f"Scanned: {result.target}",
+        f"Files scanned: {result.files_scanned}",
+        f"Candidates found: {len(result.candidates)}",
+        f"Duration: {result.duration:.1f}s",
+        "",
+    ]
+
+    by_cat = result.by_category()
+
+    for cat in CATEGORY_ORDER:
+        label = CATEGORY_LABELS[cat]
+        items = by_cat.get(cat, [])
+        lines.append(f"## {label} ({len(items)})")
+        if items:
+            for c in items:
+                loc = f"{c.file}:{c.line}" if c.line is not None else c.file
+                lines.append(f"- `{loc}` — {c.detail}")
+        lines.append("")
+
+    return "\n".join(lines)
+
+
+def format_json(result: ReconResult) -> str:
+    return json.dumps([c.to_dict() for c in result.candidates], indent=2)
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description="Fast static Pass 1 candidate scanner for harden audits.",
+    )
+    parser.add_argument("target_dir", help="Directory to scan")
+    parser.add_argument(
+        "--output",
+        metavar="FILE",
+        help="Write output to file (default: stdout)",
+    )
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        dest="as_json",
+        help="Output as JSON array instead of markdown",
+    )
+    args = parser.parse_args(argv)
+
+    target = Path(args.target_dir)
+    if not target.exists():
+        print(f"Error: target directory does not exist: {target}", file=sys.stderr)
+        return 1
+    if not target.is_dir():
+        print(f"Error: target is not a directory: {target}", file=sys.stderr)
+        return 1
+
+    result = run_recon(target)
+    output = format_json(result) if args.as_json else format_markdown(result)
+
+    if args.output:
+        Path(args.output).write_text(output, encoding="utf-8")
+        print(f"Output written to {args.output}")
+    else:
+        print(output)
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
