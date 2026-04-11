@@ -53,7 +53,7 @@ def _is_authorized(user_id: str) -> bool:
 
 
 MARVIN_DIR = str(Path.home() / "marvin")
-CLAUDE_TIMEOUT = 120  # seconds
+CLAUDE_TIMEOUT = 300  # seconds
 MAX_INPUT_LENGTH = 4000  # Slack's own message limit
 SYSTEM_PROMPT = (
     "You are MARVIN, an AI Chief of Staff running inside Claude Code. "
@@ -307,7 +307,7 @@ def ask_claude(prompt: str, thread_key: str) -> str:
                 return output
 
             except subprocess.TimeoutExpired:
-                return "That took too long (>2 min). Try a simpler question."
+                return "That took too long (>5 min). Try a simpler question."
             except FileNotFoundError:
                 return "Error: `claude` CLI not found. Make sure Claude Code is installed."
             except Exception:

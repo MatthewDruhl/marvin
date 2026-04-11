@@ -318,7 +318,7 @@ class TestAskClaude:
 
         proc = subprocess.run(
             ["claude", "--print", "--output-format", "json", "hello"],
-            capture_output=True, text=True, timeout=120,
+            capture_output=True, text=True, timeout=300,
         )
         output = proc.stdout.strip()
         data = json.loads(output)
@@ -335,7 +335,7 @@ class TestAskClaude:
         existing_session = "abc-123"
 
         cmd = ["claude", "--print", "--resume", existing_session, "follow up"]
-        subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+        subprocess.run(cmd, capture_output=True, text=True, timeout=300)
 
         called_cmd = mock_run.call_args[0][0]
         assert "--resume" in called_cmd
@@ -348,7 +348,7 @@ class TestAskClaude:
 
         proc = subprocess.run(
             ["claude", "--print", "hello"],
-            capture_output=True, text=True, timeout=120,
+            capture_output=True, text=True, timeout=300,
         )
         output = proc.stdout.strip()
         assert output == ""
@@ -357,12 +357,12 @@ class TestAskClaude:
     @patch("subprocess.run")
     def test_timeout_raises_exception(self, mock_run):
         """subprocess.TimeoutExpired should propagate so caller can handle it."""
-        mock_run.side_effect = subprocess.TimeoutExpired(cmd="claude", timeout=120)
+        mock_run.side_effect = subprocess.TimeoutExpired(cmd="claude", timeout=300)
 
         with pytest.raises(subprocess.TimeoutExpired):
             subprocess.run(
                 ["claude", "--print", "hello"],
-                capture_output=True, text=True, timeout=120,
+                capture_output=True, text=True, timeout=300,
             )
 
     @patch("subprocess.run")
@@ -372,7 +372,7 @@ class TestAskClaude:
 
         proc = subprocess.run(
             ["claude", "--print", "--output-format", "json", "hello"],
-            capture_output=True, text=True, timeout=120,
+            capture_output=True, text=True, timeout=300,
         )
         output = proc.stdout.strip()
         try:
@@ -392,7 +392,7 @@ class TestAskClaude:
 
         proc = subprocess.run(
             ["claude", "--print", "--resume", "abc", "hello"],
-            capture_output=True, text=True, timeout=120,
+            capture_output=True, text=True, timeout=300,
         )
         output = proc.stdout.strip()
         is_conflict = "Session ID" in output and "is already in use" in output
@@ -413,14 +413,14 @@ class TestAskClaude:
         max_retries = 2
         output = None
         for attempt in range(max_retries + 1):
-            proc = subprocess.run(["claude"], capture_output=True, text=True, timeout=120)
+            proc = subprocess.run(["claude"], capture_output=True, text=True, timeout=300)
             output = proc.stdout.strip()
             if "Session ID" in output and "is already in use" in output:
                 if attempt < max_retries:
                     continue
                 # Clear session and start fresh
                 sessions.pop("thread1", None)
-                proc = subprocess.run(["claude"], capture_output=True, text=True, timeout=120)
+                proc = subprocess.run(["claude"], capture_output=True, text=True, timeout=300)
                 output = proc.stdout.strip()
                 data = json.loads(output)
                 if data.get("session_id"):
@@ -440,5 +440,5 @@ class TestAskClaude:
         with pytest.raises(FileNotFoundError):
             subprocess.run(
                 ["claude", "--print", "hello"],
-                capture_output=True, text=True, timeout=120,
+                capture_output=True, text=True, timeout=300,
             )
