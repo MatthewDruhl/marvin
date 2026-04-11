@@ -3,13 +3,22 @@
 File GitHub issues from a harden audit findings.json.
 
 Usage:
-    uv run python skills/harden/harden-issues.py findings.json --repo owner/repo
+    # File issues for a batch and save issue URLs back to findings.json:
+    uv run python skills/harden/harden-issues.py findings.json --repo owner/repo --batch 1
+
+    # File issues AND create the PR in one shot:
+    uv run python skills/harden/harden-issues.py findings.json \
+        --repo owner/repo --batch 1 --create-pr
+
+    # Create PR only (issues already filed, URLs in findings.json):
+    uv run python skills/harden/harden-issues.py findings.json \
+        --repo owner/repo --batch 1 --create-pr --skip-issues
 
 Prerequisites:
     - gh CLI installed and authenticated
     - findings.json produced by validate_findings.py + score_audit.py pipeline
     - GitHub labels exist: Critical, High, Medium, Low, harden, blocking
-    - GitHub milestones match batch names in the findings (optional)
+    - For --create-pr: must be on the feature branch for that batch
 
 findings.json format (array of finding objects):
     [
@@ -25,6 +34,7 @@ findings.json format (array of finding objects):
         "impact": "...",
         "fix": "...",
         "batch": 1
+        // issue_url is written here automatically after filing
       },
       ...
     ]
@@ -112,6 +122,77 @@ def create_issue(finding: dict, repo: str, batch: int, dry_run: bool) -> str | N
     return url
 
 
+def save_issue_url(findings_path: Path, finding_id: str, url: str) -> None:
+    """Write issue_url back to the matching finding in findings.json."""
+    all_findings = json.loads(findings_path.read_text())
+    for f in all_findings:
+        if f.get("id") == finding_id:
+            f["issue_url"] = url
+            break
+    findings_path.write_text(json.dumps(all_findings, indent=2) + "\n")
+
+
+def create_pr(
+    findings: list[dict], batch_num: int, repo: str, dry_run: bool
+) -> None:
+    """Create a GitHub PR for a batch using issue_url fields already in findings."""
+    branch = subprocess.run(
+        ["git", "branch", "--show-current"], capture_output=True, text=True
+    ).stdout.strip()
+    if not branch:
+        print("ERROR: could not determine current branch", file=sys.stderr)
+        sys.exit(1)
+
+    ids = ", ".join(f.get("id", "?") for f in findings)
+    title = f"fix(harden): batch {batch_num} — {ids}"
+
+    missing_urls = [f["id"] for f in findings if not f.get("issue_url")]
+    if missing_urls:
+        print(
+            f"WARNING: no issue_url for {missing_urls} — run without --skip-issues first",
+            file=sys.stderr,
+        )
+
+    summary_lines = "\n".join(
+        f"- **{f['id']}**: {f['title']}" for f in findings
+    )
+    closes_lines = "\n".join(
+        f"Closes {f['issue_url']}" for f in findings if f.get("issue_url")
+    )
+    body = f"""## Summary
+{summary_lines}
+
+## Test plan
+- [ ] Verify each fix matches its finding description
+- [ ] Run existing tests: `uv run pytest skills/harden/tests/`
+
+{closes_lines}
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+"""
+
+    cmd = [
+        "gh", "pr", "create",
+        "--repo", repo,
+        "--base", "main",
+        "--head", branch,
+        "--title", title,
+        "--body", body,
+    ]
+
+    if dry_run:
+        print(f"[dry-run] Would create PR: {title}")
+        print(f"          Branch: {branch}")
+        print(f"          Closes: {closes_lines or '(none)'}")
+        return
+
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"ERROR creating PR: {result.stderr.strip()}", file=sys.stderr)
+    else:
+        print(f"PR created: {result.stdout.strip()}")
+
+
 def validate_findings(findings: list[dict]) -> list[str]:
     """Return a list of validation error strings; empty list means valid."""
     errors: list[str] = []
@@ -136,7 +217,24 @@ def main() -> None:
     parser.add_argument(
         "--batch", type=int, default=None, help="Only file issues for this batch number"
     )
+    parser.add_argument(
+        "--create-pr",
+        action="store_true",
+        help="Create a PR after filing issues (requires --batch)",
+    )
+    parser.add_argument(
+        "--skip-issues",
+        action="store_true",
+        help="Skip filing issues; only create the PR (requires --create-pr)",
+    )
     args = parser.parse_args()
+
+    if args.create_pr and args.batch is None:
+        print("ERROR: --create-pr requires --batch", file=sys.stderr)
+        sys.exit(1)
+    if args.skip_issues and not args.create_pr:
+        print("ERROR: --skip-issues requires --create-pr", file=sys.stderr)
+        sys.exit(1)
 
     findings_path = Path(args.findings)
     if not findings_path.exists():
@@ -155,35 +253,39 @@ def main() -> None:
 
     # Filter by batch if specified
     if args.batch is not None:
-        findings = [f for f in findings if f.get("batch") == args.batch]
-        print(f"Filing {len(findings)} issue(s) for batch {args.batch}")
+        batch_findings = [f for f in findings if f.get("batch") == args.batch]
     else:
-        print(f"Filing {len(findings)} issue(s) across all batches")
+        batch_findings = findings
 
-    errors = validate_findings(findings)
-    if errors:
-        print("Validation errors — fix before filing:", file=sys.stderr)
-        for e in errors:
-            print(f"  - {e}", file=sys.stderr)
-        sys.exit(1)
+    if not args.skip_issues:
+        label = f"batch {args.batch}" if args.batch is not None else "all batches"
+        print(f"Filing {len(batch_findings)} issue(s) for {label}")
 
-    # File in batch order, collect issue URLs grouped by batch
-    findings_sorted = sorted(findings, key=lambda f: (f.get("batch", 99), f.get("id", "")))
-    batch_issues: dict[int, list[str]] = {}
-    for finding in findings_sorted:
-        url = create_issue(
-            finding, repo=args.repo, batch=finding.get("batch", 1), dry_run=args.dry_run
+        errors = validate_findings(batch_findings)
+        if errors:
+            print("Validation errors — fix before filing:", file=sys.stderr)
+            for e in errors:
+                print(f"  - {e}", file=sys.stderr)
+            sys.exit(1)
+
+        findings_sorted = sorted(
+            batch_findings, key=lambda f: (f.get("batch", 99), f.get("id", ""))
         )
-        if url:
-            batch_num = finding.get("batch", 1)
-            batch_issues.setdefault(batch_num, []).append(url)
+        for finding in findings_sorted:
+            url = create_issue(
+                finding, repo=args.repo, batch=finding.get("batch", 1), dry_run=args.dry_run
+            )
+            if url and not args.dry_run:
+                save_issue_url(findings_path, finding["id"], url)
+                # Reload so create_pr sees fresh issue_url values
+                batch_findings = [
+                    f for f in json.loads(findings_path.read_text())
+                    if f.get("batch") == args.batch
+                ]
 
-    # Print Closes block for each batch — paste into PR body to auto-close issues on merge
-    if batch_issues:
-        print("\n--- Closes blocks (paste into PR body) ---")
-        for batch_num, urls in sorted(batch_issues.items()):
-            closes = " ".join(f"Closes {u}" for u in urls)
-            print(f"Batch {batch_num}: {closes}")
+    if args.create_pr:
+        print("\nCreating PR...")
+        create_pr(batch_findings, args.batch, repo=args.repo, dry_run=args.dry_run)
 
     print("\nDone.")
 
