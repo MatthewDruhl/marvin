@@ -283,6 +283,20 @@ During daily briefing, if PMP topics are overdue:
 - If 3+ PMP topics overdue for 3+ days, nudge harder
 - Suggest mode: "Exam Mode for realistic practice, Revision Mode for studying."
 
+### Mobile Quiz Sync (claude.ai)
+
+Matt can quiz on claude.ai while traveling. Those sessions create GitHub issues titled `pmp-quiz sync: ...` with structured progress data.
+
+**At `/marvin` startup or when processing issues:**
+1. Search for open issues with title prefix `pmp-quiz sync:`
+2. For each sync issue:
+   - Read the Quiz History Entry and Topic Updates tables
+   - Apply updates to `skills/pmp-quiz/progress/matt.md`
+   - Add the quiz history row
+   - Update each topic's question count, Last Reviewed, Next Review, and confidence
+3. Comment on the issue confirming sync, then close it
+4. Commit the progress file update
+
 ---
 
 ## Notes
