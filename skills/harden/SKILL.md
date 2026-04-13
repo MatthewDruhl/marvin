@@ -84,7 +84,7 @@ Note the printed marker path.
 
 **Step 2:** Launch a background agent (Agent tool, `run_in_background: true`, `model: [AUDIT_MODEL]`) with this prompt — fill in all bracketed values from Phase 0:
 
-> You are running a /harden audit. Calibration is done — skip Phase 0 and 0.5.
+> Read `skills/harden/agent-prompt.md` for your audit instructions. Calibration is done — start auditing immediately.
 >
 > **Audit mode:** [full — read the codebase directly] OR [recon-first — focus on the candidate list below, skip files not listed]
 >
@@ -103,7 +103,7 @@ Note the printed marker path.
 > - Scopes selected: [answer]
 > - Scrutiny level: [Light / Full / Strict]
 >
-> Follow all instructions in `~/.claude/skills/harden/SKILL.md` starting from **Severity Definitions** through **Batch Plan**. Write findings to `findings.json` in the audited project directory using the JSON format from `score_audit.py`.
+> Write findings to `findings.json` in the audited project directory using the JSON format from `score_audit.py`.
 >
 > **Scope restriction:** Only write to `[OUTPUT_FILE]` in the audited project directory. Do not modify any other files — in particular, do not write to any MARVIN state files (current.md, goals.md, decisions.md, todos.md, habits.md, learning.md) or any file outside the audited project directory.
 >
@@ -125,24 +125,6 @@ Note the printed marker path.
 > )
 > write_state(Path('[absolute path of directory being audited]/harden-state.json'), state)
 > print('State written.')
-> ```
->
-> **Final step (write state file) — run after token capture:**
-> ```python
-> # Write harden-state.json alongside findings.json
-> import json, sys
-> sys.path.insert(0, 'skills/harden')
-> from harden_state import build_initial_state, batches_from_findings, write_state
-> from pathlib import Path
-> findings = json.loads(Path('[OUTPUT_FILE]').read_text())
-> state = build_initial_state(
->     project='[PROJECT]', target='[TARGET_DIR]', repo='[REPO]',
->     grade='[GRADE]', token_usage=[TOKEN_TOTAL],
->     findings_file='[OUTPUT_FILE]',
->     batches=batches_from_findings(findings)
-> )
-> write_state(Path('[TARGET_DIR]/harden-state.json'), state)
-> print('State written to [TARGET_DIR]/harden-state.json')
 > ```
 
 **Step 3:** Tell the user: "Audit running in the background. You'll be notified when it's done. Findings will land in `findings.json`."
