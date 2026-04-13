@@ -33,19 +33,20 @@ bash skills/youtube-transcribe/transcribe.sh "<url>"
 ```
 
 This runs two commands:
-1. `yt-dlp` downloads the auto-generated subtitles as `transcript.en.srt`
-2. `sed` strips sequence numbers, timestamps, and blank lines → `transcript.txt`
+1. `yt-dlp` downloads the auto-generated subtitles to `content/transcripts/`
+2. `sed` strips sequence numbers, timestamps, and blank lines → `transcript_VIDEO_ID.txt`
 
 ### Step 2: Confirm output
 
 Tell the user:
-- Where the transcript was saved (`transcript.txt` in the current directory)
+- Where the transcript was saved (path printed by the script, under `content/transcripts/`)
 - Offer to display the contents or summarize the video
 
 ## Output
 
-- `transcript.en.srt` — raw subtitle file (intermediate, can discard)
-- `transcript.txt` — clean plain-text transcript
+Files are written to `content/transcripts/` with video-ID-based filenames:
+- `transcript_VIDEO_ID.en.srt` — raw subtitle file (intermediate, can discard)
+- `transcript_VIDEO_ID.txt` — clean plain-text transcript
 
 ## Notes
 

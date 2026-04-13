@@ -47,5 +47,6 @@ uv.lock
 harden_*_token_usage.csv
 
 # youtube-transcribe skill output
+content/transcripts/
 transcript.txt
 transcript*.srt
