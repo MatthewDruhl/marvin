@@ -1,5 +1,5 @@
 ---
-description: PMP quiz - usage /pmp-quiz <name> (Matt or Emily)
+description: PMP quiz - usage /pmp-quiz <name> [exam|revision|refresher] (Matt or Emily)
 ---
 
 # /pmp-quiz - PMP Certification Quiz
@@ -8,16 +8,25 @@ Launch a PMP quiz session for a specific person.
 
 ## Usage
 
-`/pmp-quiz <name>` — where name is `Matt` or `Emily` (case-insensitive)
+`/pmp-quiz <name> [mode] [count]` — where name is `Matt` or `Emily` (case-insensitive)
+
+### Examples
+- `/pmp-quiz Matt exam` — Exam Mode (60 questions, no feedback until end)
+- `/pmp-quiz Matt revision` — Revision Mode (feedback after each answer)
+- `/pmp-quiz Matt refresher` — Refresher Mode (recently consumed content, default 15 questions)
+- `/pmp-quiz Matt refresher 10` — Refresher Mode capped at 10 questions
+- `/pmp-quiz Emily refresher` — works for Emily too
+- `/pmp-quiz Matt` — ask which mode before starting
 
 ## Instructions
 
-### 1. Parse the Argument
+### 1. Parse the Arguments
 
-- Read the argument passed after `/pmp-quiz` (available as `$ARGUMENTS`)
+- Read the arguments passed after `/pmp-quiz` (available as `$ARGUMENTS`)
 - Normalize to lowercase for matching
-- Match against known users: `matt`, `emily`
-- If no argument or unrecognized name: display usage and ask who is quizzing
+- **First argument:** Match against known users: `matt`, `emily`. If no argument or unrecognized name: display usage and ask who is quizzing
+- **Second argument (optional):** Mode — `exam`, `revision`, or `refresher`. If absent, ask which mode.
+- **Third argument (optional, refresher only):** Question count cap (integer). Default is 15 for refresher mode.
 
 ### 2. Load Person's Progress
 
