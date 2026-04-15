@@ -2,10 +2,11 @@
 name: pmp-quiz
 description: |
   PMP certification quiz skill with per-person progress tracking.
-  Supports Exam Mode (strict simulation) and Revision Mode (learning with feedback).
+  Supports Exam Mode (strict simulation), Revision Mode (learning with feedback),
+  and Refresher Mode (review recently consumed video content).
   Uses Scenario, Multi-Select, Ordering, and Calculation question types.
   Tracks individual confidence ratings and spaced repetition for each person.
-  Invoke: /pmp-quiz <name> [exam|revision] (Matt or Emily, case-insensitive)
+  Invoke: /pmp-quiz <name> [exam|revision|refresher] (Matt or Emily, case-insensitive)
 license: MIT
 compatibility: marvin
 metadata:
@@ -31,8 +32,11 @@ This skill tracks progress independently for each person:
 ### Invocation
 - `/pmp-quiz Matt exam` — quiz Matt in Exam Mode
 - `/pmp-quiz Matt revision` — quiz Matt in Revision Mode
+- `/pmp-quiz Matt refresher` — quiz Matt on recently consumed content (default 15 questions)
+- `/pmp-quiz Matt refresher 10` — refresher mode capped at 10 questions
 - `/pmp-quiz Emily exam` — quiz Emily in Exam Mode
 - `/pmp-quiz Emily revision` — quiz Emily in Revision Mode
+- `/pmp-quiz Emily refresher` — works for Emily too
 - `/pmp-quiz Matt` (no mode) — ask which mode before starting
 - `/pmp-quiz` (no name) — ask who is quizzing, then which mode
 
@@ -60,7 +64,24 @@ Learning mode with immediate feedback after each answer.
 - Encourages understanding, not just recall
 - Suitable for studying and building confidence
 
-**If mode is not specified, ask before starting:** "Which mode — Exam (no feedback until the end) or Revision (feedback after each answer)?"
+### Refresher Mode
+Review recently consumed video content. Immediate feedback after each answer (same as Revision Mode).
+
+- Reads `pmp/CourseContent/last-consumed.md` for the list of unquizzed questions
+- Only presents questions marked `Quizzed?: no` in the manifest
+- Default cap: 15 questions per session. Override with `/pmp-quiz <name> refresher <N>`
+- After each question is answered, mark it `yes` in the manifest's Unquizzed Questions table
+- If no unquizzed questions remain, report: "All refresher questions completed! Run /pmp-consume after watching more videos to add new content."
+- Uses Revision Mode feedback style: state correct/incorrect, provide explanation, identify PMBOK 7 principle
+- At end of session, report how many refresher questions remain unquizzed
+- **Updates the person's progress file** (`skills/pmp-quiz/progress/<name>.md`):
+  - If a topic from the refresher doesn't exist in the progress file, add it at 1/5 confidence, 0/10 questions
+  - Track correct/incorrect answers per topic (increment question count for correct answers)
+  - Update "Last Reviewed" to today for each topic quizzed
+  - Apply the same confidence scoring rules as Revision Mode (>70% correct → maintain or +1, <70% → maintain, <40% → -1)
+  - Add a quiz history row at the end of the session with date, question count, score, and topics covered
+
+**If mode is not specified, ask before starting:** "Which mode — Exam (no feedback until the end), Revision (feedback after each answer), or Refresher (review recently consumed content)?"
 
 ---
 
@@ -158,19 +179,29 @@ If the user believes a question's answer is wrong:
 ### Step 0: Identify Person and Mode
 
 1. Parse the name argument (case-insensitive). If absent, ask: "Who's quizzing? Matt or Emily?"
-2. Parse the mode argument (exam or revision). If absent, ask: "Which mode — Exam (no feedback until the end) or Revision (feedback after each answer)?"
-3. Load their progress file: `skills/pmp-quiz/progress/<name>.md`
-4. Display the session header:
-   ```
-   Hey [Name], let's do some PMP review.
-   Mode: [EXAM MODE — no feedback until section end] or [REVISION MODE — feedback after each answer]
-   Section: 60 questions | Answer distribution pre-planned | Domain coverage tracked
-   ```
-5. Display the context window warning if the user has indicated they want more than 60 questions.
+2. Parse the mode argument (exam, revision, or refresher). If absent, ask: "Which mode — Exam (no feedback until the end), Revision (feedback after each answer), or Refresher (review recently consumed content)?"
+3. For refresher mode: parse optional question count after `refresher` (e.g., `/pmp-quiz Matt refresher 10`). Default cap is 15.
+4. Load their progress file: `skills/pmp-quiz/progress/<name>.md`
+5. Display the session header:
+   - **Exam/Revision:**
+     ```
+     Hey [Name], let's do some PMP review.
+     Mode: [EXAM MODE — no feedback until section end] or [REVISION MODE — feedback after each answer]
+     Section: 60 questions | Answer distribution pre-planned | Domain coverage tracked
+     ```
+   - **Refresher:**
+     ```
+     Hey [Name], let's review your recently consumed content.
+     Mode: REFRESHER — feedback after each answer
+     Questions: up to [N] from last consumed videos
+     ```
+6. Display the context window warning if the user has indicated they want more than 60 questions.
 
 ### Step 1: Pre-Plan the Question Set
 
 Before presenting any questions:
+
+**Exam/Revision Mode:**
 
 1. Select topics based on THIS PERSON's progress file (not `state/learning.md`).
 2. Plan the full 60-question set (or shorter set if fewer requested):
@@ -179,6 +210,15 @@ Before presenting any questions:
    - Assign answer letters: ~25% each of A, B, C, D (for MC questions)
    - Verify all three distributions pass before continuing
 3. Pull questions from `skills/pmp-quiz/question-bank.md` where available; generate new questions to fill the plan.
+
+**Refresher Mode:**
+
+1. Read `pmp/CourseContent/last-consumed.md`
+2. If the file doesn't exist or has no `Quizzed?: no` rows, report: "All refresher questions completed! Run /pmp-consume after watching more videos to add new content." and stop.
+3. Collect all rows where `Quizzed?` is `no`. These are the candidate questions.
+4. Cap at the session limit (default 15, or user-specified N).
+5. Look up each Question ID in the question bank (`skills/pmp-quiz/question-bank.md`) under the matching `### [Topic]` section.
+6. Domain/type distribution rules are relaxed for refresher — present whatever the consumed content produced.
 
 ### Step 2: Ask Questions
 
@@ -210,6 +250,10 @@ Before presenting any questions:
 - Provide a concise explanation.
 - Identify which PMBOK 7 principle or process group applies.
 - For Multi-Select: list all correct answers and explain any the user missed or got wrong.
+
+**Refresher Mode:**
+- Same feedback as Revision Mode: state correct/incorrect, provide explanation, identify PMBOK 7 principle.
+- After evaluating, update `pmp/CourseContent/last-consumed.md` — set `Quizzed?` to `yes` for the question just answered.
 
 ### Step 4: End-of-Section Review (both modes)
 
@@ -268,6 +312,13 @@ After question 60 (or the final question of a shorter session):
 
 7. Do NOT update `state/learning.md` — progress files are the source of truth for this skill.
 
+8. **Refresher Mode only — remaining questions report:**
+   After scoring, read `pmp/CourseContent/last-consumed.md` and count remaining `Quizzed?: no` rows. Report:
+   ```
+   Refresher backlog: [N] questions remaining from consumed videos.
+   ```
+   If none remain: "All refresher questions completed! Run /pmp-consume after watching more videos to add new content."
+
 ### Step 5: Add New Questions (Optional)
 
 If gaps exist in the question bank for certain topics:
@@ -311,4 +362,4 @@ Matt can quiz on claude.ai while traveling. Those sessions create GitHub issues 
 ---
 
 *Skill created: 2026-03-25*
-*Updated: 2026-04-09 — Added Exam/Revision modes, answer distribution enforcement, 60Q hard limit, domain audit, question type mix, zero feedback in exam mode, disputed answer procedure, context window warning*
+*Updated: 2026-04-14 — Added Refresher Mode (review recently consumed video content via manifest tracking)*
