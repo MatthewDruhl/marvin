@@ -1,6 +1,6 @@
 # PMP Question Bank
 
-Last updated: 2026-04-14
+Last updated: 2026-04-15
 
 ---
 
@@ -1227,6 +1227,350 @@ B) Do the forward and backward pass — activities where top numbers equal botto
 C) Ask the team which activities are most important
 D) Use only the backward pass
 **A:** B) For complex diagrams, doing forward + backward passes is faster than listing all paths. Activities with zero float (ES=LS, EF=LF) are on the critical path. *(Video 109)*
+
+---
+
+## Section 9: Cost Management
+
+### Plan Cost Management (Video 110)
+
+**Q1 - [SCENARIO]:** Your sponsor wants a kitchen renovation done well but at the lowest reasonable price. You research contractors, compare bids, and find a quality option at a competitive rate. This approach is called:
+A) Cost aggregation
+B) Value engineering
+C) Reserve analysis
+D) Parametric estimation
+**A:** B) Value engineering — finding a less costly way of doing the same work without sacrificing quality. A good PM delivers great work at a great price. *(Video 110)*
+
+**Q2 - MC:** A cost that remains constant throughout the project, such as a monthly office rental fee, is called:
+A) A fixed cost
+B) A variable cost
+C) A direct cost
+D) A sunk cost
+**A:** A) A fixed cost stays the same throughout the project (salaries, rental fees). Variable costs change frequently (fuel, materials prices). *(Video 110)*
+
+**Q3 - MC:** Your project consumes your functional manager's time for approvals and resource assignments, but their salary is NOT included in your project budget. This is an example of:
+A) A sunk cost
+B) A variable cost
+C) A fixed cost
+D) An indirect cost
+**A:** D) An indirect cost — you consume resources from the business (manager's time, shared facilities) that aren't charged directly to your project budget. *(Video 110)*
+
+**Q4 - [SCENARIO]:** Your project has spent $30 million over two years but is now failing. A stakeholder argues, "We can't cancel — we've already invested $30 million!" The $30 million represents:
+A) A direct cost
+B) Reserve analysis
+C) A sunk cost — money already spent that should not influence the decision to continue or cancel
+D) A variable cost
+**A:** C) Sunk cost is money already invested — it's spilt milk. Decisions about the project's future should be based on remaining value, not sunk costs. *(Video 110)*
+
+**Q5 - [SCENARIO]:** You're starting a new project and need to decide how costs will be estimated, budgeted, and controlled. Where do you document these decisions?
+A) The project charter
+B) The cost management plan
+C) The cost baseline
+D) The WBS dictionary
+**A:** B) The cost management plan is the how-to document defining how project costs will be estimated, budgeted, managed, monitored, and controlled. It's unique to every business. *(Video 110)*
+
+**Q6 - MC:** A control threshold in the cost management plan defines:
+A) The agreed-upon variance (e.g., 10-20%) at which the project is considered off-budget and action is needed
+B) The total project budget including reserves
+C) The accuracy level of estimates
+D) The maximum number of change requests allowed
+**A:** A) Control thresholds define at what percentage over/under budget the project triggers corrective action. Some projects trigger at 10%, others at 20% — it depends on the organization. *(Video 110)*
+
+---
+
+### Estimate Costs (Video 111)
+
+**Q1 - MC:** The accuracy of project cost estimates increases as the project progresses because more detail becomes known. This concept is called:
+A) Reserve analysis
+B) Cost aggregation
+C) Progressive elaboration
+D) Funding limit reconciliation
+**A:** C) Progressive elaboration — as the work becomes more defined over time, estimates become increasingly precise. *(Video 111)*
+
+**Q2 - MC:** A definitive estimate has an accuracy range of:
+A) -5% to +10%
+B) -10% to +25%
+C) -25% to +75%
+D) -50% to +100%
+**A:** A) Definitive = -5/+10 (most precise). Budgeted = -10/+25 (mid-range). Rough order of magnitude (ROM) = -25/+75 (least precise). *(Video 111)*
+
+**Q3 - [SCENARIO]:** A stakeholder asks for a project cost estimate, but planning has barely started and very little detail is available. The estimate you provide will most likely be:
+A) A definitive estimate
+B) A budgeted estimate
+C) A parametric estimate
+D) A rough order of magnitude (ROM) estimate, with a range of -25% to +75%
+**A:** D) ROM is used early in the project when very little is known. It's broad but fast. As the project progresses, estimates should become more precise (budgeted, then definitive). *(Video 111)*
+
+**Q4 - MC:** The cost of conformance (achieving quality) includes:
+A) Scrap, rework, and warranty claims
+B) Training employees, using proper equipment, and inspection
+C) Only the cost of raw materials
+D) Management reserve funds
+**A:** B) Conformance costs = prevention and appraisal — training, proper equipment, quality materials, inspection. Non-conformance costs = failure — scrap, rework, warranty. *(Video 111)*
+
+**Q5 - [SCENARIO]:** Your team delivered a product that failed quality inspection. It must be scrapped and rebuilt. This additional expense is an example of:
+A) Value engineering
+B) A sunk cost
+C) Cost of non-conformance (failure cost)
+D) A contingency reserve expenditure
+**A:** C) Non-conformance/failure costs include scrap, rework, and warranty. It's almost always more expensive to fix quality problems after the product is built than to invest in quality upfront. *(Video 111)*
+
+**Q6 - MC:** The basis of estimate should include all of the following EXCEPT:
+A) The range of the estimate (e.g., ±10%)
+B) The confidence level and assumptions used
+C) The project charter's high-level budget
+D) How the estimate was developed and what information was used
+**A:** C) The basis of estimate documents the range, confidence level, method used, who developed it, and assumptions — not the charter's high-level budget. An estimate without a range is not considered a proper estimate. *(Video 111)*
+
+---
+
+### Determine Budget (Video 112)
+
+**Q1 - MC:** The process of rolling up individual activity costs to work packages, then to control accounts, to form the total project cost is called:
+A) Reserve analysis
+B) Cost aggregation
+C) Funding limit reconciliation
+D) Value engineering
+**A:** B) Cost aggregation — aggregate activity costs up to work packages, then to control accounts, to determine the total project cost. *(Video 112)*
+
+**Q2 - [SCENARIO]:** You budgeted your project at $1,000 but added an extra $200 for risks you've identified but aren't sure will occur (like bad weather or equipment failure). This $200 is:
+A) Contingency reserve — for known/unknown risks, controlled by the PM
+B) Management reserve — for unknown/unknown risks
+C) Sunk cost
+D) Funding limit reconciliation
+**A:** A) Contingency reserve addresses known/unknown risks (you know the risk exists but don't know if it will happen). The PM controls it — no change request needed to use it. *(Video 112)*
+
+**Q3 - MC:** Management reserve is set aside for:
+A) Known/known risks (identified and quantified)
+B) Known/unknown risks (identified but uncertain)
+C) Contingency buffer controlled by the PM
+D) Unknown/unknown risks — events no one could have predicted
+**A:** D) Management reserve covers unknown/unknowns (pandemic, natural disasters, unprecedented events). It's controlled by organizational management, not the PM. *(Video 112)*
+
+**Q4 - [SCENARIO]:** Your project hits an unprecedented supply chain disruption no one predicted. You need additional funds from the management reserve. What must you do?
+A) Use the funds directly — the PM controls all reserves
+B) Ask the functional manager for approval
+C) Submit a change request — management reserve requires formal approval to access
+D) Reallocate contingency reserve funds instead
+**A:** C) Management reserve requires a change request to access because it's controlled by organizational management, not the PM. Contingency reserve, by contrast, can be used directly by the PM. *(Video 112)*
+
+**Q5 - MC:** The cost baseline is defined as:
+A) The total project budget including all reserves
+B) The sum of all activity costs plus contingency reserve (excludes management reserve)
+C) Only the activity costs without any reserves
+D) The management reserve plus contingency reserve
+**A:** B) Cost baseline = activity costs + contingency reserve. It's what performance is measured against. The project budget = cost baseline + management reserve. *(Video 112)*
+
+**Q6 - MC:** The project budget equals:
+A) Activity costs only
+B) Activity costs + contingency reserve
+C) Cost baseline + management reserve
+D) Cost baseline minus contingency reserve
+**A:** C) Project budget = cost baseline + management reserve. The cost baseline itself already includes activity costs + contingency. Adding management reserve gives the full project budget. *(Video 112)*
+
+**Q7 - [SCENARIO]:** Your project's actual spending rate exceeds the planned rate. The organization responds by limiting your available funding until spending aligns with the plan. This may cause portions of work to be rescheduled. This situation is called:
+A) Funding limit reconciliation
+B) Cost aggregation
+C) Reserve analysis
+D) Value engineering
+**A:** A) Funding limit reconciliation — when actual spending exceeds planned spending, the organization may restrict funding, which can force rescheduling of project work. *(Video 112)*
+
+---
+
+## Section 10: Quality Management
+
+### Plan Quality Management (Video 113)
+
+**Q1 - [SCENARIO]:** Edward Deming, known as the father of quality, said "The ultimate measure or test of quality is ___." Your sponsor asks what the team should focus on above all else when it comes to quality. You answer:
+A) Meeting internal specifications
+B) Passing all inspections
+C) Staying within budget
+D) Customer satisfaction — if the customer is happy, you have quality
+**A:** D) Deming's principle: quality = customer satisfaction. A product can pass every internal check but still fail if the customer isn't satisfied. *(Video 113)*
+
+**Q2 - MC:** In quality management, a "defect" is defined as:
+A) A product or deliverable that has not met the quality requirements
+B) Any change request submitted during execution
+C) A risk that has materialized
+D) A product that exceeds the quality requirements
+**A:** A) A defect is a product that hasn't met quality requirements — it doesn't function as expected. The worst outcome is defects reaching the customer. *(Video 113)*
+
+**Q3 - [SCENARIO]:** You can either hire an experienced senior programmer (expensive) or a junior programmer (cheap) for a critical module. The senior programmer will likely produce fewer bugs, requiring less code review. This illustrates:
+A) Cost aggregation
+B) Quality is prevention-driven — more prevention spending leads to less inspection and fewer defects
+C) Fast tracking
+D) Reserve analysis
+**A:** B) Spending more on prevention (experienced resources, better materials, training) reduces inspection needs and defects. Quality is prevention-driven, not inspection-driven. *(Video 113)*
+
+**Q4 - MC:** Conformance costs include prevention and inspection. Non-conformance costs include:
+A) Training and proper equipment
+B) Quality metrics and benchmarks
+C) Rework, scrap, and warranty — the cost of failing to meet quality requirements
+D) Reserve analysis and contingency
+**A:** C) Non-conformance/failure costs = rework (fix it), scrap (throw it out and start over), and warranty claims. It's almost always more expensive to fix quality after the fact. *(Video 113)*
+
+**Q5 - [SCENARIO]:** Your team is spending so much on quality materials and inspections that the product price has become unaffordable for customers. What analysis should you perform?
+A) Cost-benefit analysis — determine if the quality spending benefits outweigh the costs, or if costs are now outweighing benefits
+B) Reserve analysis
+C) Parametric estimation
+D) Funding limit reconciliation
+**A:** A) Cost-benefit analysis balances quality investment against returns. You can overspend on quality to the point where the product is too expensive for customers. *(Video 113)*
+
+**Q6 - MC:** Quality metrics are BEST described as:
+A) The project budget for quality activities
+B) A list of team members responsible for quality
+C) The quality management plan itself
+D) Measurable specifications that define what the deliverable must achieve (e.g., website load time < 2 seconds)
+**A:** D) Quality metrics are specific, measurable standards the team builds toward — they define how to verify the product meets quality requirements. *(Video 113)*
+
+---
+
+## Section 11: Resource Management
+
+### Plan Resource Management (Video 114)
+
+**Q1 - MC:** According to PMI, project resources come in two categories:
+A) Internal resources and external resources
+B) Team resources (people) and physical resources (supplies, materials, equipment, facilities)
+C) Managed resources and unmanaged resources
+D) Direct resources and indirect resources
+**A:** B) Team resources = people working on the project. Physical resources = everything else (supplies, materials, equipment, facilities, services). *(Video 114)*
+
+**Q2 - MC:** In a RACI chart, "A" (Accountable) means:
+A) The person who will be held accountable for the task — the one you blame if it goes wrong
+B) The person doing the work
+C) The person who provides advice
+D) The person who just needs to be kept informed
+**A:** A) Accountable = the person held responsible for the outcome. R = doing the work, C = consulted for help, I = informed/needs to know. *(Video 114)*
+
+**Q3 - [SCENARIO]:** You review a RACI chart and notice that "Develop Project Charter" has two people listed as Accountable (A). What is the problem?
+A) There are not enough people assigned
+B) The chart needs more Responsible (R) entries
+C) Each task can only have ONE Accountable person — two A's violates the RACI rule
+D) The Informed column is missing
+**A:** C) The cardinal rule of RACI: every task must have exactly one A. You can have multiple R's, C's, and I's, but only one person can be accountable. *(Video 114)*
+
+**Q4 - MC:** A team charter is BEST described as:
+A) The project charter signed by the sponsor
+B) A document assigning resources to activities
+C) The project management plan
+D) A document created by the project team that outlines acceptable behavior, meeting rules, and decision-making norms
+**A:** D) The team charter defines ground rules for conduct — no yelling, no over-talking, everyone gets input. The team itself should create these rules, and everyone signs it. *(Video 114)*
+
+**Q5 - [SCENARIO]:** You're forming a new project team. Who should define the acceptable behavior rules for the team charter?
+A) The sponsor
+B) The team members themselves — they create the rules they'll follow
+C) The functional manager
+D) The PMO
+**A:** B) Best practice: let the team define their own rules. When people create the rules themselves, they're more likely to follow them. *(Video 114)*
+
+**Q6 - MC:** A hierarchical chart (organization chart) in resource management shows:
+A) Who reports to whom — the power structure from sponsor down to team members
+B) The cost of each resource
+C) The schedule of resource assignments
+D) Communication channels between stakeholders
+**A:** A) Hierarchical/org charts show the reporting structure. The higher up, the more authority (sponsor → PM → team members). *(Video 114)*
+
+**Q7 - [SCENARIO]:** Your project is in month 1 and you only have 3 team members. By month 4, you have 15. In the final month, you're back to 5. This pattern is:
+A) A sign of poor planning
+B) Resource leveling in action
+C) Normal — projects typically start with few resources, ramp up during execution, then taper down as work completes
+D) An indication of scope creep
+**A:** C) This is the normal resource staffing pattern. Low at start (planning), peaks during execution, and tapers as the project winds down. *(Video 114)*
+
+---
+
+### Estimate Activity Resources (Video 115)
+
+**Q1 - MC:** The process "Estimate Activity Resources" determines:
+A) Only the type of resources needed
+B) Only how many resources are needed
+C) The project budget for resources
+D) Both WHAT type and HOW MANY resources are needed for each activity
+**A:** D) Not just "I need a painter" but "I need 3 painters." Not just "I need paint" but "I need 4 gallons." Type AND quantity per activity. *(Video 115)*
+
+**Q2 - [SCENARIO]:** To estimate paint needs, you examine each wall individually: Wall A needs 1 gallon, Wall B needs 1 gallon, Wall C needs 0.5 gallons, Wall D needs 0.5 gallons — total 3 gallons. This estimation technique is:
+A) Analogous (top-down)
+B) Bottom-up — breaking down the work, estimating each piece, then aggregating
+C) Parametric
+D) Three-point (PERT)
+**A:** B) Bottom-up estimation: break the work into components, estimate each, then aggregate. Very accurate but time-consuming. *(Video 115)*
+
+**Q3 - MC:** A resource breakdown structure (RBS) is:
+A) A hierarchical categorization of resources by type (e.g., internal/external, HR/materials/equipment)
+B) The same as the WBS
+C) A list of activity durations
+D) A cost aggregation tool
+**A:** A) The RBS categorizes resources hierarchically — for example, Internal vs External at the top, then broken into HR, Materials, Equipment underneath. *(Video 115)*
+
+**Q4 - MC:** The primary output of Estimate Activity Resources is:
+A) The resource management plan
+B) The team charter
+C) Resource requirements — documenting the type and quantity of resources needed for each activity
+D) The project budget
+**A:** C) Resource requirements tell you exactly what and how many resources each activity needs. This feeds into schedule and cost planning. *(Video 115)*
+
+**Q5 - [SCENARIO]:** Your team underestimated the number of programmers needed for a software project. During execution, the small team can't keep up and quality suffers. This illustrates:
+A) Gold plating
+B) Scope creep
+C) Progressive elaboration
+D) Why accurate resource estimation is critical — underestimating leads to overworked teams and poor quality; overestimating leads to overspending
+**A:** D) Getting resource estimates wrong has real consequences. Too few = overworked team and quality issues. Too many = budget overrun. *(Video 115)*
+
+---
+
+## Section 12: Communications Management
+
+### Plan Communications Management (Video 116)
+
+**Q1 - MC:** The formula for calculating the number of communication channels on a project is:
+A) N + (N - 1)
+B) N(N - 1) / 2, where N is the number of stakeholders
+C) N × 2
+D) (N + 1) / 2
+**A:** B) N(N-1)/2. Example: 4 stakeholders = 4×3/2 = 6 channels. More stakeholders = exponentially more communication complexity. *(Video 116)*
+
+**Q2 - [CALCULATION]:** Your project has 10 stakeholders. How many communication channels exist?
+A) 45
+B) 50
+C) 90
+D) 100
+**A:** A) 45. N(N-1)/2 = 10×9/2 = 90/2 = 45 channels. *(Video 116)*
+
+**Q3 - [SCENARIO]:** A critical safety issue is discovered on your project. You need to notify the sponsor immediately. Which communication approach is MOST appropriate?
+A) Send an email
+B) Post it on the company intranet
+C) Call them directly — urgent matters require immediate, direct communication
+D) Include it in the next weekly status report
+**A:** C) The level of urgency determines the technology. For urgent matters, use direct communication (phone call, face-to-face) rather than asynchronous methods like email. *(Video 116)*
+
+**Q4 - MC:** Formal communication differs from informal communication because:
+A) Formal is always verbal; informal is always written
+B) Formal requires a contract; informal does not
+C) Formal is cheaper to produce
+D) Formal is generally one-way (speeches, contracts, presentations); informal is two-way (meetings, emails, discussions)
+**A:** D) Formal = one-way communication (presenting, signing a contract). Informal = two-way (collaborating, negotiating, discussing). Use informal when you need back-and-forth problem solving. *(Video 116)*
+
+**Q5 - MC:** In communication methods, "push" communication means:
+A) Sending information out to recipients (e.g., emailing a report)
+B) Recipients retrieve information themselves (e.g., checking a portal)
+C) Real-time back-and-forth exchange
+D) Verbal-only communication
+**A:** A) Push = send info out (email, fax, memo). Pull = recipient goes and gets it (intranet, shared drive). Interactive = real-time back and forth (meeting, phone call). *(Video 116)*
+
+**Q6 - [SCENARIO]:** During a video call, a team member says "the project is fine" but their facial expression and body language suggest frustration. A PM should know that non-verbal communication accounts for approximately:
+A) 10-20% of communication
+B) 55-90% of communication — body language often reveals more than words
+C) 100% of communication
+D) Less than 5% of communication
+**A:** B) Non-verbal communication (body language, expressions, gestures) accounts for 55-90% of communication. It's not what you say, it's how you say it — and what your body shows. *(Video 116)*
+
+**Q7 - MC:** In the communication model, "noise" refers to:
+A) The encoding process
+B) The sender's intent
+C) Anything that blocks or disrupts the flow of information between sender and receiver
+D) The decoding process
+**A:** C) Noise is any blocker that prevents the receiver from getting the information — literal noise, technical issues, language barriers, distractions. *(Video 116)*
 
 ---
 

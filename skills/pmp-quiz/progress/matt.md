@@ -1,6 +1,6 @@
 # PMP Progress: Matt
 
-Last updated: 2026-04-15
+Last updated: 2026-04-15 (refresher #2)
 
 ---
 
@@ -11,7 +11,7 @@ Last updated: 2026-04-15
 | Project vs Operations (temporary + unique) | 1/5 | 3/10 | 2026-03-27 | 2026-03-28 | 1 day | Active |
 | Milestones (zero duration, key events) | 1/5 | 3/10 | 2026-03-27 | 2026-03-28 | 1 day | Active |
 | PMP Exam Structure (breaks, sections) | 1/5 | 3/10 | 2026-03-27 | 2026-03-28 | 1 day | Active |
-| Project Management Plan (master document) | 1/5 | 3/10 | 2026-04-05 | 2026-04-06 | 1 day | Active |
+| Project Management Plan (master document) | 2/5 | 4/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
 | Functional Manager (resource assignment authority) | 1/5 | 3/10 | 2026-04-10 | 2026-04-11 | 1 day | Active |
 | Project Charter (authorization + PM authority) | 1/5 | 3/10 | 2026-03-27 | 2026-03-28 | 1 day | Active |
 | Project Bosses (Sponsor, Program Manager roles) | 2/5 | 3/10 | 2026-04-12 | 2026-04-13 | 1 day | Active |
@@ -46,13 +46,26 @@ Last updated: 2026-04-15
 | Project Documents vs Project Management Plan | 2/5 | 6/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
 | Expert Judgment (SME usage) | 2/5 | 2/10 | 2026-04-12 | 2026-04-13 | 1 day | Active |
 | Data Flow (Gathering → Analysis → Representation → Decision Making) | 2/5 | 3/10 | 2026-04-11 | 2026-04-12 | 1 day | Active |
-| Define Activities (rolling wave planning) | 2/5 | 1/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
-| Critical Path Method (CPM) | 1/5 | 1/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
-| PERT Calculations | 2/5 | 1/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
-| Develop Project Charter | 2/5 | 1/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
-| Identify Stakeholders | 2/5 | 1/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
-| Plan Scope Management | 1/5 | 1/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
-| Develop Schedule (crashing/fast tracking) | 2/5 | 1/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
+| Define Activities (rolling wave planning) | 3/5 | 4/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Critical Path Method (CPM) | 4/5 | 3/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| PERT Calculations | 4/5 | 4/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Develop Project Charter | 4/5 | 3/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Identify Stakeholders | 2/5 | 3/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Plan Scope Management | 3/5 | 4/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Develop Schedule (crashing/fast tracking) | 3/5 | 4/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Collect Requirements | 2/5 | 2/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Define Scope | 3/5 | 3/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Create WBS | 3/5 | 3/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Plan Schedule Management | 3/5 | 2/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Sequence Activities | 3/5 | 2/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Estimate Activity Durations | 3/5 | 5/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Plan Cost Management | 2/5 | 4/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Estimate Costs | 1/5 | 2/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Determine Budget | 3/5 | 6/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Plan Quality Management | 3/5 | 6/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Plan Resource Management | 3/5 | 6/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Estimate Activity Resources | 3/5 | 5/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
+| Plan Communications Management | 2/5 | 7/10 | 2026-04-15 | 2026-04-16 | 1 day | Active |
 
 ---
 
@@ -72,6 +85,12 @@ Last updated: 2026-04-15
 | 2026-04-12 | 10 | 10/10 | EEF, Collaborative Team Env, ITTO, Leadership Behaviors, PMI Code of Ethics, Project Docs vs PMP, Org Structures, Risks vs Issues, Enable Change, PM Approaches |
 | 2026-04-12 | 10 | 7/10 | 5 Process Groups, Project Bosses, Navigate Complexity, Org Structures, Project Docs vs PMP, Leadership vs Mgmt, Systems Thinking, Optimize Risk Responses, Expert Judgment |
 | 2026-04-14 | 10 | 7/10 | Define Activities, Emotional Intelligence, Critical Path Method, PERT Calculations, Develop Project Charter, Project Docs vs PM Plan, Identify Stakeholders, Scope Management (ordering), Develop Schedule, Leadership vs Management |
+| 2026-04-15 | 15 | 15/15 | Develop Project Charter, Identify Stakeholders, Develop PM Plan, Plan Scope Mgmt, Collect Requirements, Define Scope, Create WBS, Plan Schedule Mgmt, Define Activities, Sequence Activities, Estimate Activity Durations, PERT Calculations, Develop Schedule, CPM (×2) |
+| 2026-04-15 | 15 | 14/15 | Plan Cost Mgmt (×3), Estimate Costs (×3), Determine Budget (×4), Develop Project Charter, Plan Scope Mgmt, Estimate Activity Durations, PERT Calculations, CPM |
+| 2026-04-15 | 15 | 12/15 | Identify Stakeholders, Plan Scope Mgmt, Collect Requirements, Create WBS, Sequence Activities, Estimate Activity Durations, PERT, Develop Schedule, CPM (×4), Plan Cost Mgmt, Estimate Costs, Determine Budget |
+| 2026-04-15 | 15 | 15/15 | Plan Quality Mgmt (×3), Plan Resource Mgmt (×3), Estimate Activity Resources (×2), Plan Communications Mgmt (×7) |
+| 2026-04-15 | 15 | 13/15 | Plan Quality Mgmt (×3), Plan Resource Mgmt (×4), Estimate Activity Resources (×3), Develop Schedule, CPM (×3), Create WBS |
+| 2026-04-15 | 15 | 13/15 | Identify Stakeholders, Collect Requirements, Define Scope (×2), Plan Schedule Mgmt, Define Activities (×2), Estimate Activity Durations (×2), CPM (×4), Plan Cost Mgmt, Determine Budget |
 
 ---
 
