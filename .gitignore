@@ -27,6 +27,7 @@ client_secret_*.json
 /pmp/screenshot*
 /pmp/processed/
 /pmp/NotStudied/
+/pmp/CourseContent/
 /pmp/Slides.pdf
 /pmp/Project+Documents.pdf
 # Personal data — not tracked (Issue #49)
