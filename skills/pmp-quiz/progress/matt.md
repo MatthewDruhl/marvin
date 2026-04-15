@@ -1,6 +1,6 @@
 # PMP Progress: Matt
 
-Last updated: 2026-04-12
+Last updated: 2026-04-15
 
 ---
 
@@ -21,8 +21,8 @@ Last updated: 2026-04-12
 | Organizational Structures (Functional, Matrix, Projectized) | 2/5 | 7/10 | 2026-04-12 | 2026-04-13 | 1 day | Active |
 | Risks vs Issues vs Assumptions vs Constraints | 2/5 | 5/10 | 2026-04-12 | 2026-04-13 | 1 day | Active |
 | Project Constraints (6 constraints hexagon) | 1/5 | 2/10 | 2026-03-27 | 2026-03-28 | 1 day | Active |
-| Emotional Intelligence in PM | 2/5 | 5/10 | 2026-04-11 | 2026-04-12 | 1 day | Active |
-| Leadership vs Management | 2/5 | 5/10 | 2026-04-12 | 2026-04-13 | 1 day | Active |
+| Emotional Intelligence in PM | 2/5 | 6/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
+| Leadership vs Management | 3/5 | 6/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
 | PMI Code of Ethics (Responsibility, Respect, Fairness, Honesty) | 2/5 | 3/10 | 2026-04-12 | 2026-04-13 | 1 day | Active |
 | 12 Principles of Project Management | 1/5 | 2/10 | 2026-04-01 | 2026-04-02 | 1 day | Active |
 | Stewardship (Integrity, Care, Trustworthiness, Compliance) | 1/5 | 4/10 | 2026-04-11 | 2026-04-12 | 1 day | Active |
@@ -43,9 +43,16 @@ Last updated: 2026-04-12
 | Common Inputs (PMP, EEF, OPA, Project Docs) | 1/5 | 2/10 | 2026-04-11 | 2026-04-12 | 1 day | Active |
 | Enterprise Environmental Factors (EEF) | 2/5 | 2/10 | 2026-04-12 | 2026-04-13 | 1 day | Active |
 | Organizational Process Assets (OPA) | 2/5 | 3/10 | 2026-04-11 | 2026-04-12 | 1 day | Active |
-| Project Documents vs Project Management Plan | 2/5 | 5/10 | 2026-04-12 | 2026-04-13 | 1 day | Active |
+| Project Documents vs Project Management Plan | 2/5 | 6/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
 | Expert Judgment (SME usage) | 2/5 | 2/10 | 2026-04-12 | 2026-04-13 | 1 day | Active |
 | Data Flow (Gathering → Analysis → Representation → Decision Making) | 2/5 | 3/10 | 2026-04-11 | 2026-04-12 | 1 day | Active |
+| Define Activities (rolling wave planning) | 2/5 | 1/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
+| Critical Path Method (CPM) | 1/5 | 1/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
+| PERT Calculations | 2/5 | 1/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
+| Develop Project Charter | 2/5 | 1/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
+| Identify Stakeholders | 2/5 | 1/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
+| Plan Scope Management | 1/5 | 1/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
+| Develop Schedule (crashing/fast tracking) | 2/5 | 1/10 | 2026-04-14 | 2026-04-15 | 1 day | Active |
 
 ---
 
@@ -64,6 +71,7 @@ Last updated: 2026-04-12
 | 2026-04-11 | 9 | 9/9 | OPA, Emotional Intelligence, Project Docs vs PMP, Org Structures, Product vs Project Mgmt, Data Flow, Leadership Behaviors, PM Approaches, Stakeholder Engagement |
 | 2026-04-12 | 10 | 10/10 | EEF, Collaborative Team Env, ITTO, Leadership Behaviors, PMI Code of Ethics, Project Docs vs PMP, Org Structures, Risks vs Issues, Enable Change, PM Approaches |
 | 2026-04-12 | 10 | 7/10 | 5 Process Groups, Project Bosses, Navigate Complexity, Org Structures, Project Docs vs PMP, Leadership vs Mgmt, Systems Thinking, Optimize Risk Responses, Expert Judgment |
+| 2026-04-14 | 10 | 7/10 | Define Activities, Emotional Intelligence, Critical Path Method, PERT Calculations, Develop Project Charter, Project Docs vs PM Plan, Identify Stakeholders, Scope Management (ordering), Develop Schedule, Leadership vs Management |
 
 ---
 
