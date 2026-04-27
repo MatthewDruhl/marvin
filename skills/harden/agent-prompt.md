@@ -6,6 +6,14 @@ You are running a background hardening audit. Calibration is complete. Follow th
 
 Estimate repo size (count files with Glob). For repos >50 files, cap reads at 20 files per scope. Exceed only for Critical findings — state when you do.
 
+## File Read Order (#213)
+
+When recon candidates include a `file_risk_ranking` array, **read files in risk-score order** (highest first). If the budget cap forces you to stop, the lowest-risk files are the ones you skip. This ensures the riskiest code is always reviewed.
+
+## Incremental Mode (#212)
+
+If the prompt includes a `changed_files` list, scope your reads to ONLY those files. Preserve previous findings for unchanged scopes — do not re-audit files that haven't changed. Indicate in your output: "Incremental audit: N files changed since [date]".
+
 ## Severity Definitions
 
 | Level | Definition | Example |

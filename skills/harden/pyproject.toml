@@ -1,5 +1,9 @@
 [tool.ruff]
 line-length = 100
+extend-exclude = ["tests/fixture-project"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

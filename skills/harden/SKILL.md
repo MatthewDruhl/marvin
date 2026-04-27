@@ -35,6 +35,62 @@ Store the chosen mode as `AUDIT_MODE` (`full` or `recon-first`) and the chosen m
 - [ai-audit-checklist.md](references/ai-audit-checklist.md) — Extended AI checks. Load at the start of Scope 2, not before.
 - [engineering-blind-spots.md](references/engineering-blind-spots.md) — Detection questions by scope. Load only if initial findings for a scope total fewer than 2.
 
+## Incremental Audit Mode (#212)
+
+When a previous `harden-state.json` exists in the target directory, `/harden` defaults to **incremental mode** — only scanning files changed since the last audit.
+
+**How it works:**
+1. Read `harden-state.json` from the target directory
+2. If the `commit` field exists, run `git diff --name-only <last-commit>..HEAD` in the target
+3. If changed files found: scope the audit to only those files (both recon and agent reads)
+4. Previous findings from unchanged scopes are preserved and merged into the new report
+5. Report header indicates: "Incremental audit: N files changed since last audit on YYYY-MM-DD"
+
+**Full re-audit:** Pass `--full` to force a complete audit even when a previous state exists:
+```
+/harden <target> --full
+```
+
+**First run:** No `harden-state.json` → always a full audit. No prompt needed.
+
+**No changes detected:** If `git diff` returns 0 changed files, tell the user:
+> "No files changed since last audit on [date]. Grade: [previous grade]. Use `--full` to re-audit everything."
+
+---
+
+## Scope Narrowing (#214)
+
+### Quick Audit
+
+`/harden quick <target>` auto-selects only scopes relevant to changed files:
+
+| Changed file pattern | Scope selected |
+|---------------------|----------------|
+| `*test*`, `tests/` | Tests |
+| `auth*`, `*secret*`, `*cred*`, `*.env*` | Security |
+| `*prompt*`, `*agent*`, `*llm*`, `*ai*` | AI |
+| Config, lint, format files | Code Quality |
+| `*import*`, `.gitignore`, shared state files | Decoupling |
+| Other `.py`/`.js`/`.ts` files | Security + Code Quality |
+
+If no heuristic matches, default to all scopes.
+
+### Post-Audit Scope Recommendation
+
+After every audit, suggest focused scopes for the next run based on findings density:
+```
+Next time, consider: /harden <target> --scope Security,AI
+(8 of 10 findings were in Security and AI scopes)
+```
+
+### Repeat Audit Prompt
+
+When `harden-state.json` shows a recent prior audit (within 14 days), prompt before starting:
+> "Last audit was N days ago (Grade: X). Run all 5 scopes or focus on specific ones?"
+> Options: All scopes / Security / AI / Tests / Code Quality / Decoupling / Quick (auto-select)
+
+---
+
 ## Phase 0: Context Gathering
 
 Use `AskUserQuestion` to present all calibration questions at once:

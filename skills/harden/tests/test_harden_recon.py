@@ -252,15 +252,17 @@ class TestJSONOutput:
         result = run_recon(tmp_path)
         output = format_json(result)
         parsed = json.loads(output)
-        assert isinstance(parsed, list)
+        assert isinstance(parsed, dict)
+        assert "candidates" in parsed
+        assert "file_risk_ranking" in parsed
 
     def test_json_structure_has_required_fields(self, tmp_path):
         _write(tmp_path, "config.py", 'api_key = "hardcoded"\n')
         result = run_recon(tmp_path)
         output = format_json(result)
         parsed = json.loads(output)
-        assert len(parsed) >= 1
-        item = parsed[0]
+        assert len(parsed["candidates"]) >= 1
+        item = parsed["candidates"][0]
         assert "category" in item
         assert "file" in item
         assert "line" in item
@@ -271,7 +273,7 @@ class TestJSONOutput:
         result = run_recon(tmp_path)
         output = format_json(result)
         parsed = json.loads(output)
-        for item in parsed:
+        for item in parsed["candidates"]:
             assert item["category"] == item["category"].lower()
 
     def test_json_line_none_for_file_level_candidates(self, tmp_path):
@@ -281,9 +283,21 @@ class TestJSONOutput:
         result = run_recon(tmp_path)
         output = format_json(result)
         parsed = json.loads(output)
-        gap_items = [i for i in parsed if i["category"] == "test_gaps"]
+        gap_items = [i for i in parsed["candidates"] if i["category"] == "test_gaps"]
         assert gap_items
         assert gap_items[0]["line"] is None
+
+    def test_json_risk_ranking_present(self, tmp_path):
+        _write(tmp_path, "config.py", 'api_key = "hardcoded"\n')
+        result = run_recon(tmp_path)
+        output = format_json(result)
+        parsed = json.loads(output)
+        ranking = parsed["file_risk_ranking"]
+        assert len(ranking) >= 1
+        assert "file" in ranking[0]
+        assert "score" in ranking[0]
+        assert "match_count" in ranking[0]
+        assert "categories" in ranking[0]
 
 
 # ---------------------------------------------------------------------------
@@ -304,11 +318,12 @@ class TestEmptyDirectory:
         md = format_markdown(result)
         assert "Candidates found: 0" in md
 
-    def test_json_output_empty_array(self, tmp_path):
+    def test_json_output_empty(self, tmp_path):
         result = run_recon(tmp_path)
         output = format_json(result)
         parsed = json.loads(output)
-        assert parsed == []
+        assert parsed["candidates"] == []
+        assert parsed["file_risk_ranking"] == []
 
 
 # ---------------------------------------------------------------------------
@@ -388,10 +403,168 @@ class TestCLI:
         assert rc == 0
         out = capsys.readouterr().out
         parsed = json.loads(out)
-        assert isinstance(parsed, list)
+        assert isinstance(parsed, dict)
+        assert "candidates" in parsed
 
     def test_output_file_written(self, tmp_path):
         out_file = tmp_path / "candidates.md"
         rc = main([str(tmp_path), "--output", str(out_file)])
         assert rc == 0
         assert out_file.exists()
+
+
+# ---------------------------------------------------------------------------
+# #211: New scanner tests
+# ---------------------------------------------------------------------------
+
+class TestSQLInjection:
+    def test_detects_fstring_in_execute(self, tmp_path):
+        _write(tmp_path, "db.py", 'cursor.execute(f"SELECT * FROM t WHERE id={x}")\n')
+        hits = _candidates(run_recon(tmp_path), "sql_injection")
+        assert len(hits) == 1
+        assert "SQL injection" in hits[0].detail
+
+    def test_detects_format_in_execute(self, tmp_path):
+        _write(tmp_path, "db.py", 'cursor.execute("SELECT * FROM t WHERE id={}".format(x))\n')
+        hits = _candidates(run_recon(tmp_path), "sql_injection")
+        assert len(hits) == 1
+
+    def test_ignores_parameterized_query(self, tmp_path):
+        _write(tmp_path, "db.py", 'cursor.execute("SELECT * FROM t WHERE id=?", (x,))\n')
+        hits = _candidates(run_recon(tmp_path), "sql_injection")
+        assert len(hits) == 0
+
+
+class TestUnsafeDeserialization:
+    def test_detects_pickle_loads(self, tmp_path):
+        _write(tmp_path, "proc.py", "import pickle\ndata = pickle.loads(raw)\n")
+        hits = _candidates(run_recon(tmp_path), "unsafe_deserialization")
+        assert len(hits) == 1
+        assert "pickle" in hits[0].detail
+
+    def test_detects_yaml_load(self, tmp_path):
+        _write(tmp_path, "cfg.py", "import yaml\nconfig = yaml.load(data)\n")
+        hits = _candidates(run_recon(tmp_path), "unsafe_deserialization")
+        assert len(hits) == 1
+
+    def test_ignores_yaml_safe_load(self, tmp_path):
+        _write(tmp_path, "cfg.py", "import yaml\nconfig = yaml.safe_load(data)\n")
+        hits = _candidates(run_recon(tmp_path), "unsafe_deserialization")
+        assert len(hits) == 0
+
+
+class TestShellInjection:
+    def test_detects_subprocess_run_shell_true(self, tmp_path):
+        _write(tmp_path, "deploy.py", 'import subprocess\nsubprocess.run("ls", shell=True)\n')
+        hits = _candidates(run_recon(tmp_path), "shell_injection")
+        assert len(hits) == 1
+
+    def test_detects_multiline_shell_true(self, tmp_path):
+        code = 'import subprocess\nsubprocess.run(\n    "ls -la",\n    shell=True,\n)\n'
+        _write(tmp_path, "deploy.py", code)
+        hits = _candidates(run_recon(tmp_path), "shell_injection")
+        assert len(hits) == 1
+
+    def test_ignores_shell_false(self, tmp_path):
+        _write(tmp_path, "deploy.py", 'import subprocess\nsubprocess.run(["ls"], shell=False)\n')
+        hits = _candidates(run_recon(tmp_path), "shell_injection")
+        assert len(hits) == 0
+
+
+class TestPromptInjection:
+    def test_detects_fstring_prompt(self, tmp_path):
+        _write(tmp_path, "agent.py", 'prompt = f"Help with: {user_input}"\n')
+        hits = _candidates(run_recon(tmp_path), "prompt_injection")
+        assert len(hits) == 1
+
+    def test_detects_format_message(self, tmp_path):
+        _write(tmp_path, "agent.py", 'message = "Respond to: {}".format(user_input)\n')
+        hits = _candidates(run_recon(tmp_path), "prompt_injection")
+        assert len(hits) == 1
+
+
+class TestLateImports:
+    def test_detects_import_inside_function(self, tmp_path):
+        code = "def foo():\n    import os\n    return os.getcwd()\n"
+        _write(tmp_path, "mod.py", code)
+        hits = _candidates(run_recon(tmp_path), "late_imports")
+        assert len(hits) == 1
+        assert "circular dep" in hits[0].detail
+
+    def test_ignores_top_level_import(self, tmp_path):
+        code = "import os\n\ndef foo():\n    return os.getcwd()\n"
+        _write(tmp_path, "mod.py", code)
+        hits = _candidates(run_recon(tmp_path), "late_imports")
+        assert len(hits) == 0
+
+
+# ---------------------------------------------------------------------------
+# #213: Risk scoring tests
+# ---------------------------------------------------------------------------
+
+class TestRiskScoring:
+    def test_risk_scores_computed(self, tmp_path):
+        _write(tmp_path, "config.py", 'api_key = "hardcoded"\n')
+        result = run_recon(tmp_path)
+        assert len(result.file_risk_scores) >= 1
+        assert "config.py" in result.file_risk_scores
+
+    def test_high_risk_path_gets_bonus(self, tmp_path):
+        # "auth" in filename triggers 1.5x multiplier
+        _write(tmp_path, "auth.py", 'api_key = "hardcoded"\n')
+        _write(tmp_path, "util.py", 'api_key = "hardcoded"\n')
+        result = run_recon(tmp_path)
+        auth_score = result.file_risk_scores["auth.py"].score
+        util_score = result.file_risk_scores["util.py"].score
+        assert auth_score > util_score
+
+    def test_files_by_risk_sorted_descending(self, tmp_path):
+        _write(tmp_path, "a.py", 'x = 1\n')  # no hits
+        src = tmp_path / "src"
+        src.mkdir()
+        _write(src, "auth.py", 'api_key = "secret"\npassword = "abc"\n')
+        _write(src, "clean.py", "def foo(): pass\n")
+        result = run_recon(tmp_path)
+        ranked = result.files_by_risk()
+        if len(ranked) >= 2:
+            assert ranked[0].score >= ranked[1].score
+
+    def test_markdown_includes_risk_ranking(self, tmp_path):
+        _write(tmp_path, "config.py", 'api_key = "hardcoded"\n')
+        result = run_recon(tmp_path)
+        md = format_markdown(result)
+        assert "## File Risk Ranking" in md
+        assert "config.py" in md
+
+
+# ---------------------------------------------------------------------------
+# Fixture project integration test
+# ---------------------------------------------------------------------------
+
+class TestFixtureProject:
+    """Run recon against the fixture project and verify all pattern categories fire."""
+
+    FIXTURE = Path(__file__).parent / "fixture-project"
+
+    def test_fixture_project_exists(self):
+        assert self.FIXTURE.is_dir()
+
+    def test_all_categories_detected(self):
+        result = run_recon(self.FIXTURE)
+        cats = {c.category for c in result.candidates}
+        expected = {
+            "secrets", "sql_injection", "unsafe_deserialization",
+            "shell_injection", "prompt_injection", "bare_excepts",
+            "missing_input_validation", "hardcoded_values",
+            "late_imports", "test_gaps", "large_files",
+        }
+        assert expected == cats, f"Missing: {expected - cats}, Extra: {cats - expected}"
+
+    def test_risk_ranking_auth_is_highest(self):
+        result = run_recon(self.FIXTURE)
+        ranked = result.files_by_risk()
+        assert ranked[0].file == "src/auth.py"
+
+    def test_candidate_count_reasonable(self):
+        result = run_recon(self.FIXTURE)
+        assert 25 <= len(result.candidates) <= 50

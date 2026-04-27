@@ -36,10 +36,67 @@ HARDCODED_PORT_PATTERN = re.compile(r"\bport\s*=\s*(\d{2,5})\b", re.IGNORECASE)
 HANDLER_FUNC_PATTERN = re.compile(r"^\s*def\s+(handle_|process_|parse_)\w+\s*\(", re.MULTILINE)
 VALIDATION_PATTERN = re.compile(r"\b(if not|raise|assert)\b")
 
+# --- #211: Extended patterns ---
+
+# Security: SQL injection (string formatting into queries)
+SQL_INJECTION_PATTERN = re.compile(
+    r"""(?:execute|cursor\.execute|\.query)\s*\(\s*(?:f['"]|['"].*%s|['"].*\.format)""",
+    re.IGNORECASE,
+)
+
+# Security: unsafe deserialization
+UNSAFE_DESERIALIZE_PATTERN = re.compile(
+    r"\b(?:pickle\.loads?|yaml\.(?:load|unsafe_load))\s*\(",
+)
+
+# Security: shell injection via subprocess with shell=True
+# Used for whole-file scanning (DOTALL) since shell=True often spans lines
+SHELL_INJECTION_PATTERN = re.compile(
+    r"\bsubprocess\.(?:call|run|Popen)\s*\([^)]*?shell\s*=\s*True",
+    re.DOTALL,
+)
+
+# AI: unframed user input flowing into prompts
+PROMPT_INJECTION_PATTERN = re.compile(
+    r"""(?:prompt|message|content)\s*=\s*(?:f['"]|['"].*\.format|.*\+\s*(?:user_|input|request))""",
+    re.IGNORECASE,
+)
+
+# Code Quality: unused imports (import X but X never used again in file)
+# Detected post-scan by cross-referencing import names against file text.
+
+# Decoupling: circular import guard (import inside function body = likely circular dep workaround)
+LATE_IMPORT_PATTERN = re.compile(
+    r"^(?:    |\t)+(import |from \S+ import )", re.MULTILINE
+)
+
+# --- End #211 patterns ---
+
 EXCLUDED_DIRS = {"__pycache__", ".git", "node_modules", "venv", ".venv"}
 EXCLUDED_SUFFIXES = {".lock", ".min.js"}
 
 LARGE_FILE_THRESHOLD = 300
+
+# --- #213: Risk scoring weights ---
+SEVERITY_WEIGHTS: dict[str, int] = {
+    "secrets": 5,
+    "sql_injection": 5,
+    "unsafe_deserialization": 5,
+    "shell_injection": 5,
+    "prompt_injection": 4,
+    "bare_excepts": 2,
+    "missing_input_validation": 3,
+    "hardcoded_values": 2,
+    "late_imports": 1,
+    "test_gaps": 2,
+    "large_files": 1,
+}
+
+# Higher-risk file path patterns (auth, config, routes)
+HIGH_RISK_PATH_KEYWORDS = {
+    "auth", "login", "config", "secret", "cred",
+    "route", "api", "admin", "middleware",
+}
 
 # Valid IP octet range check
 def _is_valid_ip(groups: tuple[str, ...]) -> bool:
@@ -56,14 +113,27 @@ class Candidate:
     file: str
     line: int | None
     detail: str
+    risk_score: float = 0.0
 
     def to_dict(self) -> dict:
-        return {
+        d = {
             "category": self.category,
             "file": self.file,
             "line": self.line,
             "detail": self.detail,
         }
+        if self.risk_score > 0:
+            d["risk_score"] = self.risk_score
+        return d
+
+
+@dataclass
+class FileRiskScore:
+    """Aggregated risk score for a single file."""
+    file: str
+    score: float
+    match_count: int
+    categories: set[str] = field(default_factory=set)
 
 
 @dataclass
@@ -72,12 +142,17 @@ class ReconResult:
     files_scanned: int
     duration: float
     candidates: list[Candidate] = field(default_factory=list)
+    file_risk_scores: dict[str, FileRiskScore] = field(default_factory=dict)
 
     def by_category(self) -> dict[str, list[Candidate]]:
         result: dict[str, list[Candidate]] = {}
         for c in self.candidates:
             result.setdefault(c.category, []).append(c)
         return result
+
+    def files_by_risk(self) -> list[FileRiskScore]:
+        """Return files sorted by risk score (highest first)."""
+        return sorted(self.file_risk_scores.values(), key=lambda f: f.score, reverse=True)
 
 
 # ---------------------------------------------------------------------------
@@ -301,9 +376,142 @@ def _scan_large_files(target: Path, py_files: list[Path]) -> list[Candidate]:
     return candidates
 
 
+# --- #211: New scanners ---
+
+
+def _scan_sql_injection(path: Path, rel: str) -> list[Candidate]:
+    candidates: list[Candidate] = []
+    try:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return candidates
+    for i, line in enumerate(text.splitlines(), start=1):
+        if SQL_INJECTION_PATTERN.search(line):
+            candidates.append(
+                Candidate(
+                    category="sql_injection",
+                    file=rel,
+                    line=i,
+                    detail="possible SQL injection via string formatting",
+                )
+            )
+    return candidates
+
+
+def _scan_unsafe_deserialization(path: Path, rel: str) -> list[Candidate]:
+    candidates: list[Candidate] = []
+    try:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return candidates
+    for i, line in enumerate(text.splitlines(), start=1):
+        if UNSAFE_DESERIALIZE_PATTERN.search(line):
+            candidates.append(
+                Candidate(
+                    category="unsafe_deserialization",
+                    file=rel,
+                    line=i,
+                    detail="unsafe deserialization (pickle/yaml.load)",
+                )
+            )
+    return candidates
+
+
+def _scan_shell_injection(path: Path, rel: str) -> list[Candidate]:
+    """Scan whole file for subprocess calls with shell=True (often spans multiple lines)."""
+    candidates: list[Candidate] = []
+    try:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return candidates
+    for m in SHELL_INJECTION_PATTERN.finditer(text):
+        # Find line number from match position
+        line_num = text[:m.start()].count("\n") + 1
+        candidates.append(
+            Candidate(
+                category="shell_injection",
+                file=rel,
+                line=line_num,
+                detail="subprocess with shell=True",
+            )
+        )
+    return candidates
+
+
+def _scan_prompt_injection(path: Path, rel: str) -> list[Candidate]:
+    candidates: list[Candidate] = []
+    try:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return candidates
+    for i, line in enumerate(text.splitlines(), start=1):
+        if PROMPT_INJECTION_PATTERN.search(line):
+            candidates.append(
+                Candidate(
+                    category="prompt_injection",
+                    file=rel,
+                    line=i,
+                    detail="user input may flow into prompt unsanitized",
+                )
+            )
+    return candidates
+
+
+def _scan_late_imports(path: Path, rel: str) -> list[Candidate]:
+    """Flag imports inside function bodies (often a circular-dependency workaround)."""
+    candidates: list[Candidate] = []
+    try:
+        text = path.read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return candidates
+    in_function = False
+    for i, line in enumerate(text.splitlines(), start=1):
+        if re.match(r"^\s*def\s+", line) or re.match(r"^\s*async\s+def\s+", line):
+            in_function = True
+        elif line and not line[0].isspace():
+            in_function = False
+        if in_function and re.match(r"^(?:    |\t)+(?:import |from \S+ import )", line):
+            candidates.append(
+                Candidate(
+                    category="late_imports",
+                    file=rel,
+                    line=i,
+                    detail="import inside function body (possible circular dep workaround)",
+                )
+            )
+    return candidates
+
+
 # ---------------------------------------------------------------------------
 # Main scan entry point
 # ---------------------------------------------------------------------------
+
+def _compute_risk_scores(
+    candidates: list[Candidate], target: Path
+) -> dict[str, FileRiskScore]:
+    """Compute per-file risk scores from candidates (#213)."""
+    scores: dict[str, FileRiskScore] = {}
+    for c in candidates:
+        if c.file not in scores:
+            scores[c.file] = FileRiskScore(file=c.file, score=0.0, match_count=0)
+        fs = scores[c.file]
+        fs.match_count += 1
+        fs.categories.add(c.category)
+        fs.score += SEVERITY_WEIGHTS.get(c.category, 1)
+
+    # Bonus for high-risk path keywords (auth, config, etc.)
+    for rel, fs in scores.items():
+        rel_lower = rel.lower()
+        if any(kw in rel_lower for kw in HIGH_RISK_PATH_KEYWORDS):
+            fs.score *= 1.5
+
+    # Apply score back to individual candidates
+    for c in candidates:
+        if c.file in scores:
+            c.risk_score = scores[c.file].score
+
+    return scores
+
 
 def run_recon(target_dir: str | Path) -> ReconResult:
     target = Path(target_dir).resolve()
@@ -316,14 +524,24 @@ def run_recon(target_dir: str | Path) -> ReconResult:
 
     for path in py_files:
         rel = str(path.relative_to(target))
+        # Original scanners
         candidates.extend(_scan_secrets(path, rel))
         candidates.extend(_scan_bare_excepts(path, rel))
         candidates.extend(_scan_missing_validation(path, rel))
         candidates.extend(_scan_hardcoded_values(path, rel))
+        # #211: New scanners
+        candidates.extend(_scan_sql_injection(path, rel))
+        candidates.extend(_scan_unsafe_deserialization(path, rel))
+        candidates.extend(_scan_shell_injection(path, rel))
+        candidates.extend(_scan_prompt_injection(path, rel))
+        candidates.extend(_scan_late_imports(path, rel))
 
     # File-level checks (no per-line context needed)
     candidates.extend(_scan_test_gaps(target, py_files))
     candidates.extend(_scan_large_files(target, py_files))
+
+    # #213: Compute per-file risk scores and sort candidates
+    file_risk_scores = _compute_risk_scores(candidates, target)
 
     duration = time.monotonic() - start
     return ReconResult(
@@ -331,6 +549,7 @@ def run_recon(target_dir: str | Path) -> ReconResult:
         files_scanned=all_files_count,
         duration=duration,
         candidates=candidates,
+        file_risk_scores=file_risk_scores,
     )
 
 
@@ -340,9 +559,14 @@ def run_recon(target_dir: str | Path) -> ReconResult:
 
 CATEGORY_LABELS: dict[str, str] = {
     "secrets": "Secrets",
+    "sql_injection": "SQL Injection",
+    "unsafe_deserialization": "Unsafe Deserialization",
+    "shell_injection": "Shell Injection",
+    "prompt_injection": "Prompt Injection",
     "bare_excepts": "Bare Excepts",
     "missing_input_validation": "Missing Input Validation",
     "hardcoded_values": "Hardcoded Values",
+    "late_imports": "Late Imports (Circular Dep Indicator)",
     "test_gaps": "Test Gaps",
     "large_files": "Large Files",
 }
@@ -361,6 +585,20 @@ def format_markdown(result: ReconResult) -> str:
         "",
     ]
 
+    # #213: Risk-ranked file summary
+    ranked_files = result.files_by_risk()
+    if ranked_files:
+        lines.append("## File Risk Ranking")
+        lines.append("")
+        lines.append("| Rank | File | Score | Matches | Categories |")
+        lines.append("|------|------|-------|---------|------------|")
+        for rank, fs in enumerate(ranked_files, start=1):
+            cats = ", ".join(sorted(fs.categories))
+            lines.append(f"| {rank} | `{fs.file}` | {fs.score:.1f} | {fs.match_count} | {cats} |")
+        lines.append("")
+        lines.append("*Agent should read files in this order (highest risk first).*")
+        lines.append("")
+
     by_cat = result.by_category()
 
     for cat in CATEGORY_ORDER:
@@ -377,7 +615,15 @@ def format_markdown(result: ReconResult) -> str:
 
 
 def format_json(result: ReconResult) -> str:
-    return json.dumps([c.to_dict() for c in result.candidates], indent=2)
+    output: dict = {
+        "candidates": [c.to_dict() for c in result.candidates],
+        "file_risk_ranking": [
+            {"file": fs.file, "score": fs.score, "match_count": fs.match_count,
+             "categories": sorted(fs.categories)}
+            for fs in result.files_by_risk()
+        ],
+    }
+    return json.dumps(output, indent=2)
 
 
 # ---------------------------------------------------------------------------
