@@ -137,12 +137,24 @@ topics:
 
 **Quizzed?** starts as `no` for all new questions. The `/pmp-quiz refresher` mode flips these to `yes` as questions are answered.
 
-### Step 6: Update Video Progress
+### Step 6: Update Video Progress and Sync State
 
-1. Read the video numbers from all processed files (both newly processed and previously in `processed/`)
-2. Find the highest video number — this is the latest completed video
-3. Calculate total videos completed (count all files in `processed/`)
-4. Note: Do NOT update `state/current.md` video count automatically — just report the new count so it can be updated at session end
+After processing, gather these counts:
+1. **Total videos processed:** count all files in `pmp/CourseContent/processed/`
+2. **Highest video number:** from processed filenames
+3. **Total questions in bank:** count all `**Q` lines in `skills/pmp-quiz/question-bank.md`
+4. **Unquizzed refresher count:** count rows with `| no |` in `pmp/CourseContent/last-consumed.md`
+
+Then **auto-update state files** so they stay in sync:
+
+**`state/current.md`:**
+- Update the PMP line in **Active Priorities** — replace the items count, remaining count, questions count, and refresher backlog count
+  - Items formula: total videos processed + any exam/non-video items already counted (preserve the non-video portion, only replace the video count)
+  - Remaining: 366 minus items count
+- Update the **Projects table** PMP row with current video count and question count
+
+**`state/goals.md`:**
+- Update the **PMP Certification** row in the Tracking table with current items count and question count
 
 ### Step 7: Report
 
