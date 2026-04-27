@@ -41,10 +41,13 @@ Launch a PMP quiz session for a specific person.
 - Select topics based on THIS PERSON's progress file (not `state/learning.md`)
 - Greet them by name: "Hey [Name], let's do some PMP review."
 
-### 4. Update Person's Progress
+### 4. Update Person's Progress (Background)
 
-- After the quiz, update ONLY that person's progress file at `skills/pmp-quiz/progress/<name>.md`
+- After scoring and confidence confirmation, spawn a **background agent** to handle all file writes
+- The background agent updates the person's progress file at `skills/pmp-quiz/progress/<name>.md`
+- For Refresher Mode, the background agent also batch-updates `pmp/CourseContent/last-consumed.md` (all `Quizzed?` flips in one write)
 - Do NOT update `state/learning.md` PMP section (that's Matt's MARVIN tracker, separate concern)
+- Do NOT block the user — they can start a new round immediately
 - Follow the same confidence/scoring rules from the SKILL.md
 
 ### Template for New Progress File

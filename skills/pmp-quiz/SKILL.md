@@ -70,7 +70,7 @@ Review recently consumed video content. Immediate feedback after each answer (sa
 - Reads `pmp/CourseContent/last-consumed.md` for the list of unquizzed questions
 - Only presents questions marked `Quizzed?: no` in the manifest
 - Default cap: 15 questions per session. Override with `/pmp-quiz <name> refresher <N>`
-- After each question is answered, mark it `yes` in the manifest's Unquizzed Questions table
+- Track answered Question IDs in memory during the quiz — manifest is updated in a single batch by the background agent after scoring (see Step 4)
 - If no unquizzed questions remain, report: "All refresher questions completed! Run /pmp-consume after watching more videos to add new content."
 - Uses Revision Mode feedback style: state correct/incorrect, provide explanation, identify PMBOK 7 principle
 - At end of session, report how many refresher questions remain unquizzed
@@ -253,7 +253,7 @@ Before presenting any questions:
 
 **Refresher Mode:**
 - Same feedback as Revision Mode: state correct/incorrect, provide explanation, identify PMBOK 7 principle.
-- After evaluating, update `pmp/CourseContent/last-consumed.md` — set `Quizzed?` to `yes` for the question just answered.
+- **Do NOT write to any files between questions.** Track each answered Question ID and result in memory for batch update after scoring.
 
 ### Step 4: End-of-Section Review (both modes)
 
@@ -303,21 +303,26 @@ After question 60 (or the final question of a shorter session):
    - Mostly wrong (<40%) → confidence -1 (min 1)
    - Ask user to confirm before writing changes.
 
-6. **Update progress file** at `skills/pmp-quiz/progress/<name>.md`:
-   - Set "Last Reviewed" to today
-   - Update confidence rating (after confirmation)
-   - Calculate next review date based on new confidence
-   - Update status
-   - Add entry to Quiz History table
-
-7. Do NOT update `state/learning.md` — progress files are the source of truth for this skill.
-
-8. **Refresher Mode only — remaining questions report:**
-   After scoring, read `pmp/CourseContent/last-consumed.md` and count remaining `Quizzed?: no` rows. Report:
+6. **Refresher Mode only — remaining questions report:**
+   After scoring, count the `Quizzed?: no` rows you collected in Step 1 minus the questions just answered. Report:
    ```
    Refresher backlog: [N] questions remaining from consumed videos.
    ```
    If none remain: "All refresher questions completed! Run /pmp-consume after watching more videos to add new content."
+
+7. **Spawn background agent for all file updates.**
+   After presenting scoring and getting confidence confirmation, spawn a single background agent to perform ALL file writes:
+   - **Refresher Mode:** Batch update `pmp/CourseContent/last-consumed.md` — set `Quizzed?` to `yes` for every Question ID answered this session (single write, not per-question)
+   - **All modes:** Update progress file at `skills/pmp-quiz/progress/<name>.md`:
+     - Set "Last Reviewed" to today
+     - Update confidence rating (after confirmation)
+     - Calculate next review date based on new confidence
+     - Update status
+     - Add entry to Quiz History table
+   - The background agent should confirm completion via its result message
+   - **Do NOT block the foreground** — the user can immediately start a new `/pmp-quiz` round or continue their session
+
+8. Do NOT update `state/learning.md` — progress files are the source of truth for this skill.
 
 ### Step 5: Add New Questions (Optional)
 
