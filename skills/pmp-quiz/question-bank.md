@@ -1,6 +1,6 @@
 # PMP Question Bank
 
-Last updated: 2026-04-15
+Last updated: 2026-04-24
 
 ---
 
@@ -1571,6 +1571,1230 @@ B) The sender's intent
 C) Anything that blocks or disrupts the flow of information between sender and receiver
 D) The decoding process
 **A:** C) Noise is any blocker that prevents the receiver from getting the information — literal noise, technical issues, language barriers, distractions. *(Video 116)*
+
+---
+
+## Section 13: Risk Management
+
+### Plan Risk Management (Video 117)
+
+**Q1 - MC:** PMI defines risk as:
+A) An event that has already occurred and negatively impacts the project
+B) A probability that an event affects one or more project objectives
+C) Any unplanned change to the project scope
+D) A constraint that limits the project team
+**A:** B) Risk is a probability — something that might happen, not something that has happened. It can affect schedule, cost, scope, and other project objectives positively or negatively. *(Video 117)*
+
+**Q2 - [SCENARIO]:** You deliver a software project on time, within budget, and meeting all scope requirements. However, the software only reduces expenses by 5% instead of the target 10%. This shortfall is an example of:
+A) Individual project risk
+B) Scope creep
+C) Overall project risk
+D) A quality defect
+**A:** C) Overall project risk is the risk exposure of the project as a whole — including whether the end product meets its business objectives. The organization typically manages overall risk, while the PM manages individual risks. *(Video 117)*
+
+**Q3 - MC:** The difference between individual project risk and overall project risk is:
+A) Individual risk is always negative; overall risk is always positive
+B) Individual risk affects specific project elements; overall risk is the cumulative exposure including market and organizational uncertainty
+C) They are the same thing
+D) Individual risk is managed by the organization; overall risk is managed by the PM
+**A:** B) Individual risk affects one or more parts of the project. Overall risk is the sum of individual risks plus other uncertainty (market, organizational) — typically managed by the organization, not the PM. *(Video 117)*
+
+**Q4 - [SCENARIO]:** Your organization starts building an innovative product, but halfway through, the market shifts and demand disappears. The project is terminated. This is BEST described as:
+A) Individual project risk
+B) A quality failure
+C) Overall project risk from market uncertainty
+D) Scope creep
+**A:** C) Market uncertainty is an overall project risk that can derail an entire project, regardless of how well individual risks are managed. *(Video 117)*
+
+**Q5 - MC:** Risk appetite is BEST defined as:
+A) The total risk budget for a project
+B) The amount of risk a stakeholder is willing to take in exchange for a potential reward
+C) The probability that the highest-ranked risk will occur
+D) The number of risks in the risk register
+**A:** B) Risk appetite is how much risk you're willing to accept for a reward — like how much you'd spend at a casino to win a jackpot. Different stakeholders have different appetites. *(Video 117)*
+
+**Q6 - MC:** A risk breakdown structure (RBS) is used to:
+A) List all project activities
+B) Categorize risks into groups such as external, organizational, or technical
+C) Calculate the expected monetary value of risks
+D) Assign risk owners to each identified risk
+**A:** B) The RBS categorizes risks — e.g., external (regulations, vendors) vs organizational (people, funding). It's specific to the project and industry. *(Video 117)*
+
+**Q7 - [SCENARIO]:** You are starting a new project and need to define how risks will be identified, analyzed, and responded to. Which document should you create FIRST?
+A) The risk register
+B) The risk report
+C) The risk management plan
+D) The risk response plan
+**A:** C) The risk management plan is a how-to document created before all other risk processes. It defines how to identify, assess, respond to, implement responses for, and monitor risk on the project. *(Video 117)*
+
+---
+
+### Identify Risks (Video 118)
+
+**Q1 - [SCENARIO]:** A team member says, "We already identified all risks during planning — we don't need to do it again." How should you respond?
+A) Agree — risk identification is a one-time planning activity
+B) Disagree — risk identification should be done continuously throughout the project because new risks emerge every day
+C) Agree, but suggest a review at the halfway point
+D) Escalate to the sponsor for a decision
+**A:** B) Risk identification is ongoing. New regulations, market changes, team changes — new risks can emerge at any point. This process should be performed throughout the project lifecycle. *(Video 118)*
+
+**Q2 - MC:** A prompt list in risk identification is:
+A) A checklist used to verify project deliverables
+B) A predetermined list of risk categories derived from the risk breakdown structure
+C) A list of stakeholder communication preferences
+D) A template for the project management plan
+**A:** B) A prompt list provides predetermined risk categories (e.g., safety, materials, regulations, machinery for construction) to help systematically identify risks. *(Video 118)*
+
+**Q3 - MC:** Every assumption on a project is also:
+A) A fact
+B) A constraint
+C) A risk — because there is a chance the assumption is wrong
+D) A deliverable
+**A:** C) Assumptions are facts that haven't been verified. Since they might be wrong, every assumption carries risk. The same applies to constraints, which limit the project. *(Video 118)*
+
+**Q4 - [SCENARIO]:** You want to identify both positive and negative risks for your project. Which analysis technique examines strengths, weaknesses, opportunities, and threats?
+A) Root-cause analysis
+B) Documentation analysis
+C) SWOT analysis
+D) Benchmarking
+**A:** C) SWOT analysis — Strengths and Opportunities identify positive risks; Weaknesses and Threats identify negative risks. It covers both sides. *(Video 118)*
+
+**Q5 - MC:** The risk register is BEST described as:
+A) A component of the project management plan
+B) A project document that lists all identified risks and potential responses, updated continuously throughout the project
+C) A one-time document created during planning and never modified
+D) A summary of overall project risk
+**A:** B) The risk register is a project document (NOT part of the PM plan) that lists all identified risks. It's updated continuously — every time a new risk is discovered. *(Video 118)*
+
+**Q6 - [SCENARIO]:** A new risk has been identified on your project. What should you do FIRST?
+A) Immediately implement a response
+B) Add it to the risk register
+C) Review the risk management plan to see how to manage it, then add it to the risk register
+D) Escalate to the sponsor
+**A:** C) The first step when a new risk is identified is to review the risk management plan (which tells you HOW to manage risk), then add the risk to the risk register. *(Video 118)*
+
+**Q7 - MC:** The risk report differs from the risk register because:
+A) The risk report tracks individual risks; the risk register tracks overall risk
+B) The risk register tracks individual risks; the risk report addresses sources of overall project risk
+C) They are the same document
+D) The risk report is only for the sponsor
+**A:** B) Risk register = individual risks. Risk report = sources of overall project risk. PMs are mostly concerned with individual risks; the organization manages overall risk. *(Video 118)*
+
+---
+
+### Perform Qualitative Risk Analysis (Video 119)
+
+**Q1 - MC:** The purpose of qualitative risk analysis is to:
+A) Assign dollar values to each risk
+B) Prioritize individual risks by assessing their probability of occurrence and impact
+C) Create the risk register
+D) Develop risk responses
+**A:** B) Qualitative analysis ranks and prioritizes risks by evaluating their probability (how likely) and impact (how severe). It determines which risks deserve the most attention. *(Video 119)*
+
+**Q2 - [SCENARIO]:** Your risk register has 50 identified risks. You need to determine which ones to focus on first. Which process should you perform?
+A) Identify Risks
+B) Perform Quantitative Risk Analysis
+C) Perform Qualitative Risk Analysis — rank the risks by probability and impact
+D) Plan Risk Responses
+**A:** C) Qualitative analysis ranks risks from most important to least important. You can't respond effectively without knowing which risks matter most. *(Video 119)*
+
+**Q3 - MC:** A risk probability and impact matrix multiplies probability (1-5) by impact (1-5). A risk with probability 4 and impact 5 scores:
+A) 9
+B) 15
+C) 20
+D) 25
+**A:** C) 20. Probability × Impact = 4 × 5 = 20. This is a high-priority risk. Compare to an earthquake: probability 1 × impact 5 = 5 (low priority despite high impact). *(Video 119)*
+
+**Q4 - [SCENARIO]:** An earthquake could destroy your entire project site (impact = 5), but the probability in your region is very low (probability = 1). Should this be your top priority risk?
+A) Yes — the impact is catastrophic
+B) No — despite high impact, the low probability gives it a low overall score; focus on risks with higher combined probability and impact
+C) Yes — always prioritize by impact alone
+D) No — earthquakes are never project risks
+**A:** B) The probability × impact matrix shows that high impact with very low probability = low overall score. A risk that could take your life away may not be your top worry if it's extremely unlikely. *(Video 119)*
+
+**Q5 - MC:** Risk data quality assessment evaluates:
+A) Whether the risk register is formatted correctly
+B) Whether the probability and impact assessments are based on reliable, verified data rather than guesses
+C) The total number of risks identified
+D) Whether the risk management plan is complete
+**A:** B) If you assign "medium probability" to a risk based on a guess vs. based on 200 years of seismic data, the quality is vastly different. Good data quality = reliable assessments. *(Video 119)*
+
+**Q6 - MC:** A bubble chart in qualitative risk analysis uses three dimensions to display risks. These three axes are:
+A) Cost, schedule, and scope
+B) Probability, impact, and priority (bubble size)
+C) Past, present, and future risks
+D) Internal, external, and organizational risks
+**A:** B) X-axis = impact, Y-axis = probability, bubble size = priority. The bigger and higher-right the bubble, the more critical the risk. *(Video 119)*
+
+**Q7 - [SCENARIO]:** During planning, a regulation change was at the bottom of your risk register (low probability). Six months later, the regulation is gaining political support and is now very likely. What should you do?
+A) Nothing — the risk was already assessed
+B) Update the risk register — re-rank the risk to reflect its new higher probability
+C) Remove it from the register since it was ranked low
+D) Wait for the regulation to pass before acting
+**A:** B) Risk rankings change throughout the project as the world changes. A low-priority risk can become the top risk. Qualitative analysis is performed continuously, not just once. *(Video 119)*
+
+---
+
+### Perform Quantitative Risk Analysis (Video 120)
+
+**Q1 - MC:** The key difference between qualitative and quantitative risk analysis is:
+A) Qualitative is done first; quantitative is never done
+B) Qualitative ranks risks descriptively (high/medium/low); quantitative assigns specific numerical values (dollars, days)
+C) Quantitative is less accurate than qualitative
+D) They produce the same results
+**A:** B) Qualitative says "high impact on budget." Quantitative says "$50,000 impact on budget." Quantitative provides precise numerical analysis. *(Video 120)*
+
+**Q2 - MC:** Quantitative risk analysis is typically performed on:
+A) Every single risk in the register
+B) Only the highest-ranked risks from qualitative analysis — because it requires specialized knowledge and effort
+C) Only positive risks
+D) Only risks identified during initiation
+**A:** B) Quantitative analysis requires specific risk software knowledge and industry expertise. It's generally applied only to the top-priority risks identified by qualitative analysis. *(Video 120)*
+
+**Q3 - [CALCULATION]:** Expected Monetary Value (EMV) is calculated as:
+A) Risk probability + risk impact
+B) Risk impact × risk probability
+C) Risk impact / risk probability
+D) Risk impact - risk probability
+**A:** B) EMV = Impact × Probability. Example: a risk with a $400,000 impact and 25% probability has an EMV of $100,000. *(Video 120)*
+
+**Q4 - [SCENARIO]:** You're deciding between buying a new house ($1M, 25% chance of $400K in needed repairs) vs. remodeling an old house ($800K, 10% chance of $500K in overruns). Using EMV, which option has a lower total expected cost?
+A) New house: $1M + $100K EMV = $1.1M
+B) Old house: $800K + $50K EMV = $850K — lower total expected cost
+C) Both are equal
+D) You cannot compare them using EMV
+**A:** B) New house total = $1M + (400K × 0.25) = $1.1M. Old house total = $800K + (500K × 0.10) = $850K. The old house has lower total expected cost. *(Video 120)*
+
+**Q5 - MC:** A tornado chart in quantitative risk analysis shows:
+A) The probability of weather-related risks
+B) How much different risks affect various aspects of the project, ranked from most to least impact
+C) The critical path of the project
+D) Stakeholder communication preferences
+**A:** B) Tornado charts display sensitivity analysis — showing which risks have the greatest impact on different project aspects, ranked from highest to lowest like a tornado's shape. *(Video 120)*
+
+**Q6 - MC:** A decision tree analysis is also known as:
+A) A risk breakdown structure
+B) A make-or-buy analysis — comparing options using EMV and total expected cost
+C) A SWOT analysis
+D) A bubble chart
+**A:** B) Decision tree/make-or-buy analysis uses EMV to compare options and determine which path has the best expected outcome. *(Video 120)*
+
+**Q7 - [ORDERING]:** What is the correct sequence of risk register development across the risk analysis processes?
+A) Rank risks → List risks → Assign values → Add responses
+B) List all risks (Identify) → Rank by priority (Qualitative) → Assign numerical values (Quantitative) → Add responses (Plan Responses)
+C) Assign values → List risks → Rank risks → Add responses
+D) Add responses → List risks → Rank risks → Assign values
+**A:** B) The risk register evolves: (1) Identify Risks creates it with all risks listed, (2) Qualitative ranks/prioritizes them, (3) Quantitative assigns numerical values, (4) Plan Responses adds what to do about each risk. *(Video 120)*
+
+---
+
+### Plan Risk Responses (Video 121)
+
+**Q1 - MC:** The five strategies for responding to negative risks (threats) are:
+A) Accept, Escalate, Transfer, Avoid, Mitigate
+B) Accept, Escalate, Share, Exploit, Enhance
+C) Accept, Avoid, Mitigate, Transfer, Enhance
+D) Escalate, Transfer, Exploit, Share, Mitigate
+**A:** A) For threats: Accept (do nothing), Escalate (push to higher authority), Transfer (third party/insurance), Avoid (eliminate the risk entirely), Mitigate (reduce probability and/or impact). *(Video 121)*
+
+**Q2 - [SCENARIO]:** You don't want your construction project damaged by fire, so you purchase fire insurance. This risk response strategy is:
+A) Avoidance
+B) Mitigation
+C) Transfer — giving the risk to a third party (the insurance company) to manage
+D) Acceptance
+**A:** C) Transfer means a third party takes on the risk. Insurance is the classic example — the insurance company manages the financial impact of the fire risk. *(Video 121)*
+
+**Q3 - [SCENARIO]:** Your project team is worried about the risk of a server virus. One option: unplug the computer entirely so it can never get a virus. Another option: install antivirus software. Which strategies do these represent?
+A) Both are mitigation
+B) Unplugging = avoidance (risk eliminated entirely); antivirus = mitigation (risk reduced but not eliminated)
+C) Unplugging = transfer; antivirus = acceptance
+D) Both are avoidance
+**A:** B) Avoidance eliminates the risk completely (can't get a virus if the computer is unplugged). Mitigation reduces probability and/or impact (antivirus lowers the chance but doesn't guarantee zero risk). *(Video 121)*
+
+**Q4 - MC:** The key difference between avoid and mitigate for negative risks is:
+A) Avoid is cheaper than mitigate
+B) Avoid eliminates the risk entirely; mitigate reduces the probability and/or impact but the risk can still occur
+C) Mitigate eliminates the risk; avoid reduces it
+D) There is no difference
+**A:** B) Avoid = risk is gone (don't fly = can't die in a plane crash). Mitigate = risk is reduced (wear seatbelt = lower probability/impact of car accident, but accidents can still happen). *(Video 121)*
+
+**Q5 - [MULTI-SELECT]:** Which of the following are strategies for POSITIVE risks (opportunities)? Select all that apply.
+A) Exploit
+B) Avoid
+C) Enhance
+D) Share
+E) Mitigate
+**A:** A, C, D) For opportunities: Exploit (remove uncertainty to ensure it happens), Enhance (increase probability/impact), Share (give to third party to maximize). Also: Accept and Escalate (same as threats). Avoid and Mitigate are for threats only. *(Video 121)*
+
+**Q6 - [SCENARIO]:** There's a chance your building permit will arrive two weeks early, allowing the project to start sooner. You send someone to the permit office daily to push for early approval. This strategy is:
+A) Enhance
+B) Mitigate
+C) Exploit — removing uncertainty to make sure the positive risk happens
+D) Transfer
+**A:** C) Exploit means taking action to remove uncertainty and ensure the opportunity occurs. Going to the permit office daily to push for early delivery is exploiting the opportunity. *(Video 121)*
+
+**Q7 - MC:** Which positive risk strategy corresponds to "transfer" for negative risks?
+A) Exploit
+B) Enhance
+C) Share — giving the opportunity to a third party outside the organization to maximize it
+D) Accept
+**A:** C) The threat-opportunity pairs: Avoid↔Exploit, Mitigate↔Enhance, Transfer↔Share. Accept and Escalate are the same for both. *(Video 121)*
+
+**Q8 - [SCENARIO]:** A risk event occurs that is completely outside the project manager's expertise — new government regulations that the PM doesn't know how to handle. The PM should:
+A) Accept the risk and do nothing
+B) Mitigate by reading about the regulations
+C) Escalate — push it to the company's legal department or higher authority who can respond appropriately
+D) Transfer to an insurance company
+**A:** C) Escalation is for risks outside the PM's authority or expertise. The legal department has the knowledge to handle regulatory risks. *(Video 121)*
+
+---
+
+## Section 14: Procurement Management
+
+### Plan Procurement Management (Video 122)
+
+**Q1 - MC:** PMI uses the word "agreements" instead of "contracts" because:
+A) Agreements are less formal than contracts
+B) Different countries use different terms for legally binding documents between buyers and sellers
+C) Agreements don't require signatures
+D) Contracts are only used in construction
+**A:** B) PMI uses "agreements" as the universal term because different countries may not use the word "contracts" but have equivalent legally binding documents. *(Video 122)*
+
+**Q2 - [SCENARIO]:** You need to hire a painter for a well-defined job — paint one room white. The scope is clear and you want to minimize your risk. Which contract type should you use?
+A) Time and material
+B) Cost plus fixed fee
+C) Fixed price (lump sum) — scope is well-defined, seller takes cost overrun risk
+D) Cost plus incentive fee
+**A:** C) Fixed price/lump sum is best when scope is well-defined. The seller gets one flat fee covering all labor and materials. If there's a cost overrun, the seller absorbs it — all risk lies with the seller. *(Video 122)*
+
+**Q3 - MC:** In a time and material contract, who bears the MOST risk?
+A) The seller — they absorb all cost overruns
+B) Risk is shared equally
+C) The buyer — they pay for both labor and materials, absorbing 100% of cost overruns
+D) Neither party — risk is transferred to insurance
+**A:** C) Time and material is the worst contract for the buyer. The buyer pays hourly labor rates plus all materials. If the work takes longer or uses more materials than expected, the buyer pays the full difference. *(Video 122)*
+
+**Q4 - MC:** Which contract type should you use when the scope of work is unclear or very high-level?
+A) Firm fixed price
+B) Fixed price with incentive fee
+C) Cost plus fixed fee
+D) Time and material — because the seller can't give a fixed price without knowing the scope
+**A:** D) When scope is unknown, use time and material. The seller charges hourly and the buyer pays for materials. When scope is well-defined, use fixed price. *(Video 122)*
+
+**Q5 - [SCENARIO]:** You sign a 10-year steel supply contract at $5/pound, but the contract includes a clause that adjusts the price annually based on inflation. This is an example of:
+A) Firm fixed price
+B) Cost plus award fee
+C) Fixed price with economic price adjustment (EPA)
+D) Time and material
+**A:** C) An EPA contract is a fixed price that adjusts based on economic conditions (inflation, market changes) over long-term contracts spanning years. *(Video 122)*
+
+**Q6 - MC:** The procurement statement of work describes:
+A) How vendors will be paid
+B) Which parts of the project scope will be procured externally — so sellers can assess if they're qualified
+C) The project charter
+D) The cost baseline
+**A:** B) The procurement SOW identifies what on the project will be procured. It lets sellers see the actual work and determine if they're qualified to bid. *(Video 122)*
+
+**Q7 - [MULTI-SELECT]:** Which of the following are subtypes of fixed price contracts? Select all that apply.
+A) Firm fixed price
+B) Fixed price with incentive fee
+C) Cost plus fixed fee
+D) Fixed price with economic price adjustment (EPA)
+**A:** A, B, D) The three fixed price subtypes are: firm fixed price (price never changes), fixed price with incentive fee (bonus for meeting targets), and EPA (adjusts for economic conditions over long contracts). Cost plus fixed fee is a cost reimbursable type. *(Video 122)*
+
+---
+
+## Section 15: Stakeholder Management
+
+### Plan Stakeholder Engagement (Video 123)
+
+**Q1 - MC:** The Stakeholder Engagement Assessment Matrix categorizes stakeholders into five levels:
+A) High, Medium, Low, None, Unknown
+B) Unaware, Resistant, Neutral, Supportive, Leading
+C) Internal, External, Positive, Negative, Passive
+D) Sponsor, Manager, Team, Customer, Vendor
+**A:** B) The five categories: Unaware (don't know they're a stakeholder), Resistant (negatively impacted), Neutral (don't care), Supportive (wants the project), Leading (actively engaged like team members). *(Video 123)*
+
+**Q2 - [SCENARIO]:** Mary is currently resistant to your project, but you need her to be supportive. Where do you document this current-vs-desired state and the methods to move her?
+A) The communication management plan
+B) The stakeholder register
+C) The stakeholder engagement assessment matrix and stakeholder engagement plan
+D) The risk register
+**A:** C) The assessment matrix maps where stakeholders ARE vs where you WANT them. The engagement plan documents the methods you'll use to move them (meetings, demos, one-on-ones). *(Video 123)*
+
+**Q3 - MC:** The key difference between the Stakeholder Engagement Plan and the Communication Management Plan is:
+A) They are the same document
+B) The engagement plan defines METHODS of keeping stakeholders engaged (weekly meetings, demos); the communication plan defines the SPECIFICS (day, time, location, agenda)
+C) The engagement plan is only for external stakeholders
+D) The communication plan replaces the engagement plan
+**A:** B) Engagement plan = methods (what type of engagement). Communication plan = specifics (when, where, how, what's covered). They work closely together. *(Video 123)*
+
+**Q4 - [SCENARIO]:** You decide to keep a senior stakeholder engaged through monthly product demos. Where do you document "monthly product demos" and where do you document "who's invited, how long, what's covered"?
+A) Both go in the communication management plan
+B) "Monthly product demos" → stakeholder engagement plan; "who, how long, what" → communication management plan
+C) Both go in the stakeholder engagement plan
+D) "Monthly demos" → communication plan; details → stakeholder register
+**A:** B) The engagement plan states the method (monthly product demos). The communication plan has the details (invitees, duration, content, location). *(Video 123)*
+
+**Q5 - [SCENARIO]:** A key stakeholder has become unaware of project progress and is disengaged. What should the PM do FIRST?
+A) Remove them from the stakeholder register
+B) Escalate to the sponsor
+C) Review the stakeholder engagement plan to determine appropriate methods for re-engaging them
+D) Send them an email summary
+**A:** C) When a stakeholder becomes disengaged, consult the engagement plan first. It defines the methods for keeping each stakeholder involved based on their needs and impact level. *(Video 123)*
+
+---
+
+## Section 16: Executing Processes
+
+### Planning Review & Execution Overview (Videos 124-125)
+
+**Q1 - MC:** How many processes are in the Planning process group?
+A) 10
+B) 18
+C) 24
+D) 49
+**A:** C) 24 processes in Planning — the most of any process group. These produce the project management plan with its 18 components (14 subsidiary plans + 4 baselines). *(Video 124)*
+
+**Q2 - MC:** How many processes are in the Executing process group?
+A) 2
+B) 10
+C) 12
+D) 24
+**A:** B) 10 executing processes. Execution is done in tandem with Monitoring & Controlling — you execute while monitoring to keep work on plan. *(Video 125)*
+
+**Q3 - MC:** Executing is BEST described as:
+A) Creating the project management plan
+B) Tracking and measuring project performance
+C) Performing the work defined in the project management plan — actually doing the work
+D) Formally closing the project
+**A:** C) Execution = doing the work. Painting walls, coding applications, installing servers. The plan told us what and how — now we do it. *(Video 125)*
+
+---
+
+### Direct and Manage Project Work (Video 126)
+
+**Q1 - MC:** Direct and Manage Project Work is classified as:
+A) A scope process
+B) A schedule process
+C) An integration process — it represents the sum of all other executing processes
+D) A quality process
+**A:** C) It's an integration process. It represents ALL executing processes combined — if you add up everything else in execution, this process encompasses it. *(Video 126)*
+
+**Q2 - [SCENARIO]:** A stakeholder requested painting the room green instead of white. The change went through the change control process and was approved. What happens next?
+A) The change is documented but not implemented until closing
+B) The approved change request becomes an input to Direct and Manage Project Work — execute the change
+C) The sponsor must approve it again
+D) A new project charter is needed
+**A:** B) Approved change requests are a key input. If a change is approved, you execute it. That's what this process does — perform the work in the plan AND implement approved changes. *(Video 126)*
+
+**Q3 - MC:** The PRIMARY output of Direct and Manage Project Work is:
+A) The project management plan
+B) The risk register
+C) Deliverables — the products, services, or results the plan was designed to produce
+D) The stakeholder register
+**A:** C) If this process represents all execution and the plan says "build a 20-story skyscraper," the output is the skyscraper — the deliverable. *(Video 126)*
+
+**Q4 - MC:** Work performance data comes from:
+A) The planning processes
+B) The executing processes — because that's where actual work is being done and measured
+C) The closing processes
+D) The initiating processes
+**A:** B) Work performance data (actual start/finish dates, costs spent, % complete) comes from execution because that's where work happens and gets tracked against baselines. *(Video 126)*
+
+**Q5 - [SCENARIO]:** During execution, you discover your project is $200 over budget. You request additional funds to get back on track. This is an example of:
+A) A preventive action
+B) A defect repair
+C) A corrective action — bringing the project back on plan after it has deviated
+D) Gold plating
+**A:** C) Corrective actions bring the project back on plan after deviation has occurred. Preventive actions are implemented BEFORE deviation happens to stop it from occurring. *(Video 126)*
+
+**Q6 - MC:** An issue log differs from a risk register because:
+A) Issues are potential future events; risks are current problems
+B) Issues are current negative events already affecting the project; risks are probable future events that may or may not happen
+C) They are the same document
+D) Issues are positive; risks are negative
+**A:** B) Risks = might happen (future, probable). Issues = happening now (current, real problems). Materials ARE delayed vs materials MAY be delayed. *(Video 126)*
+
+---
+
+### Manage Project Knowledge (Video 127)
+
+**Q1 - MC:** The common misconception about lessons learned is:
+A) They should only include negative experiences
+B) They are only done at the end of the project — in reality, lessons learned should be captured continuously throughout the project
+C) Only the PM can contribute lessons learned
+D) They belong in the project charter
+**A:** B) Lessons learned is NOT a one-time end-of-project activity. New knowledge should be captured every day in the Lessons Learned Register as the team discovers better methods. *(Video 127)*
+
+**Q2 - MC:** The difference between explicit knowledge and tacit knowledge is:
+A) Explicit is informal; tacit is formal
+B) Explicit is formally documented and learned from books/records; tacit is personal knowledge built from years of experience and critical thinking
+C) They are the same thing
+D) Tacit is written; explicit is verbal
+**A:** B) Explicit = books, documents, records, formal training. Tacit = personal expertise compiled through experience, exists in someone's head. Both should be captured and shared. *(Video 127)*
+
+**Q3 - [SCENARIO]:** A senior developer discovers a faster way to deploy code during execution. She keeps it to herself. Why is this a problem?
+A) It's not a problem — personal methods are private
+B) The knowledge dies when she leaves. It should be documented in the Lessons Learned Register and shared so future projects and team members benefit
+C) It violates the project charter
+D) It creates a risk
+**A:** B) Knowledge that isn't captured and shared is lost when the project ends or the person leaves. The Lessons Learned Register ensures valuable discoveries benefit the whole organization. *(Video 127)*
+
+**Q4 - MC:** The Lessons Learned Register is:
+A) Created once at the end of the project
+B) Part of the project management plan
+C) A project document updated continuously throughout execution as new knowledge is gained
+D) Only for documenting failures
+**A:** C) It's a living document. Updated whenever the team learns something new — new methods, better processes, mistakes to avoid. It's archived and shared with future projects. *(Video 127)*
+
+**Q5 - MC:** Knowledge management as a tool focuses on:
+A) Storing documents in a database
+B) Building an environment where stakeholders can share information through workshops, meetings, and networking
+C) Restricting access to project information
+D) Automating project processes
+**A:** B) Knowledge management creates a sharing culture — workshops, meetings, networking, mentoring. Information management handles the collection, storage, distribution, and eventual destruction of that information. *(Video 127)*
+
+---
+
+### Manage Quality (Video 128)
+
+**Q1 - MC:** Manage Quality (formerly called Quality Assurance) focuses on:
+A) Inspecting the final product for defects
+B) Ensuring the PROCESSES being followed will produce quality products — watching how work is done, not just the result
+C) Creating the quality management plan
+D) Calculating the cost of quality
+**A:** B) Manage Quality is about the process, not the product. Are the team's methods correct? Are they following quality standards? If the process is right, the product will be right. *(Video 128)*
+
+**Q2 - MC:** A cause-and-effect diagram (also called Ishikawa or Fishbone) is used to:
+A) Show project schedule dependencies
+B) Calculate EMV for risks
+C) Identify all potential causes that could lead to a defect or quality problem
+D) Prioritize stakeholders
+**A:** C) The fishbone diagram maps categories of causes (people, processes, materials, equipment) that could produce a specific defect. The "head" of the fish is the problem; the "bones" are causes. *(Video 128)*
+
+**Q3 - MC:** The Pareto principle (80/20 rule) applied to project management means:
+A) 80% of the budget goes to 20% of activities
+B) 80% of project problems come from 20% of the causes — focus on the vital few, not the trivial many
+C) 80% of stakeholders are supportive
+D) 80% of risks are positive
+**A:** B) Pareto's law: 80% of effects come from 20% of causes. On a project, a small number of issues (HR problems, vendor delays) typically cause the majority of problems. Focus there first. *(Video 128)*
+
+**Q4 - [SCENARIO]:** You notice the development team is writing code without following the coding standards defined in the quality management plan. The code works, but the process is wrong. What should you do?
+A) Nothing — the code works fine
+B) Conduct a quality audit to identify the gap and bring the team back to following the correct processes
+C) File a change request to remove the coding standards
+D) Wait until testing to see if defects appear
+**A:** B) Quality audits identify shortcomings and gaps in processes. Even if the output seems fine now, not following quality processes increases defect risk. Fix the process, not just the product. *(Video 128)*
+
+**Q5 - MC:** "Design for X" means:
+A) Designing the project management plan
+B) Designing the product with a specific priority in mind — where X is the variable (safety, cost, reliability, etc.)
+C) Designing for exactly 10 quality metrics
+D) Designing the WBS
+**A:** B) X is a variable. Design for safety = prioritize regulations and protection. Design for cost = prioritize cheaper materials. The design priority shapes quality decisions. *(Video 128)*
+
+**Q6 - MC:** A scatter diagram is used to:
+A) Show the critical path
+B) Display frequency of defects in a bar chart
+C) Show if a trend or correlation exists between two variables (e.g., defects vs time)
+D) Group brainstormed ideas into categories
+**A:** C) Scatter diagrams plot two variables to reveal trends. If the data points trend upward (more defects over time), there's a correlation that needs attention. *(Video 128)*
+
+---
+
+### Acquire Resources (Video 129)
+
+**Q1 - MC:** The process Acquire Resources is:
+A) Done once at the start of execution
+B) Done continuously throughout the project — resources come and go as different phases require different people and materials
+C) Only for hiring team members
+D) Part of the planning process group
+**A:** B) Resources come and go. The IT person disconnects equipment, then leaves. The painter comes, then leaves. The furniture person comes back. Acquiring resources is ongoing throughout execution. *(Video 129)*
+
+**Q2 - [SCENARIO]:** Before the project charter was even approved, the CEO assigned Mary to the project because of her expertise. Mary is an example of:
+A) A virtual team member
+B) A pre-assigned resource — selected in advance before the project formally begins
+C) A contracted vendor
+D) A functional manager
+**A:** B) Pre-assignment happens when team members are selected before the project starts, often because of specific expertise or a senior stakeholder's request. *(Video 129)*
+
+**Q3 - MC:** A resource calendar shows:
+A) The project schedule
+B) The availability of resources — when people, equipment, or materials are free to be used
+C) The cost of resources
+D) The communication plan
+**A:** B) Resource calendars show availability. Need a bulldozer next Tuesday? Check the bulldozer's resource calendar. Need Mary for a meeting Thursday at 2pm? Check her calendar. It applies to both people and physical resources. *(Video 129)*
+
+**Q4 - MC:** Virtual teams offer advantages but also present challenges including:
+A) Only cost challenges
+B) Technology failures, cultural differences, time zone availability issues, and communication barriers
+C) No challenges — virtual is always better
+D) Only scheduling challenges
+**A:** B) Virtual teams enable 24-hour operations and access to global talent, but face technology issues, cultural misunderstandings, and availability problems (3 AM meetings across time zones). *(Video 129)*
+
+**Q5 - [SCENARIO]:** You need to select a consultant for your project. You evaluate their availability, cost, certifications, experience, and references. This evaluation technique is called:
+A) Expert judgment
+B) Multi-criteria decision analysis — using multiple selection criteria to evaluate and choose resources
+C) Benchmarking
+D) Reserve analysis
+**A:** B) Multi-criteria decision analysis evaluates resources against multiple factors (availability, cost, experience, certifications, references, attitude) to make the best selection. *(Video 129)*
+
+---
+
+### Develop Team (Video 130)
+
+**Q1 - [ORDERING]:** Tuckman's Ladder describes five stages of team development. What is the correct order?
+A) Forming → Performing → Storming → Norming → Adjourning
+B) Forming → Storming → Norming → Performing → Adjourning
+C) Storming → Forming → Performing → Norming → Adjourning
+D) Norming → Forming → Storming → Performing → Adjourning
+**A:** B) Forming (team meets) → Storming (conflicts arise about methods) → Norming (team resolves conflicts, agrees on approach) → Performing (team does the work effectively) → Adjourning (project ends, team disbands). *(Video 130)*
+
+**Q2 - MC:** In Maslow's Hierarchy of Needs, a team member whose house just burned down would drop to which level?
+A) Self-actualization
+B) Esteem
+C) Safety — they've lost stability and security, which must be restored before higher needs matter
+D) Social
+**A:** C) Safety/stability is level 2. Even if someone was at self-actualization (level 5), a crisis like losing their home drops them to safety level. They can't focus on professional growth until basic security is restored. *(Video 130)*
+
+**Q3 - MC:** Herzberg's hygiene factors (good pay, safe environment, vacation) are:
+A) Motivators that drive people to excel
+B) Expected baseline conditions — they don't motivate when present, but they DEMOtivate when absent
+C) Optional perks
+D) Only relevant in government projects
+**A:** B) Hygiene factors are expected. Having them doesn't motivate you, but NOT having them (no vacation, unsafe workplace, low pay) actively demotivates. Motivating agents (growth, achievement) only work after hygiene factors are met. *(Video 130)*
+
+**Q4 - [SCENARIO]:** A manager constantly watches every team member, doesn't trust them to work independently, and believes people avoid responsibility. This management style is:
+A) Theory Y
+B) Theory Z
+C) Theory X — micromanagement based on distrust of workers
+D) Servant leadership
+**A:** C) Theory X managers believe people dislike work, avoid responsibility, and need constant supervision. Theory Y is the opposite — believing people are self-motivated and can work independently. *(Video 130)*
+
+**Q5 - MC:** Co-location (also called a war room or tight matrix) is:
+A) A virtual team setup
+B) When the entire team works in one physical location for face-to-face collaboration — especially effective for solving complex problems
+C) A type of contract
+D) A risk response strategy
+**A:** B) Co-location puts everyone in one room. It's especially popular in Agile and when solving complex problems that benefit from real-time, face-to-face communication. *(Video 130)*
+
+**Q6 - [SCENARIO]:** Your team perceives you as a subject matter expert in IT security. Team members willingly listen to your guidance and seek your advice. This type of influence is:
+A) Legitimate power
+B) Punishment power
+C) Expert power — the best power to have; people follow you because they respect your knowledge
+D) Referent power
+**A:** C) Expert power is the most effective. People follow you because they believe in your knowledge and expertise. Contrast with punishment power (worst — people work in fear) and legitimate power (formal authority without respect). *(Video 130)*
+
+**Q7 - MC:** McClelland's Three Need Theory states people stay motivated when the organization provides:
+A) Money, benefits, and vacation
+B) Achievement (ability to advance), power (increased authority), and affiliation (belonging with others)
+C) Training, tools, and time
+D) Safety, security, and stability
+**A:** B) Achievement, power, and affiliation. People want to climb the ladder, gain more authority, and build relationships within the organization. *(Video 130)*
+
+**Q8 - [MULTI-SELECT]:** Which forms of power are considered GOOD for a project manager to have? Select all that apply.
+A) Expert power
+B) Reward power
+C) Punishment power
+D) Legitimate power
+**A:** A, B) Expert power (respected for knowledge) and reward power (ability to give raises, promotions, time off) are the best. Legitimate power (I'm the boss) is not great. Referent power (charisma) is okay but not based on expertise. Punishment power (fear-based) is the worst. *(Video 130)*
+
+### OSCAR Coaching Model (Video 131)
+
+**Q1 - [MC]:** What does the acronym OSCAR stand for in the coaching model?
+A) Objectives, Strategy, Choices, Actions, Results
+B) Outcome, Situation, Choices/Consequences, Actions, Review
+C) Objectives, Scope, Control, Assessment, Review
+D) Outcome, Schedule, Cost, Actions, Requirements
+**A:** B) Outcome (future state — what they want), Situation (current state — current skills/abilities), Choices/Consequences (potential avenues and their tradeoffs), Actions (specific steps with attainable goals), Review (regular check-ins to keep them motivated). *(Video 131)*
+
+**Q2 - [SCENARIO]:** You notice a team member struggling with a new technology. You want to coach them. According to the OSCAR model, what should you do FIRST?
+A) Give them a training plan immediately
+B) Identify the desired outcome — what does the team member want to achieve?
+C) Review their past performance evaluations
+D) Assign them to a different task they can handle
+**A:** B) The OSCAR model starts with Outcome — identify the desired future state before assessing the current situation or creating an action plan. *(Video 131)*
+
+**Q3 - [SCENARIO]:** A PM is coaching a team member using the OSCAR model. They've identified the outcome (future state) and assessed the current situation. What should they do next?
+A) Create an action plan and start implementing
+B) Review results from previous coaching sessions
+C) Identify potential choices and their consequences before committing to an action plan
+D) Release the team member from the project
+**A:** C) After Outcome and Situation, the next step is Choices/Consequences — identifying all potential avenues for achieving the goal and understanding the consequences of each option before creating the action plan. *(Video 131)*
+
+---
+
+### Drexler-Sibbet Team Performance Model (Video 132)
+
+**Q1 - [ORDERING]:** The Drexler-Sibbet Team Performance Model has seven stages. What is the correct order?
+A) Orientation → Trust Building → Goal Clarification → Commitment → Implementation → High Performance → Renewal
+B) Trust Building → Orientation → Commitment → Goal Clarification → Implementation → Renewal → High Performance
+C) Goal Clarification → Trust Building → Orientation → Commitment → High Performance → Implementation → Renewal
+D) Orientation → Goal Clarification → Trust Building → Implementation → Commitment → High Performance → Renewal
+**A:** A) The seven steps are: 1) Orientation (Why are we here?), 2) Trust Building (Who are we?), 3) Goal Clarification (What are we doing?), 4) Commitment (How will we do it?), 5) Implementation (Start the work), 6) High Performance (Team hits its stride), 7) Renewal (Adapting to changes). Steps 1-4 create the team; steps 5-7 cover sustainability. *(Video 132)*
+
+**Q2 - [MC]:** In the Drexler-Sibbet model, which stage answers the question "Who are we?"
+A) Orientation
+B) Trust Building
+C) Goal Clarification
+D) Commitment
+**A:** B) Trust Building (Step 2) — team members introduce themselves, share their skills, and build trust. Orientation (Step 1) answers "Why are we here?" *(Video 132)*
+
+**Q3 - [SCENARIO]:** Your team has been working effectively for two months. A key team member leaves and a new person joins. According to the Drexler-Sibbet model, the team will likely:
+A) Continue performing at the same level
+B) Need to go through Renewal — revisiting earlier stages to integrate the change
+C) Return to the Commitment stage only
+D) Immediately disband
+**A:** B) Step 7 (Renewal) addresses working through changes like team member turnover. The team may need to revisit some earlier stages (trust building, goal clarification) to integrate the new member. *(Video 132)*
+
+---
+
+### Manage Team & Conflict Management (Video 133)
+
+**Q1 - [MC]:** According to PMI, what is the BEST way to resolve a conflict on a project?
+A) Forcing — the PM decides who wins
+B) Compromising — each side gives up something
+C) Problem solving / Confronting — find the root cause, achieve a win-win
+D) Smoothing — downplay the problem
+**A:** C) Problem solving (also called confronting or collaborating) is the ONLY recommended approach. Both parties study the problem, find the root cause, and arrive at a solution where both sides are happy and the problem is gone forever. This is a win-win. *(Video 133)*
+
+**Q2 - [MC]:** What is the greatest source of conflict on a project?
+A) Budget disagreements between team members
+B) Quality standards disputes between the PM and sponsor
+C) Schedule disagreements between functional managers and project managers
+D) Scope disputes between the customer and the PM
+**A:** C) The greatest source of conflict occurs between functional managers and project managers over schedules, primarily because functional managers control resources and may not want to release team members. *(Video 133)*
+
+**Q3 - [SCENARIO]:** Peter wants to deploy the application on a virtual machine. Bob insists on a physical machine. The PM says "Bob, you win. Peter, do it Bob's way." This conflict resolution technique is:
+A) Problem solving — both parties worked it out
+B) Forcing — priority given to one party, creating a win-lose that leads to more conflict
+C) Compromising — both gave something up
+D) Smoothing — the problem was minimized
+**A:** B) Forcing is a win-lose scenario. One person wins, the other loses. This often leads to MORE conflict because the losing party feels their solution was dismissed unfairly. *(Video 133)*
+
+**Q4 - [MULTI-SELECT]:** Which conflict resolution techniques result in the problem NOT being solved? Select all that apply.
+A) Smoothing (downplaying — "it's not a big deal")
+B) Withdrawal (walking away — "do whatever you want")
+C) Problem solving (confronting the root cause)
+D) Compromising (each side gives up something)
+**A:** A, B) Smoothing kicks the can down the road — the problem remains. Withdrawal means one person gives up and leaves — a yield-lose where the problem is never resolved. Compromising does solve the problem (though nobody is fully happy). *(Video 133)*
+
+**Q5 - [ORDERING]:** When a conflict arises, what is the correct sequence of steps?
+A) Define the problem → Analyze (cause & effect) → Develop solutions with the team → Implement a solution → Review if it works → Confirm
+B) Implement a quick fix → Analyze the results → Define the root cause
+C) Escalate to the sponsor → Wait for direction → Implement their solution
+D) Select the best solution → Analyze the problem → Define the problem
+**A:** A) The first thing to do is NOT take action — instead, define what the problem actually is. Then analyze (cause and effect), develop solutions with the team, implement, review, and confirm. Never jump straight to implementing a solution. *(Video 133)*
+
+**Q6 - [MC]:** Compromising as a conflict resolution technique is considered:
+A) Win-win — both sides are happy
+B) Lose-lose — the problem is gone but no one got everything they wanted
+C) Win-lose — one side got more
+D) The best approach after problem solving
+**A:** B) Compromising is lose-lose. Both sides give up something to meet in the middle. The problem is resolved, but neither party is fully satisfied with the outcome. *(Video 133)*
+
+---
+
+### PM Terms: Student Syndrome, Parkinson's Law, and More (Video 134)
+
+**Q1 - [MC]:** Student Syndrome in project management refers to:
+A) New team members who need extra training
+B) Planned procrastination — team members wait until the last moment to start work, eliminating any safety margin
+C) Team members who study project documentation excessively
+D) A learning curve that every project goes through
+**A:** B) Student Syndrome is when team members delay starting work until the last possible moment, removing any buffer time. If something goes wrong, there's no time to correct it. *(Video 134)*
+
+**Q2 - [MC]:** Parkinson's Law states that:
+A) Projects always go over budget by 20%
+B) Work expands to fill the time available for its completion
+C) The more team members you add, the slower the project goes
+D) Quality decreases as schedule pressure increases
+**A:** B) If you give someone 8 hours for a task that could take 2 hours, they'll somehow use all 8 hours. Work expands to fill whatever time is allocated. *(Video 134)*
+
+**Q3 - [SCENARIO]:** An agile team's actual velocity is 100 story points, but they tell the PM they can only commit to 80 points per sprint. They consistently deliver 95-100 points. This behavior is called:
+A) Parkinson's Law
+B) Student Syndrome
+C) Sandbagging — underpromising and overdelivering
+D) Self-protection
+**A:** C) Sandbagging is intentionally underpromising and overdelivering. The team commits to less than they can do to guarantee delivery, but this can distort expectations and affect project planning. *(Video 134)*
+
+**Q4 - [SCENARIO]:** The coding team finishes a module one week early. The testing team wasn't expecting the handoff until next week and isn't ready to begin testing. One week of schedule is lost. This is an example of:
+A) Student Syndrome
+B) Dropped Baton — a handover failure where one team finishes early but the next team isn't ready
+C) Parkinson's Law
+D) Sandbagging
+**A:** B) A Dropped Baton occurs when one team finishes work (like a relay runner) but the receiving team isn't prepared to accept it, causing wasted time. It highlights the importance of coordinating handoffs between teams. *(Video 134)*
+
+**Q5 - [MC]:** Self-protection in project management means:
+A) Using risk mitigation strategies
+B) Team members saying or doing things that cannot hurt them now or in the future — protecting themselves in tasks or conflicts
+C) Encrypting project documents
+D) Following safety regulations on construction sites
+**A:** B) Self-protection is a human behavior where people avoid actions that could harm their standing. For example, not finishing tasks too early (to avoid getting more work) or not making statements in arguments that could put them in jeopardy. *(Video 134)*
+
+---
+
+### Conduct Procurements (Video 138)
+
+**Q1 - [MC]:** In which process group does the project team select and award a contract to a vendor?
+A) Planning — when you decide what to procure
+B) Executing — Conduct Procurements selects the seller and awards the contract
+C) Monitoring & Controlling — when you monitor vendor performance
+D) Closing — when you finalize vendor payments
+**A:** B) Conduct Procurements is an executing process. In planning, you determine WHAT to procure and send out RFPs/RFQs. In executing, you receive seller responses, evaluate proposals, select the vendor, and award the contract (agreement). *(Video 138)*
+
+**Q2 - [MC]:** A bidder conference (also called contractor conference or pre-bid conference) is:
+A) A one-on-one meeting between the buyer and a preferred vendor
+B) A meeting where the buyer explains the entire project to all potential vendors at once, so they can submit informed proposals
+C) A post-award meeting to kick off the contract
+D) A dispute resolution forum
+**A:** B) A bidder conference brings all potential vendors together so the buyer can explain the project once rather than meeting each vendor individually. Common in government contracts with many potential bidders. *(Video 138)*
+
+**Q3 - [SCENARIO]:** Your organization needs to hire an external vendor for a major component of the project. You've already sent out RFPs during planning. Vendor proposals have come back. What is your next step?
+A) Begin negotiating with the cheapest vendor
+B) Evaluate proposals against your selection criteria, then select the qualified seller and award a contract
+C) Send out another round of RFPs to get more options
+D) Skip evaluation and use the vendor you used last time
+**A:** B) In Conduct Procurements, you analyze and evaluate seller proposals against your predetermined selection criteria, negotiate, select the most qualified vendor, and award the contract (agreement). *(Video 138)*
+
+---
+
+### Manage Stakeholder Engagement (Video 139)
+
+**Q1 - [SCENARIO]:** During project execution, you notice that key stakeholders are losing interest and becoming disengaged. The weekly status meetings aren't generating participation. What should you do?
+A) Continue following the communication plan as written — consistency matters
+B) Escalate to the sponsor and ask them to mandate attendance
+C) Submit a change request to modify the stakeholder engagement methods — if the plan isn't working, change it
+D) Remove the disengaged stakeholders from the stakeholder register
+**A:** C) If stakeholders are losing interest, the engagement methods aren't working. The best approach is to change the plan. Don't wait for the project to end — stakeholder engagement is the ultimate metric for project success. *(Video 139)*
+
+**Q2 - [MC]:** Manage Stakeholder Engagement works closely with which other plan to keep stakeholders involved?
+A) Risk management plan
+B) Communication management plan — together they keep stakeholders engaged through demos, meetings, calls, and one-on-ones
+C) Cost management plan
+D) Schedule management plan
+**A:** B) The stakeholder engagement plan works hand-in-hand with the communication management plan. Together they define HOW to keep stakeholders engaged — product walkthroughs, demos, meetings, phone calls, one-on-one conversations. *(Video 139)*
+
+---
+
+## Section 17: Monitoring & Controlling Processes
+
+### M&C Overview (Video 141)
+
+**Q1 - [MC]:** Monitoring and controlling processes are performed:
+A) Only at the end of the project, after executing is complete
+B) In a sequential format, one after another
+C) In parallel with executing — continuously checking if the work stays on plan
+D) Only when a problem is detected
+**A:** C) Monitoring and controlling runs in parallel with execution. Every day you go to work, you check scope, schedule, cost, quality, resources, communications, risks, procurements, and stakeholder engagement to ensure the work stays on plan. *(Video 141)*
+
+---
+
+### Monitor and Control Project Work (Video 142)
+
+**Q1 - [MC]:** Monitor and Control Project Work is an integration process. What is its primary purpose?
+A) To execute the project management plan
+B) To track, review, and report on project progress to determine if the work meets the plan
+C) To approve change requests
+D) To close out the project
+**A:** B) This integration process summarizes all monitoring and controlling processes. It takes work performance information from control scope/schedule/cost/etc. and produces work performance reports showing overall project status. *(Video 142)*
+
+**Q2 - [MC]:** What is the correct sequence: work performance data → work performance information → work performance reports?
+A) Reports come from executing, data comes from M&C, information is created in closing
+B) Data (raw, from executing) → Information (analyzed vs plan, from individual M&C processes) → Reports (consolidated status, from Monitor & Control Project Work)
+C) Information → Data → Reports
+D) Reports → Information → Data
+**A:** B) Work performance DATA is raw output from executing (Direct & Manage Project Work). Individual M&C processes (control scope, schedule, etc.) compare data vs plan to produce work performance INFORMATION. Monitor & Control Project Work consolidates all information into work performance REPORTS. *(Video 142)*
+
+**Q3 - [SCENARIO]:** You review the work performance report and discover your project is 10% over budget and 20% behind schedule. What should you do?
+A) Fire underperforming team members
+B) Wait until the next review cycle to see if things improve
+C) Initiate a change request to extend the schedule, gain more budget, or modify scope to bring the project back on track
+D) Continue as planned and hope for the best
+**A:** C) When the work performance report shows significant variance from the plan, you need to initiate a change request. Options include extending the schedule, increasing the budget, or modifying scope — all through the formal change control process. *(Video 142)*
+
+---
+
+### Perform Integrated Change Control — PICC (Video 143)
+
+**Q1 - [MC]:** In a predictive project, any change to the project management plan after it's been approved requires:
+A) Verbal approval from the project manager
+B) A formal change request that must be assessed and approved through the change control process
+C) Only an email to the sponsor
+D) No formal process — the PM can update the plan directly
+**A:** B) In predictive projects, ANY change to the approved project management plan must go through Perform Integrated Change Control — submit a written change request, assess the impact, and get it approved by the CCB or sponsor. No exceptions. *(Video 143)*
+
+**Q2 - [MC]:** Who can approve changes to a project?
+A) Only the project manager
+B) Only the project sponsor
+C) The project sponsor and/or the Change Control Board (CCB)
+D) Any stakeholder with an interest in the project
+**A:** C) Changes are approved by the sponsor and/or the Change Control Board. The CCB is a group responsible for reviewing, evaluating, approving, deferring, or rejecting changes and communicating the decision. *(Video 143)*
+
+**Q3 - [SCENARIO]:** A stakeholder requests a seemingly small change — adding new carpet to a room renovation project. The PM thinks it's minor. What should the PM do?
+A) Just add it to the scope since it's small
+B) Assess the change against ALL project objectives (scope, schedule, cost, quality, risk) — even small changes can have big impacts
+C) Tell the stakeholder to wait until the project is finished
+D) Delegate the decision to the team lead
+**A:** B) Big or small, ALL changes must be assessed against the entire set of project objectives. A "small" carpet change affects budget, schedule, scope, potentially resources (new vendor), and quality requirements. Never assume a change is too small to assess. *(Video 143)*
+
+**Q4 - [MC]:** A change log is:
+A) A risk register for tracking potential changes
+B) A document tracking all change requests — who requested them, when, status (being assessed, approved, rejected), available to all stakeholders
+C) A private PM document for budget changes only
+D) An output of the planning process
+**A:** B) The change log tracks every change request on the project: who requested it, when, what stage it's in (assessment, approved, rejected). It should be public/transparent so stakeholders can check the status of their requested changes. *(Video 143)*
+
+**Q5 - [ORDERING]:** What is the correct process for making a change on a predictive project?
+A) Stakeholder identifies need → Written change request submitted → PM assesses impact → CCB approves/rejects → If approved, update plan and execute → If rejected, move on or resubmit
+B) PM identifies need → PM updates plan → Inform stakeholders after
+C) CCB approves → Stakeholder submits request → PM implements
+D) Implement the change → Submit change request → Get retroactive approval
+**A:** A) The change process flows: 1) Stakeholder identifies a need, 2) Written change request submitted to PM, 3) PM assesses impact on all objectives, 4) Submitted to CCB for approval/rejection, 5) If approved — update PM plan, documents, and execute the change, 6) If rejected — move on or resubmit a new request. *(Video 143)*
+
+**Q6 - [SCENARIO]:** A change request is rejected by the CCB. The team still believes the change is necessary. What should they do?
+A) Implement the change anyway
+B) Escalate to the CEO directly
+C) Submit a new change request and go through the process again — or accept the rejection and move on
+D) Quit the project
+**A:** C) If a change is rejected, the team can either accept the decision and continue working, or they can submit a new change request (perhaps with better justification) and restart the approval process. Never implement an unapproved change. *(Video 143)*
+
+---
+
+### Validate Scope (Video 144)
+
+**Q1 - [MC]:** Validate Scope is the process of:
+A) Checking deliverables for quality defects
+B) Getting formal acceptance of completed deliverables from the customer or sponsor
+C) Defining the project scope in the planning phase
+D) Controlling scope creep during execution
+**A:** B) Validate Scope is about formalizing acceptance. The customer or sponsor inspects, tests, and examines the deliverable to confirm it meets their requirements, then provides formal acceptance. *(Video 144)*
+
+**Q2 - [ORDERING]:** What is the correct flow from deliverable to project closure?
+A) Deliverable → Validate Scope → Control Quality → Close Project
+B) Deliverable → Control Quality (verified deliverable) → Validate Scope (accepted deliverable) → Close Project or Phase
+C) Deliverable → Close Project → Validate Scope
+D) Control Quality → Deliverable → Close Project → Validate Scope
+**A:** B) The deliverable from executing goes to Control Quality first (checking against quality requirements → verified deliverable), then to Validate Scope (customer/sponsor acceptance → accepted deliverable), then to Close Project or Phase. *(Video 144)*
+
+**Q3 - [SCENARIO]:** The customer reviews a deliverable during Validate Scope and says the software is too slow — it doesn't meet their performance requirements. What happens next?
+A) The project is cancelled
+B) A change request is submitted to fix the deliverable — the team may need more time and cost to rework it
+C) The PM asks the customer to lower their requirements
+D) The deliverable is accepted as-is
+**A:** B) If the deliverable doesn't meet acceptance criteria during Validate Scope, a change request is generated. The team reworks the deliverable, which may require additional time and budget. The deliverable must eventually meet the customer's requirements for formal acceptance. *(Video 144)*
+
+**Q4 - [MC]:** The primary tool used in Validate Scope is:
+A) Data analysis
+B) Expert judgment
+C) Inspection — measuring, examining, testing, and verifying the deliverable against scope baseline requirements
+D) Earned value management
+**A:** C) Inspection (also called product walkthrough, audit, or product review) is the main tool. Customers and sponsors physically examine, test, and measure the deliverable to determine if it meets the requirements specified in the scope baseline. *(Video 144)*
+
+---
+
+### Control Scope, Schedule, and Cost (Video 145)
+
+**Q1 - [MC]:** What is variance analysis in the context of control scope?
+A) Analyzing the difference between planned scope and actual scope being delivered — determining if there's a degree of variance
+B) Calculating earned value formulas
+C) Reviewing the project charter for scope changes
+D) Analyzing team performance reviews
+**A:** A) Variance analysis in control scope determines whether the work being performed has deviated from the scope baseline. It identifies the cause of any variance and whether corrective or preventive action is needed. *(Video 145)*
+
+**Q2 - [SCENARIO]:** Your project management plan says a task should take 2 days. The work performance data shows it actually took 5 days. In which process would you identify this variance?
+A) Control Scope
+B) Control Schedule — comparing planned schedule vs actual schedule performance
+C) Control Costs
+D) Validate Scope
+**A:** B) Control Schedule monitors the status of the project schedule by comparing what the plan said (2 days) against what actually happened (5 days). The work performance information output would show you're 3 days behind for that task. *(Video 145)*
+
+**Q3 - [MC]:** In Control Costs, what does a negative cost variance (CV) indicate?
+A) The project is under budget
+B) The project is over budget — you've spent more than the value of work completed
+C) The project is ahead of schedule
+D) The project has been cancelled
+**A:** B) A negative cost variance means you spent more money than the value of work you earned. This is bad — you're over budget. Positive CV = under budget (good). *(Video 145)*
+
+**Q4 - [SCENARIO]:** You discover the project is consistently 10% off scope today, 15% tomorrow, and 20% the next day. This worsening pattern is identified through:
+A) Variance analysis — measuring the deviation at a single point
+B) Trend analysis — tracking the direction of the variance over time to predict future performance
+C) Earned value management
+D) Monte Carlo simulation
+**A:** B) Trend analysis looks at performance over time. While variance analysis tells you how far off you are right now, trend analysis shows whether things are getting better or worse — critical for forecasting and taking proactive action. *(Video 145)*
+
+**Q5 - [MC]:** When a scope change is approved on a project, what almost always happens?
+A) Nothing else changes
+B) The schedule gets shorter
+C) More time and cost are needed — scope changes almost always impact schedule and budget
+D) Quality improves automatically
+**A:** C) The instructor emphasizes that 99% of the time, scope changes lead to more time and more cost. You'll need to update the schedule and cost baselines through change requests. *(Video 145)*
+
+---
+
+### Earned Value Management — EVM (Videos 146-148, 152)
+
+**Q1 - [MC]:** Earned Value Management (EVM) is used during which process group?
+A) Planning — to create the budget
+B) Executing — to direct team work
+C) Monitoring and Controlling — to compare planned work vs actual work
+D) Closing — to write the final report
+**A:** C) EVM compares the plan to actuals, so you need actual work data from execution. It's done during Monitoring and Controlling to assess budget and schedule performance. *(Video 146)*
+
+**Q2 - [MC]:** Planned Value (PV) represents:
+A) The amount of money actually spent on the project
+B) The amount of money worth of work that SHOULD have been done at this point
+C) The total budget of the project
+D) The forecasted cost at completion
+**A:** B) PV = Planned % Complete x BAC. It tells you how much work (in dollar terms) you should have completed by now according to the plan. *(Video 148)*
+
+**Q3 - [MC]:** If a project's CPI is 0.6, this means:
+A) The project is 60% complete
+B) The project is 40% under budget
+C) The project is 40% over budget — for every dollar spent, only $0.60 of value is earned
+D) The project is 60% ahead of schedule
+**A:** C) CPI = EV / AC. A CPI of 0.6 means for every $1 spent, you're only getting $0.60 worth of work. Under 1.0 = over budget. The project is 40% over budget. *(Video 148)*
+
+**Q4 - [MC]:** SPI (Schedule Performance Index) of 1.2 means:
+A) The project is 20% over budget
+B) The project is 20% behind schedule
+C) The project is 20% ahead of schedule — more work has been done than planned
+D) The project is 120% complete
+**A:** C) SPI = EV / PV. An SPI of 1.2 means you've done 20% more work than planned. Over 1.0 = ahead of schedule. At 1.0 = on schedule. Under 1.0 = behind schedule. *(Video 148)*
+
+**Q5 - [SCENARIO]:** Your project has a BAC of $100,000 and a CPI of 0.8. What is the EAC (Estimate at Completion)?
+A) $80,000
+B) $100,000
+C) $125,000 — the project will cost $25,000 more than the original budget
+D) $120,000
+**A:** C) EAC = BAC / CPI = $100,000 / 0.8 = $125,000. The project is forecasted to cost $125,000 — that's $25,000 over the original budget because you're only getting $0.80 of value per dollar spent. *(Video 148)*
+
+**Q6 - [MC]:** ETC (Estimate to Complete) answers which question?
+A) "What was the original budget?"
+B) "How much more money do we need to finish the project?"
+C) "What is the total forecast at completion?"
+D) "Are we on schedule?"
+**A:** B) ETC = EAC - AC. It tells you how much MORE money is needed to finish the project based on current performance. If EAC = $1,000 and AC = $900, you need $100 more. *(Video 148)*
+
+**Q7 - [MULTI-SELECT]:** Which EVM values have NO formula — they are simply given values? Select all that apply.
+A) BAC (Budget at Completion)
+B) AC (Actual Cost)
+C) PV (Planned Value)
+D) CV (Cost Variance)
+**A:** A, B) BAC is just the total budget of the project — no calculation needed. AC is simply the sum of money spent so far. PV and all other values have formulas (PV = Planned % x BAC). *(Video 152)*
+
+**Q8 - [MC]:** A quick way to remember the EVM formulas: for CV, CPI, SV, and SPI — they all start with which value?
+A) BAC
+B) AC
+C) PV
+D) EV — all four formulas begin with Earned Value
+**A:** D) CV = EV - AC, CPI = EV / AC, SV = EV - PV, SPI = EV / PV. All start with EV. Additional memory tip: V (variance) = subtraction, I (index) = division. Cost formulas use AC, schedule formulas use PV. *(Video 152)*
+
+**Q9 - [SCENARIO]:** Your project's TCPI is 1.3. What does this tell you?
+A) The project is 30% under budget
+B) The team needs to work 30% harder (more efficiently) than their current rate to finish on budget
+C) The project is 30% ahead of schedule
+D) 30% of the work is complete
+**A:** B) TCPI (To-Complete Performance Index) measures how hard you need to work to finish within budget. A TCPI > 1.0 means you need to perform better than current rate. At 1.3, the team must work 30% harder/more efficiently to hit the budget target. Under 1.0 is favorable — you can relax a bit. *(Video 148)*
+
+**Q10 - [MC]:** VAC (Variance at Completion) tells you:
+A) How much work is remaining
+B) The difference between the original budget and the forecasted budget — positive means under budget, negative means over
+C) The current schedule variance
+D) How many change requests have been submitted
+**A:** B) VAC = BAC - EAC. A positive VAC means you'll finish under budget (money left over). A negative VAC means you'll finish over budget (need more money). For example, VAC of -$1,000 means you'll be $1,000 over budget at completion. *(Video 148)*
+
+---
+
+### Control Quality (Video 153)
+
+**Q1 - [MC]:** What is the difference between a deliverable and a verified deliverable?
+A) There is no difference
+B) A deliverable comes from executing; a verified deliverable has passed quality inspection and meets quality requirements
+C) A verified deliverable has been accepted by the customer
+D) A deliverable is a document; a verified deliverable is a physical product
+**A:** B) A deliverable is the raw output from executing. Control Quality inspects it against quality requirements. If it passes, it becomes a "verified deliverable" — ready for customer acceptance in Validate Scope. *(Video 153)*
+
+**Q2 - [MC]:** A control chart uses the "Rule of Seven." What does this mean?
+A) Seven defects are acceptable before action is needed
+B) If seven consecutive data points fall on one side of the mean, the process is leaning and the machine/process should be inspected — even though no defect has occurred yet
+C) Every seventh product must be inspected
+D) A project should have no more than seven quality metrics
+**A:** B) The Rule of Seven indicates the process is trending toward one of the upper/lower control limits. All seven products may be within limits (not defective), but the pattern signals the machine is wearing or drifting. Inspect and fix the process before it produces actual defects. *(Video 153)*
+
+**Q3 - [SCENARIO]:** You're manufacturing doors that must be 7 feet. A door comes off the line at 7'2" when the upper control limit is 7'1". What should you do?
+A) Accept the door since it's close enough
+B) The door is a defect — it's outside the control limits. Fix the machine and reject the defective product
+C) Adjust the control limits to 7'2"
+D) Continue production and check again tomorrow
+**A:** B) Any product outside the upper or lower control limits is defective. The machine produced a door at 7'2" when the upper limit is 7'1" — it won't fit a standard frame. Stop, fix the machine, and reject the defective output. *(Video 153)*
+
+**Q4 - [MC]:** Statistical sampling in control quality is used when:
+A) You want to test every single deliverable
+B) There are too many components to test all of them, so you select a random subset for quality inspection
+C) You only want to test the most expensive items
+D) The customer requests specific items to be tested
+**A:** B) When you have hundreds of components (e.g., 400 software modules), you can't test them all. Statistical sampling takes a random selection for testing. The sample should be as random as possible — not all from one developer or one module. *(Video 153)*
+
+**Q5 - [MULTI-SELECT]:** Which of the following are tools or techniques used in Control Quality? Select all that apply.
+A) Inspection (audits, walkthroughs, peer reviews)
+B) Checklists and check sheets
+C) Control charts (with Rule of Seven)
+D) Monte Carlo simulation
+**A:** A, B, C) Inspection validates deliverables aren't defective. Checklists tell inspectors what to look for; check sheets keep running totals. Control charts monitor if a process is in control using upper/lower limits and the Rule of Seven. Monte Carlo is a quantitative risk analysis tool. *(Video 153)*
+
+---
+
+### Control Resources (Video 154)
+
+**Q1 - [MC]:** The Control Resources process focuses on:
+A) Managing and motivating team members
+B) Controlling physical resources (materials, equipment, facilities) — NOT human resources
+C) Hiring new team members
+D) Releasing team members at project end
+**A:** B) Control Resources is about ensuring physical resources (materials, equipment, tools, machinery) are used correctly and efficiently. People are managed through Manage Team, not Control Resources. The instructor emphasizes: "You don't control people — that sounds bad." *(Video 154)*
+
+**Q2 - [SCENARIO]:** You notice your construction team is using excessive amounts of paint on walls, wasting materials and inflating costs. Which process addresses this?
+A) Manage Team
+B) Control Resources — ensuring physical resources are utilized efficiently to maximize benefit and stay on budget
+C) Control Costs
+D) Manage Quality
+**A:** B) Control Resources ensures physical resources (including materials like paint) are being used correctly and efficiently. Wasteful use of resources leads to budget overruns and project errors. *(Video 154)*
+
+---
+
+### Monitor Communications (Video 155)
+
+**Q1 - [SCENARIO]:** The communication management plan calls for weekly Friday meetings with the sponsor. The meetings are happening as planned, but the sponsor says they aren't getting the information they need. What should you do?
+A) Continue holding the meetings since you're following the plan
+B) Cancel the meetings entirely
+C) Submit a change request to modify the communication methods — following the plan isn't enough if it's not meeting stakeholder needs
+D) Ask the sponsor to attend daily standups instead
+**A:** C) Monitor Communications checks not only if the plan is being followed, but whether the communications are ADEQUATE. Even if you're executing the plan perfectly, if stakeholders aren't satisfied, you need to change the communication approach. *(Video 155)*
+
+**Q2 - [MC]:** What is the key difference between Manage Communications and Monitor Communications?
+A) They are the same process in different process groups
+B) Manage Communications (executing) performs the actual communication; Monitor Communications (M&C) evaluates whether the communications are effective and adequate
+C) Manage Communications is for internal; Monitor Communications is for external
+D) Monitor Communications happens first
+**A:** B) Manage Communications executes the plan — you hold the meetings, send the reports. Monitor Communications evaluates whether what you did was effective: Did the team actually meet vendors on Monday? Are stakeholders happy with the communication quality? *(Video 155)*
+
+---
+
+### Monitor Risks (Video 156)
+
+**Q1 - [MC]:** How often should you monitor risks on a project?
+A) Monthly at the scheduled risk review
+B) Only when a risk event occurs
+C) Every single day — 24/7, 365 days a year, as long as the project is active
+D) Weekly during team meetings
+**A:** C) Risk monitoring never stops. The instructor emphasizes: "Every moment you're awake you're monitoring for risk." New risks can emerge any day — pandemics, team member emergencies, vendor delays, regulatory changes. *(Video 156)*
+
+**Q2 - [SCENARIO]:** During planning, you identified a risk of seasonal flooding affecting your supply chain and ranked it as "Low" in summer. It's now approaching winter. What should you do?
+A) Leave the risk ranking as-is since it was already assessed
+B) Update the risk register — move the risk up in ranking since the probability has increased with the seasonal change
+C) Remove the risk since it's been in the register too long
+D) Wait until the flooding actually occurs
+**A:** B) Risks can move up and down the register as circumstances change. Just like flu risk is low in summer and high in winter, your risk rankings should be updated as conditions evolve. Monitor Risks includes tracking identified risks and seeing if they change. *(Video 156)*
+
+**Q3 - [MULTI-SELECT]:** Monitor Risks involves which of the following activities? Select all that apply.
+A) Tracking previously identified risks to see if they've changed
+B) Identifying and analyzing new risks
+C) Evaluating whether existing risk responses are still adequate
+D) Creating the initial risk register
+**A:** A, B, C) Monitor Risks tracks existing risks (they move up/down in severity), identifies new risks (every day brings new ones), and evaluates whether the responses planned months ago are still adequate — maybe new technologies or methods offer better responses. Creating the initial risk register happens during Identify Risks in planning. *(Video 156)*
+
+---
+
+### Control Procurements (Video 157)
+
+**Q1 - [MC]:** What is a "claim" in procurement management?
+A) A formal acceptance of vendor work
+B) A dispute between the buyer and contractor — typically when the contractor wants more money for work done outside the contract
+C) A request for proposal from a new vendor
+D) A quality inspection report
+**A:** B) A claim is a dispute, usually when a contractor does work beyond the contract scope and requests additional payment. Claims are settled through negotiation (claims administration). *(Video 157)*
+
+**Q2 - [SCENARIO]:** You hired a painter for $200 to paint a room. The painter discovered holes in the walls, patched them, and now wants $250. You disagree on the extra charge. How is this resolved?
+A) The PM pays the full $250 without question
+B) Through claims administration — a negotiation process to reach an agreement (e.g., settling at $225 since the extra work was necessary)
+C) Fire the vendor and hire someone new
+D) Escalate directly to court
+**A:** B) Claims administration uses negotiation to resolve disputes between buyer and seller. The contractor did extra work (patching holes) that was necessary but outside the original contract. A negotiated settlement (like $225) resolves the dispute without litigation. *(Video 157)*
+
+**Q3 - [MULTI-SELECT]:** When closing out a procurement, which sign-offs should occur? Select all that apply.
+A) Formal written confirmation that all payments have been made to the vendor
+B) Vendor sign-off that all work was completed and accepted
+C) Verbal agreement between PM and vendor
+D) Sponsor approval of every invoice
+**A:** A, B) Two formal written sign-offs protect both parties: 1) confirmation that all payments were made (protects the vendor), and 2) confirmation that all work was completed and accepted (protects the buyer). These written documents prevent future lawsuits since both parties have signed off. *(Video 157)*
+
+**Q4 - [MC]:** Control Procurements includes all of the following EXCEPT:
+A) Monitoring vendor contract performance
+B) Inspecting and auditing vendor work
+C) Selecting and awarding contracts to new vendors
+D) Closing out completed contracts with formal sign-offs
+**A:** C) Selecting and awarding contracts happens in Conduct Procurements (executing). Control Procurements (M&C) monitors existing vendor relationships, inspects/audits their work against the contract, handles claims, and closes out completed contracts. *(Video 157)*
+
+---
+
+### Monitor Stakeholder Engagement (Video 158)
+
+**Q1 - [MC]:** Monitor Stakeholder Engagement evaluates:
+A) Only whether the engagement plan is being followed
+B) Both whether the plan is being followed AND whether the engagement strategies are actually adequate and effective
+C) Only stakeholder satisfaction surveys
+D) Only budget spent on stakeholder events
+**A:** B) This process checks two things: 1) Are you following the stakeholder engagement plan? 2) Even if you are following it, is it actually WORKING? You might be executing perfectly but the strategies themselves could be inadequate. *(Video 158)*
+
+**Q2 - [SCENARIO]:** Your team has been following the stakeholder engagement plan exactly. Monthly demos, weekly emails, quarterly reviews — all happening as planned. However, stakeholders are still disengaged and unresponsive. What does this tell you?
+A) The team needs to follow the plan more closely
+B) Stakeholders don't care about the project
+C) The engagement strategies are inadequate — even though the plan is being followed, the methods need to change via a change request
+D) No action needed since the plan is being followed
+**A:** C) Following the plan isn't enough if the strategies don't work. Monitor Stakeholder Engagement is where you evaluate whether the engagement methods are truly effective. If not, submit a change request to modify the strategies before it's too late. *(Video 158)*
+
+---
+
+## Section 18: Closing Processes
+
+### Close Project or Phase (Video 159)
+
+**Q1 - [ORDERING]:** What is the correct sequence of closing activities?
+A) Release team → Capture lessons learned → Transfer deliverables → Write report → Archive
+B) Verify deliverables accepted → Capture final lessons learned → Release team → Transfer deliverables to operations → Write project report → Archive records
+C) Write report → Archive → Release team → Transfer deliverables
+D) Transfer deliverables → Release team → Capture lessons learned → Archive
+**A:** B) The correct order matters — especially capturing lessons learned BEFORE releasing the team. If you release the team first, you have nobody to conduct the lessons learned with. Then transfer deliverables, write the final report, and archive. *(Video 159)*
+
+**Q2 - [SCENARIO]:** Halfway through a project, the organization decides to cancel it. The PM should:
+A) Just stop all work immediately — the project is dead
+B) Still go through the Close Project or Phase process — close accounts, reassign personnel, capture lessons learned, document what was done and what wasn't
+C) Continue working as if nothing happened
+D) Only close out vendor contracts
+**A:** B) Even if a project is prematurely terminated, you MUST go through the closing process. You need to close accounts, reassign team members (they were working yesterday — where do they go now?), capture final lessons learned, document what was spent, get acceptance on completed work, and archive records. *(Video 159)*
+
+**Q3 - [MULTI-SELECT]:** Which of the following are activities performed during Close Project or Phase? Select all that apply.
+A) Confirm delivery and formal acceptance of deliverables
+B) Close project accounts (bank accounts, credit cards opened for the project)
+C) Reassign personnel to other projects
+D) Create the project charter
+**A:** A, B, C) Closing includes: confirming acceptance, closing accounts, reassigning personnel, confirming vendor work acceptance, closing contracts, capturing final lessons learned, writing the final report, transferring deliverables to operations, and archiving records. The project charter is created during initiating, not closing. *(Video 159)*
+
+**Q4 - [MC]:** The final report written during project closing includes:
+A) Only the project budget
+B) A summary of what happened — what went right, what went wrong, variance from baselines — archived with the PMO for future reference
+C) Only the lessons learned
+D) A marketing summary of the product
+**A:** B) The final report summarizes the entire project: successes, failures, variance from baselines (schedule, cost, scope), and overall performance. This report is archived with the Project Management Office so future projects can reference it. *(Video 159)*
+
+**Q5 - [MC]:** What must happen BEFORE you can enter the Close Project or Phase process?
+A) All team members must be released
+B) The final report must be written
+C) Deliverables must be accepted — accepted deliverables are an input, not an output, of this process
+D) All risks must be eliminated
+**A:** C) The accepted deliverable (from Validate Scope) is an INPUT to Close Project or Phase. You cannot close the project until the customer/sponsor has formally accepted the deliverables. Then you transition, report, and archive. *(Video 159)*
 
 ---
 
