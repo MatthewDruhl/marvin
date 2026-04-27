@@ -30,7 +30,7 @@ OUTPUT_DIR="$REPO_ROOT/content/transcripts"
 mkdir -p "$OUTPUT_DIR"
 
 # SEC-2: Derive unique filename from video ID to avoid overwrites
-if [[ "$URL" =~ [?&]v=([a-zA-Z0-9_-]+) ]]; then
+if [[ "$URL" =~ [\?\&]v=([a-zA-Z0-9_-]+) ]]; then
     VIDEO_ID="${BASH_REMATCH[1]}"
 elif [[ "$URL" =~ youtu\.be/([a-zA-Z0-9_-]+) ]]; then
     VIDEO_ID="${BASH_REMATCH[1]}"
