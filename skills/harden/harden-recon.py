@@ -50,8 +50,10 @@ UNSAFE_DESERIALIZE_PATTERN = re.compile(
 )
 
 # Security: shell injection via subprocess with shell=True
+# Used for whole-file scanning (DOTALL) since shell=True often spans lines
 SHELL_INJECTION_PATTERN = re.compile(
-    r"\bsubprocess\.(?:call|run|Popen)\s*\([^)]*shell\s*=\s*True",
+    r"\bsubprocess\.(?:call|run|Popen)\s*\([^)]*?shell\s*=\s*True",
+    re.DOTALL,
 )
 
 # AI: unframed user input flowing into prompts
@@ -416,21 +418,23 @@ def _scan_unsafe_deserialization(path: Path, rel: str) -> list[Candidate]:
 
 
 def _scan_shell_injection(path: Path, rel: str) -> list[Candidate]:
+    """Scan whole file for subprocess calls with shell=True (often spans multiple lines)."""
     candidates: list[Candidate] = []
     try:
         text = path.read_text(encoding="utf-8", errors="ignore")
     except OSError:
         return candidates
-    for i, line in enumerate(text.splitlines(), start=1):
-        if SHELL_INJECTION_PATTERN.search(line):
-            candidates.append(
-                Candidate(
-                    category="shell_injection",
-                    file=rel,
-                    line=i,
-                    detail="subprocess with shell=True",
-                )
+    for m in SHELL_INJECTION_PATTERN.finditer(text):
+        # Find line number from match position
+        line_num = text[:m.start()].count("\n") + 1
+        candidates.append(
+            Candidate(
+                category="shell_injection",
+                file=rel,
+                line=line_num,
+                detail="subprocess with shell=True",
             )
+        )
     return candidates
 
 
