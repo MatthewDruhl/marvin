@@ -3,9 +3,11 @@ harden_state.py — manages harden-state.json (co-located with findings.json)
 
 harden-state.json records audit results and batch filing progress so that
 the notification handler and /harden resume can pick up where the audit left off.
+Stores the audit commit hash to support incremental audits (#212).
 """
 import json
 import os
+import subprocess
 import tempfile
 from datetime import date
 from pathlib import Path
@@ -35,6 +37,44 @@ def read_state(state_path: Path) -> dict | None:
     return json.loads(state_path.read_text())
 
 
+def get_head_commit(target: str | Path) -> str | None:
+    """Return the current HEAD commit hash for a git repo, or None if not a repo."""
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=str(target),
+            capture_output=True,
+            text=True,
+            timeout=10,
+        )
+        if result.returncode == 0:
+            return result.stdout.strip()
+    except (subprocess.TimeoutExpired, FileNotFoundError):
+        pass
+    return None
+
+
+def get_changed_files(target: str | Path, since_commit: str) -> list[str] | None:
+    """Return list of files changed since a commit, or None on error.
+
+    Uses git diff --name-only to find files modified, added, or deleted
+    between the given commit and HEAD.
+    """
+    try:
+        result = subprocess.run(
+            ["git", "diff", "--name-only", f"{since_commit}..HEAD"],
+            cwd=str(target),
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        if result.returncode == 0:
+            return [f for f in result.stdout.strip().splitlines() if f]
+    except (subprocess.TimeoutExpired, FileNotFoundError):
+        pass
+    return None
+
+
 def build_initial_state(
     project: str,
     target: str,
@@ -52,6 +92,7 @@ def build_initial_state(
           "target": target,
           "repo": repo,
           "date": today's date as YYYY-MM-DD,
+          "commit": HEAD commit hash (for incremental audits),
           "grade": grade,
           "token_usage": token_usage,
           "findings_file": findings_file,
@@ -67,6 +108,7 @@ def build_initial_state(
         "target": target,
         "repo": repo,
         "date": date.today().isoformat(),
+        "commit": get_head_commit(target) or "unknown",
         "grade": grade,
         "token_usage": token_usage,
         "findings_file": findings_file,

@@ -252,15 +252,17 @@ class TestJSONOutput:
         result = run_recon(tmp_path)
         output = format_json(result)
         parsed = json.loads(output)
-        assert isinstance(parsed, list)
+        assert isinstance(parsed, dict)
+        assert "candidates" in parsed
+        assert "file_risk_ranking" in parsed
 
     def test_json_structure_has_required_fields(self, tmp_path):
         _write(tmp_path, "config.py", 'api_key = "hardcoded"\n')
         result = run_recon(tmp_path)
         output = format_json(result)
         parsed = json.loads(output)
-        assert len(parsed) >= 1
-        item = parsed[0]
+        assert len(parsed["candidates"]) >= 1
+        item = parsed["candidates"][0]
         assert "category" in item
         assert "file" in item
         assert "line" in item
@@ -271,7 +273,7 @@ class TestJSONOutput:
         result = run_recon(tmp_path)
         output = format_json(result)
         parsed = json.loads(output)
-        for item in parsed:
+        for item in parsed["candidates"]:
             assert item["category"] == item["category"].lower()
 
     def test_json_line_none_for_file_level_candidates(self, tmp_path):
@@ -281,9 +283,21 @@ class TestJSONOutput:
         result = run_recon(tmp_path)
         output = format_json(result)
         parsed = json.loads(output)
-        gap_items = [i for i in parsed if i["category"] == "test_gaps"]
+        gap_items = [i for i in parsed["candidates"] if i["category"] == "test_gaps"]
         assert gap_items
         assert gap_items[0]["line"] is None
+
+    def test_json_risk_ranking_present(self, tmp_path):
+        _write(tmp_path, "config.py", 'api_key = "hardcoded"\n')
+        result = run_recon(tmp_path)
+        output = format_json(result)
+        parsed = json.loads(output)
+        ranking = parsed["file_risk_ranking"]
+        assert len(ranking) >= 1
+        assert "file" in ranking[0]
+        assert "score" in ranking[0]
+        assert "match_count" in ranking[0]
+        assert "categories" in ranking[0]
 
 
 # ---------------------------------------------------------------------------
@@ -304,11 +318,12 @@ class TestEmptyDirectory:
         md = format_markdown(result)
         assert "Candidates found: 0" in md
 
-    def test_json_output_empty_array(self, tmp_path):
+    def test_json_output_empty(self, tmp_path):
         result = run_recon(tmp_path)
         output = format_json(result)
         parsed = json.loads(output)
-        assert parsed == []
+        assert parsed["candidates"] == []
+        assert parsed["file_risk_ranking"] == []
 
 
 # ---------------------------------------------------------------------------
@@ -388,7 +403,8 @@ class TestCLI:
         assert rc == 0
         out = capsys.readouterr().out
         parsed = json.loads(out)
-        assert isinstance(parsed, list)
+        assert isinstance(parsed, dict)
+        assert "candidates" in parsed
 
     def test_output_file_written(self, tmp_path):
         out_file = tmp_path / "candidates.md"
