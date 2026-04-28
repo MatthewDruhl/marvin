@@ -18,6 +18,32 @@ See `SETUP.md` for onboarding and post-clone steps.
 
 ---
 
+## CLAUDE.md vs. SKILL.md vs. Hooks Boundary
+
+**CLAUDE.md owns:**
+- What (policies, rules, file locations, valid values)
+- Always-on context (applies to every conversation)
+- Definitions and constraints (TWC rules, job tracking locations, learning dedup)
+
+**SKILL.md owns:**
+- How (step-by-step procedures, execution order)
+- On-demand workflows (only loaded when skill is invoked)
+- Self-verification checklists
+
+**Hooks own:**
+- Hard rules that must NEVER be violated, regardless of context
+- Binary checks (allowed/blocked, no judgment needed)
+- Guardrails that the model has historically forgotten or violated
+
+**The tests:**
+- If it's a policy or definition → CLAUDE.md
+- If it's a procedure with numbered steps → SKILL.md
+- If it's a rule where violation = damage and no exceptions exist → Hook
+
+**Never duplicate between them.** CLAUDE.md defines the rules, SKILL.md references and executes them, Hooks enforce the non-negotiable ones. If a trim removes procedural steps from CLAUDE.md, they MUST be migrated to the relevant SKILL.md before the trim is committed.
+
+---
+
 ## How MARVIN Works
 
 ### Core Principles
