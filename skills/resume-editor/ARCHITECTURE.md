@@ -11,8 +11,8 @@
 ├── MatthewDruhl.docx                  Base resume (preserves all formatting)
 └── applications/
     └── {Company}/                     Output per company
-        ├── Resume-{PREFIX}-{CO}.docx
-        ├── CoverLetter-{PREFIX}-{CO}.docx
+        ├── {First}_{Last}_resume.docx
+        ├── {First}_{Last}_cover_letter.docx
         ├── tailoring.json             Tailoring input for this application
         └── tailoring-trimmed.json     Post-trim version (if auto-trimmed)
 
@@ -139,7 +139,7 @@ This is the main workflow. Steps 1-3 are Claude (AI), steps 4-5 are resume_build
  └────────────────┬────────────────┘
                   │
                   ▼
-     Resume-MATTHEW-DRUHL-{CO}.docx
+     Matthew_Druhl_resume.docx
 ```
 
 ---
