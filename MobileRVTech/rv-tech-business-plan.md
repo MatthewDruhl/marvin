@@ -124,86 +124,126 @@ Source: Official NRVTA Tool List. R = Required (must bring to class). O = Option
 
 ### Core Tools — Required Across All Tech Courses
 
-| Tool | Status | Notes |
-|---|---|---|
-| Klein CL810 Multimeter | R | AC AND DC amp clamp — do not substitute |
-| 25-Piece Multimeter Leads Kit | R | RVTA, RVTR, RVTW courses |
-| GFCI Tester | R | Core electrical testing |
-| 11-in-1 Screwdriver | R | All courses |
-| Wire Strippers | R | RVTA, RVTR, RVTW |
-| Wire Crimping and Cutting Tool | R | RVTA, RVTR, RVTW |
-| Needle Nose Pliers / Side Cutters | R | All courses |
-| Nut Driver Set — SAE & Metric | R | RVTA, RVTR, RVTW |
-| Cordless Drill (NO impact drills) | R | RVTR 301 specifically — no impact |
-| Headlamp | R | RVTA, RVTR, RVTW |
-| Tool Bucket / Toolbox / Tool Bag | O | Bring something to organize |
-| Allen Wrench Set | O | Recommended for tech courses |
-| Channel Locks | O | Recommended for tech courses |
-| Caulking Gun | O | Recommended for tech courses |
-| Utility Knife | O | Inspector + some tech courses |
-| AC Foil Tape | O | RVTA, RVTE |
-| Digital Probe Thermometer | O | Useful across multiple courses |
-| Anemometer | O | Airflow measurement |
-| Ames Multimeter CM1000A | O | Backup meter |
+| Tool | Status | Est. Cost | Notes |
+|---|---|---|---|
+| Klein CL810 Multimeter | R | $130 | AC AND DC amp clamp — do not substitute |
+| 25-Piece Multimeter Leads Kit | R | $20 | RVTA, RVTR, RVTW courses |
+| GFCI Tester | R | $15 | Core electrical testing (Klein RT210 or similar) |
+| 11-in-1 Screwdriver | R | $18 | All courses (Klein 32500) |
+| Wire Strippers | R | $20 | RVTA, RVTR, RVTW (Klein 11057 or similar) |
+| Wire Crimping and Cutting Tool | R | $25 | RVTA, RVTR, RVTW (Klein 1005SEN or similar) |
+| Needle Nose Pliers / Side Cutters | R | $30 | All courses (pair of Klein pliers) |
+| Nut Driver Set — SAE & Metric | R | $55 | RVTA, RVTR, RVTW (Klein 7-pc SAE + 7-pc Metric) |
+| Cordless Drill (NO impact drills) | R | $130 | RVTR 301 specifically — no impact (Makita/DeWalt mid-range w/ battery) |
+| Headlamp | R | $25 | RVTA, RVTR, RVTW (rechargeable LED) |
+| Tool Bucket / Toolbox / Tool Bag | O | $40 | Bring something to organize |
+| Allen Wrench Set | O | $20 | Recommended for tech courses (SAE + Metric) |
+| Channel Locks | O | $25 | Recommended for tech courses (Channellock 10") |
+| Caulking Gun | O | $10 | Recommended for tech courses |
+| Utility Knife | O | $10 | Inspector + some tech courses |
+| AC Foil Tape | O | $14 | RVTA, RVTE (Nashua 322 or similar) |
+| Digital Probe Thermometer | O | $20 | Useful across multiple courses |
+| Anemometer | O | $30 | Airflow measurement (handheld digital) |
+| Ames Multimeter CM1000A | O | $95 | Backup meter (Harbor Freight) |
 
 ### Inspector Track — Additional Tools
 
-| Tool | Status | Notes |
-|---|---|---|
-| Windows Laptop | R | HomeGauge software installed Day 1 (~$5.90/mo for 3 months) |
-| Large Screen Android or iOS Tablet/Phone | R | Field data entry |
-| Data Transfer Cable / Charger | R | Keep device powered |
-| Propane Leak Test Solution | R | LP system inspection |
-| Metal Oven Thermometer | R | Appliance testing |
-| Propane Leak Test Manometer + Quick Connect Kit | R | Male 1/4" to QC, 1/4" tee, 1/4" barb, shutoff valve, 5' air extension hose |
-| Gas Teflon Tape | R | LP fittings |
-| Hot Skin Test Kit | R | 16/18 gauge wire 50–100 ft + male receptacle grounding unit + cord organizer |
-| DOT Systems Tester — IPA Light Ranger Mutt RV | R | Trailer lighting / brake circuit tester |
-| Two Thermometers (-40F to 80F) | R | Refrigerator and freezer temp verification |
-| RV / Truck Tire Pressure Gauge | R | Tire inspection |
-| Little Giant or Similar Ladder | R | Roof access |
-| Disposable Gloves | R | Standard PPE |
-| Multi-Purpose Butane Stick Lighter (electronic) | R | Appliance ignition testing |
-| Tape Measure | R | Inspector + generator courses |
-| Clipboard | R | Inspector courses |
-| LED Flashlight + Backup Flashlight | R | Crawl spaces, compartments |
-| 7-Way Circuit Tester | O | Trailer connector testing |
-| Lockout/Tagout Device | O | Safety |
-| Knee Pads | O | Floor and roof work |
-| Voltage / Frequency Meter | O | Inspector courses |
-| Yoga Mat | O | Floor work during inspections |
-| 4' Step Ladder or Step Stool | O | Interior height access |
-| 6' x 2' Folding Table | O | Inspector workstation |
-| JG Oil & Coolant Analysis Kits | O | Advanced inspector add-on — diesel chassis fluids |
+| Tool | Status | Est. Cost | Notes |
+|---|---|---|---|
+| Windows Laptop | R | $500 | HomeGauge software installed Day 1 (~$5.90/mo for 3 months); mid-range if you don't already own one |
+| Large Screen Android or iOS Tablet/Phone | R | $0 | Field data entry — assume using existing phone/tablet |
+| Data Transfer Cable / Charger | R | $15 | Keep device powered (USB-C cable + car charger) |
+| Propane Leak Test Solution | R | $8 | LP system inspection (Camco spray bottle) |
+| Metal Oven Thermometer | R | $8 | Appliance testing (stainless steel analog) |
+| Propane Leak Test Manometer + Quick Connect Kit | R | $75 | Male 1/4" to QC, 1/4" tee, 1/4" barb, shutoff valve, 5' air extension hose |
+| Gas Teflon Tape | R | $5 | LP fittings (yellow gas-rated tape) |
+| Hot Skin Test Kit | R | $35 | 16/18 gauge wire 50–100 ft + male receptacle grounding unit + cord organizer (DIY assembly) |
+| DOT Systems Tester — IPA Light Ranger Mutt RV | R | $220 | Trailer lighting / brake circuit tester (IPA 9101) |
+| Two Thermometers (-40F to 80F) | R | $15 | Refrigerator and freezer temp verification (2-pack) |
+| RV / Truck Tire Pressure Gauge | R | $20 | Tire inspection (dual-head digital, 200+ PSI) |
+| Little Giant or Similar Ladder | R | $250 | Roof access (multi-position, 17–22 ft) |
+| Disposable Gloves | R | $15 | Standard PPE (box of 100 nitrile) |
+| Multi-Purpose Butane Stick Lighter (electronic) | R | $10 | Appliance ignition testing |
+| Tape Measure | R | $12 | Inspector + generator courses (25 ft) |
+| Clipboard | R | $5 | Inspector courses |
+| LED Flashlight + Backup Flashlight | R | $35 | Crawl spaces, compartments (2 quality LED lights) |
+| 7-Way Circuit Tester | O | $15 | Trailer connector testing (plug-in LED type) |
+| Lockout/Tagout Device | O | $25 | Safety (basic personal kit) |
+| Knee Pads | O | $30 | Floor and roof work (gel cushion, hard shell) |
+| Voltage / Frequency Meter | O | $30 | Inspector courses (Klein MM325 or similar) |
+| Yoga Mat | O | $25 | Floor work during inspections |
+| 4' Step Ladder or Step Stool | O | $60 | Interior height access |
+| 6' x 2' Folding Table | O | $45 | Inspector workstation (fold-in-half portable) |
+| JG Oil & Coolant Analysis Kits | O | $30 | Advanced inspector add-on — diesel chassis fluids (per test, ~$25–30 each) |
 
 ### Generator Track — Additional Tools (TBD)
 
-| Tool | Status | Notes |
-|---|---|---|
-| Metric & SAE Socket Set | R | Disassembly / reassembly |
-| Crimping Tool Set | R | Wiring harness repair |
-| Feeler Gauge Set | R | Spark plug gap, valve clearance |
-| Torque Screwdriver | R | Precise fastener torque |
-| 1/64" to 1/2" Drill Bit Set | R | Casework drilling |
-| Digital Caliper | O | Precision measurement |
-| De-pin Tools | O | Connector pin removal |
-| Left-Handed Drill Bits | O | Broken bolt extraction |
-| Center Punch | O | Drill starting |
-| Soldering Iron | O | Wiring repair |
-| Torque Wrench | O | Engine assembly work |
+| Tool | Status | Est. Cost | Notes |
+|---|---|---|---|
+| Metric & SAE Socket Set | R | $60 | Disassembly / reassembly (3/8" drive, ~50-pc) |
+| Crimping Tool Set | R | $35 | Wiring harness repair (ratcheting, insulated terminals) |
+| Feeler Gauge Set | R | $12 | Spark plug gap, valve clearance (32-blade dual SAE/metric) |
+| Torque Screwdriver | R | $35 | Precise fastener torque (adjustable 10–70 in-lb) |
+| 1/64" to 1/2" Drill Bit Set | R | $30 | Casework drilling (29-pc HSS or cobalt set) |
+| Digital Caliper | O | $30 | Precision measurement (6" stainless, iGaging or similar) |
+| De-pin Tools | O | $20 | Connector pin removal (basic automotive kit) |
+| Left-Handed Drill Bits | O | $15 | Broken bolt extraction (set with extractors) |
+| Center Punch | O | $10 | Drill starting (automatic spring-loaded) |
+| Soldering Iron | O | $30 | Wiring repair (Weller 30W kit with stand and solder) |
+| Torque Wrench | O | $60 | Engine assembly work (3/8" drive click-type) |
 
 ### Solar Track — Additional Tools
 
-| Tool | Status | Notes |
-|---|---|---|
-| Metric & SAE Socket Set | R | Mounting hardware |
-| Tape Measure | R | Panel layout and wire runs |
-| Crimping Tool Set | R (Adv Solar) | MC4 and ring terminal crimping |
-| Allen Wrench Set | O | Panel mounting hardware |
-| Knee Pads | O | Roof panel installation |
-| Utility Knife | O | Wire management, sealant work |
+| Tool | Status | Est. Cost | Notes |
+|---|---|---|---|
+| Metric & SAE Socket Set | R | $60 | Mounting hardware (same set as Generator track) |
+| Tape Measure | R | $12 | Panel layout and wire runs (same as Inspector track) |
+| Crimping Tool Set | R (Adv Solar) | $40 | MC4 and ring terminal crimping (MC4-specific crimper) |
+| Allen Wrench Set | O | $20 | Panel mounting hardware (same set as Core optional) |
+| Knee Pads | O | $30 | Roof panel installation (same as Inspector optional) |
+| Utility Knife | O | $10 | Wire management, sealant work (same as Core optional) |
 
 Before purchasing, audit what you already own against these lists. Biggest likely gaps: Klein CL810, inspector manometer kit, hot skin test kit components, DOT IPA Light Ranger Mutt tester.
+
+### Tool Cost Summary
+
+Estimated costs based on mid-range retail pricing (Amazon, Home Depot, Klein Tools, etc.) as of mid-2026. Shared tools counted once in Grand Total.
+
+**By Track — Required Tools Only**
+
+| Track | Required Tools Cost | Notes |
+|---|---|---|
+| Core Tools | $468 | 10 required items |
+| Inspector Track (additional) | $1,228 | 17 required items; laptop est. $500 if not owned |
+| Generator Track (additional) | $172 | 5 required items; socket set shared w/ Solar |
+| Solar Track (additional) | $40 | MC4 crimper only; socket set + tape measure shared |
+| **Grand Total — Required** | **$1,908** | Shared items (socket set, tape measure) counted once |
+
+**By Track — Optional Tools Only**
+
+| Track | Optional Tools Cost | Notes |
+|---|---|---|
+| Core Tools | $264 | 9 optional items |
+| Inspector Track (additional) | $260 | 8 optional items; knee pads shared w/ Solar |
+| Generator Track (additional) | $165 | 6 optional items |
+| Solar Track (additional) | $0 | All Solar optionals shared with other tracks |
+| **Grand Total — Optional** | **$689** | Shared items counted once |
+
+**Grand Totals**
+
+| Scenario | Estimated Cost |
+|---|---|
+| Required tools only (all 4 tracks) | **$1,908** |
+| Required + Optional tools (all 4 tracks) | **$2,597** |
+| Phase 1 only — Core Required | **$468** |
+| Phase 1 only — Core Required + Optional | **$732** |
+
+Notes:
+- Windows laptop ($500) is the single biggest line item. If you already own one, subtract $500 from Inspector and Grand Totals.
+- Existing phone/tablet assumed for Inspector field data entry ($0).
+- Socket set, tape measure, knee pads, Allen wrench set, and utility knife appear in multiple tracks but are counted only once in grand totals.
+- Prices reflect mid-range quality (not cheapest, not premium). Actual costs will vary by retailer and sales.
+- Some items (Hot Skin Test Kit, Manometer Kit) are DIY-assembled from components; estimates reflect parts cost.
 
 ---
 
@@ -229,13 +269,14 @@ Payment options: (1) Pay in full, (2) 25% deposit + balance due 30 days before c
 
 ### Lodging — Texan RV Park (on-site at NRVTA, Athens TX)
 
-| Site Type | 1 Week | 5 Weeks | 7 Weeks | 11 Weeks (est.) |
-|---|---|---|---|---|
-| **Standard RV Site** | $282 | **$1,410** | $1,974 | **~$3,100** |
-| Studio Cabin | $640 | $2,850 | $3,990 | ~$7,040 |
-| Tiny Home | $977 | $4,350 | $6,090 | ~$10,747 |
+| Duration | Cost |
+|---|---|
+| 1 Week | $282 |
+| 5 Weeks | **$1,410** |
+| 7 Weeks | $1,974 |
+| 11 Weeks (est.) | **~$3,100** |
 
-Prices are Sunday-Sunday, 7 nights per week. Cabins/Tiny Homes include tax if stay is 31+ days.
+Standard RV site — staying in our own RV. Prices are Sunday-Sunday, 7 nights per week.
 
 ### Startup Cost Summary
 
@@ -245,18 +286,18 @@ Prices are Sunday-Sunday, 7 nights per week. Cabins/Tiny Homes include tax if st
 |---|---|---|
 | NRVTA — Advanced RV Service Technician (Phase 1) | $10,438 | $10,438 |
 | NRVTA — Solar + Generator + Inspector (Phase 2-4) | $19,824 | $19,824 |
-| NRVTA Lodging — Standard RV Site (~11 weeks) | $3,100 | $3,100 |
+| NRVTA Lodging — Standard RV Site (5 wks Phase 1 / ~11 wks all) | $1,410 / $3,100 | $1,410 / $3,100 |
 | Texas LLC Formation + Registered Agent (Year 1) | $350 | $500 |
 | EPA 608 + CETP LP Gas | $300 | $500 |
-| Tools & Equipment (after audit) | TBD | TBD |
+| Tools & Equipment (after audit) | $1,900 | $2,600 |
 | Insurance Year 1 (GL + Garage Keepers + Commercial Auto) | $2,500 | $5,000 |
 | Website + Domain + Business Cards | $200 | $600 |
 | QuickBooks Year 1 | $180 | $420 |
 | CPA Setup + First Year Filing | $300 | $700 |
 | Parts Inventory / Consumables Buffer | $500 | $1,500 |
 | Working Capital Reserve (3 months) | $3,000 | $6,000 |
-| **Total (self-pay, all 4 credentials)** | **~$40,700** | **~$48,600** |
-| **Total (Phase 1 only + business launch)** | **~$21,300** | **~$29,200** |
+| **Total (self-pay, all 4 credentials)** | **~$42,600** | **~$51,200** |
+| **Total (Phase 1 only + business launch)** | **~$21,100** | **~$29,700** |
 
 **Scenario B — VR&E Funded (pending approval)**
 
