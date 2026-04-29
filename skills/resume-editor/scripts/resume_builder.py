@@ -83,7 +83,7 @@ def get_header() -> dict[str, str]:
 def get_filename_prefix() -> str:
     """Build the resume/cover letter filename prefix from resume-data.json.
 
-    e.g. 'Matthew_Druhl' from header.name 'Matthew Druhl'
+    e.g. 'Jane_Doe' from header.name 'Jane Doe'
     """
     header = get_header()
     name = header.get("name", "Resume")
