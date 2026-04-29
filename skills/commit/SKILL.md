@@ -87,7 +87,22 @@ EOF
 )"
 ```
 
-### Step 6: Push (if requested)
+### Step 6: Push and PR
+
+If a new branch was created in Step 0, automatically push and open a PR:
+
+```bash
+git push -u origin <branch-name>
+gh pr create --title "<type>: <short description>" --body "$(cat <<'EOF'
+## Summary
+<1-3 bullet points>
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+EOF
+)"
+```
+
+If already on an existing feature branch, just push:
 ```bash
 git push
 ```
@@ -133,7 +148,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 1. `<type>: <message>`
 2. `<type>: <message>`
 
-{Pushed to origin/main | Ready to push}
+{Pushed to origin/<branch> | PR: <url>}
 ```
 
 ---
