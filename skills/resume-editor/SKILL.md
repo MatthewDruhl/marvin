@@ -2,7 +2,7 @@
 name: resume-editor
 description: |
   Build tailored resumes and cover letters from structured data + formatting template.
-  Four modes: Apply (tailor for a job posting), Match (validate fit), Update (modify data), View (display data).
+  Five modes: Tailor (lightweight, conversational), Apply (full ceremony for cold applications), Match (validate fit), Update (modify data), View (display data).
 license: MIT
 compatibility: marvin
 metadata:
@@ -74,109 +74,110 @@ uv run --with python-docx python3 ~/marvin/skills/resume-editor/scripts/resume_b
 
 ## Commands
 
+### `/resume tailor`
+
+Lightweight, conversational resume tailoring. Use when you already know what to emphasize (recruiter feedback, specific ask, tweaking for a known role). No formal checkpoints — iterative back-and-forth.
+
+#### Flow
+
+1. **Load source material** — Read `platforms.md`, relevant `role-deep-dive-*.json` files, and `resume-data.json`. If a JD or recruiter email is available, read that too.
+2. **Propose changes** — Present what to adjust (summary, bullets, skills) with honest gap analysis. One decision at a time.
+3. **Iterate** — User reviews, pushes back, adjusts. Repeat until satisfied.
+4. **Build** — Write tailoring JSON, run `build --tailoring-file FILE --output-dir DIR`.
+5. **Review** — Show the output, fix any issues.
+
+#### Guardrails (always apply)
+- Never fabricate skills or relabel systems. `platforms.md` banned framings still apply.
+- Every bullet must trace to `resume-data.json` or a deep dive.
+- Run the AI-Tell Checklist before presenting (especially em dashes).
+- Flag honest gaps rather than inventing claims.
+
+#### When to use
+- Recruiter says "add more about X"
+- Tweaking an existing tailoring for a similar role
+- Quick adjustments where the user is steering
+
+---
+
 ### `/resume apply <url>`
 
-Fetch a job posting, tailor the resume, build the .docx + cover letter.
+Full ceremony for cold-applying to a job posting. Formal checkpoints, self-audit with source citations, keyword extraction, cover letter. Use when applying to a new posting without prior context.
+
+#### Pre-flight Load (MANDATORY — ground truth before JD)
+
+Before fetching the job posting, load canonical source material in this order. Do NOT fetch the JD first — JD vocabulary shapes generation and causes fabrication.
+
+1. **`~/Resume/data/platforms.md`** — canonical system definitions and banned framings. The anchor.
+2. **`~/Resume/data/role-deep-dive-*.json`** — interview transcripts for recent roles.
+3. **`~/Resume/data/resume-data.json`** — source of truth for bullets, titles, dates, skills.
+4. **Then** fetch the JD.
 
 #### Checkpoint Flow
-
-**Step 0: Pre-flight Load (MANDATORY — ground truth before JD)**
-
-Before fetching the job posting, load canonical source material into context in this order. Do NOT fetch the JD first — JD vocabulary will shape your baseline understanding of what the user has done, and that's exactly backwards.
-
-1. **`~/Resume/data/platforms.md`** — canonical definitions of the user's built systems and cross-system banned framings. This file is the anchor. If a claim about a system isn't supported here, it's fabricated.
-2. **`~/Resume/data/role-deep-dive-*.json`** — deep dive interview transcripts for the roles that will be tailored (typically the most recent 2-3 roles). These contain the user's actual language, specific accomplishments, and strength ratings.
-3. **`~/Resume/data/resume-data.json`** — source of truth for bullets, titles, dates, skills. Every reworded bullet must trace back to an original here.
-4. **Then** proceed to Step 1 and fetch the JD.
-
-**Why this order matters:** Fetching the JD first lets its vocabulary shape the generation — invented capabilities, composite titles, and relabeled systems follow. Grounding in source material first makes the JD a filter against reality, not a template for invention.
 
 **Step 1: Fetch & Analyze**
 - WebFetch the URL
 - Extract: company, title, job ID, requirements, tech stack, salary, location
-- **Extract 15-20 ATS keywords** from the job description — exact terms and phrases the posting uses (e.g., "Kubernetes", "CI/CD", "cross-functional"). Prefer the posting's exact phrasing over synonyms. Include both required and preferred skills.
-- Save extracted keywords in the tailoring JSON `keywords` field — these drive `auto-trim` scoring and `score` output
-- For each extracted keyword, note whether it maps to something in `platforms.md` / `resume-data.json`. Keywords with no mapping are NOT licenses to invent — they're signals that the user may not be a strong fit for those specific terms.
+- **Extract 15-20 ATS keywords** — exact terms from the posting. Prefer their phrasing over synonyms.
+- Save keywords in the tailoring JSON `keywords` field
+- Map each keyword to `platforms.md` / `resume-data.json`. Unmapped keywords are gaps, not licenses to invent.
 
 **Step 2: Checkpoint 1 — Strategy**
 Present to user:
-- **Extracted keywords** (from Step 1) — confirm or adjust before proceeding
-- Which bullets to include (by tag relevance to extracted keywords)
-- Which skills to feature vs drop
-- Title/summary reframe recommendation
-- Bullets to cut (least relevant by tag score) for 2-page fit
+- Extracted keywords — confirm or adjust
+- Which bullets to include (by tag relevance)
+- Skills to feature vs drop
+- Title/summary reframe
 - Cover letter tone (confident or professional)
 
-Wait for user approval before proceeding.
+Wait for approval.
 
-**Step 3: Generate + Self-audit + Checkpoint 2 — Content Review**
+**Step 3: Generate + Self-audit + Checkpoint 2**
 
-This step has three substeps. The self-audit is MANDATORY — do not skip it, and do not present unaudited content to the user. The user's time is for editing and judgment calls, not for catching fabrications.
+**3a. Generate privately** — summary, bullets, Expertise Includes, skills. Do NOT present yet.
 
-**3a. Generate privately**
-- Write the reworded summary, bullets per role, Expertise Includes list, and skills list
-- Do NOT stream this into the conversation yet
-- Do NOT present to the user yet
+**3b. Self-audit (MANDATORY gate)** — For every sentence, answer: "What source supports this?" Sources must be:
+- A file from pre-flight (`platforms.md`, deep dives, `resume-data.json`)
+- An extracted keyword that legitimately maps to user's data
+- A direct user statement from this conversation
 
-**3b. Self-audit (MANDATORY gate)**
+No source = rewrite or cut. Do not present unsourced claims.
 
-For every generated sentence and every Expertise Includes line, answer: "What specific source supports this claim?" A source must be one of:
-- A file loaded in Step 0 (`platforms.md`, `role-deep-dive-*.json`, `resume-data.json`) — cite the exact section/field/bullet
-- An extracted keyword from the JD that legitimately maps to something in the user's data
-- A direct statement the user made earlier in this conversation
+**Audit trap categories** (see `platforms.md` "Cross-system banned framings"):
+- Title/identity fabrications
+- Invented capabilities
+- System relabeling
+- Overclaiming domain ownership
 
-If any sentence has no source, **rewrite it to match a source or cut it** before presenting. Do not hedge with "approximately" to hide uncertainty. Do not present unsourced claims and hope the user doesn't notice.
+If one fabrication surfaces, assume more exist. Fix all in one pass.
 
-**Audit trap categories** (see `~/Resume/data/platforms.md` "Cross-system banned framings" for the specific list):
-- **Title / identity fabrications** — inventing a composite title to match a JD when the user's actual titles are in `resume-data.json`
-- **Invented capabilities** — adding an Expertise Includes line that doesn't trace to any specific bullet or deep-dive entry
-- **System relabeling** — describing the user's systems using JD vocabulary that doesn't match what the systems actually do
-- **Overclaiming domain ownership** — describing narrow features as broad domain expertise (e.g., a specific validation check ≠ "security engineer")
-
-If the audit surfaces one fabrication, assume there are more. Multiple fabrications in one output are usually the same root-cause mistake expressed multiple ways — fix all instances in one pass, then add the specific trap to `~/Resume/data/platforms.md`.
-
-**3c. Checkpoint 2 — Present audited content with claim→source mapping**
-
-Present to the user with source citations so they can audit the audit. Use this format:
+**3c. Checkpoint 2 — Present with source citations**
 
 ```
 ## Summary
-
-Sentence 1: "<reworded sentence text>"
-  Source: <file path> > <section/field/bullet reference>
-
-Sentence 2: "<reworded sentence text>"
-  Source: <file path> > <section/field/bullet reference>
-
-## Expertise Includes
-
-- <Expertise line 1>
-    Source: <file path> > <section/field/bullet reference>
-- <Expertise line 2>
-    Source: <file path> > <section/field/bullet reference>
+Sentence: "<text>"
+  Source: <file> > <section>
 
 ## Bullets (per role)
-
-<Company> — <Role Title> (<dates>)
-- "<reworded bullet text>"
-    Source: <file path> > <exact bullet location>
+<Company> — <Role> (<dates>)
+- "<text>"
+    Source: <file> > <bullet location>
 ```
 
-Also present:
-- Skills list (grouped by category)
-- Certifications to include
-- Cover letter tone reminder (confident or professional from Checkpoint 1)
-
-Wait for user approval before proceeding. If the user flags a claim, fix it AND check adjacent content for the same error pattern (don't wait to be asked about each location individually).
+Also present: skills list, certifications, cover letter tone. Wait for approval.
 
 **Step 4: Build**
-1. Write the tailoring JSON file to a temp location (keywords from Step 1 are already in the JSON)
-2. Run `auto-trim --tailoring-file FILE --output-dir DIR --keywords KW1,KW2,... --company NAME` using the keywords extracted in Step 1. No manual keyword input needed — pass them from the tailoring JSON `keywords` field.
-3. If auto-trim is not needed (already within page limit), use `build --tailoring-file FILE --output-dir DIR` directly.
-4. Write cover letter body to temp .txt file
-5. Run `cover-letter --company NAME --job-title TITLE --body-file FILE --output-dir DIR`
+1. Write tailoring JSON
+2. Run `auto-trim` with extracted keywords (or `build` if within page limit)
+3. Write cover letter body to temp file
+4. Run `cover-letter --company NAME --job-title TITLE --body-file FILE --output-dir DIR`
 
-**Tailoring file structure:**
+**Step 5: Final Review** — Show content, cover letter summary, file paths.
+
+**Step 6: Optional Post-Build** — Offer STAR+R stories, form answers, LinkedIn outreach (see subcommands below).
+
+**Step 7: Log** — "Ready to apply? I'll log to applications.md + TWC when you confirm."
+
+#### Tailoring file structure
 ```json
 {
   "title": "Generated title for this role",
@@ -218,23 +219,6 @@ Wait for user approval before proceeding. If the user flags a claim, fix it AND 
   ]
 }
 ```
-
-**Step 5: Final Review**
-- Show built resume content
-- Show cover letter summary
-- Show file paths
-
-**Step 6: Optional Post-Build Steps**
-Offer these after the resume and cover letter are built:
-
-- **STAR+R Story Bank** — "Want me to generate interview stories from your role deep dives?" If yes, generate 3-5 STAR+R stories mapped to this JD's requirements (see `/resume stories` below).
-- **Application Form Answers** — "Want me to draft answers for common application questions?" If yes, generate 5 short answers (see `/resume form-answers` below). Only offer when `/resume match` would recommend "Apply."
-- **LinkedIn Outreach** — "Want me to draft a LinkedIn connection message?" If yes, generate a 3-sentence message (see `/resume outreach` below).
-
-**Step 7: Log**
-Ask: "Ready to apply? I'll log to applications.md + TWC when you confirm."
-
-If confirmed, follow the job tracking workflow from CLAUDE.md.
 
 ---
 
@@ -435,7 +419,7 @@ The canonical list of banned framings lives in **`~/Resume/data/platforms.md`** 
 Before finalizing any bullet, check for these patterns and remove them:
 
 **Banned words/phrases:**
-- Em dashes (—). Use periods, commas, or restructure instead.
+- **Em dashes (—). Use periods, commas, or restructure instead. Check EVERY bullet and the summary. This is the #1 most common miss.**
 - "Leveraging", "utilizing", "spearheading", "orchestrating"
 - "Seamless", "seamlessly", "streamlined"
 - "Cross-functional" (say who: "the security team", "Finance", etc.)
@@ -565,7 +549,7 @@ Design page 1 accordingly: contact, summary, last 2-3 roles, and key skills must
 - Role headers: bold title + tab + right-justified bold dates (tab stop at pos 10800)
 - Bullets: ListParagraph style
 - Single-column layout only — multi-column breaks ATS parsing
-- **File naming:** `Resume-FIRSTNAME-LASTNAME-COMPANY.docx` (helps recruiters find the file)
+- **File naming:** `FirstName_LastName_resume.docx` (clean, recruiter-friendly)
 - Submit as .docx (not PDF) for maximum ATS compatibility
 
 ### Company-Tier Tailoring

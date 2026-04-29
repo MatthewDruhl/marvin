@@ -83,11 +83,11 @@ def get_header() -> dict[str, str]:
 def get_filename_prefix() -> str:
     """Build the resume/cover letter filename prefix from resume-data.json.
 
-    e.g. 'MATTHEW-DRUHL' from header.name 'Matthew Druhl'
+    e.g. 'Matthew_Druhl' from header.name 'Matthew Druhl'
     """
     header = get_header()
     name = header.get("name", "Resume")
-    return name.upper().replace(" ", "-")
+    return name.replace(" ", "_")
 
 
 # ---------------------------------------------------------------------------
@@ -752,9 +752,7 @@ def cmd_build(args: argparse.Namespace) -> None:
 
     # Determine output filename
     prefix = get_filename_prefix()
-    company = tailoring.get("experience", [{}])[0].get("company", "Company")
-    company_clean = company.replace(" ", "")
-    output_file = output_dir / f"Resume-{prefix}-{company_clean}.docx"
+    output_file = output_dir / f"{prefix}_resume.docx"
 
     # Open the original resume as our base (preserves all formatting perfectly)
     if not RESUME_PATH.exists():
@@ -1461,8 +1459,7 @@ def cmd_cover_letter(args: argparse.Namespace) -> None:
 
     # Save
     prefix = get_filename_prefix()
-    company_clean = company.replace(" ", "")
-    output_file = output_dir / f"CoverLetter-{prefix}-{company_clean}.docx"
+    output_file = output_dir / f"{prefix}_cover_letter.docx"
     doc.save(str(output_file))
     print(f"Cover letter created: {output_file}")
 
@@ -1747,33 +1744,13 @@ def cmd_auto_trim(args: argparse.Namespace) -> None:
     temp_tailoring_path.unlink(missing_ok=True)
 
     prefix = get_filename_prefix()
-    company = tailoring.get("experience", [{}])[0].get("company", "Company")
-    company_clean = company.replace(" ", "")
-    output_file = output_dir / f"Resume-{prefix}-{company_clean}.docx"
+    output_file = output_dir / f"{prefix}_resume.docx"
 
-    # Rename output file if --company provided
-    company_name = getattr(args, "company", "") or ""
-    glob_pattern = f"Resume-{prefix}-*.docx"
-    if company_name:
-        docx_files = sorted(
-            output_dir.glob(glob_pattern),
-            key=lambda p: p.stat().st_mtime,
-            reverse=True,
-        )
-        if docx_files:
-            output_file = docx_files[0]
-            new_name = output_dir / f"Resume-{prefix}-{company_name.upper().replace(' ', '')}.docx"
-            if output_file != new_name:
-                output_file.rename(new_name)
-                output_file = new_name
-    else:
-        docx_files = sorted(
-            output_dir.glob(glob_pattern),
-            key=lambda p: p.stat().st_mtime,
-            reverse=True,
-        )
-        if docx_files:
-            output_file = docx_files[0]
+    # Find the built file (auto-trim calls cmd_build internally which uses the new naming)
+    glob_pattern = f"{prefix}_resume.docx"
+    built = output_dir / glob_pattern
+    if built.exists():
+        output_file = built
 
     total_bullets = sum(
         len(role.get("bullets", []))
