@@ -11,6 +11,13 @@ Sync new topics from `~/Code/Learning/topics-learned.md` into `state/learning.md
 ### 2. Compare and Identify New Topics
 For each section in `topics-learned.md`, check if the topic already exists in `state/learning.md`.
 
+**Topic Dedup (Issue #35):** Normalize before comparing to prevent duplicates:
+1. Lowercase both strings
+2. Strip whitespace
+3. Remove trailing "s" (basic plural: "List Comprehensions" matches "List Comprehension")
+4. Check if normalized new topic is a substring of an existing topic (or vice versa)
+5. If a near-match is found, skip and note: "skipped (matches existing: [name])"
+
 **Confidence mapping for new topics:**
 - `Issues Needing More Guidance` items → **1/5** (lowest)
 - `Topics Covered` and `Key Concepts Practiced` items → **2/5**

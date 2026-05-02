@@ -240,6 +240,23 @@ During daily briefing, if topics are overdue:
 - Mention: "You have X topics overdue for review. Want a quick quiz?"
 - If 3+ topics overdue for 3+ days, nudge harder
 
+## Confidence and Question Tracking
+
+When updating `state/learning.md` during or after a quiz:
+
+**Confidence column:**
+- Initialize `1/5` for new topics
+- Increase by 1 for every 10 questions answered correctly
+- When level equals `5/5`: inform user to confirm, reduce testing of the topic
+
+**Question column:**
+- Initialize to `0/10` for new topics
+- Reset `0/10` after confidence level change
+- Correct answer: increase by 1
+- Wrong answer: provide validation on correct and incorrect answers. Do not increase count.
+
+**Source verification:** Verify answers against official documentation and `topics-learned.md` examples.
+
 ## Question Types by Confidence Level
 
 ### (1/5) and (2/5)
