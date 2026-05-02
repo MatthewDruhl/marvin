@@ -12,35 +12,14 @@ See `SETUP.md` for onboarding and post-clone steps.
 
 ---
 
-## Slash Command Rules
-
-**When a user types a slash command, execute it immediately.** No pushback, no alternatives — just run it.
-
----
-
 ## CLAUDE.md vs. SKILL.md vs. Hooks Boundary
 
-**CLAUDE.md owns:**
-- What (policies, rules, file locations, valid values)
-- Always-on context (applies to every conversation)
-- Definitions and constraints (TWC rules, job tracking locations, learning dedup)
+Ownership rules are in global `~/.claude/CLAUDE.md` under "CLAUDE.md Standards." Quick tests:
+- Policy or definition → CLAUDE.md
+- Procedure with numbered steps → SKILL.md
+- Rule where violation = damage, no exceptions → Hook
 
-**SKILL.md owns:**
-- How (step-by-step procedures, execution order)
-- On-demand workflows (only loaded when skill is invoked)
-- Self-verification checklists
-
-**Hooks own:**
-- Hard rules that must NEVER be violated, regardless of context
-- Binary checks (allowed/blocked, no judgment needed)
-- Guardrails that the model has historically forgotten or violated
-
-**The tests:**
-- If it's a policy or definition → CLAUDE.md
-- If it's a procedure with numbered steps → SKILL.md
-- If it's a rule where violation = damage and no exceptions exist → Hook
-
-**Never duplicate between them.** CLAUDE.md defines the rules, SKILL.md references and executes them, Hooks enforce the non-negotiable ones. If a trim removes procedural steps from CLAUDE.md, they MUST be migrated to the relevant SKILL.md before the trim is committed.
+**Never duplicate between them.** If a trim removes procedural steps from CLAUDE.md, they MUST be migrated to the relevant SKILL.md before the trim is committed.
 
 ---
 
@@ -143,32 +122,9 @@ See `SETUP.md` for onboarding and post-clone steps.
 
 ## Learning
 
-### Topic Dedup for /learn-sync (Issue #35)
-When syncing topics, normalize before comparing to prevent duplicates:
-1. Lowercase both strings
-2. Strip whitespace
-3. Remove trailing "s" (basic plural: "List Comprehensions" matches "List Comprehension")
-4. Check if normalized new topic is a substring of an existing topic (or vice versa)
-5. If a near-match is found, skip and note: "skipped (matches existing: [name])"
-
-### General
-- verify against official documentation and `topics-learned.md` examples
-- update the topics in `state/learning.md`
-  - Confidence column on Topics table
-    - initialize `1/5` for new topics
-    - increase by 1 for every 10 questions answered correctly
-    - When level equals `5/5`
-      - inform me to confirm
-      - Reduce testing of the topic
-  - Question column on Topics table
-    - initialize to 0/10 for new topics
-    - reset 0/10 after Confidence level change
-    - Correct Answer increase by 1
-    - Wrong Answer provide validation on correct and incorrect answers.  Do not increase count
-
-Quiz question types by confidence level are defined in `skills/quiz/SKILL.md`.
-
----
+- **Topic dedup rules:** `/learn-sync` skill
+- **Confidence/question tracking:** `skills/quiz/SKILL.md`
+- **Question types by confidence level:** `skills/quiz/SKILL.md`
 
 ---
 
