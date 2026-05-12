@@ -22,8 +22,8 @@ Mission: To provide certified, professional, mobile RV maintenance and repair se
 | Phase | Timeframe | Focus |
 |---|---|---|
 | Foundation | Now – Q4 2026 | LLC, EIN, bank account, tool audit, insurance, NRVTA registration |
-| Training Phase 1 | Q1 2027 | 5-week Advanced program — RVTAA Certified credential |
-| Training Phase 2 | Q1–Q2 2027 | Solar + Inspector tracks — 4 total credentials |
+| Training Phase 1 | Q1 2027 | 5-week Advanced program — RVTAA Certified RV Service Technician |
+| Training Phase 2 | Q1–Q2 2027 | 3-week Inspector program — RVTAA Certified RV Inspector |
 | Apprenticeship | Q2–Q3 2027 | Work under an established Master Mobile RV Tech for first summer to gain real-world experience |
 | Full Operation | Q3–Q4 2027 | Independent jobs, full-rate pricing, active marketing |
 
@@ -56,20 +56,20 @@ Tier 2 — Advanced RV Service Technician / Certified (5 weeks / 188 hrs) — PR
 - RVTP 910 — Certified Exam Review Day (8 hrs)
 - Credential: RVTAA Certified RV Service Technician
 
-### Full Training Sequence
+### Training Sequence
 
-| Phase | Courses | Duration | Credential |
-|---|---|---|---|
-| Phase 1 | RVTF 200 + RVTA/RVTE/RVTR/RVTW 301 + RVTP 910 | 5 weeks | RVTAA Certified RV Service Technician |
-| Phase 2 | RVTS 301 — Solar Power | 1 week | Solar Technician |
-| Phase 2 | RVTS 302 — Advanced Solar | 1 week | Advanced Solar Technician |
-| Phase 3? | RVTG 301 — Generators | 1 week | Generator Technician (TBD) |
-| Phase 3? | RVTG 302 — Advanced Generators | 1 week | Advanced Generator Technician (TBD) |
-| Phase 4 | INSP 201 — Principles of RV Inspection | 1 week | Toward RVTAA Inspector Credential |
-| Phase 4 | INSP 301 — Advanced RV Inspector | 1 week | RVTAA Certified RV Inspector |
-| Total | | ~11 weeks | 4 credentials |
+| Phase     | Courses                                       | Duration     | Credential                            |
+| --------- | --------------------------------------------- | ------------ | ------------------------------------- |
+| Phase 1   | RVTF 200 + RVTA/RVTE/RVTR/RVTW 301 + RVTP 910 | 5 weeks      | RVTAA Certified RV Service Technician |
+| Phase 2   | INSP 201 — Principles of RV Inspection        | 1 week       | Toward RVTAA Inspector Credential     |
+| Phase 2   | INSP 301 — Advanced RV Inspector              | 1 week       | RVTAA Certified RV Inspector          |
+| **Total** |                                               | **~7 weeks** | **2 credentials**                     |
 
-Consider batching Phases 2–4 back-to-back in Athens, TX — one extended stay to walk out with all credentials. Call admissions to plan the optimal block schedule.
+Batch Phase 1 and Phase 2 back-to-back in Athens, TX to minimize travel. Call admissions to confirm whether RVTF 200 can be waived for the Inspector program (already completed in Phase 1). If not, add 1 week (8 weeks total).
+
+### Future Training (post-launch, as demand warrants)
+
+Solar (RVTS 301/302) and Generator (RVTG 301/302) certifications can be added later. Aqua-Hot OEM training is another high-value add-on. See `research-aqua-hot-training.md`.
 
 ### Additional Certifications
 
@@ -96,12 +96,11 @@ Consider batching Phases 2–4 back-to-back in Athens, TX — one extended stay 
 
 ### Insurance
 
-Do not take any paying jobs until General Liability and Garage Keepers coverage is in place.
+Do not take any paying jobs until General Liability coverage is in place.
 
 | Policy | Cost Estimate | Notes |
 |---|---|---|
 | General Liability ($1M) | $500–$1,500/yr | Required by most campgrounds to operate on site |
-| Garage Keepers / Care Custody Control | $400–$1,000/yr | Covers damage to customer's RV while in your care |
 | Commercial Auto | $1,200–$2,400/yr | Personal policy will NOT cover business use |
 | Tools & Equipment Floater | $200–$500/yr | Covers loss or damage to your tool loadout |
 | Pollution / Completed Operations | Ask your agent | LP gas liability after job completion |
@@ -176,72 +175,40 @@ Source: Official NRVTA Tool List. R = Required (must bring to class). O = Option
 | 6' x 2' Folding Table | O | $45 | Inspector workstation (fold-in-half portable) |
 | JG Oil & Coolant Analysis Kits | O | $30 | Advanced inspector add-on — diesel chassis fluids (per test, ~$25–30 each) |
 
-### Generator Track — Additional Tools (TBD)
-
-| Tool | Status | Est. Cost | Notes |
-|---|---|---|---|
-| Metric & SAE Socket Set | R | $60 | Disassembly / reassembly (3/8" drive, ~50-pc) |
-| Crimping Tool Set | R | $35 | Wiring harness repair (ratcheting, insulated terminals) |
-| Feeler Gauge Set | R | $12 | Spark plug gap, valve clearance (32-blade dual SAE/metric) |
-| Torque Screwdriver | R | $35 | Precise fastener torque (adjustable 10–70 in-lb) |
-| 1/64" to 1/2" Drill Bit Set | R | $30 | Casework drilling (29-pc HSS or cobalt set) |
-| Digital Caliper | O | $30 | Precision measurement (6" stainless, iGaging or similar) |
-| De-pin Tools | O | $20 | Connector pin removal (basic automotive kit) |
-| Left-Handed Drill Bits | O | $15 | Broken bolt extraction (set with extractors) |
-| Center Punch | O | $10 | Drill starting (automatic spring-loaded) |
-| Soldering Iron | O | $30 | Wiring repair (Weller 30W kit with stand and solder) |
-| Torque Wrench | O | $60 | Engine assembly work (3/8" drive click-type) |
-
-### Solar Track — Additional Tools
-
-| Tool | Status | Est. Cost | Notes |
-|---|---|---|---|
-| Metric & SAE Socket Set | R | $60 | Mounting hardware (same set as Generator track) |
-| Tape Measure | R | $12 | Panel layout and wire runs (same as Inspector track) |
-| Crimping Tool Set | R (Adv Solar) | $40 | MC4 and ring terminal crimping (MC4-specific crimper) |
-| Allen Wrench Set | O | $20 | Panel mounting hardware (same set as Core optional) |
-| Knee Pads | O | $30 | Roof panel installation (same as Inspector optional) |
-| Utility Knife | O | $10 | Wire management, sealant work (same as Core optional) |
-
 Before purchasing, audit what you already own against these lists. Biggest likely gaps: Klein CL810, inspector manometer kit, hot skin test kit components, DOT IPA Light Ranger Mutt tester.
 
 ### Tool Cost Summary
 
-Estimated costs based on mid-range retail pricing (Amazon, Home Depot, Klein Tools, etc.) as of mid-2026. Shared tools counted once in Grand Total.
+Estimated costs based on mid-range retail pricing (Amazon, Home Depot, Klein Tools, etc.) as of mid-2026.
 
-**By Track — Required Tools Only**
+**Required Tools**
 
 | Track | Required Tools Cost | Notes |
 |---|---|---|
-| Core Tools | $468 | 10 required items |
-| Inspector Track (additional) | $1,228 | 17 required items; laptop est. $500 if not owned |
-| Generator Track (additional) | $172 | 5 required items; socket set shared w/ Solar |
-| Solar Track (additional) | $40 | MC4 crimper only; socket set + tape measure shared |
-| **Grand Total — Required** | **$1,908** | Shared items (socket set, tape measure) counted once |
+| Core Tools (Phase 1) | $468 | 10 required items |
+| Inspector Track (Phase 2, additional) | $1,228 | 17 required items; laptop est. $500 if not owned |
+| **Total — Required** | **$1,696** | 27 required items |
 
-**By Track — Optional Tools Only**
+**Optional Tools**
 
 | Track | Optional Tools Cost | Notes |
 |---|---|---|
-| Core Tools | $264 | 9 optional items |
-| Inspector Track (additional) | $260 | 8 optional items; knee pads shared w/ Solar |
-| Generator Track (additional) | $165 | 6 optional items |
-| Solar Track (additional) | $0 | All Solar optionals shared with other tracks |
-| **Grand Total — Optional** | **$689** | Shared items counted once |
+| Core Tools (Phase 1) | $264 | 9 optional items |
+| Inspector Track (Phase 2, additional) | $260 | 8 optional items |
+| **Total — Optional** | **$524** | 17 optional items |
 
 **Grand Totals**
 
 | Scenario | Estimated Cost |
 |---|---|
-| Required tools only (all 4 tracks) | **$1,908** |
-| Required + Optional tools (all 4 tracks) | **$2,597** |
+| Required tools only | **$1,696** |
+| Required + Optional tools | **$2,220** |
 | Phase 1 only — Core Required | **$468** |
 | Phase 1 only — Core Required + Optional | **$732** |
 
 Notes:
 - Windows laptop ($500) is the single biggest line item. If you already own one, subtract $500 from Inspector and Grand Totals.
 - Existing phone/tablet assumed for Inspector field data entry ($0).
-- Socket set, tape measure, knee pads, Allen wrench set, and utility knife appear in multiple tracks but are counted only once in grand totals.
 - Prices reflect mid-range quality (not cheapest, not premium). Actual costs will vary by retailer and sales.
 - Some items (Hot Skin Test Kit, Manometer Kit) are DIY-assembled from components; estimates reflect parts cost.
 
@@ -256,12 +223,10 @@ Notes:
 | Program | Duration | Tuition | Reg Fee | Books/Supplies | Exam Fee | Total |
 |---|---|---|---|---|---|---|
 | Advanced RV Service Technician | 5 weeks / 188 hrs | $9,214 | $100 | $825 | $299 | **$10,438** |
-| Advanced Solar Technician | 3 weeks / 118 hrs | $5,714 | $100 | $495 | $299 | $6,608 |
-| Advanced Generator Technician | 3 weeks / 118 hrs | $5,714 | $100 | $495 | $299 | $6,608 |
-| RV Inspector | 3 weeks / 118 hrs | $5,714 | $100 | $495 | $299 | $6,608 |
-| **All 4 programs** | **~11 weeks** | | | | | **$30,262** |
+| RV Inspector | 3 weeks / 118 hrs | $5,714 | $100 | $495 | $299 | **$6,608** |
+| **Both programs** | **~8 weeks** | | | | | **$17,046** |
 
-Note: Add-on programs each include RVTF 200 (RV Fundamentals) as Week 1 since they are standalone programs. If taking subjects individually after completing the Advanced program, costs may differ — confirm with admissions.
+Note: The Inspector program includes RVTF 200 (RV Fundamentals) as Week 1 since it is a standalone program. If taking it after completing the Advanced program, costs may differ — confirm with admissions.
 
 Discounts: Military discount = 10% off tuition for RVTF 200 / INSP 200 only (not full programs). Minimal savings.
 
@@ -272,9 +237,8 @@ Payment options: (1) Pay in full, (2) 25% deposit + balance due 30 days before c
 | Duration | Cost |
 |---|---|
 | 1 Week | $282 |
-| 5 Weeks | **$1,410** |
-| 7 Weeks | $1,974 |
-| 11 Weeks (est.) | **~$3,100** |
+| 5 Weeks (Phase 1) | **$1,410** |
+| 7 Weeks (Phase 1 + 2) | **~$1,974** |
 
 Standard RV site — staying in our own RV. Prices are Sunday-Sunday, 7 nights per week.
 
@@ -285,19 +249,18 @@ Standard RV site — staying in our own RV. Prices are Sunday-Sunday, 7 nights p
 | Category | Low | High |
 |---|---|---|
 | NRVTA — Advanced RV Service Technician (Phase 1) | $10,438 | $10,438 |
-| NRVTA — Solar + Generator + Inspector (Phase 2-4) | $19,824 | $19,824 |
-| NRVTA Lodging — Standard RV Site (5 wks Phase 1 / ~11 wks all) | $1,410 / $3,100 | $1,410 / $3,100 |
+| NRVTA — RV Inspector (Phase 2) | $6,608 | $6,608 |
+| NRVTA Lodging — Standard RV Site (~7 weeks) | $1,974 | $1,974 |
 | Texas LLC Formation + Registered Agent (Year 1) | $350 | $500 |
 | EPA 608 + CETP LP Gas | $300 | $500 |
-| Tools & Equipment (after audit) | $1,900 | $2,600 |
-| Insurance Year 1 (GL + Garage Keepers + Commercial Auto) | $2,500 | $5,000 |
+| Tools & Equipment (after audit) | $1,696 | $2,220 |
+| Insurance Year 1 (GL + Commercial Auto + Tools Floater) | $1,900 | $4,400 |
 | Website + Domain + Business Cards | $200 | $600 |
 | QuickBooks Year 1 | $180 | $420 |
 | CPA Setup + First Year Filing | $300 | $700 |
 | Parts Inventory / Consumables Buffer | $500 | $1,500 |
 | Working Capital Reserve (3 months) | $3,000 | $6,000 |
-| **Total (self-pay, all 4 credentials)** | **~$42,600** | **~$51,200** |
-| **Total (Phase 1 only + business launch)** | **~$21,100** | **~$29,700** |
+| **Total (self-pay, 2 credentials)** | **~$27,400** | **~$35,800** |
 
 **Scenario B — VR&E Funded (pending approval)**
 
@@ -327,10 +290,8 @@ Partial coverage is also possible — VR&E may fund training but not all busines
 | Roof Seal / Caulking (full) | $300–$600 | High demand, recurring |
 | Appliance Repair | $150–$400 | Parts extra |
 | Slide-Out Service | $150–$500 | Lubrication, alignment, motor |
-| Solar System Install / Service | $500–$2,000+ | Premium ticket, growing segment |
 | Winterization | $100–$200 | High volume in fall |
 | De-Winterization | $100–$175 | High volume in spring |
-| Annual Inspection Package | $200–$350 | Revisit recurring revenue models in Year 2 |
 
 ---
 
@@ -404,7 +365,6 @@ Partial coverage is also possible — VR&E may fund training but not all busines
 
 - Get quotes from 3+ carriers for General Liability
 - Secure GL policy ($1M minimum)
-- Secure Garage Keepers / CCC coverage
 - Secure Commercial Auto insurance
 - Add Tools & Equipment floater
 - Create standard work order / service agreement template
@@ -413,10 +373,6 @@ Partial coverage is also possible — VR&E may fund training but not all busines
 
 - Complete 5-week Advanced RV Service Technician program at NRVTA
 - Pass RVTAA Certified RV Service Technician exam
-- Complete RVTS 301 — Solar Power
-- Complete RVTS 302 — Advanced Solar
-- Complete RVTG 301 — Generators (TBD?)
-- Complete RVTG 302 — Advanced Generators (TBD?)
 - Complete INSP 201 — Principles of RV Inspection
 - Complete INSP 301 — Advanced RV Inspector
 - Pass EPA 608 exam
