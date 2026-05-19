@@ -149,8 +149,8 @@ Source: Official NRVTA Tool List. R = Required (must bring to class). O = Option
 
 | Tool | Status | Est. Cost | Notes |
 |---|---|---|---|
-| Windows Laptop | R | $500 | HomeGauge software installed Day 1 (~$5.90/mo for 3 months); mid-range if you don't already own one |
-| Large Screen Android or iOS Tablet/Phone | R | $0 | Field data entry — assume using existing phone/tablet |
+| Parallels + Windows License (Mac) | R | $240 | HomeGauge Report Writer is Windows-only; runs on Mac via Parallels (~$100) + Windows license (~$140). Skip if you already have Parallels. |
+| iPad (HomeGauge Companion app) | R | $0 | Field data collection on-site — using existing iPad |
 | Data Transfer Cable / Charger | R | $15 | Keep device powered (USB-C cable + car charger) |
 | Propane Leak Test Solution | R | $8 | LP system inspection (Camco spray bottle) |
 | Metal Oven Thermometer | R | $8 | Appliance testing (stainless steel analog) |
@@ -186,8 +186,8 @@ Estimated costs based on mid-range retail pricing (Amazon, Home Depot, Klein Too
 | Track | Required Tools Cost | Notes |
 |---|---|---|
 | Core Tools (Phase 1) | $468 | 10 required items |
-| Inspector Track (Phase 2, additional) | $1,228 | 17 required items; laptop est. $500 if not owned |
-| **Total — Required** | **$1,696** | 27 required items |
+| Inspector Track (Phase 2, additional) | $968 | 17 required items; Parallels + Windows license instead of dedicated laptop |
+| **Total — Required** | **$1,436** | 27 required items |
 
 **Optional Tools**
 
@@ -201,14 +201,14 @@ Estimated costs based on mid-range retail pricing (Amazon, Home Depot, Klein Too
 
 | Scenario | Estimated Cost |
 |---|---|
-| Required tools only | **$1,696** |
-| Required + Optional tools | **$2,220** |
+| Required tools only | **$1,436** |
+| Required + Optional tools | **$1,960** |
 | Phase 1 only — Core Required | **$468** |
 | Phase 1 only — Core Required + Optional | **$732** |
 
 Notes:
-- Windows laptop ($500) is the single biggest line item. If you already own one, subtract $500 from Inspector and Grand Totals.
-- Existing phone/tablet assumed for Inspector field data entry ($0).
+- Parallels + Windows license ($240) replaces dedicated Windows laptop. If you already have Parallels, subtract ~$100 from Inspector and Grand Totals.
+- Existing iPad used for HomeGauge Companion app (field data collection).
 - Prices reflect mid-range quality (not cheapest, not premium). Actual costs will vary by retailer and sales.
 - Some items (Hot Skin Test Kit, Manometer Kit) are DIY-assembled from components; estimates reflect parts cost.
 
@@ -253,14 +253,14 @@ Standard RV site — staying in our own RV. Prices are Sunday-Sunday, 7 nights p
 | NRVTA Lodging — Standard RV Site (~7 weeks) | $1,974 | $1,974 |
 | Texas LLC Formation + Registered Agent (Year 1) | $350 | $500 |
 | EPA 608 + CETP LP Gas | $300 | $500 |
-| Tools & Equipment (after audit) | $1,696 | $2,220 |
+| Tools & Equipment (after audit) | $1,436 | $1,960 |
 | Insurance Year 1 (GL + Commercial Auto + Tools Floater) | $1,900 | $4,400 |
 | Website + Domain + Business Cards | $200 | $600 |
 | QuickBooks Year 1 | $180 | $420 |
 | CPA Setup + First Year Filing | $300 | $700 |
 | Parts Inventory / Consumables Buffer | $500 | $1,500 |
 | Working Capital Reserve (3 months) | $3,000 | $6,000 |
-| **Total (self-pay, 2 credentials)** | **~$27,400** | **~$35,800** |
+| **Total (self-pay, 2 credentials)** | **~$27,100** | **~$35,500** |
 
 **Scenario B — VR&E Funded (pending approval)**
 
