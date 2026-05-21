@@ -51,10 +51,11 @@ Read these files (parallelize where possible):
 **Purpose:** Surface job responses and new contacts proactively.
 
 1. Read `~/Resume/jobs/applications.md` for active company names
-2. Search Gmail for emails from those companies (last 7 days)
-3. Search Gmail for job keywords: "application", "interview", "thank you for applying" (last 7 days)
-4. **Act, don't ask:** If results include unrecognized senders or new job-related emails, pull the full content immediately. Do NOT ask permission to read — just read and include findings in the briefing.
-5. For email threads (introductions, recruiter outreach), pull the full thread to understand context
+2. If active apps exist, search Gmail for emails from those companies (last 7 days)
+3. If active apps exist, search Gmail for job keywords: "application", "interview", "thank you for applying" (last 7 days)
+4. **Always run (even with 0 active apps):** Search Gmail for recruiter outreach (last 7 days). Use keywords: "opportunity", "role", "position", "candidate". Cross-reference senders against `~/Resume/jobs/contacts.md`. Flag emails from new senders.
+5. **Act, don't ask:** If results include unrecognized senders or new job-related emails, pull the full content immediately. Do NOT ask permission to read — just read and include findings in the briefing.
+6. For email threads (introductions, recruiter outreach), pull the full thread to understand context
 
 ### Step 4: Cross-Reference and Quality Check
 
@@ -77,7 +78,7 @@ Analyze the state files already loaded in Step 2. Do NOT re-read them. The goal 
 
 **Session gap:**
 - Calculate the gap between today and the most recent session log.
-- If gap > 1 day, read up to 3 intervening session logs and prepare a "Since last session" summary.
+- If gap > 1 day, note the gap in the briefing (e.g., "3 days since last session"). Context is already in `current.md` Recent Updates.
 - If resuming today's session, skip this.
 
 **Confidence tracking:**
@@ -111,9 +112,6 @@ Compile everything into a concise briefing:
 
 ```
 {Greeting based on time of day}. It's {Day}, {Date}, {Time} {TZ}.
-
-**Since Last Session:** (omit if resuming today or gap <= 1 day)
-- {Summary of activity from intervening session logs}
 
 **Today's Schedule:**
 - {Time} — {Event} (in X minutes / X hours ago)
