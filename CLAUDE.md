@@ -12,6 +12,12 @@ See `SETUP.md` for onboarding and post-clone steps.
 
 ---
 
+## Privacy and Data Boundaries
+
+Follow `PRIVACY.md` before importing files, adding integrations, committing generated artifacts, or working with personal/client data. Live state, sessions, credentials, raw transcripts, private client files, and personal job-search records must stay out of git unless they are explicitly sanitized examples.
+
+---
+
 ## CLAUDE.md vs. SKILL.md vs. Hooks Boundary
 
 Ownership rules are in global `~/.claude/CLAUDE.md` under "CLAUDE.md Standards." Quick tests:
@@ -50,15 +56,18 @@ Ownership rules are in global `~/.claude/CLAUDE.md` under "CLAUDE.md Standards."
 ## Job Tracking Workflow
 
 **Location:** Job tracking data is split between two locations:
-- **`~/Resume/jobs/`** — Applications, opportunities, interview prep, job research/analysis (personal data, outside repo)
-- **`content/jobs/`** — Contacts, search strings, TWC reporting (in repo, TWC CSVs gitignored)
+- **`~/Resume/jobs/`** — Applications, opportunities, interview prep, job research/analysis, live contacts, and follow-ups (personal data, outside repo)
+- **`content/jobs/`** — Sanitized examples, search strings, TWC scripts, and TWC documentation (in repo; generated TWC CSVs/PDFs gitignored)
+
+See `PRIVACY.md` for the full data-boundary rules. When in doubt, put live job-search data under `~/Resume/jobs/`, not `content/jobs/`.
 
 ### Files
 - **`~/Resume/jobs/applications.md`** - Active applications with current status
 - **`~/Resume/jobs/opportunities.md`** - Roles to research and apply for
 - **`~/Resume/jobs/interview-prep/`** - Question banks, mock sessions, company research
 - **`~/Resume/jobs/research/`** - Job posting analysis, match scores, salary research, job search session outputs (personal evaluation data — never in repo)
-- **`content/jobs/contacts.md`** - Recruiter conversations and follow-ups
+- **`~/Resume/jobs/contacts.md`** - Recruiter conversations and follow-ups (personal data — never in repo)
+- **`content/jobs/contacts.md.example`** - Sanitized contact example only
 - **`content/jobs/TWC/`** - Official Texas Workforce Commission reporting (CSV format, gitignored)
   - `job-application-tracker.csv` - Master list of all applications
   - `work-search-week-*.csv` - Weekly activity logs (4 required per week)
@@ -160,8 +169,8 @@ marvin/
 ├── reports/               # Weekly reports and analytics
 ├── content/               # Your content and notes
 │   ├── learning-journal.md # Code learning journal (TIL entries)
-│   └── jobs/              # Job tracking (contacts, search strings, TWC)
-│       └── contacts.md    # Networking CRM
+│   └── jobs/              # Sanitized examples, search strings, TWC tooling
+│       └── contacts.md.example # Sanitized networking CRM example
 ├── skills/                # Capabilities (add your own!)
 └── .claude/               # Slash commands
 ```

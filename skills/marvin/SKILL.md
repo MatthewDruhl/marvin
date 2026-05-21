@@ -64,7 +64,7 @@ Before presenting the briefing, check for contradictions and resolutions across 
 2. **Today's events:** Check `state/current.md` for anything scheduled today. Use TIME from Step 1 to mark each as upcoming (include time remaining) or already passed.
 3. **TWC week status:** Determine current TWC week (Sun-Sat). Check if a CSV exists for this week. Count activities logged. Calculate days remaining.
 4. **Stale open threads:** Flag any open thread in `state/current.md` that hasn't been updated in 7+ days.
-5. **New contacts from Gmail:** If Gmail surfaced a new job contact not in `content/jobs/contacts.md`, prepare to add them.
+5. **New contacts from Gmail:** If Gmail surfaced a new job contact not in `~/Resume/jobs/contacts.md`, prepare to add them.
 
 ### Step 5: Sync Learning Tracker
 
@@ -81,7 +81,7 @@ Before presenting the briefing, check for contradictions and resolutions across 
 Act on findings from Steps 3-5 before presenting the briefing:
 
 1. **TWC CSV:** If a new week started and no CSV exists, create it
-2. **Contacts:** If Gmail found a new job contact, add to `content/jobs/contacts.md`
+2. **Contacts:** If Gmail found a new job contact, add to `~/Resume/jobs/contacts.md`
 3. **TWC logging:** If Gmail found a networking event or job search activity, log to current week's TWC CSV
 4. **Follow-up resolution:** If Step 4 resolved any follow-ups, write the updates to `todos.md`
 

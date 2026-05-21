@@ -10,6 +10,8 @@ Two-way Slack bot that pipes messages to Claude Code CLI via Socket Mode.
 
 ## Security Notes
 
+Review `../../PRIVACY.md` before changing bot permissions, adding new Slack surfaces, or committing examples copied from real conversations.
+
 ### System Prompt (defense-in-depth)
 
 The `SYSTEM_PROMPT` constant instructs Claude to stay in role, refuse credential
