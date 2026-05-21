@@ -29,6 +29,8 @@ Manage professional contacts and follow-up reminders.
 
 ## Process
 
+Contact data is personal data. Store live contacts in `~/Resume/jobs/contacts.md`; keep only sanitized examples in the MARVIN repo.
+
 ### Step 1: Identify Action
 - **Add contact** → Create new entry in contacts.md
 - **Log interaction** → Update interaction history and last interaction date
@@ -37,7 +39,7 @@ Manage professional contacts and follow-up reminders.
 - **Update relationship** → Change relationship strength level
 
 ### Step 2: Read Current State
-Read `content/jobs/contacts.md` for current contact data.
+Read `~/Resume/jobs/contacts.md` for current contact data.
 
 ### Step 3: Execute Action
 
@@ -56,7 +58,7 @@ For logging interaction:
 5. Set next follow-up date
 
 ### Step 4: Update File
-Write changes to `content/jobs/contacts.md`.
+Write changes to `~/Resume/jobs/contacts.md`.
 
 ### Step 5: Confirm
 ```

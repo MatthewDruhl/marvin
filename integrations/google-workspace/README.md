@@ -100,6 +100,8 @@ The `workspace-mcp` package has a known bug with Google Tasks. The setup script 
 
 ## Danger Zone
 
+Review `../../PRIVACY.md` before changing scopes, adding tools, importing exports, or committing examples from Gmail/Calendar data.
+
 | Action | Risk Level | Who's Affected |
 |--------|------------|----------------|
 | Send emails | **High** | Recipients see it immediately |

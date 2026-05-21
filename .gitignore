@@ -1,4 +1,6 @@
 .env
+.env.*
+!.env.example
 .DS_Store
 tmp/
 *.pdf
@@ -19,6 +21,16 @@ learning/
 g_client_secret.json
 client_secret_*.json
 .google-workspace-credentials/
+credentials/
+token.json
+tokens.json
+*token*.json
+*secret*.json
+*.pem
+*.key
+*.p12
+*.sqlite
+*.sqlite3
 
 # Truck (moved to ~/Documents/truck/)
 2021Ram3500/
@@ -40,6 +52,18 @@ content/jobs/opportunities.md
 content/jobs/contacts.md
 content/jobs/interview-prep
 content/jobs/research
+
+# Private client/freelance imports and generated artifacts
+content/private/
+content/freelance/**/meetingTranscripts/
+content/freelance/**/*original.txt
+content/freelance/**/*.xlsx
+content/freelance/**/*.xls
+content/freelance/**/*.docx
+content/freelance/**/*.pdf
+content/freelance/**/exports/
+content/freelance/**/raw/
+content/freelance/**/private/
 
 __pycache__/
 .venv/
