@@ -56,7 +56,34 @@ Read these files (parallelize where possible):
 4. **Act, don't ask:** If results include unrecognized senders or new job-related emails, pull the full content immediately. Do NOT ask permission to read — just read and include findings in the briefing.
 5. For email threads (introductions, recruiter outreach), pull the full thread to understand context
 
-### Step 4: Cross-Reference and Resolve
+### Step 4: Quality Loop (Staleness and Contradiction Scan)
+
+Run this BEFORE cross-referencing. The goal is to catch state drift so the briefing reflects reality, not stale files.
+
+**4a. State file freshness:**
+- Read the `Last updated:` line in `state/current.md`, `state/goals.md`, and `state/todos.md`.
+- Flag any file not updated in the last 3 days. Include the age in the briefing alerts (e.g., "current.md last updated 9 days ago").
+
+**4b. Past deadlines still written in future tense:**
+- Scan `state/current.md` for dates, meetings, or deadlines that have already passed.
+- Flag anything phrased as upcoming that is actually in the past (e.g., "Target: videos done by May 15" when today is May 21).
+- Include these in the briefing so the user can decide whether to update or close.
+
+**4c. Contradictions across state files:**
+- Compare priority descriptions in `current.md` against `goals.md` and `todos.md`. Flag mismatches (e.g., different rejection counts, different project statuses, duplicate numbering).
+- Check if any todo marked active has been resolved per session logs or `current.md`.
+
+**4d. Session gap analysis:**
+- Calculate the gap between today and the most recent session log.
+- If gap > 1 day, read intervening session logs and prepare a "Since last session" summary for the briefing.
+- If resuming today's session, skip this.
+
+**4e. Confidence tracking:**
+- Track which checks succeeded and which could not complete (e.g., Gmail MCP unavailable, file missing, no active applications to check).
+- Carry this forward. In the briefing, distinguish confirmed facts from skipped checks.
+- Format: "(skipped: Gmail MCP not available)" or "(skipped: no active applications)".
+
+### Step 5: Cross-Reference and Resolve
 
 Before presenting the briefing, check for contradictions and resolutions across loaded state:
 
@@ -66,7 +93,7 @@ Before presenting the briefing, check for contradictions and resolutions across 
 4. **Stale open threads:** Flag any open thread in `state/current.md` that hasn't been updated in 7+ days.
 5. **New contacts from Gmail:** If Gmail surfaced a new job contact not in `~/Resume/jobs/contacts.md`, prepare to add them.
 
-### Step 5: Sync Learning Tracker
+### Step 6: Sync Learning Tracker
 
 1. Read `~/Code/Learning/topics-learned.md`
 2. Compare against `state/learning.md` using dedup rules from CLAUDE.md
@@ -76,9 +103,9 @@ Before presenting the briefing, check for contradictions and resolutions across 
 4. If new topics were added, include a summary in the briefing
 5. If nothing new, skip silently
 
-### Step 6: Take Proactive Actions
+### Step 7: Take Proactive Actions
 
-Act on findings from Steps 3-5 before presenting the briefing:
+Act on findings from Steps 3-6 before presenting the briefing:
 
 1. **TWC CSV:** If a new week started and no CSV exists, create it
 2. **Contacts:** If Gmail found a new job contact, add to `~/Resume/jobs/contacts.md`
@@ -87,12 +114,15 @@ Act on findings from Steps 3-5 before presenting the briefing:
 
 Note what actions were taken — include in the briefing.
 
-### Step 7: Present Briefing
+### Step 8: Present Briefing
 
 Compile everything into a concise briefing:
 
 ```
 {Greeting based on time of day}. It's {Day}, {Date}, {Time} {TZ}.
+
+**Since Last Session:** (omit if resuming today or gap <= 1 day)
+- {Summary of activity from intervening session logs}
 
 **Today's Schedule:**
 - {Time} — {Event} (in X minutes / X hours ago)
@@ -104,38 +134,47 @@ Compile everything into a concise briefing:
 
 **Job Search:**
 - Active apps: {count} ({names})
-- Gmail: {new responses or "no new responses"}
+- Gmail: {new responses or "no new responses"} {or "(skipped: reason)"}
 - TWC: {X}/4 for the week (due Saturday)
 
 **Alerts:**
+- {Stale state files with age: "current.md last updated 9 days ago"}
+- {Past deadlines still phrased as future}
+- {Contradictions between state files}
 - {Follow-ups resolved}
 - {New contacts added}
-- {Deadlines approaching}
-- {Stale threads}
+- {Stale open threads}
 
 **Learning:**
 - {New topics synced, or omit if none}
+
+**Skipped Checks:** (omit if all checks completed)
+- {Check name}: {reason it was skipped}
 
 How can I help today?
 ```
 
 **Formatting rules:**
 - If resuming today's session, acknowledge what was already covered
-- Omit empty sections (no "Alerts: none")
+- Omit empty sections (no "Alerts: none", no "Skipped Checks" if all passed)
 - Keep concise — offer details on request
 - Use time-relative language ("in 53 minutes", "2 hours ago") for today's events
+- Alerts should be actionable. "current.md is 9 days stale" is useful. "Everything looks fine" is not.
 
 ## Self-Verification Checklist
 
 After completing all steps but BEFORE presenting the briefing, verify:
 
 - [ ] Did I use full datetime (day, date, time, timezone)?
+- [ ] Did I check `Last updated` dates on all state files and flag any > 3 days old?
+- [ ] Did I scan for past deadlines still written in future tense?
+- [ ] Did I check for contradictions across current.md, goals.md, and todos.md?
 - [ ] Did I check todos.md follow-ups for anything already resolved?
 - [ ] Did I pull full content for any new job-related emails (not just flag them)?
 - [ ] Did I mark today's events as upcoming/passed based on current time?
 - [ ] Did I check/create the TWC weekly CSV?
 - [ ] Did I avoid asking permission for reads that are part of the startup flow?
-- [ ] Did I cross-reference state files against each other for contradictions?
+- [ ] Did I note which checks were skipped and why?
 
 If any check fails, fix it before presenting.
 
@@ -143,3 +182,4 @@ If any check fails, fix it before presenting.
 
 *Skill created: 2026-01-22*
 *Rewritten: 2026-04-28 — restored intelligence lost in CLAUDE.md V2 trim, added cross-referencing, Gmail, proactive actions, and self-verification*
+*Updated: 2026-05-21 — added quality loop (staleness detection, contradiction scan, session gap analysis, confidence tracking), removed duplicate .claude/commands/marvin.md (#249)*
