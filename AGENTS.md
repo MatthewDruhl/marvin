@@ -1,75 +1,54 @@
 # MARVIN for Codex
 
-This repository is the MARVIN workspace: a file-backed AI chief of staff. MARVIN's behavior is defined by project context, state files, session logs, and reusable skills.
+Codex adapter for this repository. Keep this file thin: route behavior to canonical skills and shared context files.
 
-Use this file as the Codex entry point. Keep the existing Claude setup intact unless the user explicitly asks to change it.
+## Required Branch Rule
 
-## Operating Model
+GitHub issues with `[codex-marvin-option-1]` in the title must be implemented only on branch:
+`codex-marvin-option-1`.
 
-- Treat `CLAUDE.md` as project context and MARVIN's canonical workspace overview.
-- Treat `.claude/commands/` and `.claude/hooks/` as Claude-specific adapter files.
-- Do not edit `.claude/` files for Codex compatibility unless the user asks.
-- Follow the relevant `skills/*/SKILL.md` file for repeatable workflows.
-- Preserve MARVIN's existing state/session conventions.
-- Prefer additive Codex support over changing existing Claude behavior.
+## Startup Path
 
-## Important Paths
+For "start MARVIN", `/marvin`, or equivalent startup requests:
 
-- `CLAUDE.md` - MARVIN overview, workspace rules, and job-tracking context.
-- `state/` - Current priorities, goals, todos, habits, learning, and decisions.
-- `sessions/` - Daily session logs.
-- `content/` - Notes, research, job-search content, and project material.
-- `reports/` - Analytics and periodic reports.
-- `skills/` - Reusable assistant workflows.
-- `integrations/` - External integrations, including Slack and Google Workspace notes.
+1. Run from repo root: `python scripts/marvin_start.py`
+2. Use startup packet output as source context.
+3. Then follow `skills/marvin/SKILL.md` for briefing behavior and proactive actions.
 
-## Command Map
+Shared runtime-neutral context referenced by startup:
 
-When the user invokes a MARVIN-style command, use the matching skill or command instructions:
+- `context/user-profile.md`
+- `context/marvin-operating-rules.md`
 
-- `/marvin` - Read `skills/marvin/SKILL.md`.
-- `/update` - Read `skills/update/SKILL.md`.
-- `/end` - Read `skills/end/SKILL.md`; if it delegates to `.claude/commands/end.md`, read that file as reference only.
-- `/resume` - Read `skills/resume-editor/SKILL.md`.
-- `/update-resume` - Read `skills/update-resume/SKILL.md`.
-- `/harden` - Read `skills/harden/SKILL.md`.
-- `/quiz` - Read `skills/quiz/SKILL.md`.
-- `/pmp-quiz` - Read `skills/pmp-quiz/SKILL.md`.
-- `/pmp-intake` - Read `skills/pmp-intake/SKILL.md`.
-- `/youtube-transcribe` - Read `skills/youtube-transcribe/SKILL.md`.
-- `/commit` - Read `skills/commit/SKILL.md`.
+## Command Routing
 
-If a command exists only under `.claude/commands/`, read that command file as a reference and adapt it to Codex's available tools.
+- `/marvin` -> `skills/marvin/SKILL.md`
+- `/update` -> `skills/update/SKILL.md`
+- `/end` -> `skills/end/SKILL.md`
+- `/resume` -> `skills/resume-editor/SKILL.md`
+- `/update-resume` -> `skills/update-resume/SKILL.md`
+- `/harden` -> `skills/harden/SKILL.md`
+- `/quiz` -> `skills/quiz/SKILL.md`
+- `/pmp-quiz` -> `skills/pmp-quiz/SKILL.md`
+- `/pmp-intake` -> `skills/pmp-intake/SKILL.md`
+- `/youtube-transcribe` -> `skills/youtube-transcribe/SKILL.md`
+- `/commit` -> `skills/commit/SKILL.md`
 
-## Session Behavior
+If a command exists only in `.claude/commands/`, treat that file as reference and adapt it to Codex tools.
 
-When operating as MARVIN:
+## Workflow Change Order
 
-1. Establish the current date and time with `date`.
-2. Load the relevant state files before giving briefings or making planning claims.
-3. Append durable updates to `sessions/YYYY-MM-DD.md` when a workflow calls for it.
-4. Update `state/current.md`, `state/todos.md`, or related state files only when material state changes.
-5. Keep user-facing briefings concise and action-oriented.
+When MARVIN behavior changes:
 
-For Slack-originated sessions, follow the existing convention in `integrations/slack/bot.py`: write logs to `sessions/slack-YYYY-MM-DD.md` rather than the normal daily session file.
+1. Update canonical `skills/*/SKILL.md` first.
+2. Update shared context files in `context/*` for runtime-neutral changes.
+3. Update runtime adapters only if routing changed:
+   - Claude adapter files: `.claude/commands/*`
+   - Codex adapter file: `AGENTS.md`
+4. Add a session log note when behavior changes materially.
 
-## Safety Boundaries
+## Adapter Constraints
 
-- Never reveal or print secrets from `.env`, OAuth credential stores, tokens, or private key material.
-- Do not send emails, post external messages, or modify calendar events without explicit confirmation.
-- Do not delete files or perform destructive git operations unless the user explicitly asks.
-- Respect existing uncommitted changes. Do not revert user work.
-- Keep personal evaluation data that belongs under `~/Resume/jobs/research/` out of this repository.
-
-## Codex Compatibility Notes
-
-This file is intentionally additive. Codex support should not require changes to:
-
-- `CLAUDE.md`
-- `.claude/commands/*`
-- `.claude/hooks/*`
-- Existing skill files
-- `integrations/slack/bot.py`
-- `.mcp.json`
-
-If deeper Codex support is requested later, prefer adding adapter documentation or a separate Codex runner before modifying the Claude-specific runtime.
+- Preserve existing Claude behavior.
+- Do not edit `.claude/` files unless explicitly required by a separate issue.
+- Keep external-action safeguards: confirm before send/post/calendar-modify/delete/publish.
