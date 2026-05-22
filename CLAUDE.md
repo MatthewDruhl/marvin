@@ -27,6 +27,8 @@ Ownership rules are in global `~/.claude/CLAUDE.md` under "CLAUDE.md Standards."
 
 **Never duplicate between them.** If a trim removes procedural steps from CLAUDE.md, they MUST be migrated to the relevant SKILL.md before the trim is committed.
 
+**Never delete `.claude/commands/*.md` files.** These are the only way Claude Code registers slash commands. Each command file is a trigger that points to a `skills/` procedure. Without the command file, the slash command silently stops working. The `skills/` SKILL.md alone is not enough.
+
 ---
 
 ## How MARVIN Works
