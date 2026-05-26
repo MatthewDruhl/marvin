@@ -1,0 +1,83 @@
+# K-Planter Meeting Notes — 2026-05-26
+
+**Attendees:** Matt, Jana, Brian
+**Duration:** ~1h 50m
+**Location:** On-site (Williamsburg, IA)
+
+---
+
+## Key Findings
+
+**Current State:** Everything is manual. Jana is overwhelmed trying to run the business, oversee Romanian staff, and fix constant errors. Staff in Romania can't reliably perform basic tasks like Excel markup calculations.
+
+**Systems in use:**
+- **Kinze Europe Webshop** -- ordering/quoting (Kinze-owned, K-Planter has an account)
+- **SAGA** -- Romanian state accounting software (legally required)
+- **FGO** -- invoicing program (~$25/mo, connected to SAGA, but unreliable)
+
+**Translation is a non-issue.** They work in English product names throughout. Only a few category words (wholegoods, spare parts) need Romanian. Not the complexity originally assumed.
+
+---
+
+## Pain Points Identified
+
+1. **Inventory reconciliation** -- SAGA shows incorrect inventory because staff doesn't properly record goods in/out. End-of-month reconciliation is a nightmare.
+2. **Partial order invoicing** -- Kinze ships partial orders. Jana has to manually calculate what's been paid (25% advance) vs. what's being delivered (e.g., 30% of order) vs. what's still owed.
+3. **No source of truth** -- Can't trust SAGA numbers. Can't trust FGO numbers. No independent system to verify against.
+4. **Order status visibility** -- Customers ask every other day what's ready. Jana manually compares Kinze's packing lists against proforma orders.
+5. **Superseded part numbers** -- Old codes from manuals don't match Webshop codes. Manual lookup each time.
+6. **99-item upload limit** -- Webshop only accepts 99 items per CSV upload. Orders of 500+ items get split into multiple batches manually.
+7. **Accounting company errors** -- Three different firms over the years, all making mistakes. Bank statements not reconciled properly. Advances not connected to orders.
+8. **Currency exchange** -- Buy in EUR, SAGA records in RON. Exchange rate applied at different times causes discrepancies. Unrealized gains taxed as profit.
+
+---
+
+## Agreed Direction
+
+Matt recommended against building custom inventory or invoicing software. Off-the-shelf is better for those core functions. Matt's value-add is the integration/automation layer between systems.
+
+### Next Steps
+
+**Brian/Jana (evaluate QuickBooks):**
+- Free trial, load 100 part numbers, run a mini business for a month
+- Check: inventory tracking, invoicing, per-customer markup, Romanian language/currency support
+- Check: purchase orders vs. invoices, multi-currency, exchange rate handling
+- Get from Nick (accounting): General ledger/chart of accounts from SAGA
+- Get from Nick/Erica: Documentation of what they're actually doing between FGO and SAGA
+
+**Matt (when QuickBooks evaluation is done):**
+- Build automation to move data between systems
+- File-trigger automation (drop CSV on Google Drive, triggers QuickBooks upload)
+- API integrations between QuickBooks and SAGA
+- Monthly reconciliation reports (QuickBooks vs. SAGA, audit trail with transaction IDs)
+- Exchange rate lookups (historical rates for invoice date, not upload date)
+- Partial order math (advance payments, partial deliveries, remaining balance)
+
+---
+
+## Engagement Scope Update
+
+Matt positioned himself as **integration/automation**, not building inventory or invoicing from scratch. Phased approach: get QuickBooks working first, then wire up the automation pieces. Custom code for the "steps between," not rebuilding what's already available off the shelf.
+
+**Key quotes from Matt:**
+- "I can build whatever you want me to build, but I also want to make sure you guys spend money nicely."
+- "I would probably highly suggest researching other invoicing software... because that's their business."
+- "I can help facilitate some of the automation pieces... you drop a file on the folder and loads it up."
+
+---
+
+## Business Context
+
+- ~2,000-3,000 part numbers in stock
+- ~30-40 active customers
+- 1 delivery per week inbound, 2-3 outbound
+- Standard markup is 5%, with per-customer discounts (e.g., 3% for customers who bought planters)
+- FGO shows 8,800 pieces in stock (not trusted)
+- Romanian e-invoice law requires all invoices submitted online within 2-3 days
+- Brian and Jana leaving Thursday. Matt staying an extra week.
+
+---
+
+## Timeline
+
+Ball is in Brian/Jana's court to evaluate QuickBooks before Matt starts building.
