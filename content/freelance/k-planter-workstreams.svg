@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 1580">
+  <style>
+    text { font-family: "Inter", "Helvetica Neue", Arial, sans-serif; }
+    .title { font-size: 18px; font-weight: 700; fill: #1e293b; }
+    .subtitle { font-size: 12px; fill: #64748b; }
+    .node-text { font-size: 11px; fill: #1e293b; font-weight: 500; }
+    .node-sub { font-size: 9.5px; fill: #64748b; }
+    .ds-text { font-size: 11px; fill: #7c2d12; font-weight: 600; }
+    .ds-sub { font-size: 9px; fill: #9a3412; }
+    .section-label { font-size: 11px; font-weight: 700; fill: #475569; letter-spacing: 1px; }
+    .legend-text { font-size: 10px; fill: #475569; }
+    .step-num { font-size: 9px; fill: #ffffff; font-weight: 700; }
+  </style>
+  <defs>
+    <marker id="arrow-gray" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3.5 L 0 7 z" fill="#16a34a"/>
+    </marker>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+  <rect width="960" height="1580" fill="#f8fafc" rx="0"/>
+  <text x="480" y="36" text-anchor="middle" class="title">K-Planter Business Workstreams</text>
+  <text x="480" y="52" text-anchor="middle" class="subtitle">Wholegoods &amp; Repair Parts — Shared Flow (DRY)</text>
+  <rect x="40" y="68" width="880" height="80" rx="8" fill="none" stroke="#fed7aa" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="56" y="85" class="section-label" fill="#c2410c">DATA SOURCES</text>
+  <rect x="60" y="96" width="260" height="42" rx="6" fill="#fff7ed" stroke="#fb923c" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="190" y="113" text-anchor="middle" class="ds-text">Kinze Europe Webshop</text>
+  <text x="190" y="128" text-anchor="middle" class="ds-sub">List price, DNET, item import</text>
+  <rect x="350" y="96" width="260" height="42" rx="6" fill="#fff7ed" stroke="#fb923c" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="480" y="113" text-anchor="middle" class="ds-text">SAGA</text>
+  <text x="480" y="128" text-anchor="middle" class="ds-sub">Romanian accounting software</text>
+  <rect x="640" y="96" width="260" height="42" rx="6" fill="#fff7ed" stroke="#fb923c" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="770" y="113" text-anchor="middle" class="ds-text">FGO</text>
+  <text x="770" y="128" text-anchor="middle" class="ds-sub">Pro-forma &amp; final invoices</text>
+  <rect x="60" y="180" width="360" height="155" rx="8" fill="none" stroke="#bfdbfe" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="76" y="197" class="section-label" fill="#2563eb">WHOLEGOODS ONLY</text>
+  <rect x="80" y="212" width="320" height="46" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.2" filter="url(#shadow)"/>
+  <circle cx="96" cy="235" r="9" fill="#3b82f6"/>
+  <text x="96" y="239" text-anchor="middle" class="step-num">1</text>
+  <text x="112" y="231" class="node-text">Configure planter &amp; options</text>
+  <text x="112" y="246" class="node-sub">Manual process with customer</text>
+  <rect x="80" y="270" width="320" height="46" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.2" filter="url(#shadow)"/>
+  <circle cx="96" cy="293" r="9" fill="#3b82f6"/>
+  <text x="96" y="297" text-anchor="middle" class="step-num">2</text>
+  <text x="112" y="297" class="node-text">Enter configuration into Webshop</text>
+  <line x1="240" y1="258" x2="240" y2="270" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <rect x="500" y="180" width="420" height="215" rx="8" fill="none" stroke="#bbf7d0" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="516" y="197" class="section-label" fill="#16a34a">REPAIR PARTS ONLY</text>
+  <rect x="520" y="212" width="380" height="46" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.2" filter="url(#shadow)"/>
+  <circle cx="536" cy="235" r="9" fill="#16a34a"/>
+  <text x="536" y="239" text-anchor="middle" class="step-num">1</text>
+  <text x="552" y="231" class="node-text">Receive part list from customer</text>
+  <text x="552" y="246" class="node-sub">Often handwritten, manual Excel entry</text>
+  <rect x="520" y="270" width="380" height="46" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.2" filter="url(#shadow)"/>
+  <circle cx="536" cy="293" r="9" fill="#16a34a"/>
+  <text x="536" y="297" text-anchor="middle" class="step-num">2</text>
+  <text x="552" y="297" class="node-text">Enter item number &amp; quantity into Webshop</text>
+  <rect x="520" y="328" width="380" height="46" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.2" filter="url(#shadow)"/>
+  <circle cx="536" cy="351" r="9" fill="#16a34a"/>
+  <text x="536" y="355" text-anchor="middle" class="step-num">3</text>
+  <text x="552" y="347" class="node-text">Replace old codes with new codes</text>
+  <text x="552" y="362" class="node-sub">From Kinze Europe substitution list</text>
+  <line x1="710" y1="258" x2="710" y2="270" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <line x1="710" y1="316" x2="710" y2="328" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <line x1="240" y1="316" x2="240" y2="420" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <line x1="710" y1="374" x2="710" y2="420" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <path d="M 480,420 L 500,436 L 480,452 L 460,436 Z" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="240" y1="420" x2="460" y2="436" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="710" y1="420" x2="500" y2="436" stroke="#94a3b8" stroke-width="1.5"/>
+  <rect x="160" y="452" width="640" height="668" rx="8" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="176" y="469" class="section-label">SHARED FLOW</text>
+  <line x1="480" y1="452" x2="480" y2="480" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <rect x="200" y="480" width="560" height="46" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" filter="url(#shadow)"/>
+  <circle cx="220" cy="503" r="9" fill="#64748b"/>
+  <text x="220" y="507" text-anchor="middle" class="step-num">1</text>
+  <text x="238" y="499" class="node-text">Review list price &amp; DNET</text>
+  <text x="238" y="514" class="node-sub">Determine quote price for customer</text>
+  <line x1="480" y1="526" x2="480" y2="538" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <rect x="200" y="538" width="560" height="46" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" filter="url(#shadow)"/>
+  <circle cx="220" cy="561" r="9" fill="#64748b"/>
+  <text x="220" y="565" text-anchor="middle" class="step-num">2</text>
+  <text x="238" y="557" class="node-text">Create quotation for customer</text>
+  <text x="238" y="572" class="node-sub">Manual document creation</text>
+  <line x1="480" y1="584" x2="480" y2="596" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <rect x="200" y="596" width="560" height="46" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" filter="url(#shadow)"/>
+  <circle cx="220" cy="619" r="9" fill="#64748b"/>
+  <text x="220" y="623" text-anchor="middle" class="step-num">3</text>
+  <text x="238" y="615" class="node-text">Convert Webshop quote</text>
+  <text x="238" y="630" class="node-sub">To confirmed order</text>
+  <line x1="480" y1="642" x2="480" y2="654" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <rect x="200" y="654" width="560" height="46" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" filter="url(#shadow)"/>
+  <circle cx="220" cy="677" r="9" fill="#64748b"/>
+  <text x="220" y="681" text-anchor="middle" class="step-num">4</text>
+  <text x="238" y="673" class="node-text">Receive pro-forma invoice</text>
+  <text x="238" y="688" class="node-sub">From Kinze Europe</text>
+  <line x1="480" y1="700" x2="480" y2="712" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <rect x="200" y="712" width="560" height="46" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" filter="url(#shadow)"/>
+  <circle cx="220" cy="735" r="9" fill="#64748b"/>
+  <text x="220" y="739" text-anchor="middle" class="step-num">5</text>
+  <text x="238" y="731" class="node-text">Create pro-forma invoice</text>
+  <text x="238" y="746" class="node-sub">For customer</text>
+  <line x1="480" y1="758" x2="480" y2="770" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <rect x="200" y="770" width="560" height="46" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" filter="url(#shadow)"/>
+  <circle cx="220" cy="793" r="9" fill="#64748b"/>
+  <text x="220" y="797" text-anchor="middle" class="step-num">6</text>
+  <text x="238" y="789" class="node-text">Receive down payment</text>
+  <text x="238" y="804" class="node-sub">15% - 25% of order value</text>
+  <line x1="480" y1="816" x2="480" y2="828" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <rect x="200" y="828" width="560" height="46" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" filter="url(#shadow)"/>
+  <circle cx="220" cy="851" r="9" fill="#64748b"/>
+  <text x="220" y="855" text-anchor="middle" class="step-num">7</text>
+  <text x="238" y="847" class="node-text">Submit down payment</text>
+  <text x="238" y="862" class="node-sub">To Kinze Europe</text>
+  <line x1="480" y1="874" x2="480" y2="886" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <rect x="200" y="886" width="560" height="46" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" filter="url(#shadow)"/>
+  <circle cx="220" cy="909" r="9" fill="#64748b"/>
+  <text x="220" y="913" text-anchor="middle" class="step-num">8</text>
+  <text x="238" y="905" class="node-text">Receive payment in full</text>
+  <text x="238" y="920" class="node-sub">From customer</text>
+  <line x1="480" y1="932" x2="480" y2="944" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <rect x="200" y="944" width="560" height="46" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" filter="url(#shadow)"/>
+  <circle cx="220" cy="967" r="9" fill="#64748b"/>
+  <text x="220" y="971" text-anchor="middle" class="step-num">9</text>
+  <text x="238" y="963" class="node-text">Prepare shipping documentation</text>
+  <text x="238" y="978" class="node-sub">Based on Kinze Europe docs</text>
+  <line x1="480" y1="990" x2="480" y2="1002" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <rect x="200" y="1002" width="560" height="46" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" filter="url(#shadow)"/>
+  <circle cx="220" cy="1025" r="9" fill="#64748b"/>
+  <text x="220" y="1029" text-anchor="middle" class="step-num">10</text>
+  <text x="238" y="1021" class="node-text">Receive goods into inventory</text>
+  <text x="238" y="1036" class="node-sub">K-Planter warehouse</text>
+  <line x1="480" y1="1048" x2="480" y2="1060" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <rect x="200" y="1060" width="560" height="46" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2" filter="url(#shadow)"/>
+  <circle cx="220" cy="1083" r="9" fill="#64748b"/>
+  <text x="220" y="1087" text-anchor="middle" class="step-num">11</text>
+  <text x="238" y="1079" class="node-text">Create final invoice on delivery</text>
+  <text x="238" y="1094" class="node-sub">Remove from K-Planter inventory</text>
+  <line x1="480" y1="1106" x2="480" y2="1154" stroke="#94a3b8" stroke-width="1.5"/>
+  <path d="M 480,1138 L 500,1154 L 480,1170 L 460,1154 Z" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="460" y1="1154" x2="240" y2="1190" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="500" y1="1154" x2="710" y2="1190" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="240" y1="1190" x2="240" y2="1200" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <rect x="80" y="1200" width="320" height="46" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="240" y="1220" text-anchor="middle" class="node-text">Create UIT code</text>
+  <text x="240" y="1234" text-anchor="middle" class="node-sub">RO e-transport system for goods entering/exiting Romania</text>
+  <line x1="710" y1="1190" x2="710" y2="1200" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <rect x="520" y="1200" width="380" height="46" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.2" filter="url(#shadow)"/>
+  <text x="710" y="1220" text-anchor="middle" class="node-text">Create packing list / delivery note</text>
+  <text x="710" y="1234" text-anchor="middle" class="node-sub">With HS code and weight information</text>
+  <rect x="240" y="1270" width="480" height="70" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="260" y="1287" class="section-label">LEGEND</text>
+  <rect x="260" y="1296" width="14" height="14" rx="3" fill="#eff6ff" stroke="#3b82f6" stroke-width="1"/>
+  <text x="280" y="1307" class="legend-text">Wholegoods only</text>
+  <rect x="400" y="1296" width="14" height="14" rx="3" fill="#f0fdf4" stroke="#16a34a" stroke-width="1"/>
+  <text x="420" y="1307" class="legend-text">Repair Parts only</text>
+  <rect x="550" y="1296" width="14" height="14" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+  <text x="570" y="1307" class="legend-text">Shared flow</text>
+  <rect x="260" y="1316" width="14" height="14" rx="3" fill="#fff7ed" stroke="#fb923c" stroke-width="1"/>
+  <text x="280" y="1327" class="legend-text">Data sources</text>
+  <path d="M 408,1316 L 418,1323 L 408,1330 L 398,1323 Z" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+  <text x="424" y="1327" class="legend-text">Merge / Diverge point</text>
+</svg>
