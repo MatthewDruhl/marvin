@@ -80,7 +80,7 @@ Still needed:
 ## Next Steps
 
 - [ ] Meet with Brian and Jana (5/26) to learn full scope
-- [ ] Clarify client/billing relationship (direct, through Kinze, through Ryan?)
+- [ ] Clarify client/billing relationship (direct)
 - [ ] Document pain points and time costs
 - [ ] Deliver discovery assessment with recommended solution and pricing
 - [ ] Get written agreement before starting build phase
