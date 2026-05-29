@@ -46,7 +46,17 @@ Append to `sessions/{TODAY}.md`:
 
 If file doesn't exist, create with header: `# Session Log: {TODAY}`
 
-### Step 3: Update State (if needed)
+### Step 3: Refresh Project Registry
+Check `state/projects.md` for any project that was discussed or worked on
+since the last update/session start. For each:
+1. `cd {path} && git branch --show-current` — update current branch
+2. `cd {path} && gh pr list --state open` — update open PRs count
+3. `cd {path} && gh issue list --state open` — update open issues count
+4. Update any Notes field if project state changed (new PR, branch switch, etc.)
+
+Skip projects that weren't touched. Skip freelance subdirectories (no repo).
+
+### Step 4: Update State (if needed)
 Only update `state/current.md` if something actually changed:
 - New open thread
 - Completed item
@@ -55,7 +65,7 @@ Only update `state/current.md` if something actually changed:
 
 Skip if nothing material changed.
 
-### Step 4: Confirm (minimal)
+### Step 5: Confirm (minimal)
 One line: "Checkpointed: {brief description}"
 
 No summary. No "next actions" list. Just confirm the save.

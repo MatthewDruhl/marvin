@@ -43,19 +43,31 @@ Read these files (parallelize where possible):
 2. `state/goals.md` — Goals and progress tracking
 3. `state/todos.md` — Active todos and follow-ups
 4. `state/habits.md` — Habit streaks
-5. `sessions/{TODAY}.md` — If exists, we're resuming today's session
-6. If no today file, read the most recent file in `sessions/` for continuity
+5. `state/projects.md` — Project registry (repos, branches, PRs, issues)
+6. `sessions/{TODAY}.md` — If exists, we're resuming today's session
+7. If no today file, read the most recent file in `sessions/` for continuity
 
 ### Step 3: Check Gmail
 
-**Purpose:** Surface job responses and new contacts proactively.
+**Purpose:** Surface job responses, freelance/business communications, and new contacts proactively.
 
+#### 3a: Active contacts and clients
+1. Read `state/current.md` Active Priorities for freelance client names and key contacts (e.g., Ryan, Bryan, Jana, Doug, Bob, Michael Bond)
+2. Search Gmail for emails from each active freelance/business contact by name (last 7 days)
+3. Pull full content for any new emails from these contacts
+
+#### 3b: Job search
 1. Read `~/Resume/jobs/applications.md` for active company names
 2. If active apps exist, search Gmail for emails from those companies (last 7 days)
 3. If active apps exist, search Gmail for job keywords: "application", "interview", "thank you for applying" (last 7 days)
-4. **Always run (even with 0 active apps):** Search Gmail for recruiter outreach (last 7 days). Use keywords: "opportunity", "role", "position", "candidate". Cross-reference senders against `~/Resume/jobs/contacts.md`. Flag emails from new senders.
-5. **Act, don't ask:** If results include unrecognized senders or new job-related emails, pull the full content immediately. Do NOT ask permission to read — just read and include findings in the briefing.
-6. For email threads (introductions, recruiter outreach), pull the full thread to understand context
+
+#### 3c: Recruiter outreach
+1. **Always run (even with 0 active apps):** Search Gmail for recruiter outreach (last 7 days). Use keywords: "opportunity", "role", "position", "candidate". Cross-reference senders against `~/Resume/jobs/contacts.md`. Flag emails from new senders.
+2. **Always run:** Search spam for job-related emails (last 7 days)
+
+#### 3d: Act on findings
+1. **Act, don't ask:** If results include unrecognized senders or new job-related emails, pull the full content immediately. Do NOT ask permission to read — just read and include findings in the briefing.
+2. For email threads (introductions, recruiter outreach), pull the full thread to understand context
 
 ### Step 4: Cross-Reference and Quality Check
 

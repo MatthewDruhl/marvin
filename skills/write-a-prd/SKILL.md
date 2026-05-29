@@ -1,67 +1,199 @@
 ---
-description: Create a PRD through user interview, codebase exploration, and module design, then submit as a GitHub issue. Use when user wants to write a PRD, create a product requirements document, or plan a new feature.
+name: write-a-prd
+description: |
+  Create a PRD through user interview, codebase exploration, and module design,
+  then submit as a GitHub issue. Use when user wants to write a PRD, create a
+  product requirements document, or plan a new feature.
+license: MIT
+compatibility: marvin
+metadata:
+  marvin-category: development
+  user-invocable: true
+  slash-command: /write-a-prd
+  model: default
+  proactive: false
 ---
 
-This skill will be invoked when the user wants to create a PRD. You may skip steps if you don't consider them necessary.
+# Write a PRD
 
-Ask the user for a long, detailed description of the problem they want to solve and any potential ideas for solutions.
+Create a structured PRD with testable acceptance criteria, submitted as a
+GitHub issue. Every step is required. No steps may be skipped.
 
-Explore the repo to verify their assertions and understand the current state of the codebase.
+## When to Use
 
-Interview the user relentlessly about every aspect of this plan until you reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one.
+- User wants to plan a new feature or significant change
+- User says "write a PRD", "plan this feature", "I need a spec"
+- After `/extract-specs` has produced a requirements brief
 
-Sketch out the major modules you will need to build or modify to complete the implementation. Actively look for opportunities to extract deep modules that can be tested in isolation.
+## Process
 
-A deep module (as opposed to a shallow module) is one which encapsulates a lot of functionality in a simple, testable interface which rarely changes.
+### Step 1: Gather Context
 
-Check with the user that these modules match their expectations. Check with the user which modules they want tests written for.
+**If a requirements brief exists** (from `/extract-specs`):
+1. Ask the user which brief to use, or check for recent briefs in the
+   project's content folder
+2. Read the brief. Use it as the starting point. Do not re-interview
+   on topics already covered.
+3. Identify gaps and open questions from the brief that still need answers.
 
-Once you have a complete understanding of the problem and solution, use the template below to write the PRD. The PRD should be submitted as a GitHub issue.
+**If no brief exists:**
+1. Ask the user for a detailed description of the problem they want to solve
+   and any ideas for solutions
+2. Ask which project this is for. Look up the repo in `state/projects.md`.
 
+### Step 2: Explore the Codebase
+
+1. Read the project's CLAUDE.md if it exists
+2. Identify modules, patterns, and architecture relevant to the feature
+3. Check for existing implementations that overlap with the proposed feature
+4. Verify the user's assertions about current behavior by reading the code
+
+Do not take the user's description of the codebase at face value. Read it.
+
+### Step 3: Interview
+
+Interview the user about every aspect of this plan until reaching shared
+understanding. Walk down each branch of the design tree, resolving
+dependencies between decisions one by one.
+
+**Present one question at a time. Wait for the answer before asking the next.**
+
+Cover these areas (skip only if the requirements brief already resolved them):
+
+1. **Problem clarity:** What problem does this solve? Who has this problem?
+   How do they deal with it today?
+2. **Scope:** What's in scope? What's explicitly out of scope?
+3. **User behavior:** What does the user do step by step? What are the
+   happy path and failure cases?
+4. **Constraints:** Technical limitations, timeline, dependencies on other
+   work, compatibility requirements
+5. **Edge cases:** What happens when inputs are unexpected? What about
+   empty states, errors, concurrent access?
+6. **Integration:** How does this interact with existing features? What
+   could it break?
+
+If a question can be answered by exploring the codebase, explore the
+codebase instead of asking the user.
+
+### Step 4: Design Modules
+
+1. Sketch out the major modules to build or modify
+2. For each module, define:
+   - Its public interface (what it exposes)
+   - Its responsibility (what it owns)
+   - Its depth (complex implementation behind a simple interface is good)
+3. Look for opportunities to extract deep modules that can be tested in
+   isolation
+4. Present the module design to the user. Get approval.
+
+### Step 5: Write User Stories with Acceptance Criteria
+
+For each user story:
+
+```markdown
+### US-<number>: <short title>
+
+**As a** <actor>, **I want** <feature>, **so that** <reason>.
+
+**Acceptance criteria:**
+- [ ] <testable criterion — describes observable behavior>
+- [ ] <testable criterion — describes observable behavior>
+- [ ] <testable criterion — describes observable behavior>
+```
+
+**Rules for acceptance criteria:**
+- Every criterion must be testable. "Works correctly" is not testable.
+  "Returns a 200 with the user's name in the response body" is testable.
+- Every criterion must describe behavior from the outside, not
+  implementation. "Uses a hashmap internally" is implementation.
+  "Lookups return in under 100ms" is behavior.
+- If you can't write a testable criterion, the user story is too vague.
+  Go back to the interview and clarify.
+- Fewer precise criteria beat many vague ones. Aim for 2-5 per story.
+
+### Step 6: Write the PRD
+
+Assemble the full PRD using this template:
+
+```markdown
 ## Problem Statement
 
-The problem that the user is facing, from the user's perspective.
+<The problem from the user's perspective. What's broken or missing.
+Why it matters.>
 
 ## Solution
 
-The solution to the problem, from the user's perspective.
+<The solution from the user's perspective. What changes and how it
+helps. Not implementation details.>
 
 ## User Stories
 
-A LONG, numbered list of user stories. Each user story should be in the format of:
+<All user stories from Step 5, with acceptance criteria>
 
-As an <actor>, I want a <feature>, so that <reason>
+## Module Design
 
-1. As a mobile bank customer, I want to see balance on my accounts, so that I can make better informed decisions about my spending
-
-This list of user stories should be extremely extensive and cover all aspects of the feature.
+<Modules from Step 4: interfaces, responsibilities, dependencies.
+No file paths or code snippets — these go stale.>
 
 ## Implementation Decisions
 
-A list of implementation decisions that were made. This can include:
+<Decisions made during the interview:>
+- <Architectural choices and why>
+- <Schema changes>
+- <API contracts>
+- <Integration approach>
+- <What was explicitly ruled out and why>
 
-- The modules that will be built/modified
-- The interfaces of those modules that will be modified
-- Technical clarifications from the developer
-- Architectural decisions
-- Schema changes
-- API contracts
-- Specific interactions
+## Testing Strategy
 
-Do NOT include specific file paths or code snippets. They may end up being outdated very quickly.
-
-## Testing Decisions
-
-A list of testing decisions that were made. Include:
-
-- A description of what makes a good test (only test external behavior, not implementation details)
-- Which modules will be tested
-- Prior art for the tests (i.e. similar types of tests in the codebase)
+<For each module the user wants tested:>
+- <Module name>: <what behaviors to test, referencing which user
+  stories/criteria they verify>
+- <Prior art>: <existing tests in the codebase that follow similar
+  patterns>
 
 ## Out of Scope
 
-A description of the things that are out of scope for this PRD.
+<What was discussed but explicitly deferred. Include WHY it's deferred
+so future readers don't re-litigate it.>
 
-## Further Notes
+## Open Questions
 
-Any further notes about the feature.
+<Anything unresolved. If this section is not empty, the PRD is not
+ready for implementation until these are answered.>
+```
+
+### Step 7: Verify Before Submitting
+
+Before submitting the PRD as a GitHub issue, check:
+
+- [ ] Every user story has testable acceptance criteria
+- [ ] Every acceptance criterion describes observable behavior, not implementation
+- [ ] The testing strategy references specific user stories
+- [ ] Implementation decisions are consistent with the module design
+- [ ] Out of scope items have a reason
+- [ ] Open questions section is empty (if not, resolve them with the user first)
+- [ ] The problem statement and solution are consistent with the user stories
+- [ ] No assertions about the codebase that weren't verified by reading the code
+
+If any check fails, fix it before proceeding.
+
+### Step 8: Submit
+
+1. Confirm with the user: "Ready to submit this PRD as a GitHub issue?"
+2. Create the issue: `gh issue create --repo <repo> --title "PRD: <title>" --body <prd>`
+3. Report the issue number and URL
+
+## What This Skill Does NOT Do
+
+- Skip steps
+- Create implementation issues (that's `/prd-to-issues`)
+- Make unverified claims about the codebase
+- Submit a PRD with open questions unresolved
+- Write acceptance criteria that can't be tested
+
+---
+
+*Skill created: 2026-01-22*
+*Rewritten: 2026-05-28 — added testable acceptance criteria per user story,
+removed skip permission, added verification pass, integrated with /extract-specs*
