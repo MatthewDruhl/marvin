@@ -39,6 +39,6 @@ Before changing `CLAUDE.md`, `AGENTS.md`, or `.claude/commands/*`, confirm:
 
 ## Drift Review
 
-Use `scripts/check_instruction_drift.py` to catch mapped command wrappers that likely copied procedure content from a skill. The script is intentionally lightweight: it checks for known command-to-skill mappings, missing skill references, oversized wrappers, and procedural headings inside `.claude/commands/*`.
+Use `scripts/check_instruction_drift.py` to catch mapped command wrappers that likely copied procedure content from a skill. The script is intentionally lightweight: it discovers command-to-skill mappings from skill frontmatter `metadata.slash-command`, then checks for missing skill references, oversized wrappers, and procedural headings inside `.claude/commands/*`.
 
-Unmapped command wrappers should be reviewed manually. If an unmapped command grows into a reusable workflow, create or update a canonical skill first, then add the command-to-skill mapping to the drift checker.
+Unmapped command wrappers should be reviewed manually. If an unmapped command grows into a reusable workflow, create or update a canonical skill first and set its `metadata.slash-command` value.

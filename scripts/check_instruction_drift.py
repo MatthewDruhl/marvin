@@ -10,19 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 COMMAND_DIR = ROOT / ".claude" / "commands"
-
-COMMAND_SKILLS = {
-    "commit": "skills/commit/SKILL.md",
-    "end": "skills/end/SKILL.md",
-    "marvin": "skills/marvin/SKILL.md",
-    "pmp-consume": "skills/pmp-quiz/pmp-consume-SKILL.md",
-    "pmp-intake": "skills/pmp-intake/SKILL.md",
-    "pmp-quiz": "skills/pmp-quiz/SKILL.md",
-    "resume": "skills/resume-editor/SKILL.md",
-    "update": "skills/update/SKILL.md",
-    "update-resume": "skills/update-resume/SKILL.md",
-    "youtube-transcribe": "skills/youtube-transcribe/SKILL.md",
-}
+SKILLS_DIR = ROOT / "skills"
 
 MAX_MAPPED_COMMAND_LINES = 35
 MAX_ORDERED_LIST_ITEMS = 3
@@ -45,6 +33,55 @@ def meaningful_lines(text: str) -> list[str]:
         for line in text.splitlines()
         if line.strip() and not line.strip().startswith("---") and not line.strip().startswith("description:")
     ]
+
+
+def frontmatter_lines(text: str) -> list[str]:
+    lines = text.splitlines()
+    if not lines or lines[0].strip() != "---":
+        return []
+
+    for index, line in enumerate(lines[1:], start=1):
+        if line.strip() == "---":
+            return lines[1:index]
+    return []
+
+
+def frontmatter_value(lines: list[str], key: str) -> str | None:
+    prefix = f"{key}:"
+    for line in lines:
+        if line.strip().startswith(prefix):
+            return line.split(":", 1)[1].strip().strip("\"'")
+    return None
+
+
+def normalize_command(value: str | None) -> str | None:
+    if not value or value == "null":
+        return None
+    return value.removeprefix("/")
+
+
+def discover_command_skills() -> tuple[dict[str, str], list[str]]:
+    command_skills: dict[str, str] = {}
+    errors: list[str] = []
+
+    for skill_path in sorted(SKILLS_DIR.rglob("*SKILL*.md")):
+        relative_skill = skill_path.relative_to(ROOT)
+        if relative_skill.parts[1:] == ("_template", "SKILL.md"):
+            continue
+
+        metadata = frontmatter_lines(skill_path.read_text(encoding="utf-8"))
+        command = normalize_command(frontmatter_value(metadata, "slash-command"))
+        if command is None:
+            continue
+
+        existing = command_skills.get(command)
+        if existing is not None:
+            errors.append(f"{relative_skill}: duplicate slash-command /{command}; already owned by {existing}")
+            continue
+
+        command_skills[command] = relative_skill.as_posix()
+
+    return command_skills, errors
 
 
 def check_mapped_command(command_path: Path, skill_path: str) -> list[str]:
@@ -86,11 +123,13 @@ def check_mapped_command(command_path: Path, skill_path: str) -> list[str]:
 def check_commands() -> DriftResult:
     errors: list[str] = []
     warnings: list[str] = []
+    command_skills, discovery_errors = discover_command_skills()
+    errors.extend(discovery_errors)
 
     command_paths = sorted(COMMAND_DIR.glob("*.md"))
     command_names = {path.stem for path in command_paths}
 
-    for command_name, skill_path in sorted(COMMAND_SKILLS.items()):
+    for command_name, skill_path in sorted(command_skills.items()):
         command_path = COMMAND_DIR / f"{command_name}.md"
         if not command_path.exists():
             errors.append(f"{command_path.relative_to(ROOT)}: mapped command file is missing")
@@ -98,7 +137,7 @@ def check_commands() -> DriftResult:
         errors.extend(check_mapped_command(command_path, skill_path))
 
     for command_path in command_paths:
-        if command_path.stem in COMMAND_SKILLS:
+        if command_path.stem in command_skills:
             continue
         lines = meaningful_lines(command_path.read_text(encoding="utf-8"))
         if len(lines) > MAX_MAPPED_COMMAND_LINES:
@@ -107,7 +146,7 @@ def check_commands() -> DriftResult:
                 "review manually or create a skill mapping"
             )
 
-    for command_name in sorted(set(COMMAND_SKILLS) - command_names):
+    for command_name in sorted(set(command_skills) - command_names):
         errors.append(f".claude/commands/{command_name}.md: mapped command file is missing")
 
     return DriftResult(errors=errors, warnings=warnings)
