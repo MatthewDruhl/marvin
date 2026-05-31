@@ -30,7 +30,8 @@ Read these in parallel where possible:
 1. `state/current.md`
 2. `state/habits.md`
 3. `state/goals.md`
-4. `sessions/{TODAY}.md` if it exists
+4. `state/commitments.json`
+5. `sessions/{TODAY}.md` if it exists
 
 Get today's date with:
 
@@ -53,6 +54,7 @@ Review the conversation and prepare one combined message with these sections:
 **State Changes Preview**
 - Proposed changes to `state/current.md`, including new priorities, changed statuses, completed items, and new open threads
 - Proposed `state/goals.md` updates only if goal progress was made
+- Proposed `state/commitments.json` updates for new, resolved, blocked, waiting, stale, or changed commitments
 - Proposed `content/log.md` entry only if content was shipped
 
 **Habit Check**
@@ -71,8 +73,12 @@ After the user confirms, write all applicable updates:
    - Keep it under 50 lines.
    - Move details to `content/` when needed.
 3. Update `state/habits.md` with any reported habit completions.
-4. Edit `state/goals.md` only if goal progress was discussed.
-5. Append to `content/log.md` only if content was shipped.
+4. Edit `state/commitments.json` for confirmed commitment changes.
+   - Use stable IDs (`commit-YYYY-MM-DD-NNN`).
+   - Use ISO dates.
+   - Do not add new active commitments to `state/todos.md`; that file is legacy/reference.
+5. Edit `state/goals.md` only if goal progress was discussed.
+6. Append to `content/log.md` only if content was shipped.
 
 ### Step 4: Conditional Cleanup
 

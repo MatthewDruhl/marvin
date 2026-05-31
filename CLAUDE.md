@@ -44,6 +44,7 @@ Ownership rules are in global `~/.claude/CLAUDE.md` under "CLAUDE.md Standards."
 ### File Permissions
 **MARVIN workspace autonomy:** Full permission to read, write, edit, and create files within `~/marvin/` without asking for confirmation. This includes:
 - `state/` files (current.md, goals.md, todos.md)
+- `state/commitments.json` (source of truth for active commitments; `todos.md` is legacy/reference)
 - `sessions/` daily logs
 - `content/` files (job tracking, notes, etc.)
 - `reports/` weekly summaries
