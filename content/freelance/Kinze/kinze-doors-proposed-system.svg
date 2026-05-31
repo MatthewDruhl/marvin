@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1060" width="1200" height="1060">
+  <style>
+    text { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  </style>
+  <defs>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ea580c"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#16a34a"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+    </marker>
+    <marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="1060" fill="#ffffff"/>
+  <text x="600" y="36" text-anchor="middle" font-size="20" font-weight="600" fill="#111827">Kinze Doors Quoting — Proposed Quote System</text>
+  <rect x="80" y="52" width="220" height="60" rx="8" fill="#f9fafb" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="190" y="74" text-anchor="middle" font-size="14" font-weight="600" fill="#374151">HubSpot</text>
+  <text x="190" y="92" text-anchor="middle" font-size="11" fill="#6b7280">website form submissions</text>
+  <line x1="140" y1="112" x2="140" y2="195" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow-gray)"/>
+  <rect x="68" y="145" width="58" height="16" rx="3" fill="#ffffff" opacity="0.95"/>
+  <text x="97" y="157" text-anchor="middle" font-size="10" fill="#6b7280">email</text>
+  <path d="M 300,80 L 440,80 L 440,195" fill="none" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+  <rect x="320" y="65" width="88" height="16" rx="3" fill="#ffffff" opacity="0.95"/>
+  <text x="364" y="77" text-anchor="middle" font-size="10" fill="#7c3aed">API / webhook</text>
+  <rect x="40" y="140" width="1120" height="130" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="60" y="165" font-size="15" font-weight="600" fill="#1e40af">Lead Intake</text>
+  <rect x="70" y="200" width="200" height="55" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="170" y="221" text-anchor="middle" font-size="13" fill="#111827">Susie&#39;s email</text>
+  <text x="170" y="237" text-anchor="middle" font-size="11" fill="#6b7280">inbox / Complete folder</text>
+  <text x="170" y="250" text-anchor="middle" font-size="10" fill="#6b7280">unchanged workflow</text>
+  <rect x="340" y="200" width="240" height="55" rx="8" fill="#ede9fe" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="460" y="218" text-anchor="middle" font-size="13" font-weight="600" fill="#5b21b6">Quote System Queue</text>
+  <text x="460" y="234" text-anchor="middle" font-size="11" fill="#6b7280">requests land automatically</text>
+  <text x="460" y="250" text-anchor="middle" font-size="10" fill="#6b7280">customer info pre-filled from HubSpot</text>
+  <line x1="580" y1="227" x2="660" y2="227" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+  <rect x="670" y="195" width="240" height="65" rx="8" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
+  <text x="790" y="216" text-anchor="middle" font-size="13" font-weight="600" fill="#c2410c">Release Request</text>
+  <text x="790" y="232" text-anchor="middle" font-size="11" fill="#6b7280">Susie or Bob reviews and</text>
+  <text x="790" y="246" text-anchor="middle" font-size="11" fill="#6b7280">starts the quoting process</text>
+  <text x="790" y="258" text-anchor="middle" font-size="10" fill="#16a34a">manual control</text>
+  <line x1="790" y1="260" x2="790" y2="290" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)"/>
+  <rect x="40" y="290" width="1120" height="370" rx="10" fill="#faf5ff" stroke="#c4b5fd" stroke-width="2"/>
+  <text x="60" y="318" font-size="15" font-weight="600" fill="#6d28d9">Quote System</text>
+  <text x="195" y="318" font-size="12" fill="#8b5cf6">(C# / .NET / Blazor / SQL Server)</text>
+  <rect x="80" y="340" width="220" height="55" rx="8" fill="#ede9fe" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="190" y="361" text-anchor="middle" font-size="13" font-weight="600" fill="#5b21b6">Customer Database</text>
+  <text x="190" y="377" text-anchor="middle" font-size="11" fill="#6b7280">contact info, quote history,</text>
+  <text x="190" y="390" text-anchor="middle" font-size="11" fill="#6b7280">follow-up stage tracking</text>
+  <line x1="190" y1="395" x2="190" y2="425" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+  <rect x="80" y="430" width="220" height="55" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="190" y="451" text-anchor="middle" font-size="13" fill="#111827">Confirm door specs</text>
+  <text x="190" y="467" text-anchor="middle" font-size="11" fill="#6b7280">pre-filled from HubSpot form</text>
+  <text x="190" y="480" text-anchor="middle" font-size="10" fill="#6b7280">user adjusts if needed</text>
+  <line x1="300" y1="457" x2="380" y2="457" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+  <rect x="390" y="340" width="220" height="55" rx="8" fill="#ede9fe" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="500" y="361" text-anchor="middle" font-size="13" font-weight="600" fill="#5b21b6">Band Chart Logic</text>
+  <text x="500" y="377" text-anchor="middle" font-size="11" fill="#6b7280">frame + truss + pump</text>
+  <text x="500" y="390" text-anchor="middle" font-size="11" fill="#16a34a">automated</text>
+  <line x1="500" y1="395" x2="500" y2="425" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+  <rect x="390" y="430" width="220" height="55" rx="8" fill="#ede9fe" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="500" y="451" text-anchor="middle" font-size="13" font-weight="600" fill="#5b21b6">Pricing Engine</text>
+  <text x="500" y="467" text-anchor="middle" font-size="11" fill="#6b7280">BOM, stress, safety factors,</text>
+  <text x="500" y="480" text-anchor="middle" font-size="11" fill="#6b7280">total door cost</text>
+  <line x1="500" y1="485" x2="500" y2="520" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+  <rect x="390" y="525" width="220" height="50" rx="8" fill="#ede9fe" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="500" y="546" text-anchor="middle" font-size="13" font-weight="600" fill="#5b21b6">GA Drawing Match</text>
+  <text x="500" y="562" text-anchor="middle" font-size="11" fill="#6b7280">auto-suggest by dimensions</text>
+  <line x1="610" y1="550" x2="690" y2="550" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+  <rect x="700" y="425" width="220" height="70" rx="8" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
+  <text x="810" y="446" text-anchor="middle" font-size="13" font-weight="600" fill="#c2410c">Bob Reviews</text>
+  <text x="810" y="462" text-anchor="middle" font-size="11" fill="#6b7280">verify pricing, select drawing,</text>
+  <text x="810" y="476" text-anchor="middle" font-size="11" fill="#6b7280">approve or adjust</text>
+  <text x="810" y="490" text-anchor="middle" font-size="10" fill="#16a34a">Susie can review if Bob is out</text>
+  <line x1="610" y1="457" x2="690" y2="457" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+  <line x1="810" y1="495" x2="810" y2="530" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+  <rect x="700" y="535" width="220" height="55" rx="8" fill="#ede9fe" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="810" y="556" text-anchor="middle" font-size="13" font-weight="600" fill="#5b21b6">Generate Quote</text>
+  <text x="810" y="572" text-anchor="middle" font-size="11" fill="#6b7280">auto quote #, 2x markup,</text>
+  <text x="810" y="586" text-anchor="middle" font-size="11" fill="#6b7280">PDF with GA drawing</text>
+  <path d="M 990,340 L 990,375 Q 990,390 1040,390 Q 1090,390 1090,375 L 1090,340 Q 1090,355 1040,355 Q 990,355 990,340 Z" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <ellipse cx="1040" cy="340" rx="50" ry="15" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <text x="1040" y="345" text-anchor="middle" font-size="11" font-weight="600" fill="#15803d">Price Table</text>
+  <text x="1040" y="375" text-anchor="middle" font-size="10" fill="#6b7280">annual update</text>
+  <path d="M 990,430 L 990,465 Q 990,480 1040,480 Q 1090,480 1090,465 L 1090,430 Q 1090,445 1040,445 Q 990,445 990,430 Z" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <ellipse cx="1040" cy="430" rx="50" ry="15" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <text x="1040" y="435" text-anchor="middle" font-size="11" font-weight="600" fill="#15803d">GA Drawings</text>
+  <text x="1040" y="465" text-anchor="middle" font-size="10" fill="#6b7280">indexed by dims</text>
+  <line x1="990" y1="365" x2="920" y2="457" stroke="#16a34a" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrow-green)"/>
+  <line x1="990" y1="455" x2="920" y2="550" stroke="#16a34a" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrow-green)"/>
+  <line x1="810" y1="590" x2="810" y2="685" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <rect x="40" y="685" width="1120" height="155" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <text x="60" y="713" font-size="15" font-weight="600" fill="#15803d">Susie: Quote Delivery</text>
+  <rect x="130" y="735" width="200" height="50" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="230" y="756" text-anchor="middle" font-size="13" fill="#111827">Susie reviews quote</text>
+  <text x="230" y="772" text-anchor="middle" font-size="11" fill="#6b7280">PDF + GA drawing</text>
+  <line x1="330" y1="760" x2="410" y2="760" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <rect x="420" y="730" width="230" height="60" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="535" y="752" text-anchor="middle" font-size="13" font-weight="600" fill="#15803d">Email quote to customer</text>
+  <text x="535" y="768" text-anchor="middle" font-size="11" fill="#6b7280">quote PDF + GA drawing</text>
+  <text x="535" y="783" text-anchor="middle" font-size="10" fill="#6b7280">Susie sends manually</text>
+  <line x1="650" y1="760" x2="730" y2="760" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <rect x="740" y="730" width="220" height="60" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="850" y="752" text-anchor="middle" font-size="13" fill="#111827">Follow-up via system</text>
+  <text x="850" y="768" text-anchor="middle" font-size="11" fill="#6b7280">call reminders, stage tracking,</text>
+  <text x="850" y="783" text-anchor="middle" font-size="11" fill="#6b7280">visible to Susie + Bob</text>
+  <path d="M 960,760 L 1130,760 L 1130,370 L 300,370 L 300,380" fill="none" stroke="#7c3aed" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrow-purple)"/>
+  <rect x="1063" y="555" width="105" height="16" rx="3" fill="#ffffff" opacity="0.95"/>
+  <text x="1115" y="567" text-anchor="middle" font-size="10" fill="#7c3aed">updates customer DB</text>
+  <rect x="40" y="865" width="560" height="140" rx="8" fill="#fefce8" stroke="#fde68a" stroke-width="1"/>
+  <text x="60" y="887" font-size="13" font-weight="600" fill="#92400e">Key Changes from Current Process</text>
+  <text x="60" y="907" font-size="12" fill="#78350f">&#x2022; HubSpot pushes requests directly into Quote System (no data entry)</text>
+  <text x="60" y="925" font-size="12" fill="#78350f">&#x2022; Susie still gets email — keeps her pulse on the process</text>
+  <text x="60" y="943" font-size="12" fill="#78350f">&#x2022; Manual release gives control over when quotes are processed</text>
+  <text x="60" y="961" font-size="12" fill="#78350f">&#x2022; Bob shifts from doing the work to reviewing system output</text>
+  <text x="60" y="979" font-size="12" fill="#78350f">&#x2022; Susie can run quotes when Bob is out of office</text>
+  <text x="60" y="997" font-size="12" fill="#78350f">&#x2022; GA drawing matching and quote generation are automatic</text>
+  <rect x="700" y="865" width="460" height="45" rx="6" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="715" y1="883" x2="745" y2="883" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow-gray)"/>
+  <text x="753" y="887" font-size="11" fill="#6b7280">External</text>
+  <line x1="805" y1="883" x2="835" y2="883" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arrow-purple)"/>
+  <text x="843" y="887" font-size="11" fill="#6b7280">System</text>
+  <line x1="895" y1="883" x2="925" y2="883" stroke="#ea580c" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <text x="933" y="887" font-size="11" fill="#6b7280">Bob</text>
+  <line x1="970" y1="883" x2="1000" y2="883" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="1008" y="887" font-size="11" fill="#6b7280">Susie</text>
+  <line x1="1055" y1="883" x2="1085" y2="883" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <text x="1093" y="887" font-size="11" fill="#6b7280">Data</text>
+  <text x="700" y="940" font-size="10" font-style="italic" fill="#9ca3af">Note: Verify when HubSpot documents are updated</text>
+</svg>

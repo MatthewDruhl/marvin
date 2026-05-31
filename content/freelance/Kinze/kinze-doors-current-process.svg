@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1020" width="1200" height="1020">
+  <style>
+    text { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  </style>
+  <defs>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ea580c"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#dc2626"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#16a34a"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="1020" fill="#ffffff"/>
+  <text x="600" y="36" text-anchor="middle" font-size="20" font-weight="600" fill="#111827">Kinze Doors Quoting — Current Process</text>
+  <rect x="80" y="52" width="220" height="72" rx="8" fill="#f9fafb" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="190" y="74" text-anchor="middle" font-size="14" font-weight="600" fill="#374151">HubSpot</text>
+  <text x="190" y="92" text-anchor="middle" font-size="11" fill="#6b7280">website form submissions</text>
+  <text x="190" y="115" text-anchor="middle" font-size="10" font-style="italic" fill="#dc2626">When are HubSpot docs updated?</text>
+  <line x1="190" y1="124" x2="190" y2="185" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow-gray)"/>
+  <rect x="40" y="145" width="1120" height="125" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="60" y="170" font-size="15" font-weight="600" fill="#1e40af">Susie: Lead Intake</text>
+  <rect x="80" y="190" width="220" height="50" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="190" y="211" text-anchor="middle" font-size="13" fill="#111827">HubSpot form arrives</text>
+  <text x="190" y="227" text-anchor="middle" font-size="11" fill="#6b7280">Kinze Doors email</text>
+  <line x1="300" y1="215" x2="380" y2="215" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <rect x="390" y="190" width="220" height="50" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="500" y="211" text-anchor="middle" font-size="13" fill="#111827">Susie reviews form</text>
+  <text x="500" y="227" text-anchor="middle" font-size="11" fill="#6b7280">dims, building type, extras</text>
+  <line x1="610" y1="215" x2="690" y2="215" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <rect x="700" y="190" width="220" height="50" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="810" y="211" text-anchor="middle" font-size="13" fill="#111827">Susie forwards to Bob</text>
+  <text x="810" y="227" text-anchor="middle" font-size="11" fill="#6b7280">via email</text>
+  <line x1="810" y1="240" x2="810" y2="290" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <rect x="40" y="290" width="1120" height="410" rx="10" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="60" y="318" font-size="15" font-weight="600" fill="#c2410c">Bob: Pricing and Specs</text>
+  <rect x="80" y="345" width="220" height="50" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="190" y="366" text-anchor="middle" font-size="13" fill="#111827">Bob logs request</text>
+  <text x="190" y="382" text-anchor="middle" font-size="11" fill="#6b7280">in tracking spreadsheet</text>
+  <line x1="300" y1="370" x2="380" y2="370" stroke="#ea580c" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <rect x="390" y="345" width="220" height="50" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="500" y="366" text-anchor="middle" font-size="13" fill="#111827">Enter door specs</text>
+  <text x="500" y="382" text-anchor="middle" font-size="11" fill="#6b7280">width, height, thickness, wind load</text>
+  <line x1="610" y1="370" x2="690" y2="370" stroke="#ea580c" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <rect x="700" y="340" width="220" height="60" rx="8" fill="#ede9fe" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="810" y="361" text-anchor="middle" font-size="13" font-weight="600" fill="#5b21b6">Eric&#39;s Band Chart</text>
+  <text x="810" y="377" text-anchor="middle" font-size="11" fill="#6b7280">frame + truss + pump</text>
+  <text x="810" y="391" text-anchor="middle" font-size="11" fill="#5b21b6">deterministic selection</text>
+  <line x1="810" y1="400" x2="810" y2="430" stroke="#ea580c" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <rect x="390" y="435" width="220" height="60" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="500" y="456" text-anchor="middle" font-size="13" fill="#111827">Pricing Calculator</text>
+  <text x="500" y="472" text-anchor="middle" font-size="11" fill="#6b7280">BOM, wind load, stress,</text>
+  <text x="500" y="486" text-anchor="middle" font-size="11" fill="#6b7280">safety factors, total cost</text>
+  <path d="M 810,440 L 810,465 L 610,465" fill="none" stroke="#ea580c" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <line x1="500" y1="495" x2="500" y2="535" stroke="#ea580c" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <polygon points="500,540 560,570 500,600 440,570" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="500" y="567" text-anchor="middle" font-size="12" font-weight="600" fill="#111827">Pass /</text>
+  <text x="500" y="581" text-anchor="middle" font-size="12" font-weight="600" fill="#111827">Fail?</text>
+  <path d="M 440,570 L 340,570 L 340,370 L 380,370" fill="none" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arrow-red)"/>
+  <rect x="345" y="545" width="50" height="18" rx="3" fill="#ffffff" opacity="0.95"/>
+  <text x="370" y="558" text-anchor="middle" font-size="11" font-weight="600" fill="#dc2626">FAIL</text>
+  <rect x="270" y="450" width="115" height="18" rx="3" fill="#ffffff" opacity="0.95"/>
+  <text x="327" y="463" text-anchor="middle" font-size="10" fill="#6b7280">upgrade truss/frame</text>
+  <line x1="560" y1="570" x2="690" y2="570" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <rect x="590" y="555" width="50" height="18" rx="3" fill="#ffffff" opacity="0.95"/>
+  <text x="615" y="568" text-anchor="middle" font-size="11" font-weight="600" fill="#16a34a">PASS</text>
+  <rect x="700" y="545" width="220" height="50" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="810" y="566" text-anchor="middle" font-size="13" fill="#111827">Search GA drawings</text>
+  <text x="810" y="582" text-anchor="middle" font-size="11" fill="#6b7280">exact or closest match</text>
+  <line x1="810" y1="595" x2="810" y2="625" stroke="#ea580c" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <rect x="700" y="630" width="220" height="55" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="810" y="651" text-anchor="middle" font-size="13" fill="#111827">Bob sends to Susie</text>
+  <text x="810" y="667" text-anchor="middle" font-size="11" fill="#6b7280">cost, opening time, pump,</text>
+  <text x="810" y="680" text-anchor="middle" font-size="11" fill="#6b7280">GA drawing, special notes</text>
+  <line x1="810" y1="685" x2="810" y2="725" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <rect x="40" y="725" width="1120" height="260" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+  <text x="60" y="753" font-size="15" font-weight="600" fill="#15803d">Susie: Quote Delivery</text>
+  <rect x="80" y="775" width="180" height="50" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="170" y="796" text-anchor="middle" font-size="13" fill="#111827">Increment quote #</text>
+  <text x="170" y="812" text-anchor="middle" font-size="11" fill="#6b7280">manual numbering</text>
+  <line x1="260" y1="800" x2="320" y2="800" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <rect x="330" y="775" width="180" height="50" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="420" y="796" text-anchor="middle" font-size="13" fill="#111827">Fill quote template</text>
+  <text x="420" y="812" text-anchor="middle" font-size="11" fill="#6b7280">~30 seconds</text>
+  <line x1="510" y1="800" x2="570" y2="800" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <rect x="580" y="775" width="170" height="50" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="665" y="796" text-anchor="middle" font-size="13" fill="#111827">Apply 2x markup</text>
+  <text x="665" y="812" text-anchor="middle" font-size="11" fill="#6b7280">calculate final price</text>
+  <line x1="750" y1="800" x2="810" y2="800" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <rect x="820" y="775" width="170" height="50" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="905" y="796" text-anchor="middle" font-size="13" fill="#111827">Lock form</text>
+  <text x="905" y="812" text-anchor="middle" font-size="11" fill="#6b7280">save as PDF</text>
+  <path d="M 905,825 L 905,850 L 440,850 L 440,870" fill="none" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <rect x="310" y="875" width="260" height="55" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="440" y="895" text-anchor="middle" font-size="13" font-weight="600" fill="#15803d">Email quote to customer</text>
+  <text x="440" y="912" text-anchor="middle" font-size="11" fill="#6b7280">quote PDF + GA drawing</text>
+  <text x="440" y="925" text-anchor="middle" font-size="10" fill="#6b7280">(exact GA or similar GA template)</text>
+  <line x1="570" y1="902" x2="690" y2="902" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <rect x="595" y="887" width="80" height="18" rx="3" fill="#ffffff" opacity="0.95"/>
+  <text x="635" y="900" text-anchor="middle" font-size="11" fill="#6b7280">2-3 days later</text>
+  <rect x="700" y="875" width="220" height="55" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <text x="810" y="895" text-anchor="middle" font-size="13" fill="#111827">Bob follows up</text>
+  <text x="810" y="912" text-anchor="middle" font-size="11" fill="#6b7280">call customer, log result</text>
+  <text x="810" y="925" text-anchor="middle" font-size="10" fill="#6b7280">up to 3 calls, ~1 week apart</text>
+  <rect x="40" y="960" width="530" height="45" rx="6" fill="#f9fafb" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="55" y1="978" x2="85" y2="978" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <text x="93" y="982" font-size="11" fill="#6b7280">Susie</text>
+  <line x1="135" y1="978" x2="165" y2="978" stroke="#ea580c" stroke-width="1.5" marker-end="url(#arrow-orange)"/>
+  <text x="173" y="982" font-size="11" fill="#6b7280">Bob</text>
+  <line x1="205" y1="978" x2="235" y2="978" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+  <text x="243" y="982" font-size="11" fill="#6b7280">Pass / delivery</text>
+  <line x1="335" y1="978" x2="365" y2="978" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arrow-red)"/>
+  <text x="373" y="982" font-size="11" fill="#6b7280">Fail loop</text>
+  <line x1="430" y1="978" x2="460" y2="978" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow-gray)"/>
+  <text x="468" y="982" font-size="11" fill="#6b7280">External</text>
+</svg>
