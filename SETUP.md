@@ -40,7 +40,7 @@ Workflow procedures live in `skills/*/SKILL.md`. Codex slash commands are not au
 ### Codex Limitations
 
 - `.claude/commands/*` files are Claude adapters, not Codex command registrations.
-- Project MCP servers from `.mcp.json` may not be available automatically in Codex. If Gmail or calendar tools are unavailable during `/marvin`, report those checks as skipped instead of failing silently.
+- Project MCP servers from `.mcp.json` may not be available automatically in Codex. If Gmail or calendar tools are unavailable during `/marvin`, report those checks as skipped instead of failing silently. See `integrations/google-workspace/README.md` for the Google Workspace MCP setup and fallback behavior.
 - Keep external-action safeguards: confirm before sending email, posting Slack messages, changing calendars, publishing, deleting, or overwriting.
 
 ## Claude Code Setup

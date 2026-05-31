@@ -50,6 +50,18 @@ Read these files (parallelize where possible):
 
 **Purpose:** Surface job responses and new contacts proactively.
 
+Before searching, verify Google Workspace MCP tools are available in the current runtime. Project `.mcp.json` may not be loaded automatically outside Claude Code.
+
+If Calendar MCP tools are unavailable, do not query Google Calendar. Use `current.md` for today's events in Step 4 and add `Calendar: skipped (Google Workspace MCP unavailable in this runtime)` to Skipped Checks.
+
+If Gmail MCP tools are unavailable:
+
+1. Do not attempt shell workarounds or read credential files.
+2. Mark Gmail checks as skipped with the reason, e.g. `Gmail: skipped (Google Workspace MCP unavailable in this runtime)`.
+3. Continue the rest of the startup flow.
+
+If Gmail MCP tools are available:
+
 1. Read `~/Resume/jobs/applications.md` for active company names
 2. If active apps exist, search Gmail for emails from those companies (last 7 days)
 3. If active apps exist, search Gmail for job keywords: "application", "interview", "thank you for applying" (last 7 days)
