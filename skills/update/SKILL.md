@@ -32,6 +32,7 @@ Quickly scan the recent conversation for:
 - Decisions made
 - Files created/modified
 - Any state changes needed
+- Any commitments created, resolved, blocked, waiting, or given a new next action
 
 Keep it brief. No full summary needed.
 
@@ -55,7 +56,16 @@ Only update `state/current.md` if something actually changed:
 
 Skip if nothing material changed.
 
-### Step 4: Confirm (minimal)
+### Step 4: Update Commitments (if needed)
+
+Use `state/commitments.json` as the source of truth for active commitments. Update it only when the recent work clearly changed a commitment:
+- New commitment with owner, project, status, next action, and source
+- Changed status (`active`, `waiting`, `blocked`, `done`, `dropped`)
+- Changed due date, review date, last touched date, or next action
+
+Do not add new active commitments to `state/todos.md`; that file is legacy/reference. If the change is ambiguous, ask before writing.
+
+### Step 5: Confirm (minimal)
 One line: "Checkpointed: {brief description}"
 
 No summary. No "next actions" list. Just confirm the save.

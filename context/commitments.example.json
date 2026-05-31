@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "last_updated": "2026-05-31",
+  "commitments": [
+    {
+      "id": "commit-2026-05-31-001",
+      "title": "Submit project invoice",
+      "status": "active",
+      "owner": "User",
+      "project": "Example Consulting",
+      "source": {
+        "type": "session",
+        "path": "sessions/YYYY-MM-DD.md"
+      },
+      "created": "2026-05-31",
+      "due": "2026-06-05",
+      "review_after": "2026-06-03",
+      "last_touched": "2026-05-31",
+      "next_action": "Draft invoice and confirm billing details.",
+      "notes": "Synthetic example. Do not put live client or billing details in committed examples."
+    },
+    {
+      "id": "commit-2026-05-31-002",
+      "title": "Wait for approval response",
+      "status": "waiting",
+      "owner": "User",
+      "project": "Example Admin",
+      "source": {
+        "type": "state",
+        "path": "state/current.md"
+      },
+      "created": "2026-05-31",
+      "due": null,
+      "review_after": "2026-06-07",
+      "last_touched": "2026-05-31",
+      "next_action": "Check for response after the review date.",
+      "notes": "Synthetic waiting-state example."
+    }
+  ]
+}

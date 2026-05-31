@@ -41,10 +41,11 @@ Use throughout the briefing. If events are scheduled today, compare against TIME
 Read these files (parallelize where possible):
 1. `state/current.md` — Current priorities, open threads, scheduled events
 2. `state/goals.md` — Goals and progress tracking
-3. `state/todos.md` — Active todos and follow-ups
-4. `state/habits.md` — Habit streaks
-5. `sessions/{TODAY}.md` — If exists, we're resuming today's session
-6. If no today file, read the most recent file in `sessions/` for continuity
+3. `state/commitments.json` — Local source of truth for active commitments, due dates, review dates, owners, and next actions. If missing, create it from the structure in `context/commitments.example.json`.
+4. `state/todos.md` — Legacy human-readable reference; do not treat as source of truth for active commitments
+5. `state/habits.md` — Habit streaks
+6. `sessions/{TODAY}.md` — If exists, we're resuming today's session
+7. If no today file, read the most recent file in `sessions/` for continuity
 
 ### Step 3: Check Gmail
 
@@ -78,15 +79,16 @@ Analyze the state files already loaded in Step 2. Do NOT re-read them. The goal 
 - Scan `current.md` for dates or deadlines that have already passed but are still phrased as upcoming (e.g., "Target: videos done by May 15" when today is May 21).
 
 **Contradictions:**
-- Compare priority descriptions in `current.md` against `goals.md` and `todos.md`. Flag mismatches (e.g., different rejection counts, different project statuses).
-- Check if any todo marked active has been resolved per session logs or `current.md`.
+- Compare priority descriptions in `current.md` against `goals.md` and `commitments.json`. Flag mismatches (e.g., different rejection counts, different project statuses).
+- Check if any active commitment appears resolved per session logs, `current.md`, or Gmail findings.
 
 **Cross-references:**
-1. **Follow-ups vs. reality:** Compare `todos.md` follow-ups against Gmail findings and `current.md`. If a follow-up is clearly resolved, mark it in `todos.md` and note in the briefing.
+1. **Commitments vs. reality:** Compare active commitments against Gmail findings and `current.md`. If a commitment is clearly resolved, prepare a `commitments.json` status update and note it in the briefing.
 2. **Today's events:** Check `current.md` for anything scheduled today. Use TIME from Step 1 to mark each as upcoming or already passed.
 3. **TWC week status:** Determine current TWC week (Sun-Sat). Check if a CSV exists for this week. Count activities logged. Calculate days remaining.
 4. **Stale open threads:** Flag any open thread in `current.md` that hasn't been updated in 7+ days.
 5. **New contacts from Gmail:** If Gmail surfaced a new job contact not in `~/Resume/jobs/contacts.md`, prepare to add them.
+6. **Commitment health:** From `commitments.json`, flag overdue commitments, commitments with `review_after` today or earlier, and commitments whose `last_touched` is more than 7 days old unless status is `waiting`, `done`, or `dropped`.
 
 **Session gap:**
 - Calculate the gap between today and the most recent session log.
@@ -114,7 +116,7 @@ Act on findings from Steps 3-5 before presenting the briefing:
 1. **TWC CSV:** If a new week started and no CSV exists, create it
 2. **Contacts:** If Gmail found a new job contact, add to `~/Resume/jobs/contacts.md`
 3. **TWC logging:** If Gmail found a networking event or job search activity, log to current week's TWC CSV
-4. **Follow-up resolution:** If Step 4 resolved any follow-ups, update `todos.md`
+4. **Commitments:** If Step 4 resolved, changed, or discovered commitments, preview the `commitments.json` changes before writing. Do not scatter new active commitments into `todos.md`.
 
 Note what actions were taken — include in the briefing.
 
@@ -138,11 +140,16 @@ Compile everything into a concise briefing:
 - Gmail: {new responses or "no new responses"} {or "(skipped: reason)"}
 - TWC: {X}/4 for the week (due Saturday)
 
+**Commitments:**
+- Overdue: {title} — due {date}; next action: {next_action}
+- Review today: {title} — next action: {next_action}
+- Stale: {title} — last touched {date}
+
 **Alerts:**
 - {Stale state files with age: "current.md last updated 9 days ago"}
 - {Past deadlines still phrased as future}
 - {Contradictions between state files}
-- {Follow-ups resolved}
+- {Commitments resolved or updated}
 - {New contacts added}
 - {Stale open threads}
 
@@ -157,7 +164,7 @@ How can I help today?
 
 **Formatting rules:**
 - If resuming today's session, acknowledge what was already covered
-- Omit empty sections (no "Alerts: none", no "Skipped Checks" if all passed)
+- Omit empty sections (no "Alerts: none", no "Commitments" if nothing is actionable, no "Skipped Checks" if all passed)
 - Keep concise — offer details on request
 - Use time-relative language ("in 53 minutes", "2 hours ago") for today's events
 - Alerts should be actionable. "current.md is 9 days stale" is useful. "Everything looks fine" is not.
@@ -168,10 +175,11 @@ After completing all steps but BEFORE presenting the briefing, verify:
 
 - [ ] Did I use full datetime (day, date, time, timezone)?
 - [ ] Did I run quality checks (staleness, past deadlines, contradictions) on already-loaded state files?
-- [ ] Did I check todos.md follow-ups for anything already resolved?
+- [ ] Did I check `commitments.json` for overdue, review-due, stale, or resolved commitments?
 - [ ] Did I pull full content for any new job-related emails (not just flag them)?
 - [ ] Did I mark today's events as upcoming/passed based on current time?
 - [ ] Did I check/create the TWC weekly CSV?
+- [ ] Did I avoid treating `state/todos.md` as the source of truth for active commitments?
 - [ ] Did I avoid asking permission for reads that are part of the startup flow?
 - [ ] Did I note which checks were skipped and why?
 
