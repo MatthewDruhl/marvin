@@ -12,6 +12,7 @@ From the repo root:
 
 ```bash
 uvx ruff check .
+python3 scripts/check_instruction_drift.py
 python3 scripts/validate_commitments.py context/commitments.example.json
 ```
 

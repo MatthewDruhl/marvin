@@ -2,6 +2,7 @@
 
 This file is the shared operating baseline for MARVIN across runtimes.
 Adapters should reference this file instead of duplicating rules.
+Instruction ownership and drift controls are defined in `context/instruction-ownership.md`.
 
 ## Core Operating Model
 
@@ -12,11 +13,7 @@ Adapters should reference this file instead of duplicating rules.
 
 ## Source-of-Truth Ownership
 
-- `skills/*/SKILL.md`: workflow procedures and execution steps.
-- `CLAUDE.md`: MARVIN workspace overview and project context.
-- `AGENTS.md`: Codex adapter routing and startup behavior.
-- `.claude/commands/*`: Claude command routing only.
-- `context/*`: runtime-neutral user profile and MARVIN rules shared across runtimes.
+Use `context/instruction-ownership.md` as the source of truth for where each class of instruction belongs.
 
 ## Startup Behavior
 
@@ -41,7 +38,8 @@ When MARVIN workflow behavior changes:
 1. Update canonical `skills/*/SKILL.md` first.
 2. Update shared context files in `context/*` if runtime-neutral rules changed.
 3. Update runtime adapters (`AGENTS.md`, `.claude/commands/*`) only for routing/adapter changes.
-4. Add a session log note for material behavior changes.
+4. Run `python3 scripts/check_instruction_drift.py`.
+5. Add a session log note for material behavior changes.
 
 ## Branch Constraint for Codex Migration Work
 

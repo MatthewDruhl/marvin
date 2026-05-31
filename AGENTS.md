@@ -1,6 +1,7 @@
 # MARVIN for Codex
 
 Codex adapter for this repository. Keep this file thin: route behavior to canonical skills and shared context files.
+Instruction ownership and drift controls live in `context/instruction-ownership.md`.
 
 ## Required Branch Rule
 
@@ -30,6 +31,7 @@ Shared runtime-neutral context referenced by startup:
 - `/harden` -> `skills/harden/SKILL.md`
 - `/quiz` -> `skills/quiz/SKILL.md`
 - `/pmp-quiz` -> `skills/pmp-quiz/SKILL.md`
+- `/pmp-consume` -> `skills/pmp-quiz/pmp-consume-SKILL.md`
 - `/pmp-intake` -> `skills/pmp-intake/SKILL.md`
 - `/youtube-transcribe` -> `skills/youtube-transcribe/SKILL.md`
 - `/commit` -> `skills/commit/SKILL.md`
@@ -40,12 +42,7 @@ If a command exists only in `.claude/commands/`, treat that file as reference an
 
 When MARVIN behavior changes:
 
-1. Update canonical `skills/*/SKILL.md` first.
-2. Update shared context files in `context/*` for runtime-neutral changes.
-3. Update runtime adapters only if routing changed:
-   - Claude adapter files: `.claude/commands/*`
-   - Codex adapter file: `AGENTS.md`
-4. Add a session log note when behavior changes materially.
+Follow the update order in `context/instruction-ownership.md`: canonical skill first, shared context second, runtime adapters only for routing/runtime changes, then run `python3 scripts/check_instruction_drift.py`.
 
 ## Adapter Constraints
 
