@@ -16,7 +16,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
-from resume_builder import DATA_FILE, RESUME_PATH, cmd_auto_trim, cmd_build
+from resume_builder import DATA_FILE, RESUME_PATH, cmd_auto_trim, cmd_build, get_filename_prefix
 
 # Skip all tests in this module if required files are missing
 pytestmark = pytest.mark.skipif(
@@ -108,11 +108,11 @@ class TestBuildCommand:
         )
         cmd_build(args)
 
-        docx_files = list(output_dir.glob("Resume-*.docx"))
-        assert len(docx_files) == 1, f"Expected 1 docx, got {len(docx_files)}"
+        output_file = output_dir / f"{get_filename_prefix()}_resume.docx"
+        assert output_file.exists()
 
-    def test_build_filename_contains_company(self, minimal_tailoring, tmp_path):
-        """Output filename should contain the company name."""
+    def test_build_filename_uses_resume_header_name(self, minimal_tailoring, tmp_path):
+        """Output filename should use the resume header name."""
         tailoring_file, _ = minimal_tailoring
         output_dir = tmp_path / "output"
         output_dir.mkdir()
@@ -124,7 +124,7 @@ class TestBuildCommand:
         cmd_build(args)
 
         docx_files = list(output_dir.glob("*.docx"))
-        assert any("TESTCORP" in f.name for f in docx_files)
+        assert [f.name for f in docx_files] == [f"{get_filename_prefix()}_resume.docx"]
 
     def test_build_docx_not_empty(self, minimal_tailoring, tmp_path):
         """Built docx should have nonzero size."""
@@ -160,7 +160,7 @@ class TestAutoTrimCommand:
         )
         cmd_auto_trim(args)
 
-        docx_files = list(output_dir.glob("Resume-*.docx"))
+        docx_files = list(output_dir.glob(f"{get_filename_prefix()}_resume.docx"))
         assert len(docx_files) >= 1
 
         trimmed = output_dir / "tailoring-trimmed.json"
@@ -185,8 +185,8 @@ class TestAutoTrimCommand:
         data = json.loads(trimmed.read_text())
         assert "experience" in data
 
-    def test_auto_trim_with_company_rename(self, minimal_tailoring, tmp_path):
-        """Auto-trim with --company should rename the output file."""
+    def test_auto_trim_uses_resume_header_name_with_company_arg(self, minimal_tailoring, tmp_path):
+        """Auto-trim keeps the resume-header filename even when --company is supplied."""
         tailoring_file, _ = minimal_tailoring
         output_dir = tmp_path / "output"
         output_dir.mkdir()
@@ -201,7 +201,7 @@ class TestAutoTrimCommand:
         cmd_auto_trim(args)
 
         docx_files = list(output_dir.glob("*.docx"))
-        assert any("CUSTOMNAME" in f.name for f in docx_files)
+        assert [f.name for f in docx_files] == [f"{get_filename_prefix()}_resume.docx"]
 
     def test_auto_trim_respects_min_bullets(self, tmp_path):
         """Auto-trim should never leave a role with 0 bullets, even with tight page limit."""

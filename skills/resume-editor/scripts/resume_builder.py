@@ -1857,7 +1857,11 @@ def main() -> None:
     trim_parser.add_argument("--output-dir", required=True, help="Output directory")
     trim_parser.add_argument("--keywords", required=True, help="Comma-separated job keywords")
     trim_parser.add_argument("--max-pages", type=int, default=2, help="Max pages (default: 2)")
-    trim_parser.add_argument("--company", default="", help="Company name for output filename (overrides tailoring)")
+    trim_parser.add_argument(
+        "--company",
+        default="",
+        help="Company name accepted for compatibility; filename uses resume header",
+    )
 
     args = parser.parse_args()
 

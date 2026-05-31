@@ -173,7 +173,7 @@ class TestCmdBackup:
 
         backups = list(backup_dir.glob("*.docx"))
         assert len(backups) == 1
-        assert "MatthewDruhl_" in backups[0].name
+        assert backups[0].name.startswith("TestResume_")
 
 
 # ---------------------------------------------------------------------------
