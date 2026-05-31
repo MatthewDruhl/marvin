@@ -254,7 +254,7 @@ class TestGetHeaderErrors:
         data_file.write_text(json.dumps(data))
         with patch("resume_builder.DATA_FILE", data_file):
             prefix = get_filename_prefix()
-        assert prefix == "RESUME"
+        assert prefix == "Resume"
 
 
 # ---------------------------------------------------------------------------
