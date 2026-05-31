@@ -22,7 +22,7 @@ Adapters should reference this file instead of duplicating rules.
 
 For "start MARVIN" (or equivalent), collect deterministic context before briefing:
 
-1. Run `python scripts/marvin_start.py` from repo root.
+1. Run `python3 scripts/marvin_start.py` from repo root.
 2. Use startup packet output as initial working context.
 3. Follow `skills/marvin/SKILL.md` for the briefing and proactive workflow behavior.
 

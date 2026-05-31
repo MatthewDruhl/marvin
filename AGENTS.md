@@ -11,7 +11,7 @@ GitHub issues with `[codex-marvin-option-1]` in the title must be implemented on
 
 For "start MARVIN", `/marvin`, or equivalent startup requests:
 
-1. Run from repo root: `python scripts/marvin_start.py`
+1. Run from repo root: `python3 scripts/marvin_start.py`
 2. Use startup packet output as source context.
 3. Then follow `skills/marvin/SKILL.md` for briefing behavior and proactive actions.
 
