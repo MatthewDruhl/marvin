@@ -37,9 +37,10 @@ If the user doesn't specify files, ask: "What source material should I work from
 
 ## Process
 
-### Step 1: Ingest Source Material
+### Step 1: Identify Project and Ingest Source Material
 
-1. Read every file the user provides. Do not skim. Do not summarize before analyzing.
+1. Ask the user which project this is for. Look it up in `state/projects.md` to get the repo and path. If the project isn't registered, ask if they want to add it.
+2. Read every file the user provides. Do not skim. Do not summarize before analyzing.
 2. For each source, note:
    - Who said what (attribute statements to people)
    - What was the date/context of the source
@@ -110,8 +111,8 @@ Update the brief based on answers. Repeat until the user says it's complete.
 
 ### Step 6: Save and Handoff
 
-1. Save the final requirements brief to the project's content folder:
-   `content/<project>/requirements-brief-<YYYY-MM-DD>.md`
+1. Save the final requirements brief to the project's folder (from `state/projects.md`):
+   `<project-path>/requirements-brief-<YYYY-MM-DD>.md`
 2. Tell the user: "Requirements brief saved. Run `/write-a-prd` to turn this
    into a structured PRD. The brief will be used as input."
 

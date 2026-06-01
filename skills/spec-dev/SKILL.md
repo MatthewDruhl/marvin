@@ -37,8 +37,8 @@ Interactive for planning, background for execution.
 
 #### Step 1: Read the Spec
 
-1. Look up the project in `state/projects.md` to get the repo
-2. If user didn't specify a repo, ask which project this issue belongs to
+1. If user didn't specify a repo, ask which project this issue belongs to
+2. Look up the project in `state/projects.md` to get the repo and path
 3. Fetch the issue: `gh issue view <number> --repo <owner/repo> --comments`
 4. Read the full issue body and any comments
 5. Verify acceptance criteria exist. If missing or vague, stop:
@@ -169,8 +169,9 @@ fight over git checkout.
 
 ## Error Handling
 
-- **Tests won't pass:** Agent makes 3 attempts, then stops and reports
-  what failed and why. Does not force tests to pass.
+- **Tests won't pass:** Agent makes 3 distinct attempts (different approach
+  each time, not rerunning the same failing code), then stops and reports
+  what failed, what was tried, and why. Does not force tests to pass.
 - **Spec is ambiguous:** Agent stops and reports which criterion is unclear.
   Does not guess or interpret ambiguous requirements.
 - **Missing dependencies:** Agent stops and reports what's needed.

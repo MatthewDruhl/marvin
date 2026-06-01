@@ -29,17 +29,18 @@ GitHub issue. Every step is required. No steps may be skipped.
 
 ### Step 1: Gather Context
 
+1. Ask the user which project this is for. Look up the repo and path in `state/projects.md`. This is required regardless of whether a brief exists.
+
 **If a requirements brief exists** (from `/extract-specs`):
-1. Ask the user which brief to use, or check for recent briefs in the
-   project's content folder
-2. Read the brief. Use it as the starting point. Do not re-interview
+2. Ask the user which brief to use, or check for recent briefs in the
+   project's folder
+3. Read the brief. Use it as the starting point. Do not re-interview
    on topics already covered.
-3. Identify gaps and open questions from the brief that still need answers.
+4. Identify gaps and open questions from the brief that still need answers.
 
 **If no brief exists:**
-1. Ask the user for a detailed description of the problem they want to solve
+2. Ask the user for a detailed description of the problem they want to solve
    and any ideas for solutions
-2. Ask which project this is for. Look up the repo in `state/projects.md`.
 
 ### Step 2: Explore the Codebase
 
@@ -58,19 +59,18 @@ dependencies between decisions one by one.
 
 **Present one question at a time. Wait for the answer before asking the next.**
 
-Cover these areas (skip only if the requirements brief already resolved them):
+Use this checklist as a reference for areas to cover. Do NOT blast through
+them all at once. Ask one question, wait for the answer, then decide what
+to ask next based on the response. Skip areas the requirements brief
+already resolved.
 
+**Areas to cover:**
 1. **Problem clarity:** What problem does this solve? Who has this problem?
-   How do they deal with it today?
 2. **Scope:** What's in scope? What's explicitly out of scope?
-3. **User behavior:** What does the user do step by step? What are the
-   happy path and failure cases?
-4. **Constraints:** Technical limitations, timeline, dependencies on other
-   work, compatibility requirements
-5. **Edge cases:** What happens when inputs are unexpected? What about
-   empty states, errors, concurrent access?
-6. **Integration:** How does this interact with existing features? What
-   could it break?
+3. **User behavior:** Happy path and failure cases, step by step.
+4. **Constraints:** Technical limitations, timeline, dependencies.
+5. **Edge cases:** Unexpected inputs, empty states, errors.
+6. **Integration:** How does this interact with existing features?
 
 If a question can be answered by exploring the codebase, explore the
 codebase instead of asking the user.
@@ -178,11 +178,13 @@ Before submitting the PRD as a GitHub issue, check:
 
 If any check fails, fix it before proceeding.
 
-### Step 8: Submit
+### Step 8: Save and Submit
 
-1. Confirm with the user: "Ready to submit this PRD as a GitHub issue?"
-2. Create the issue: `gh issue create --repo <repo> --title "PRD: <title>" --body <prd>`
-3. Report the issue number and URL
+1. Save a local copy of the PRD to the project folder:
+   `<project-path>/prd-<YYYY-MM-DD>.md`
+2. Confirm with the user: "Ready to submit this PRD as a GitHub issue?"
+3. Create the issue: `gh issue create --repo <repo> --title "PRD: <title>" --body <prd>`
+4. Report the issue number and URL
 
 ## What This Skill Does NOT Do
 
