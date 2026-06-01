@@ -48,13 +48,15 @@ Append to `sessions/{TODAY}.md`:
 If file doesn't exist, create with header: `# Session Log: {TODAY}`
 
 ### Step 3: Update State (if needed)
-Only update `state/current.md` if something actually changed:
+Read the Projects table and Open Threads in `state/current.md`. Compare against what was discussed this session. If any project, thread, or status change from the session isn't reflected, ask: "Should I add/update X in current.md?"
+
+Triggers:
+- New project or task discovered
 - New open thread
 - Completed item
-- Changed priority
-- New project/task discovered
+- Changed priority or status
 
-Skip if nothing material changed.
+Skip only after verifying nothing was missed.
 
 ### Step 4: Update Commitments (if needed)
 

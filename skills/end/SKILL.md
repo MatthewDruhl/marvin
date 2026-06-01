@@ -52,6 +52,7 @@ Review the conversation and prepare one combined message with these sections:
 - Action items
 
 **State Changes Preview**
+- Read the Projects table and Open Threads in `state/current.md`. Compare against what was discussed this session. If any project, thread, or status change isn't reflected, include it in the proposed changes.
 - Proposed changes to `state/current.md`, including new priorities, changed statuses, completed items, and new open threads
 - Proposed `state/goals.md` updates only if goal progress was made
 - Proposed `state/commitments.json` updates for new, resolved, blocked, waiting, stale, or changed commitments
