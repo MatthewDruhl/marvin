@@ -47,7 +47,17 @@ Append to `sessions/{TODAY}.md`:
 
 If file doesn't exist, create with header: `# Session Log: {TODAY}`
 
-### Step 3: Update State (if needed)
+### Step 3: Refresh Project Registry
+Check `state/projects.md` for any project that was discussed or worked on
+since the last update/session start. For each:
+1. `cd {path} && git branch --show-current` — update current branch
+2. `cd {path} && gh pr list --state open` — update open PRs count
+3. `cd {path} && gh issue list --state open` — update open issues count
+4. Update any Notes field if project state changed (new PR, branch switch, etc.)
+
+Skip projects that weren't touched. Skip freelance subdirectories (no repo).
+
+### Step 4: Update State (if needed)
 Read the Projects table and Open Threads in `state/current.md`. Compare against what was discussed this session. If any project, thread, or status change from the session isn't reflected, ask: "Should I add/update X in current.md?"
 
 Triggers:
@@ -58,7 +68,7 @@ Triggers:
 
 Skip only after verifying nothing was missed.
 
-### Step 4: Update Commitments (if needed)
+### Step 5: Update Commitments (if needed)
 
 Use `state/commitments.json` as the source of truth for active commitments. Update it only when the recent work clearly changed a commitment:
 - New commitment with owner, project, status, next action, and source
@@ -67,7 +77,7 @@ Use `state/commitments.json` as the source of truth for active commitments. Upda
 
 Do not add new active commitments to `state/todos.md`; that file is legacy/reference. If the change is ambiguous, ask before writing.
 
-### Step 5: Confirm (minimal)
+### Step 6: Confirm (minimal)
 One line: "Checkpointed: {brief description}"
 
 No summary. No "next actions" list. Just confirm the save.
