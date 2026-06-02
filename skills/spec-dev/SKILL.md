@@ -88,9 +88,16 @@ Approve this plan?
 
 **Wait for explicit user approval before proceeding.**
 
+#### Step 4: Save the Plan
+
+After user approves, save the plan to the project folder:
+`<project-path>/plan-issue-<number>.md`
+
+This is the audit trail. If the build drifts, compare the PR against this file.
+
 ### Phase 2: Background (no user needed)
 
-After user approves the plan, spawn a background agent with worktree
+After the plan is saved, spawn a background agent with worktree
 isolation to execute the build.
 
 #### Agent Instructions

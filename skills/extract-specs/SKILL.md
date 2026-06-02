@@ -109,6 +109,8 @@ Ask the user:
 
 Update the brief based on answers. Repeat until the user says it's complete.
 
+**Important:** Present questions one at a time. Wait for the answer before asking the next.
+
 ### Step 6: Save and Handoff
 
 1. Save the final requirements brief to the project's folder (from `state/projects.md`):
