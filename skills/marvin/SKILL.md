@@ -45,8 +45,8 @@ Read these files (parallelize where possible):
 4. `state/todos.md` — Legacy human-readable reference; do not treat as source of truth for active commitments
 5. `state/habits.md` — Habit streaks
 6. `state/projects.md` — Project registry (repos, branches, PRs, issues)
-6. `sessions/{TODAY}.md` — If exists, we're resuming today's session
-7. If no today file, read the most recent file in `sessions/` for continuity
+7. `sessions/{TODAY}.md` — If exists, we're resuming today's session
+8. If no today file, read the most recent file in `sessions/` for continuity
 
 ### Step 3: Check Gmail
 
