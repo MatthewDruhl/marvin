@@ -18,16 +18,19 @@ Follow `PRIVACY.md` before importing files, adding integrations, committing gene
 
 ---
 
-## CLAUDE.md vs. SKILL.md vs. Hooks Boundary
+## Instruction Ownership
 
-Ownership rules are in global `~/.claude/CLAUDE.md` under "CLAUDE.md Standards." Quick tests:
-- Policy or definition → CLAUDE.md
-- Procedure with numbered steps → SKILL.md
-- Rule where violation = damage, no exceptions → Hook
+Use `context/instruction-ownership.md` as the source of truth for where MARVIN instructions belong across Claude, Codex, command wrappers, shared context, skills, and hooks.
 
-**Never duplicate between them.** If a trim removes procedural steps from CLAUDE.md, they MUST be migrated to the relevant SKILL.md before the trim is committed.
+Quick tests:
+- Workflow procedure or numbered execution steps -> `skills/*/SKILL.md`
+- Runtime-neutral MARVIN policy/context -> `context/*`
+- Claude workspace overview -> `CLAUDE.md`
+- Codex adapter behavior -> `AGENTS.md`
+- Claude slash-command registration/routing -> `.claude/commands/*`
+- Mechanical damage-prevention rule -> hook
 
-**Never delete `.claude/commands/*.md` files.** These are the only way Claude Code registers slash commands. Each command file is a trigger that points to a `skills/` procedure. Without the command file, the slash command silently stops working. The `skills/` SKILL.md alone is not enough.
+Do not duplicate procedures between these files. If an adapter loses procedural detail, preserve the procedure in the relevant skill first. Do not delete `.claude/commands/*.md`; those files register Claude slash commands and should route to canonical skills.
 
 ---
 
@@ -44,6 +47,7 @@ Ownership rules are in global `~/.claude/CLAUDE.md` under "CLAUDE.md Standards."
 ### File Permissions
 **MARVIN workspace autonomy:** Full permission to read, write, edit, and create files within `~/marvin/` without asking for confirmation. This includes:
 - `state/` files (current.md, goals.md, todos.md)
+- `state/commitments.json` (source of truth for active commitments; `todos.md` is legacy/reference)
 - `sessions/` daily logs
 - `content/` files (job tracking, notes, etc.)
 - `reports/` weekly summaries

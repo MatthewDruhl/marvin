@@ -22,6 +22,26 @@ The integration uses the [workspace-mcp](https://github.com/ergovia-devs/workspa
 .claude/settings.local.json         # Enables the MCP server (gitignored)
 ```
 
+## Runtime Support
+
+### Claude Code
+
+Claude Code can use the project `.mcp.json` server when the server is enabled in `.claude/settings.local.json`. Interactive Claude Code sessions are the primary supported runtime for this integration today.
+
+### Codex
+
+Codex does not necessarily load project `.mcp.json` servers automatically. Treat Google Workspace MCP availability as runtime-dependent unless the current Codex environment explicitly exposes Gmail and Calendar tools.
+
+For `/marvin` startup in Codex:
+
+1. Check whether Gmail and Calendar MCP tools are available before using them.
+2. If they are available, use the normal MARVIN Gmail/calendar workflow.
+3. If they are unavailable, continue startup and report skipped checks clearly, for example:
+   - `Gmail: skipped (Google Workspace MCP unavailable in this runtime)`
+   - `Calendar: skipped (Google Workspace MCP unavailable in this runtime)`
+
+Do not work around missing MCP access by reading `.env`, OAuth tokens, browser profiles, or local credential stores. Missing MCP tools should degrade to skipped checks, not a failed `/marvin` briefing.
+
 ### What `.mcp.json` looks like
 
 ```json

@@ -32,6 +32,7 @@ Quickly scan the recent conversation for:
 - Decisions made
 - Files created/modified
 - Any state changes needed
+- Any commitments created, resolved, blocked, waiting, or given a new next action
 
 Keep it brief. No full summary needed.
 
@@ -57,15 +58,26 @@ since the last update/session start. For each:
 Skip projects that weren't touched. Skip freelance subdirectories (no repo).
 
 ### Step 4: Update State (if needed)
-Only update `state/current.md` if something actually changed:
+Read the Projects table and Open Threads in `state/current.md`. Compare against what was discussed this session. If any project, thread, or status change from the session isn't reflected, ask: "Should I add/update X in current.md?"
+
+Triggers:
+- New project or task discovered
 - New open thread
 - Completed item
-- Changed priority
-- New project/task discovered
+- Changed priority or status
 
-Skip if nothing material changed.
+Skip only after verifying nothing was missed.
 
-### Step 5: Confirm (minimal)
+### Step 5: Update Commitments (if needed)
+
+Use `state/commitments.json` as the source of truth for active commitments. Update it only when the recent work clearly changed a commitment:
+- New commitment with owner, project, status, next action, and source
+- Changed status (`active`, `waiting`, `blocked`, `done`, `dropped`)
+- Changed due date, review date, last touched date, or next action
+
+Do not add new active commitments to `state/todos.md`; that file is legacy/reference. If the change is ambiguous, ask before writing.
+
+### Step 6: Confirm (minimal)
 One line: "Checkpointed: {brief description}"
 
 No summary. No "next actions" list. Just confirm the save.

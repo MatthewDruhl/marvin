@@ -65,7 +65,7 @@ class TestGenericResumeRegression:
         )
         cmd_build(args)
 
-        built_files = list(output_dir.glob("Resume-*.docx"))
+        built_files = list(output_dir.glob("*_resume.docx"))
         assert len(built_files) == 1, f"Expected 1 docx, got {len(built_files)}"
 
         known_paragraphs = _extract_text(KNOWN_GOOD)
@@ -98,7 +98,7 @@ class TestGenericResumeRegression:
         )
         cmd_build(args)
 
-        built_files = list(output_dir.glob("Resume-*.docx"))
+        built_files = list(output_dir.glob("*_resume.docx"))
         known_tables = _extract_table_text(KNOWN_GOOD)
         built_tables = _extract_table_text(built_files[0])
 
@@ -128,7 +128,7 @@ class TestGenericResumeRegression:
         )
         cmd_build(args)
 
-        built_files = list(output_dir.glob("Resume-*.docx"))
+        built_files = list(output_dir.glob("*_resume.docx"))
         built_paragraphs = _extract_text(built_files[0])
 
         expected_sections = [
@@ -159,7 +159,7 @@ class TestGenericResumeRegression:
         )
         cmd_build(args)
 
-        built_files = list(output_dir.glob("Resume-*.docx"))
+        built_files = list(output_dir.glob("*_resume.docx"))
         built_text = "\n".join(_extract_text(built_files[0]))
 
         for section_key in ("experience", "additional_experience"):

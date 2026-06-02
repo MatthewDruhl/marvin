@@ -132,6 +132,7 @@ def build_packet(repo_root: Path, create_week_file: bool) -> dict[str, Any]:
         "global_claude": Path.home() / ".claude" / "CLAUDE.md",
         "state_current": repo_root / "state" / "current.md",
         "state_goals": repo_root / "state" / "goals.md",
+        "state_commitments": repo_root / "state" / "commitments.json",
         "state_todos": repo_root / "state" / "todos.md",
         "state_habits": repo_root / "state" / "habits.md",
     }
@@ -148,6 +149,7 @@ def build_packet(repo_root: Path, create_week_file: bool) -> dict[str, Any]:
         ),
         FileEntry("state_current", paths["state_current"]),
         FileEntry("state_goals", paths["state_goals"]),
+        FileEntry("state_commitments", paths["state_commitments"]),
         FileEntry("state_todos", paths["state_todos"]),
         FileEntry("state_habits", paths["state_habits"]),
     ]

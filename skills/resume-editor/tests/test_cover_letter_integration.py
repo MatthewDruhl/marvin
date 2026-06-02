@@ -9,7 +9,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
-from resume_builder import cmd_cover_letter
+from resume_builder import cmd_cover_letter, get_filename_prefix
 
 
 class TestCoverLetterCommand:
@@ -34,11 +34,11 @@ class TestCoverLetterCommand:
         )
         cmd_cover_letter(args)
 
-        docx_files = list(output_dir.glob("CoverLetter-*.docx"))
-        assert len(docx_files) == 1
+        output_file = output_dir / f"{get_filename_prefix()}_cover_letter.docx"
+        assert output_file.exists()
 
-    def test_filename_contains_company(self, tmp_path):
-        """Output filename should include the company name."""
+    def test_filename_uses_resume_header_name(self, tmp_path):
+        """Output filename should use the resume header name."""
         body_file = tmp_path / "body.txt"
         body_file.write_text("Test body paragraph.")
         output_dir = tmp_path / "output"
@@ -54,7 +54,7 @@ class TestCoverLetterCommand:
         cmd_cover_letter(args)
 
         docx_files = list(output_dir.glob("*.docx"))
-        assert any("AcmeInc" in f.name for f in docx_files)
+        assert [f.name for f in docx_files] == [f"{get_filename_prefix()}_cover_letter.docx"]
 
     def test_missing_body_file_exits(self, tmp_path):
         """Should sys.exit(1) when body file doesn't exist."""
