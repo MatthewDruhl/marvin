@@ -1,0 +1,77 @@
+Kinze Doors On-Site Meetings
+May 27, 2026 | Williamsburg, IA
+
+
+MEETING 1: Susanne's Workflow Walkthrough
+8:43 AM | ~34 minutes
+Attendees: Susanne (Kinzenbaw) Veatch, Matt Druhl, Ryan Veatch
+
+Susanne walked through her full quoting process from start to finish. HubSpot form submissions arrive at a dedicated Kinze Doors email account. She leaves them in the inbox until processed, then moves them to a "Complete" folder. That inbox is her tracking system. Monday mornings can have five or more forms waiting.
+
+When a request comes in, Susanne forwards the HubSpot form to Bob. Bob works through his pricing spreadsheet, determines the cost, and sends back a number along with a GA (general assembly) drawing. Susanne then fills out a quote form template in about 30 seconds: customer info, door dimensions, opening time, lead time, and a 50% deposit requirement. She applies the markup (currently 2x), calculates the final price, locks the form, saves it as a PDF, and emails it to the customer with the GA drawing attached.
+
+Quote numbering is manual. She scrolls to the bottom of her file, finds the last number, and increments it. If she makes a mistake after locking the form, she has to recreate it from scratch.
+
+For returning customers, Susanne searches her email for the old quote, forwards it, and attaches the new one alongside.
+
+The group quickly aligned on one thing: Bob is the bottleneck, not Susanne. On a busy weekend, 12 to 13 quotes can pile up. It takes Bob two days to dig out. If Bob is on vacation, quotes wait. Meanwhile, Susanne's process is fast and she's comfortable with it.
+
+Susanne was direct about the current CRM app. It adds steps for her (save a HubSpot email as a PDF, upload it to the app, download the output) and doesn't save her time. She wants to keep her email workflow. She also said she doesn't want everything automated until there's trust in the system.
+
+Everyone agreed: start with automating Bob's pricing process. Leave Susanne's workflow alone for now. Build the system alongside Bob's manual process so he can verify the output until he's confident it's correct.
+
+
+MEETING 2: Bob's Pricing Process and Eric's Band Chart
+9:41 AM | ~44 minutes
+Attendees: Bob, Ryan Veatch, Eric (joined at the end)
+Matt was present, mostly observing.
+
+Bob walked through his end-to-end process from receiving a HubSpot form to sending pricing back to Susanne.
+
+He starts by logging the quote request in a tracking spreadsheet. He's logged about 230 quotes since launch. There's a separate tab for phone call logs where he documents every call, incoming and outgoing. He highlights callbacks in blue and marks definite "no" responses in yellow. A pivot table lets him see which door sizes get quoted most often.
+
+For the actual pricing, Bob opens a separate spreadsheet and enters the door specifications: width and height, thickness (8 inches standard, 12 for larger doors), column frame design (four types: Small Single, Single, Big Single, Truss), electrical power, truss type, cylinder bore, hydraulic pump size, and wind load rating. Behind the scenes, the spreadsheet runs calculations across multiple tabs covering cylinder requirements, bill of materials, wind load, stress analysis, and safety factors. Pass/fail indicators flag structural problems. If wind deflection fails, Bob upgrades the truss or changes the frame design. The whole calculator takes 3 to 5 minutes.
+
+The time-consuming part is finding a GA drawing. Bob browses a folder of all existing drawings, searching by width. Drawing numbers have embedded logic (numbers starting with "112" are all singles, for example). For a 38-foot request, he'd look at anything from 36 to 40 feet. If an exact match exists, he sends it. If not, he sends the closest one with a note. This manual search is where Bob spends the most time.
+
+Once he has the cost and drawing, Bob replies to Susanne with the total door cost, estimated opening time, pump specs, the GA drawing, and any special notes. Susanne applies the markup and creates the customer-facing quote. Bob then waits one to two weeks and follows up with the customer by phone, up to three calls about a week apart.
+
+How Bob selects the frame design and truss type has been based on experience and intuition, but there is logic behind it. Eric Sprenchi built a visual "band chart" that maps door width and height to valid frame and truss combinations. At the end of this meeting, Ryan brought Matt to Eric's desk for a walkthrough.
+
+Eric's chart is the key to making the pricing engine fully automated. For a given door width and height, it calculates rough door weight and center of gravity. Based on those values, it determines the maximum hydraulic pressure at every point through the full cylinder stroke, checked at 0.1-inch increments. Each cell shows which frame designs are valid. "ERROR" means nothing works at that size and pressure. There are two pressure tiers: 1500 PSI and 2200 PSI. If 1500 shows ERROR, you go to the higher pump. Eric's intent was to make it definitive: "You take the choice away. If I have this size door, this is the size you have. Period."
+
+This eliminates Bob's intuition step entirely. Frame design, truss type, and pump selection all become deterministic.
+
+Other details from this meeting: material costs update once a year from Fourshift (their ERP system). It takes Bob half a day to update all costs manually. Ryan asked if costs could be pulled from Fourshift automatically. Bob thinks so but doesn't have the access. Accounting could provide a spreadsheet export. The formulas and calculation logic are stable. Eric is working on new design concepts to reduce costs, which could eventually change the spreadsheet structure, but the core sizing, stress, and BOM logic won't change.
+
+Pump selection is currently based on Bob's experience but follows a simple threshold: under 1500 PSI gets a 4hp pump, 1500 to 2500 PSI gets a 5hp or 8hp. This isn't automated in the spreadsheet but could be easily.
+
+Bob said he'd use a web-based system instead of the spreadsheet and would enter his phone call logs into the app so the rest of the team could see them. He wants to run the system alongside his manual process until he's confident it matches.
+
+Quote volume has grown quickly. They were at about 70 quotes in mid-March when marketing ramped up. Now they're at 230. The most common reason customers don't buy is cost, especially ag customers who have never priced a hydraulic door before. Aviation customers understand the pricing better.
+
+People referenced: Arlen originally created the pricing spreadsheet but has since left Kinze. Tim breaks down Eric's 3D models into individual part drawings. Dennis creates GA drawings in CAD, about 20 minutes per drawing.
+
+
+MEETING 3: IT Requirements and Tech Stack
+10:40 AM | ~16 minutes
+Attendees: Doug Weaver (IT lead), Steve Stumpff (IT/security), Ryan Veatch, Matt Druhl, one other Kinze IT staff
+
+
+Doug and Steve confirmed the application is internal-only for Phase 1. Ryan mentioned it could go on the website as a customer-facing quoting tool someday, but that's not in scope now.
+
+Doug requires SAML SSO so users log in with their existing credentials. No separate login. Steve clarified it's SAML-based and works with any identity provider, not tied to Windows specifically.
+
+The application will deploy on existing Kinze IIS servers with a load balancer in front. The load balancer is for maintenance windows (take one server down while the other keeps running), not for performance. There will only be two to three concurrent users.
+
+Doug asked directly whether an LLM is involved. Matt confirmed no, the system is deterministic. Ryan noted they want to leave the door open for AI features later, but Matt is intentionally separating any future LLM work from the core deterministic code.
+
+The tech stack is locked. Frontend: C# with Blazor Server (server-side rendering). Doug's strong preference is anything C-sharp. He said he'd accept Node.js or React but has limited staff to support it. Backend: .NET web services with JWT authentication between the frontend and backend. Database: SQL Server 2023, adding a new database to an existing server. Doug mentioned SQL Server 2023 supports embeddings if they ever need that. Repository: GitHub for now, with a possible transition to Azure DevOps later. No new licenses needed yet.
+
+For the development and handoff workflow, Matt develops in his own environment on GitHub, builds V1, runs test cases externally, then has Susanne and Bob review. Once the product is solid, Matt packages it as a versioned release with deployment instructions. Kinze IT runs it through their own test-to-prod pipeline. Future features come as versioned releases.
+
+Doug confirmed that if there are different user roles, they should be baked in from the start. Users will be grouped in Active Directory.
+
+No automated emails in Phase 1. Susanne will continue sending quotes manually. Ryan said sending from the app might be nice down the road. Steve noted they have an internal SMTP relay available if needed later.
+
+Kinze is also purchasing code review software for vulnerability scanning. Two tools were evaluated. Doug preferred the more expensive option, but the cheaper one was selected at one-third the price. It will run before deployment and can audit after the fact. Steve was okay publishing the app before code review is fully in place, then fixing issues as they surface.
