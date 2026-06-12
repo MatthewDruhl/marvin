@@ -88,6 +88,98 @@ def find_session_log(sessions_dir: Path, today: dt.date) -> tuple[Path | None, s
     return candidates[0], "latest"
 
 
+def parse_last_updated(text: str | None) -> dt.date | None:
+    if not text:
+        return None
+    match = re.search(r"(?im)^\**last updated:?\**\s*:?\s*(\d{4}-\d{2}-\d{2})", text)
+    if not match:
+        return None
+    try:
+        return dt.date.fromisoformat(match.group(1))
+    except ValueError:
+        return None
+
+
+def build_staleness(
+    files: dict[str, dict[str, Any]], today: dt.date, threshold_days: int = 3
+) -> dict[str, Any]:
+    out: dict[str, Any] = {}
+    for label in ("state_current", "state_goals", "state_todos", "state_habits"):
+        data = files.get(label)
+        last = parse_last_updated(data["content"]) if data else None
+        age = (today - last).days if last else None
+        out[label] = {
+            "last_updated": last.isoformat() if last else None,
+            "age_days": age,
+            "stale": age is not None and age > threshold_days,
+        }
+    return out
+
+
+def parse_iso_date(value: Any) -> dt.date | None:
+    if not value or not isinstance(value, str):
+        return None
+    try:
+        return dt.date.fromisoformat(value[:10])
+    except ValueError:
+        return None
+
+
+def build_commitments_health(
+    raw: str | None, today: dt.date, stale_days: int = 7
+) -> dict[str, Any]:
+    out: dict[str, Any] = {
+        "status": "ok",
+        "active_count": 0,
+        "overdue": [],
+        "review_due": [],
+        "stale": [],
+    }
+    if raw is None:
+        out["status"] = "missing"
+        return out
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        out["status"] = f"invalid_json: {exc}"
+        return out
+    for c in data.get("commitments", []):
+        if c.get("status") != "active":
+            continue
+        out["active_count"] += 1
+        summary = {
+            "id": c.get("id"),
+            "title": c.get("title"),
+            "next_action": c.get("next_action"),
+        }
+        due = parse_iso_date(c.get("due"))
+        if due and due < today:
+            out["overdue"].append({**summary, "due": due.isoformat()})
+        review = parse_iso_date(c.get("review_after"))
+        if review and review <= today:
+            out["review_due"].append({**summary, "review_after": review.isoformat()})
+        touched = parse_iso_date(c.get("last_touched"))
+        if touched and (today - touched).days > stale_days:
+            out["stale"].append(
+                {**summary, "last_touched": touched.isoformat()}
+            )
+    return out
+
+
+def session_gap_days(sessions_dir: Path, today: dt.date) -> int | None:
+    if not sessions_dir.exists():
+        return None
+    dates = []
+    for p in sessions_dir.glob("*.md"):
+        try:
+            dates.append(dt.date.fromisoformat(p.stem))
+        except ValueError:
+            continue
+    if not dates:
+        return None
+    return (today - max(dates)).days
+
+
 def count_nonempty_csv_rows(path: Path) -> int:
     text, err = read_text(path)
     if err or text is None:
@@ -135,6 +227,7 @@ def build_packet(repo_root: Path, create_week_file: bool) -> dict[str, Any]:
         "state_commitments": repo_root / "state" / "commitments.json",
         "state_todos": repo_root / "state" / "todos.md",
         "state_habits": repo_root / "state" / "habits.md",
+        "state_projects": repo_root / "state" / "projects.md",
     }
 
     file_entries = [
@@ -152,6 +245,7 @@ def build_packet(repo_root: Path, create_week_file: bool) -> dict[str, Any]:
         FileEntry("state_commitments", paths["state_commitments"]),
         FileEntry("state_todos", paths["state_todos"]),
         FileEntry("state_habits", paths["state_habits"]),
+        FileEntry("state_projects", paths["state_projects"]),
     ]
 
     files: dict[str, dict[str, Any]] = {}
@@ -190,7 +284,17 @@ def build_packet(repo_root: Path, create_week_file: bool) -> dict[str, Any]:
     week_created = False
     if create_week_file and not week_exists_before:
         twc_dir.mkdir(parents=True, exist_ok=True)
-        header = "Date,Activity Type,Company,Position,Method,Notes\n"
+        template = twc_dir / "weekly-work-search-template.csv"
+        template_text, template_err = read_text(template)
+        if template_err is None and template_text and template_text.strip():
+            header = template_text.splitlines()[0] + "\n"
+        else:
+            header = (
+                "Week Starting,Week Ending,Required Searches,Date of Activity,"
+                "Work Search Activity,Type of Job,Company Name,Address,City,"
+                "State,Zip Code,Phone,Email,Contact Method,Person Contacted,"
+                "Results,Notes\n"
+            )
         week_file.write_text(header, encoding="utf-8")
         week_created = True
     week_exists_after = week_file.exists()
@@ -198,6 +302,11 @@ def build_packet(repo_root: Path, create_week_file: bool) -> dict[str, Any]:
 
     applications_path = Path.home() / "Resume" / "jobs" / "applications.md"
     active_count, active_err = count_active_applications(applications_path)
+
+    staleness = build_staleness(files, today)
+    commitments_raw = files["state_commitments"]["content"]
+    commitments = build_commitments_health(commitments_raw, today)
+    gap_days = session_gap_days(sessions_dir, today)
 
     return {
         "generated_at": {
@@ -217,6 +326,9 @@ def build_packet(repo_root: Path, create_week_file: bool) -> dict[str, Any]:
         },
         "files": files,
         "session_log": session_data,
+        "staleness": staleness,
+        "commitments_health": commitments,
+        "session_gap_days": gap_days,
         "twc_current_week": {
             "week_start_sunday": start.isoformat(),
             "week_end_saturday": end.isoformat(),
@@ -254,6 +366,25 @@ def render_text(packet: dict[str, Any]) -> str:
     lines.append(f"- source: {s['source']}")
     lines.append(f"- status: {s['status']}")
     lines.append(f"- path: {s['path']}")
+    gap = packet["session_gap_days"]
+    lines.append(f"- gap_days_since_last_session: {gap}")
+    lines.append("")
+    lines.append("State File Staleness (threshold 3 days):")
+    for label, info in packet["staleness"].items():
+        flag = " STALE" if info["stale"] else ""
+        lines.append(
+            f"- {label}: last_updated={info['last_updated']} "
+            f"age_days={info['age_days']}{flag}"
+        )
+    lines.append("")
+    ch = packet["commitments_health"]
+    lines.append("Commitments Health:")
+    lines.append(f"- status: {ch['status']}, active: {ch['active_count']}")
+    for key in ("overdue", "review_due", "stale"):
+        lines.append(f"- {key}: {len(ch[key])}")
+        for item in ch[key]:
+            extra = item.get("due") or item.get("review_after") or item.get("last_touched")
+            lines.append(f"  - {item['title']} ({extra}) next: {item['next_action']}")
     lines.append("")
     twc = packet["twc_current_week"]
     lines.append("TWC Current Week:")
