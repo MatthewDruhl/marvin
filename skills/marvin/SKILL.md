@@ -24,29 +24,26 @@ Start MARVIN session with full context loading, Gmail check, cross-referencing, 
 
 ## Process
 
-### Step 1: Establish Current Date and Time
+### Step 1: Generate the Startup Packet
+
 ```bash
-date '+%A %Y-%m-%d %H:%M %Z'
+uv run python scripts/marvin_start.py --format text --create-twc-week-file
 ```
-Store full output. Extract:
-- `DAY` — day of week (e.g., Tuesday)
-- `TODAY` — YYYY-MM-DD for file naming
-- `TIME` — HH:MM for event-aware reasoning
-- `TZ` — timezone for clarity
 
-Use throughout the briefing. If events are scheduled today, compare against TIME to determine upcoming vs. already passed. Never guess the day of week from the date.
+The packet is the deterministic foundation of the briefing. It contains:
+- **Generated timestamp** — DAY, TODAY (YYYY-MM-DD), TIME, TZ. Use these throughout; never guess the day of week or compute dates yourself.
+- **File contents** — `state/current.md`, `goals.md`, `commitments.json`, `todos.md` (legacy reference only, not source of truth), `habits.md`, `projects.md`, CLAUDE/AGENTS/context files, and today's (or the most recent) session log.
+- **State file staleness** — last-updated date and age per state file, flagged past 3 days.
+- **Commitments health** — overdue, review-due, and stale (7+ days untouched) active commitments with next actions.
+- **Session gap** — days since the last session log.
+- **TWC current week** — Sunday-Saturday window, week file path, activity row count. The `--create-twc-week-file` flag creates the week's CSV from the template if missing; never create it by hand.
+- **Active application count** from `~/Resume/jobs/applications.md`.
 
-### Step 2: Load Context
+Do not recompute anything the packet already provides. If the script fails, fall back to `date '+%A %Y-%m-%d %H:%M %Z'` plus manual file reads, and flag the failure in Skipped Checks.
 
-Read these files (parallelize where possible):
-1. `state/current.md` — Current priorities, open threads, scheduled events
-2. `state/goals.md` — Goals and progress tracking
-3. `state/commitments.json` — Local source of truth for active commitments, due dates, review dates, owners, and next actions. If missing, create it from the structure in `context/commitments.example.json`.
-4. `state/todos.md` — Legacy human-readable reference; do not treat as source of truth for active commitments
-5. `state/habits.md` — Habit streaks
-6. `state/projects.md` — Project registry (repos, branches, PRs, issues)
-7. `sessions/{TODAY}.md` — If exists, we're resuming today's session
-8. If no today file, read the most recent file in `sessions/` for continuity
+### Step 2: Note Session Continuity
+
+From the packet: if the session log source is `today`, we're resuming today's session — acknowledge what was already covered. If `session_gap_days` > 1, note the gap in the briefing. If `state/commitments.json` is missing, create it from `context/commitments.example.json`.
 
 ### Step 3: Check Gmail
 
@@ -84,28 +81,22 @@ If Gmail MCP tools are available:
 
 ### Step 4: Cross-Reference and Quality Check
 
-Analyze the state files already loaded in Step 2. Do NOT re-read them. The goal is to catch drift, contradictions, and stale data so the briefing reflects reality.
+Analyze the packet contents from Step 1. Do NOT re-read state files. The mechanical facts (staleness ages, commitment health, TWC counts, session gap) are already in the packet; this step is the judgment layer on top.
 
 **Freshness and drift:**
-- Check the `Last updated:` line in each state file. Flag any not updated in the last 3 days with age (e.g., "current.md last updated 9 days ago").
-- Scan `current.md` for dates or deadlines that have already passed but are still phrased as upcoming (e.g., "Target: videos done by May 15" when today is May 21).
+- Report packet staleness flags with age (e.g., "current.md last updated 9 days ago").
+- Scan `current.md` for dates or deadlines that have already passed but are still phrased as upcoming (e.g., "Target: videos done by May 15" when today is May 21). This is prose the script can't parse; it's on you.
 
 **Contradictions:**
 - Compare priority descriptions in `current.md` against `goals.md` and `commitments.json`. Flag mismatches (e.g., different rejection counts, different project statuses).
 - Check if any active commitment appears resolved per session logs, `current.md`, or Gmail findings.
 
 **Cross-references:**
-1. **Commitments vs. reality:** Compare active commitments against Gmail findings and `current.md`. If a commitment is clearly resolved, prepare a `commitments.json` status update and note it in the briefing.
-2. **Today's events:** Check `current.md` for anything scheduled today. Use TIME from Step 1 to mark each as upcoming or already passed.
-3. **TWC week status:** Determine current TWC week (Sun-Sat). Check if a CSV exists for this week. Count activities logged. Calculate days remaining.
+1. **Commitments vs. reality:** Compare the packet's overdue/review-due/stale commitments against Gmail findings and `current.md`. If a commitment is clearly resolved, prepare a `commitments.json` status update and note it in the briefing.
+2. **Today's events:** Check `current.md` for anything scheduled today. Use TIME from the packet to mark each as upcoming or already passed.
+3. **TWC week status:** Use the packet's `twc_current_week` (window, row count, file). Calculate days remaining to Saturday.
 4. **Stale open threads:** Flag any open thread in `current.md` that hasn't been updated in 7+ days.
 5. **New contacts from Gmail:** If Gmail surfaced a new job contact not in `~/Resume/jobs/contacts.md`, prepare to add them.
-6. **Commitment health:** From `commitments.json`, flag overdue commitments, commitments with `review_after` today or earlier, and commitments whose `last_touched` is more than 7 days old unless status is `waiting`, `done`, or `dropped`.
-
-**Session gap:**
-- Calculate the gap between today and the most recent session log.
-- If gap > 1 day, note the gap in the briefing (e.g., "3 days since last session"). Context is already in `current.md` Recent Updates.
-- If resuming today's session, skip this.
 
 **Confidence tracking:**
 - Track which checks succeeded and which could not complete (e.g., Gmail MCP unavailable, no active applications).
@@ -125,7 +116,7 @@ Analyze the state files already loaded in Step 2. Do NOT re-read them. The goal 
 
 Act on findings from Steps 3-5 before presenting the briefing:
 
-1. **TWC CSV:** If a new week started and no CSV exists, create it
+1. **TWC CSV:** Already handled by the Step 1 script (`--create-twc-week-file`). Note in the briefing if the packet says the file was created.
 2. **Contacts:** If Gmail found a new job contact, add to `~/Resume/jobs/contacts.md`
 3. **TWC logging:** If Gmail found a networking event or job search activity, log to current week's TWC CSV
 4. **Commitments:** If Step 4 resolved, changed, or discovered commitments, preview the `commitments.json` changes before writing. Do not scatter new active commitments into `todos.md`.
@@ -183,14 +174,12 @@ How can I help today?
 
 ## Self-Verification Checklist
 
-After completing all steps but BEFORE presenting the briefing, verify:
+The startup packet handles datetime, staleness, commitment health, and TWC mechanics. Before presenting the briefing, verify the judgment work:
 
-- [ ] Did I use full datetime (day, date, time, timezone)?
-- [ ] Did I run quality checks (staleness, past deadlines, contradictions) on already-loaded state files?
-- [ ] Did I check `commitments.json` for overdue, review-due, stale, or resolved commitments?
+- [ ] Did I run the startup script (not recompute dates/TWC/staleness by hand)?
+- [ ] Did I check for past deadlines still phrased as upcoming, and contradictions between state files?
 - [ ] Did I pull full content for any new job-related emails (not just flag them)?
 - [ ] Did I mark today's events as upcoming/passed based on current time?
-- [ ] Did I check/create the TWC weekly CSV?
 - [ ] Did I avoid treating `state/todos.md` as the source of truth for active commitments?
 - [ ] Did I avoid asking permission for reads that are part of the startup flow?
 - [ ] Did I note which checks were skipped and why?
@@ -202,3 +191,4 @@ If any check fails, fix it before presenting.
 *Skill created: 2026-01-22*
 *Rewritten: 2026-04-28 — restored intelligence lost in CLAUDE.md V2 trim, added cross-referencing, Gmail, proactive actions, and self-verification*
 *Updated: 2026-05-21 — merged quality loop into cross-reference step (no double-reads), removed duplicate .claude/commands/marvin.md (#249)*
+*Updated: 2026-06-12 — wired Steps 1-2 to scripts/marvin_start.py; deterministic work (datetime, staleness, commitment health, TWC, session gap) moved to the script (#286)*
