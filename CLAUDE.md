@@ -59,79 +59,11 @@ Do not duplicate procedures between these files. If an adapter loses procedural 
 
 ---
 
-## Job Tracking Workflow
+## Job Tracking
 
-**Location:** Job tracking data is split between two locations:
-- **`~/Resume/jobs/`** — Applications, opportunities, interview prep, job research/analysis, live contacts, and follow-ups (personal data, outside repo)
-- **`content/jobs/`** — Sanitized examples, search strings, TWC scripts, and TWC documentation (in repo; generated TWC CSVs/PDFs gitignored)
+**Data boundary:** Live job-search data (applications, contacts, research) lives in `~/Resume/jobs/`, outside the repo. Only sanitized examples, search strings, and TWC tooling live in `content/jobs/` (generated TWC CSVs/PDFs gitignored). See `PRIVACY.md`. When in doubt: `~/Resume/jobs/`.
 
-See `PRIVACY.md` for the full data-boundary rules. When in doubt, put live job-search data under `~/Resume/jobs/`, not `content/jobs/`.
-
-### Files
-- **`~/Resume/jobs/applications.md`** - Active applications with current status
-- **`~/Resume/jobs/opportunities.md`** - Roles to research and apply for
-- **`~/Resume/jobs/interview-prep/`** - Question banks, mock sessions, company research
-- **`~/Resume/jobs/research/`** - Job posting analysis, match scores, salary research, job search session outputs (personal evaluation data — never in repo)
-- **`~/Resume/jobs/contacts.md`** - Recruiter conversations and follow-ups (personal data — never in repo)
-- **`content/jobs/contacts.md.example`** - Sanitized contact example only
-- **`content/jobs/TWC/`** - Official Texas Workforce Commission reporting (CSV format, gitignored)
-  - `job-application-tracker.csv` - Master list of all applications
-  - `work-search-week-*.csv` - Weekly activity logs (4 required per week)
-
-### Job Research Workflow
-
-**When analyzing a job posting, researching a company, or running a job search session:** save output to `~/Resume/jobs/research/` (never to `content/jobs/`). This includes match scorecards, salary context research, and job search session summaries. These contain Matt's personal evaluation data and must stay outside the repo.
-
-**File naming:** `{company}-{role}-{jobid}.md` for posting analyses, `{company}-search-{YYYY-MM-DD}.md` for broader searches.
-
-### Tracking New Applications
-
-**Required from user:** URL, Company, Job Title (minimum)
-
-**Optional but useful:** Salary range, location (remote/hybrid/onsite), tech stack, applied via (FlexJobs, LinkedIn, direct, etc.)
-
-**User says:** "applied for [Job Title] at [Company] [URL]" or similar
-
-**I do:**
-1. Add to `~/Resume/jobs/applications.md` with status "Application submitted"
-2. Add to `TWC/job-application-tracker.csv` for official reporting
-3. Add to current week's `work-search-week-*.csv` (create new week file if needed)
-4. If optional details weren't provided, try fetching from URL to fill in salary, location, tech stack
-5. Confirm what was added + TWC progress for the week
-
-### Logging Job Search Activities
-
-**User says:** "job search: [what they did]"
-
-**I do:**
-1. Add to current week's `work-search-week-*.csv`
-2. Track progress toward 4/week TWC requirement
-3. Confirm logging
-
-**Valid activities:** Applied for job, Interview, Follow-up email, Searched online, Job fair, Networking event, Career counseling
-
-### Gmail Response Checking
-
-**When:** At every `/marvin` session start (automatic)
-
-**I do:**
-1. Search Gmail for emails from companies in `~/Resume/jobs/applications.md`
-2. Search for keywords: "application", "interview", "thank you for applying"
-3. Report any new responses
-4. Ask if user wants to update application statuses
-5. Update both markdown and CSV files as needed
-
-### Weekly TWC Requirement
-
-- **Required:** 4 job search activities per week
-- **Week runs:** Sunday - Saturday (e.g., Jan 25 - Jan 31)
-- **Week files named by:** Starting Sunday date (e.g., `work-search-week-2026-01-25.csv`)
-- **I track:** Activities logged, remind when approaching deadline
-- **I create:** New weekly CSV file when needed (named with upcoming Sunday's date)
-- **Deadline:** End of Saturday to complete 4 activities for the week
-- **New week starts:** Sunday (requires new CSV file)
-
-**Important:** Always verify the current day of week when discussing deadlines. Use `date +%A` to confirm. Never assume the day based on the date alone.
+**Procedures** (tracking applications, logging activities, Gmail checks, weekly TWC requirement): `skills/job-tracking/SKILL.md`.
 
 ---
 
