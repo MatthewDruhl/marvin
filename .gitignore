@@ -64,6 +64,8 @@ content/freelance/**/*.pdf
 content/freelance/**/exports/
 content/freelance/**/raw/
 content/freelance/**/private/
+content/freelance/**/*-data.json
+content/freelance/llc-expenses.csv
 
 __pycache__/
 .venv/

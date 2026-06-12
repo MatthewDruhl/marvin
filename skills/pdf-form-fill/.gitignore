@@ -1,0 +1,4 @@
+# Never commit signature assets
+*signature*.png
+*.sig.png
+assets/signatures/
