@@ -14,8 +14,11 @@ if [ -z "$CMD" ]; then
   exit 0
 fi
 
-# Only check commands that look like git commit
-if ! echo "$CMD" | grep -qE 'git\s+commit'; then
+# Only check commands where git commit appears in command position
+# (start of command or after a separator), not anywhere in the string.
+# Prevents false positives when quoted text merely mentions committing
+# (e.g. an issue body passed to gh issue create).
+if ! echo "$CMD" | grep -qE '(^|[;&|]\(?)\s*(command\s+)?git\s+(-[A-Za-z]+\s+\S+\s+)*commit'; then
   exit 0
 fi
 
