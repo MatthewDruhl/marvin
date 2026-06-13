@@ -46,39 +46,32 @@ Do not recompute anything the packet already provides. If the script fails, fall
 
 From the packet: if the session log source is `today`, we're resuming today's session — acknowledge what was already covered. If `session_gap_days` > 1, note the gap in the briefing. If `state/commitments.json` is missing, create it from `context/commitments.example.json`.
 
-### Step 3: Check Gmail
+### Step 3: Check Gmail (delegated to gmail-triage subagent)
 
-**Purpose:** Surface job responses, freelance/business communications, and new contacts proactively.
+**Purpose:** Surface job responses, freelance/business communications, and new contacts proactively, without pulling raw email bodies into this session's context.
 
-Before searching, verify Google Workspace MCP tools are available in the current runtime. Project `.mcp.json` may not be loaded automatically outside Claude Code.
+**Launch the subagent immediately after Step 1** so it runs while you work Steps 2 and 4 (cross-referencing is the first thing that needs its results):
 
-If Calendar MCP tools are unavailable, do not query Google Calendar. Use `current.md` for today's events in Step 4 and add `Calendar: skipped (Google Workspace MCP unavailable in this runtime)` to Skipped Checks.
+```
+Agent(
+  subagent_type: "gmail-triage",
+  description: "Gmail triage for startup briefing",
+  prompt: today's date
+        + active contact/client names (from the packet's current.md priorities)
+        + active company names (if the packet shows active applications)
+        + "contacts file: ~/Resume/jobs/contacts.md"
+        + "session logs: ~/marvin/sessions/"
+)
+```
 
-If Gmail MCP tools are unavailable:
+The agent owns the searches, newsletter filtering, already-saved dedup, and long-thread handling (#280-282, procedure in `.claude/agents/gmail-triage.md`). It returns structured findings: category, sender, summary, action, and full content only for items needing cross-reference. Trust its `noise` list; do not re-fetch noise items.
 
-1. Do not attempt shell workarounds or read credential files.
-2. Mark Gmail checks as skipped with the reason, e.g. `Gmail: skipped (Google Workspace MCP unavailable in this runtime)`.
-3. Continue the rest of the startup flow.
+**Act, don't ask:** for findings the agent marks with an action (new contact, job response, client request), proceed in the main session without asking permission.
 
-If Gmail MCP tools are available:
-
-#### 3a: Active contacts and clients
-1. Read `state/current.md` Active Priorities for freelance client names and key contacts (e.g., Ryan, Bryan, Jana, Doug, Bob, Michael Bond)
-2. Search Gmail for emails from each active freelance/business contact by name (last 7 days)
-3. Pull full content for any new emails from these contacts
-
-#### 3b: Job search
-1. Read `~/Resume/jobs/applications.md` for active company names
-2. If active apps exist, search Gmail for emails from those companies (last 7 days)
-3. If active apps exist, search Gmail for job keywords: "application", "interview", "thank you for applying" (last 7 days)
-
-#### 3c: Recruiter outreach
-1. **Always run (even with 0 active apps):** Search Gmail for recruiter outreach (last 7 days). Use keywords: "opportunity", "role", "position", "candidate". Cross-reference senders against `~/Resume/jobs/contacts.md`. Flag emails from new senders.
-2. **Always run:** Search spam for job-related emails (last 7 days)
-
-#### 3d: Act on findings
-1. **Act, don't ask:** If results include unrecognized senders or new job-related emails, pull the full content immediately. Do NOT ask permission to read — just read and include findings in the briefing.
-2. For email threads (introductions, recruiter outreach), pull the full thread to understand context
+**Fallbacks:**
+- `gmail-triage` agent type unavailable in this runtime → run the searches inline following the agent file's procedure (metadata first, filter noise, never full-fetch 3+ message threads).
+- Gmail MCP tools unavailable entirely → no shell workarounds, no credential files; mark `Gmail: skipped (Google Workspace MCP unavailable in this runtime)` and continue.
+- Calendar MCP tools unavailable → don't query Google Calendar; use `current.md` for today's events in Step 4 and add `Calendar: skipped` to Skipped Checks.
 
 ### Step 4: Cross-Reference and Quality Check
 
@@ -183,8 +176,9 @@ How can I help today?
 The startup packet handles datetime, staleness, commitment health, and TWC mechanics. Before presenting the briefing, verify the judgment work:
 
 - [ ] Did I run the startup script (not recompute dates/TWC/staleness by hand)?
+- [ ] Did I launch gmail-triage right after Step 1 (or follow its procedure inline as fallback)?
 - [ ] Did I check for past deadlines still phrased as upcoming, and contradictions between state files?
-- [ ] Did I pull full content for any new job-related emails (not just flag them)?
+- [ ] Did I act on every agent finding with an action attached (not just list them)?
 - [ ] Did I mark today's events as upcoming/passed based on current time?
 - [ ] Did I avoid treating `state/todos.md` as the source of truth for active commitments?
 - [ ] Did I avoid asking permission for reads that are part of the startup flow?
@@ -198,3 +192,4 @@ If any check fails, fix it before presenting.
 *Rewritten: 2026-04-28 — restored intelligence lost in CLAUDE.md V2 trim, added cross-referencing, Gmail, proactive actions, and self-verification*
 *Updated: 2026-05-21 — merged quality loop into cross-reference step (no double-reads), removed duplicate .claude/commands/marvin.md (#249)*
 *Updated: 2026-06-12 — wired Steps 1-2 to scripts/marvin_start.py; deterministic work (datetime, staleness, commitment health, TWC, session gap) moved to the script (#286)*
+*Updated: 2026-06-12 — Step 3 delegated to gmail-triage subagent: metadata-first triage, newsletter filter, already-saved dedup, long-thread handling (#291, closes #280-282)*
