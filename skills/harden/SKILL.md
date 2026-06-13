@@ -161,7 +161,9 @@ Note the printed marker path.
 >
 > Write findings to `findings.json` in the audited project directory using the JSON format from `score_audit.py`.
 >
-> **Scope restriction:** Only write to `[OUTPUT_FILE]` in the audited project directory. Do not modify any other files — in particular, do not write to any MARVIN state files (current.md, goals.md, decisions.md, todos.md, habits.md, learning.md) or any file outside the audited project directory.
+> Follow `~/marvin/context/agent-contract.md` for write-scope, verification, and report-back rules (git rules don't apply — this is a read-and-report audit, no branches or PRs).
+>
+> **Scope restriction (tighter than the contract; this wins):** Only write to `[OUTPUT_FILE]` in the audited project directory. Do not modify any other files — in particular, do not write to any MARVIN state files (current.md, goals.md, decisions.md, todos.md, habits.md, learning.md) or any file outside the audited project directory.
 >
 > **Final step (token capture + state) — run after writing findings.json:**
 > ```bash
