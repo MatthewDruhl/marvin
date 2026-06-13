@@ -183,7 +183,14 @@ Note the printed marker path.
 > print('State written.')
 > ```
 
-**Step 3:** Tell the user: "Audit running in the background. You'll be notified when it's done. Findings will land in `findings.json`."
+**Step 3:** Log the run. Append an entry to `~/marvin/state/agent-runs.json`
+(schema: `~/marvin/context/agent-runs.example.json`): id `run-YYYY-MM-DD-NNN`,
+project name, skill `harden`, task (audit mode + scopes), branch `null`,
+status `running`, launched date, output = the findings.json path. Update
+`last_updated`. When the audit completes, update the entry to `needs-review`
+with the completed date and grade in notes.
+
+**Step 4:** Tell the user: "Audit running in the background. You'll be notified when it's done. Findings will land in `findings.json`."
 
 Do not proceed further — the background agent handles all scopes.
 

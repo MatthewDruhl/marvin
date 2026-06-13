@@ -174,6 +174,17 @@ Agent(
 Always use worktree isolation. Background agents sharing a working tree
 fight over git checkout.
 
+#### Log the Run
+
+Immediately after spawning, append an entry to `~/marvin/state/agent-runs.json`
+(schema: `~/marvin/context/agent-runs.example.json`): id `run-YYYY-MM-DD-NNN`,
+project name from `state/projects.md`, skill `spec-dev`, the task one-liner,
+the branch, status `running`, launched date. Update `last_updated`.
+
+When the agent reports back, update the entry: status `needs-review`,
+completed date, output = PR URL, notes = test results or concerns. The
+`/marvin` briefing surfaces `needs-review` entries until Matt resolves them.
+
 ## Error Handling
 
 - **Tests won't pass:** Agent makes 3 distinct attempts (different approach

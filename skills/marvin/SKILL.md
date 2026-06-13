@@ -36,6 +36,7 @@ The packet is the deterministic foundation of the briefing. It contains:
 - **State file staleness** — last-updated date and age per state file, flagged past 3 days.
 - **Commitments health** — overdue, review-due, and stale (7+ days untouched) active commitments with next actions.
 - **Session gap** — days since the last session log.
+- **Agent runs** — pending background-agent work from `state/agent-runs.json`: runs needing review, still running, or running suspiciously long. If the file is missing, create it from `context/agent-runs.example.json` (empty `runs` list).
 - **TWC current week** — Sunday-Saturday window, week file path, activity row count. The `--create-twc-week-file` flag creates the week's CSV from the template if missing; never create it by hand.
 - **Active application count** from `~/Resume/jobs/applications.md`.
 
@@ -147,6 +148,11 @@ Compile everything into a concise briefing:
 - Overdue: {title} — due {date}; next action: {next_action}
 - Review today: {title} — next action: {next_action}
 - Stale: {title} — last touched {date}
+
+**Agent Runs:** (omit if ledger is empty)
+- Needs review: {project}/{skill} — {task}; output: {PR URL or path}
+- Running: {project}/{skill} — {task} (launched {date})
+- Stale: {project}/{skill} — running since {date}, check if it died
 
 **Alerts:**
 - {Stale state files with age: "current.md last updated 9 days ago"}

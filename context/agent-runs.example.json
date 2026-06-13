@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "last_updated": "2026-06-12",
+  "runs": [
+    {
+      "id": "run-2026-06-12-001",
+      "project": "DandD",
+      "skill": "spec-dev",
+      "task": "Implement issue #49 (combat respawn bug)",
+      "branch": "fix/combat-respawn",
+      "output": "https://github.com/MatthewDruhl/DandD/pull/57",
+      "status": "needs-review",
+      "launched": "2026-06-12",
+      "completed": "2026-06-12",
+      "notes": "All acceptance criteria verified. 3 new tests."
+    },
+    {
+      "id": "run-2026-06-12-002",
+      "project": "Blindfold",
+      "skill": "harden",
+      "task": "Full audit, security + AI scopes",
+      "branch": null,
+      "output": "~/Projects/blindfold/findings.json",
+      "status": "running",
+      "launched": "2026-06-12",
+      "completed": null,
+      "notes": ""
+    }
+  ],
+  "_schema": {
+    "id": "run-YYYY-MM-DD-NNN, stable, assigned at launch",
+    "project": "Name matching a project in state/projects.md",
+    "skill": "Skill that launched the agent (spec-dev, harden, dispatch, ...)",
+    "task": "One-line description of what the agent was asked to do",
+    "branch": "Feature branch the agent works on, or null",
+    "output": "Where the result lives: PR URL, findings file path, content/ doc",
+    "status": "running | needs-review | merged | abandoned",
+    "launched": "ISO date the agent was spawned",
+    "completed": "ISO date the agent finished, or null while running",
+    "notes": "Free text: concerns, follow-ups, verification status"
+  }
+}

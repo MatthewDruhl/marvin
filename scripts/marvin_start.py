@@ -166,6 +166,45 @@ def build_commitments_health(
     return out
 
 
+def build_agent_runs(path: Path, today: dt.date, stale_days: int = 1) -> dict[str, Any]:
+    out: dict[str, Any] = {
+        "status": "ok",
+        "path": str(path),
+        "counts": {},
+        "running": [],
+        "needs_review": [],
+        "stale_running": [],
+    }
+    raw, err = read_text(path)
+    if err is not None:
+        out["status"] = err
+        return out
+    try:
+        data = json.loads(raw or "")
+    except json.JSONDecodeError as exc:
+        out["status"] = f"invalid_json: {exc}"
+        return out
+    for run in data.get("runs", []):
+        status = run.get("status", "unknown")
+        out["counts"][status] = out["counts"].get(status, 0) + 1
+        summary = {
+            "id": run.get("id"),
+            "project": run.get("project"),
+            "skill": run.get("skill"),
+            "task": run.get("task"),
+            "output": run.get("output"),
+            "launched": run.get("launched"),
+        }
+        if status == "running":
+            out["running"].append(summary)
+            launched = parse_iso_date(run.get("launched"))
+            if launched and (today - launched).days > stale_days:
+                out["stale_running"].append(summary)
+        elif status == "needs-review":
+            out["needs_review"].append(summary)
+    return out
+
+
 def session_gap_days(sessions_dir: Path, today: dt.date) -> int | None:
     if not sessions_dir.exists():
         return None
@@ -184,8 +223,12 @@ def count_nonempty_csv_rows(path: Path) -> int:
     text, err = read_text(path)
     if err or text is None:
         return 0
-    rows = [line for line in text.splitlines() if line.strip()]
-    return max(0, len(rows) - 1)
+    lines = text.splitlines()
+    if not lines:
+        return 0
+    # Skip the header; a row of bare commas (template placeholder) is not data.
+    data_rows = [ln for ln in lines[1:] if ln.replace(",", "").strip()]
+    return len(data_rows)
 
 
 def count_active_applications(path: Path) -> tuple[int | None, str | None]:
@@ -307,6 +350,7 @@ def build_packet(repo_root: Path, create_week_file: bool) -> dict[str, Any]:
     commitments_raw = files["state_commitments"]["content"]
     commitments = build_commitments_health(commitments_raw, today)
     gap_days = session_gap_days(sessions_dir, today)
+    agent_runs = build_agent_runs(repo_root / "state" / "agent-runs.json", today)
 
     return {
         "generated_at": {
@@ -329,6 +373,7 @@ def build_packet(repo_root: Path, create_week_file: bool) -> dict[str, Any]:
         "staleness": staleness,
         "commitments_health": commitments,
         "session_gap_days": gap_days,
+        "agent_runs": agent_runs,
         "twc_current_week": {
             "week_start_sunday": start.isoformat(),
             "week_end_saturday": end.isoformat(),
@@ -385,6 +430,16 @@ def render_text(packet: dict[str, Any]) -> str:
         for item in ch[key]:
             extra = item.get("due") or item.get("review_after") or item.get("last_touched")
             lines.append(f"  - {item['title']} ({extra}) next: {item['next_action']}")
+    lines.append("")
+    ar = packet["agent_runs"]
+    lines.append("Agent Runs:")
+    lines.append(f"- status: {ar['status']}, counts: {ar['counts'] or 'none'}")
+    for key in ("needs_review", "running", "stale_running"):
+        for item in ar[key]:
+            lines.append(
+                f"- [{key}] {item['project']}/{item['skill']}: {item['task']} "
+                f"(launched {item['launched']}, output: {item['output']})"
+            )
     lines.append("")
     twc = packet["twc_current_week"]
     lines.append("TWC Current Week:")
