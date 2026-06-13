@@ -31,7 +31,8 @@ Read these in parallel where possible:
 2. `state/habits.md`
 3. `state/goals.md`
 4. `state/commitments.json`
-5. `sessions/{TODAY}.md` if it exists
+5. `state/agent-runs.json` if it exists
+6. `sessions/{TODAY}.md` if it exists
 
 Get today's date with:
 
@@ -56,6 +57,7 @@ Review the conversation and prepare one combined message with these sections:
 - Proposed changes to `state/current.md`, including new priorities, changed statuses, completed items, and new open threads
 - Proposed `state/goals.md` updates only if goal progress was made
 - Proposed `state/commitments.json` updates for new, resolved, blocked, waiting, stale, or changed commitments
+- Proposed `state/agent-runs.json` updates for agent runs resolved this session (PR merged → `merged`, output reviewed → keep or `abandoned`, agent finished → `needs-review` with output location)
 - Proposed `content/log.md` entry only if content was shipped
 
 **Habit Check**
@@ -78,8 +80,9 @@ After the user confirms, write all applicable updates:
    - Use stable IDs (`commit-YYYY-MM-DD-NNN`).
    - Use ISO dates.
    - Do not add new active commitments to `state/todos.md`; that file is legacy/reference.
-5. Edit `state/goals.md` only if goal progress was discussed.
-6. Append to `content/log.md` only if content was shipped.
+5. Edit `state/agent-runs.json` for confirmed run status changes (schema: `context/agent-runs.example.json`). Update `last_updated`.
+6. Edit `state/goals.md` only if goal progress was discussed.
+7. Append to `content/log.md` only if content was shipped.
 
 ### Step 4: Conditional Cleanup
 
