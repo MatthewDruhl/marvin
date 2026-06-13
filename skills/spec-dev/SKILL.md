@@ -102,6 +102,11 @@ isolation to execute the build.
 
 #### Agent Instructions
 
+Prepend the full text of `~/marvin/context/agent-contract.md` to the agent
+prompt — it defines isolation, git, write-scope, verification, and
+report-back rules. The instructions below add the spec-dev workflow on top;
+they extend the contract, never weaken it.
+
 Pass the following to the background agent:
 
 1. **Setup**
@@ -155,7 +160,8 @@ Pass the following to the background agent:
 
      🤖 Generated with [Claude Code](https://claude.com/claude-code)
      ```
-   - Do NOT merge the PR. Do NOT close the issue.
+     (This extends the contract's PR format with the Acceptance Criteria
+     Verification section. Merge/close prohibitions are in the contract.)
 
 6. **Report Back**
    - Notify with: PR URL, test results, any concerns or decisions made
@@ -171,8 +177,8 @@ Agent(
 )
 ```
 
-Always use worktree isolation. Background agents sharing a working tree
-fight over git checkout.
+Worktree isolation is required by the agent contract (see
+`context/agent-contract.md` for the why).
 
 #### Log the Run
 
@@ -187,11 +193,8 @@ completed date, output = PR URL, notes = test results or concerns. The
 
 ## Error Handling
 
-- **Tests won't pass:** Agent makes 3 distinct attempts (different approach
-  each time, not rerunning the same failing code), then stops and reports
-  what failed, what was tried, and why. Does not force tests to pass.
-- **Spec is ambiguous:** Agent stops and reports which criterion is unclear.
-  Does not guess or interpret ambiguous requirements.
+- **Tests won't pass / ambiguous spec:** Contract verification rules apply
+  (3 distinct attempts then stop and report; never guess on ambiguity).
 - **Missing dependencies:** Agent stops and reports what's needed.
   Does not install packages without project context.
 
